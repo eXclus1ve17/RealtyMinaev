@@ -10,11 +10,10 @@
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://realtyminaev.ru/">
 <meta name="theme-color" content="#101A2C">
-<meta name="google-site-verification" content="qyT_vMnswKHXzj3KTHAk0JMDKD8ExCJlGaEmdbB0PmE">
 <meta property="og:url" content="https://realtyminaev.ru/">
 <meta property="og:site_name" content="Дмитрий Минаев">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:image" content="https://realtyminaev.ru/img/og.jpg?v=fd20851e03ad">
+<meta property="og:image" content="https://realtyminaev.ru/img/og.jpg?v=1f83e50df966">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Дмитрий Минаев, брокер по недвижимости в Москве">
@@ -26,21 +25,7 @@
 <!-- Onest лежит на своём домене: fonts.googleapis.com у части посетителей
      в России не открывается, и страница оставалась без фирменного шрифта. -->
 <link rel="preload" as="font" type="font/woff2" href="fonts/onest-cyrillic.woff2?v=c3f4223046fb" crossorigin>
-<!-- @font-face встроены прямо в страницу: отдельный fonts.css блокировал отрисовку (~0,8 с на мобильных). -->
-<style>
-@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
-  src:url("fonts/onest-cyrillic-ext.woff2?v=8b55db3131aa") format("woff2");
-  unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
-@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
-  src:url("fonts/onest-cyrillic.woff2?v=c3f4223046fb") format("woff2");
-  unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
-@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
-  src:url("fonts/onest-latin-ext.woff2?v=f72bdc75595b") format("woff2");
-  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
-@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
-  src:url("fonts/onest-latin.woff2?v=cc61cbd632bb") format("woff2");
-  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-</style>
+<link rel="stylesheet" href="fonts.css?v=db2ff084a264">
 <style>
 /* ============================================================
    Дмитрий Минаев — просто о недвижимости
@@ -79,7 +64,7 @@ html[data-theme="steel"]{
   --ink:         #101A2C;   /* основной текст                    */
   --ink-rgb:     16,26,44;  /* он же для линий и теней           */
   --ink-2:       #525C6B;   /* абзацы, описания                  */
-  --ink-3:       #687180;   /* подписи, плейсхолдеры             */
+  --ink-3:       #7C8593;   /* подписи, плейсхолдеры             */
 
   /* акцент — кнопки и активные состояния */
   --accent:      #2F4A7A;   /* стальной синий                    */
@@ -109,7 +94,7 @@ html[data-theme="graphite"]{
   --ink:         #16191D;
   --ink-rgb:     22,25,29;
   --ink-2:       #5C636B;
-  --ink-3:       #6E757D;
+  --ink-3:       #8B929A;
 
   --accent:      #8A6A33;   /* шампань, приглушённая             */
   --accent-rgb:  138,106,51;
@@ -136,7 +121,7 @@ html[data-theme="emerald"]{
   --ink:         #1B2422;
   --ink-rgb:     27,36,34;
   --ink-2:       #586460;
-  --ink-3:       #69736F;
+  --ink-3:       #87918D;
 
   --accent:      #14312A;   /* зелень как акцент                 */
   --accent-rgb:  20,49,42;
@@ -192,14 +177,12 @@ section[id]{scroll-margin-top:96px}
 .eyebrow.on-photo{color:#fff}
 .eyebrow.on-photo::before{background:var(--accent)}
 .h1{font-size:24.1cqw;line-height:1.02;letter-spacing:-.045em;font-weight:600}
-/* Обе строки имени набраны с одинаковым трекингом и выровнены по левому краю,
-   как в классической вёрстке: без растягивания второй строки под ширину первой. */
+/* Обе строки имени одной ширины. Кегль считается от ширины колонки (cqw),
+   поэтому подобранный трекинг держится на любом экране, а не только здесь.
+   Отрицательный отступ снимает пробел после последней буквы. */
 .h1 .ln{display:block;white-space:nowrap}
-/* Подпись «Брокер по недвижимости» — часть H1 для поиска, вид прежний. */
-.h1 .hero-role{line-height:1.6}
-.vh{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .h1 .ln-1{letter-spacing:-.0216em;margin-right:.0216em}
-.h1 .ln-2{letter-spacing:-.0216em;margin-right:.0216em}
+.h1 .ln-2{letter-spacing:.1053em;margin-right:-.1053em}
 .h2{font-size:clamp(28px,4.2vw,52px)}
 .h3{font-size:clamp(20px,2.3vw,28px);letter-spacing:-.02em}
 .h4{font-size:clamp(17px,1.6vw,20px);letter-spacing:-.015em;font-weight:600}
@@ -504,7 +487,7 @@ f}
   font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--accent-ink);
   background:var(--accent-soft);border-radius:999px;padding:7px 14px}
 .algo-h .term i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--ink-2)}
+  text-transform:uppercase;color:var(--ink-3)}
 .algo-step{padding:18px clamp(20px,2.4vw,32px);border-bottom:1px solid var(--line-2)}
 .algo-step:last-of-type{border-bottom:0}
 .algo-step b{display:block;font-size:16px;font-weight:600;letter-spacing:-.02em;margin-bottom:5px}
@@ -579,9 +562,7 @@ textarea{resize:vertical;min-height:84px}
 .ftr-bot{border-top:1px solid rgba(255,255,255,.12);
   padding:clamp(18px,2vw,24px) 0 calc(clamp(18px,2vw,24px) + env(safe-area-inset-bottom));
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-size:12.5px;color:rgba(255,255,255,.62)}
-.ftr-legal a{color:rgba(255,255,255,.72);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
-.ftr-legal a:hover{color:#fff}
+  font-size:12.5px;color:rgba(255,255,255,.45)}
 
 /* ---------- липкая панель на мобильных ---------- */
 .sticky-bar{
@@ -818,7 +799,7 @@ textarea{resize:vertical;min-height:84px}
 {"@context":"https://schema.org","@graph":[
  {"@type":"RealEstateAgent","@id":"https://realtyminaev.ru/#agent",
   "name":"Дмитрий Минаев — риелтор и брокер по недвижимости",
-  "url":"https://realtyminaev.ru/","image":"https://realtyminaev.ru/img/og.jpg?v=fd20851e03ad","logo":"https://realtyminaev.ru/icon-512.png?v=61635c6374b2",
+  "url":"https://realtyminaev.ru/","image":"https://realtyminaev.ru/img/og.jpg?v=1f83e50df966","logo":"https://realtyminaev.ru/icon-512.png?v=61635c6374b2",
   "telephone":"+7-926-397-77-75",
   "description":"Аттестованный риелтор и брокер по недвижимости в Москве. Вторичное жильё, новостройки, коммерция под доход, загородная недвижимость. Сложные сделки: опека, наследство, доли, ипотека.",
   "areaServed":{"@type":"City","name":"Москва"},
@@ -838,7 +819,7 @@ textarea{resize:vertical;min-height:84px}
   "name":"Минаев Дмитрий Михайлович","alternateName":"Дмитрий Минаев",
   "jobTitle":"Риелтор, брокер по недвижимости",
   "worksFor":{"@id":"https://realtyminaev.ru/#agent"},
-  "image":"https://realtyminaev.ru/img/og.jpg?v=fd20851e03ad","url":"https://realtyminaev.ru/",
+  "image":"https://realtyminaev.ru/img/og.jpg?v=1f83e50df966","url":"https://realtyminaev.ru/",
   "hasCredential":{"@type":"EducationalOccupationalCredential",
     "credentialCategory":"Аттестат брокера по недвижимости",
     "recognizedBy":{"@type":"Organization","name":"Российская гильдия риэлторов"}}},
@@ -847,9 +828,18 @@ textarea{resize:vertical;min-height:84px}
   "inLanguage":"ru-RU","publisher":{"@id":"https://realtyminaev.ru/#agent"}}
 ]}
 </script>
-<!-- Яндекс.Метрика и цели — в /consent.js: счётчик запускается только после согласия на cookie. -->
-<script src="/consent.js?v=1" defer></script>
-<script src="/lead.js?v=1" defer></script>
+<!-- Яндекс.Метрика, счётчик 112500819. Скрипт грузится асинхронно
+     и уже после отрисовки страницы — на скорость первого экрана не влияет. -->
+<script>
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(112500819, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer",
+                          accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112500819" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <style>
 .pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,#c9d4e6 47%,#2f4a7a 64%,#101a2c 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
 </style></head>
@@ -899,11 +889,11 @@ textarea{resize:vertical;min-height:84px}
            экран узкий и высокий — там перекрытие ещё больше, отсюда 185vw. -->
       <picture>
         <source type="image/webp" sizes="(max-width:560px) 95vw, (max-width:820px) 90vw, (max-width:1180px) 85vw, (max-width:1500px) 66vw, 1000px"
-                srcset="img/hero-sm.webp?v=e7bc0e6282c7 900w, img/hero-mm.webp?v=6a7f13887bbf 1200w, img/hero-md.webp?v=f077f0b1c3cf 1500w,
-                        img/hero-2k.webp?v=5b0f8af51c8d 2000w, img/hero-lg.webp?v=67184461bf93 2400w">
-        <img src="img/hero-md.jpg?v=1c6cefcc3447" width="1500" height="2000"
-             srcset="img/hero-sm.jpg?v=b97d0ed80d68 900w, img/hero-mm.jpg?v=22d0b54e23a6 1200w, img/hero-md.jpg?v=1c6cefcc3447 1500w,
-                     img/hero-2k.jpg?v=1df1e36d79d3 2000w, img/hero-lg.jpg?v=e2724545080a 2400w"
+                srcset="img/hero-sm.webp?v=722fb69b7aea 900w, img/hero-mm.webp?v=eccd8fd6fa7a 1200w, img/hero-md.webp?v=fe9edc462b92 1500w,
+                        img/hero-2k.webp?v=09554ab978bc 2000w, img/hero-lg.webp?v=20a5a36859f4 2400w">
+        <img src="img/hero-md.jpg?v=0cf05471bcbb" width="1500" height="2000"
+             srcset="img/hero-sm.jpg?v=a8571eb11002 900w, img/hero-mm.jpg?v=0f5149730f27 1200w, img/hero-md.jpg?v=0cf05471bcbb 1500w,
+                     img/hero-2k.jpg?v=6095db7e7a8e 2000w, img/hero-lg.jpg?v=ffb791629de0 2400w"
              sizes="(max-width:560px) 95vw, (max-width:820px) 90vw, (max-width:1180px) 85vw, (max-width:1500px) 66vw, 1000px"
              alt="Дмитрий Минаев, риелтор и брокер по недвижимости в Москве" fetchpriority="high">
       </picture>
@@ -938,9 +928,8 @@ textarea{resize:vertical;min-height:84px}
         <h1 class="h1">
           <span class="ln ln-1">Дмитрий</span>
           <span class="ln ln-2">Минаев</span>
-          <span class="vh"> — </span>
-          <span class="hero-role">Брокер по недвижимости</span>
         </h1>
+        <span class="hero-role">Брокер по недвижимости</span>
         <div class="marks marks-narrow">
           <a class="mark" href="#attestat" aria-label="Гильдия риэлторов Москвы — к разделу об аттестате" title="Гильдия риэлторов Москвы"><picture><source type="image/webp" srcset="img/grm.webp?v=bb97e2f3c382"><img src="img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></a>
           <a class="mark" href="#attestat" aria-label="Российская гильдия риэлторов — к разделу об аттестате" title="Российская гильдия риэлторов"><picture><source type="image/webp" srcset="img/rgr.webp?v=cc48daf510ab"><img src="img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></a>
@@ -1052,7 +1041,7 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Готовый пакет документов и закрытые «хвосты» по прописке и коммуналке</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="sell">Обсудить продажу</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить продажу</a>
             </div>
           </div>
         </div>
@@ -1101,7 +1090,7 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Квартиру, принятую по акту с зафиксированными замечаниями</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="new">Обсудить новостройку</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить новостройку</a>
             </div>
           </div>
         </div>
@@ -1144,7 +1133,7 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Право собственности, зарегистрированное без приостановок</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="second">Обсудить покупку</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить покупку</a>
             </div>
           </div>
         </div>
@@ -1187,7 +1176,7 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>План действий, если арендатор уходит</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="comm">Обсудить инвестицию</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить инвестицию</a>
             </div>
           </div>
         </div>
@@ -1230,7 +1219,7 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Понимание, за сколько это можно будет продать</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="country">Обсудить загородную</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить загородную</a>
             </div>
           </div>
         </div>
@@ -1297,7 +1286,7 @@ textarea{resize:vertical;min-height:84px}
       <!-- уточнить: можно добавить строку вида «провёл — таких сделок», когда будет цифра -->
       <div class="cases-cta">
         <span class="t">Не нашли свой случай? Опишите ситуацию — скажу, что для этого понадобится.</span>
-        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="complex">Описать ситуацию</a>
+        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram"="Здравствуйте! У меня непростая ситуация со сделкой: ">Описать ситуацию</a>
       </div>
     </div>
   </div>
@@ -1381,13 +1370,11 @@ textarea{resize:vertical;min-height:84px}
     <ul class="ftr-rows">
       <li><span>Брокер</span><span>Минаев Дмитрий Михайлович</span></li>
       <li><span>Агентство</span><span>ООО «Лендис Эстейт»</span></li>
-      <li><span>Реквизиты</span><span>ИП Минаев Дмитрий Михайлович · ОГРНИП 322774600727335 · ИНН 772327416300</span></li>
       <li><span>Адрес</span><span>г. Москва, БЦ Port Plaza, ул. Проектируемый проезд № 4062, д. 6, стр. 16 · м. «Технопарк»</span></li>
     </ul>
 
     <div class="ftr-bot">
       <span>© <span id="yr">2026</span> Дмитрий Минаев. Москва</span>
-      <span class="ftr-legal"><a href="/privacy/">Политика обработки персональных данных</a> · <a href="#" data-cookie-settings>Настройки cookie</a></span>
     </div>
   </div>
 </footer>
@@ -1540,6 +1527,10 @@ textarea{resize:vertical;min-height:84px}
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();
+</script>
+<script>
+/* цель Метрики: клик по полоске проекта Forma 96 */
+document.addEventListener('click',function(e){var g=e.target.closest('[data-goal]');if(g&&window.ym)ym(112500819,'reachGoal',g.getAttribute('data-goal'))});
 </script>
 </body>
 </html>
