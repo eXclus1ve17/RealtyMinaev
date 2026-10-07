@@ -1,0 +1,3 @@
+send-config.php
+*.log
+__pycache__/

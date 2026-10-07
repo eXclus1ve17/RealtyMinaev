@@ -19,8 +19,9 @@ RewriteRule ^ https://realtyminaev.ru/%1 [R=301,L]
 </IfModule>
 
 # Служебные файлы не отдаём наружу
+RedirectMatch 404 ^/_build(/|$)
 <IfModule mod_authz_core.c>
-  <FilesMatch "^(README\.md|\.htaccess)$">
+  <FilesMatch "^(README\.md|DEPLOY\.md|\.htaccess|\.gitignore|send-config.*\.php|.*\.log|.*\.py)$">
     Require all denied
   </FilesMatch>
 </IfModule>

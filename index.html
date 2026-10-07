@@ -505,7 +505,7 @@ f}
   font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--accent-ink);
   background:var(--accent-soft);border-radius:999px;padding:7px 14px}
 .algo-h .term i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--ink-3)}
+  text-transform:uppercase;color:var(--ink-2)}
 .algo-step{padding:18px clamp(20px,2.4vw,32px);border-bottom:1px solid var(--line-2)}
 .algo-step:last-of-type{border-bottom:0}
 .algo-step b{display:block;font-size:16px;font-weight:600;letter-spacing:-.02em;margin-bottom:5px}
@@ -580,7 +580,7 @@ textarea{resize:vertical;min-height:84px}
 .ftr-bot{border-top:1px solid rgba(255,255,255,.12);
   padding:clamp(18px,2vw,24px) 0 calc(clamp(18px,2vw,24px) + env(safe-area-inset-bottom));
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-size:12.5px;color:rgba(255,255,255,.45)}
+  font-size:12.5px;color:rgba(255,255,255,.62)}
 .ftr-legal a{color:rgba(255,255,255,.72);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
 .ftr-legal a:hover{color:#fff}
 
@@ -850,6 +850,7 @@ textarea{resize:vertical;min-height:84px}
 </script>
 <!-- Яндекс.Метрика и цели — в /consent.js: счётчик запускается только после согласия на cookie. -->
 <script src="/consent.js?v=1" defer></script>
+<script src="/lead.js?v=1" defer></script>
 <style>
 .pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,#c9d4e6 47%,#2f4a7a 64%,#101a2c 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
 </style></head>
@@ -1052,7 +1053,8 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Готовый пакет документов и закрытые «хвосты» по прописке и коммуналке</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить продажу</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="sell">Оценить квартиру бесплатно</a>
+              <a class="btn btn-line" href="/prodat-kvartiru/">Подробнее о продаже</a>
             </div>
           </div>
         </div>
@@ -1101,7 +1103,8 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Квартиру, принятую по акту с зафиксированными замечаниями</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить новостройку</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="new">Обсудить новостройку</a>
+              <a class="btn btn-line" href="/novostrojki/">Подробнее о новостройках</a>
             </div>
           </div>
         </div>
@@ -1144,7 +1147,8 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Право собственности, зарегистрированное без приостановок</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить покупку</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="second">Обсудить покупку</a>
+              <a class="btn btn-line" href="/kupit-kvartiru/">Подробнее о покупке</a>
             </div>
           </div>
         </div>
@@ -1187,7 +1191,8 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>План действий, если арендатор уходит</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить инвестицию</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="comm">Обсудить инвестицию</a>
+              <a class="btn btn-line" href="/kommercheskaya-nedvizhimost/">Подробнее о коммерции</a>
             </div>
           </div>
         </div>
@@ -1230,7 +1235,8 @@ textarea{resize:vertical;min-height:84px}
             <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Понимание, за сколько это можно будет продать</span></li>
             </ul></div>
             <div class="algo-cta">
-              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить загородную</a>
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="country">Обсудить загородную</a>
+              <a class="btn btn-line" href="/zagorodnaya-nedvizhimost/">Подробнее о загородной</a>
             </div>
           </div>
         </div>
@@ -1297,7 +1303,8 @@ textarea{resize:vertical;min-height:84px}
       <!-- уточнить: можно добавить строку вида «провёл — таких сделок», когда будет цифра -->
       <div class="cases-cta">
         <span class="t">Не нашли свой случай? Опишите ситуацию — скажу, что для этого понадобится.</span>
-        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="describe_case">Описать ситуацию</a>
+        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-lead="complex">Описать ситуацию</a>
+        <a class="btn btn-glass" href="/slozhnye-sdelki/">Все случаи подробно</a>
       </div>
     </div>
   </div>

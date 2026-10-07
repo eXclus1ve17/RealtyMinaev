@@ -71,6 +71,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href], [data-goal]');
     if (!a || !window.ym) return;
+    if (a.hasAttribute('data-lead') && !a.getAttribute('data-goal')) return; // форма заявки считает свои цели сама
     var goals = goalsFor(a);
     if (!goals.length) return;
     var params = { place: placeOf(a) };
