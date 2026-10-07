@@ -26,8 +26,8 @@
      в России не открывается, и страница оставалась без фирменного шрифта. -->
 <link rel="preload" as="font" type="font/woff2" href="fonts/onest-cyrillic.woff2?v=c3f4223046fb" crossorigin>
 <!-- Фото первого экрана грузится сразу, параллельно со стилями. Те же файлы и sizes, что в <picture>. -->
-<link rel="preload" as="image" type="image/avif" media="(max-width:560px)" imagesizes="140vw" imagesrcset="img/hero-m-500.avif?v=4cc2c9811ee4 500w, img/hero-m-750.avif?v=b36b76bcbff3 750w, img/hero-m-990.avif?v=fef0c78452fb 990w" fetchpriority="high">
-<link rel="preload" as="image" type="image/avif" media="(min-width:561px)" imagesizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" imagesrcset="img/hero-800.avif?v=0ced51496ef5 800w, img/hero-1100.avif?v=ef54ad559229 1100w, img/hero-1500.avif?v=5fa3766c8c11 1500w" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" media="(max-width:560px)" imagesizes="140vw" imagesrcset="img/hero-m-500.avif?v=83cff3000ad1 500w, img/hero-m-750.avif?v=16a76ae3fa7a 750w, img/hero-m-990.avif?v=41cf4483397e 990w" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" media="(min-width:561px)" imagesizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" imagesrcset="img/hero-800.avif?v=d603ce3620a3 800w, img/hero-1100.avif?v=016e89cc094f 1100w, img/hero-1500.avif?v=8167b03ba80e 1500w" fetchpriority="high">
 <link rel="stylesheet" href="fonts.css?v=db2ff084a264">
 <style>
 /* ============================================================
@@ -904,13 +904,13 @@ textarea{resize:vertical;min-height:84px}
            sizes больше 100vw: кадр обрезается по cover и увеличен масштабом,
            реально он отрисовывается шире экрана (замерено на 320–2560px). -->
       <picture>
-        <source media="(max-width:560px)" type="image/avif" sizes="140vw" srcset="img/hero-m-500.avif?v=4cc2c9811ee4 500w, img/hero-m-750.avif?v=b36b76bcbff3 750w, img/hero-m-990.avif?v=fef0c78452fb 990w">
-        <source media="(max-width:560px)" type="image/webp" sizes="140vw" srcset="img/hero-m-500.webp?v=b05b8e8ed161 500w, img/hero-m-750.webp?v=36517a67f881 750w, img/hero-m-990.webp?v=96cf267894f8 990w">
-        <source media="(max-width:560px)" type="image/jpeg" sizes="140vw" srcset="img/hero-m-500.jpg?v=b3014e7e2435 500w, img/hero-m-750.jpg?v=bbba96619c1b 750w, img/hero-m-990.jpg?v=002c13e97bb2 990w">
-        <source type="image/avif" sizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" srcset="img/hero-800.avif?v=0ced51496ef5 800w, img/hero-1100.avif?v=ef54ad559229 1100w, img/hero-1500.avif?v=5fa3766c8c11 1500w">
-        <source type="image/webp" sizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" srcset="img/hero-800.webp?v=cedb317cff33 800w, img/hero-1100.webp?v=1f979ce44a5d 1100w, img/hero-1500.webp?v=f963e3d6ab09 1500w">
-        <img src="img/hero-1100.jpg?v=41c84472c180" width="1500" height="2000"
-             srcset="img/hero-800.jpg?v=4b4de8b08984 800w, img/hero-1100.jpg?v=41c84472c180 1100w, img/hero-1500.jpg?v=89e57a3fc722 1500w"
+        <source media="(max-width:560px)" type="image/avif" sizes="140vw" srcset="img/hero-m-500.avif?v=83cff3000ad1 500w, img/hero-m-750.avif?v=16a76ae3fa7a 750w, img/hero-m-990.avif?v=41cf4483397e 990w">
+        <source media="(max-width:560px)" type="image/webp" sizes="140vw" srcset="img/hero-m-500.webp?v=a8f7c336f0d7 500w, img/hero-m-750.webp?v=c0f32036d821 750w, img/hero-m-990.webp?v=64e589f83d86 990w">
+        <source media="(max-width:560px)" type="image/jpeg" sizes="140vw" srcset="img/hero-m-500.jpg?v=d16040524656 500w, img/hero-m-750.jpg?v=6faefa89d62d 750w, img/hero-m-990.jpg?v=dd84f9a86405 990w">
+        <source type="image/avif" sizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" srcset="img/hero-800.avif?v=d603ce3620a3 800w, img/hero-1100.avif?v=016e89cc094f 1100w, img/hero-1500.avif?v=8167b03ba80e 1500w">
+        <source type="image/webp" sizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" srcset="img/hero-800.webp?v=6a204f71e1e5 800w, img/hero-1100.webp?v=b356bf75485c 1100w, img/hero-1500.webp?v=6af9c9341a3c 1500w">
+        <img src="img/hero-1100.jpg?v=19434422b45b" width="1500" height="2000"
+             srcset="img/hero-800.jpg?v=ba49731227c4 800w, img/hero-1100.jpg?v=19434422b45b 1100w, img/hero-1500.jpg?v=96a15a5f81b7 1500w"
              sizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px"
              alt="Дмитрий Минаев, брокер по недвижимости, на строительной площадке жилого комплекса" fetchpriority="high">
       </picture>
