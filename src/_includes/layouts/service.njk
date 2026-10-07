@@ -60,17 +60,19 @@ layout: layouts/base.njk
 
 {{ content | safe }}
 
+{%- if faq %}
 <section class="section"><div class="wrap split">
-  <div class="head"><span class="eyebrow">Вопросы</span><h2 class="h2">Что спрашивают чаще всего</h2>
-    <p class="lead">Блок появится на сайте, когда будут реальные вопросы клиентов.</p></div>
-  <div class="faq">
-    <details open><summary>Сколько стоят ваши услуги?</summary><p><span class="fill">[ЗАПОЛНИТЬ: стоимость, что входит, когда оплачивается]</span></p></details>
-    <details><summary><span class="fill">[ЗАПОЛНИТЬ: вопрос клиента]</span></summary><p><span class="fill">[ЗАПОЛНИТЬ: ответ]</span></p></details>
-  </div>
+  <div class="head"><span class="eyebrow">Вопросы</span><h2 class="h2">Что спрашивают чаще всего</h2></div>
+  <div class="faq">{% for q in faq %}<details{% if loop.first %} open{% endif %}><summary>{{ q.q }}</summary><p>{{ q.a | safe }}</p></details>{% endfor %}</div>
 </div></section>
+{%- elif prototype %}
+<section class="section"><div class="wrap">
+  <p class="draft"><span class="fill">[ЗАПОЛНИТЬ: 3–5 вопросов клиентов по этой услуге с ответами — появится блок «Вопросы» с разметкой FAQ. Без вопросов блока на сайте не будет.]</span></p>
+</div></section>
+{%- endif %}
 
-{{ cardsBlock("Почитать", "Статьи по теме", articles or [
-  { k: "Статьи", t: "Все статьи", p: "Продажа, покупка, новостройки, сложные сделки.", url: "/statyi/", go: "Перейти →" }
-]) }}
+{%- if articles %}
+{{ cardsBlock("Почитать", "По теме", articles) }}
+{%- endif %}
 
 {{ cta(ctaTitle, ctaText) }}

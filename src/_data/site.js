@@ -35,12 +35,6 @@ export default {
     { title: "Статьи", url: "/statyi/" },
     { title: "Контакты", url: "/kontakty/" },
   ],
-  footer: [
-    { title: "Районы", items: [
-      { title: "ЮАО", url: "/yuao/" },
-      { title: "ЮЗАО", url: "/yuzao/" },
-      { title: "Новая Москва", url: "/novaya-moskva/" },
-      { title: "Домодедово", url: "/domodedovo/" },
-    ]},
-  ],
+  // Районы появятся в подвале, когда по ним будет своё содержание (см. src/yuao.njk и др.).
+  footer: [],
 };

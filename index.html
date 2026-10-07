@@ -855,6 +855,11 @@ textarea{resize:vertical;min-height:84px}
 .ftr-nav a{color:rgba(255,255,255,.72)}
 .ftr-nav a:hover{color:#fff}
 .ftr-bot a{color:rgba(255,255,255,.6);text-decoration:underline;text-underline-offset:3px}
+
+/* Сценарий на главной — коротко: этапы одной строкой, подробности на странице услуги */
+.algo-brief{list-style:none;margin:0;padding:20px clamp(20px,2.4vw,32px);display:grid;gap:12px;border-bottom:1px solid var(--line-2)}
+.algo-brief li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:center;font-size:16px;font-weight:600;letter-spacing:-.015em}
+.algo-brief .num{width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center;font-size:13px}
 </style></head>
 <body>
 
@@ -1050,14 +1055,7 @@ textarea{resize:vertical;min-height:84px}
           <div class="algo">
             <div class="algo-h"><span class="t">Что я делаю</span>
               <span class="term"><i>Типичный срок</i>6 недель</span></div>
-          <div class="algo-step"><div><b>Оценка и предпродажная подготовка</b><p>Смотрю цены реальных закрытых сделок в вашем доме и районе, а не хотелки в объявлениях. Говорю, что стоит исправить, а на что не тратить деньги. Съёмка, планировка, текст объявления.</p></div></div>
-          <div class="algo-step"><div><b>Вывод на рынок и показы</b><p>Площадки, работа с базой покупателей и агентов, отбор адекватных заявок. Показы веду сам — вам не нужно отпрашиваться с работы.</p></div></div>
-          <div class="algo-step"><div><b>Торг, сделка и деньги</b><p>Переговоры по цене и условиям, аванс или задаток так, чтобы покупатель не сорвался. Аккредитив или ячейка, подача в Росреестр, передача объекта по акту.</p></div></div>
-            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Деньги на счёте после регистрации, а не обещания</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Регулярный отчёт: просмотры, звонки, показы и предложения по цене</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Готовый пакет документов и закрытые «хвосты» по прописке и коммуналке</span></li>
-            </ul></div>
+            <ol class="algo-brief"><li><span class="num">1</span>Оценка и предпродажная подготовка</li><li><span class="num">2</span>Вывод на рынок и показы</li><li><span class="num">3</span>Торг, сделка и деньги</li></ol>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить продажу</a>
               <a class="btn btn-line" href="/uslugi/prodazha-kvartiry/">Подробнее об услуге</a>
@@ -1100,14 +1098,7 @@ textarea{resize:vertical;min-height:84px}
           <div class="algo">
             <div class="algo-h"><span class="t">Что я делаю</span>
               <span class="term"><i>Типичный срок</i>1 неделя</span></div>
-          <div class="algo-step"><div><b>Критерии и проверка застройщика</b><p>Бюджет, транспорт, школы, срок сдачи, горизонт владения — фильтры, которые отсекают девять вариантов из десяти. По каждому оставшемуся: история сдачи объектов, эскроу, проектная декларация, темпы стройки по факту.</p></div></div>
-          <div class="algo-step"><div><b>Выбор конкретного лота</b><p>Корпус, этаж, сторона, вид из окна, соседи по площадке, расположение относительно въезда и школы. Здесь и рождается разница в цене перепродажи.</p></div></div>
-          <div class="algo-step"><div><b>Договор и приёмка</b><p>Сравнение ипотечных программ и рассрочки, бронирование, проверка ДДУ до подписания. Приёмка с профессиональным приёмщиком — бесплатно для вас, с фиксацией недостатков и контролем их устранения до подписания акта.</p></div></div>
-            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Сравнительную таблицу проектов с плюсами, минусами и рисками</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Проверенный ДДУ и понятную схему расчётов</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Квартиру, принятую по акту с зафиксированными замечаниями</span></li>
-            </ul></div>
+            <ol class="algo-brief"><li><span class="num">1</span>Критерии и проверка застройщика</li><li><span class="num">2</span>Выбор конкретного лота</li><li><span class="num">3</span>Договор и приёмка</li></ol>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить новостройку</a>
               <a class="btn btn-line" href="/uslugi/novostrojki/">Подробнее об услуге</a>
@@ -1144,14 +1135,7 @@ textarea{resize:vertical;min-height:84px}
           <div class="algo">
             <div class="algo-h"><span class="t">Что я делаю</span>
               <span class="term"><i>Типичный срок</i>4 недели</span></div>
-          <div class="algo-step"><div><b>Подбор и отсев</b><p>Формирую короткий список из вариантов, которые действительно подходят, и объезжаю их до того, как везти вас.</p></div></div>
-          <div class="algo-step"><div><b>Проверка объекта и продавца</b><p>ЕГРН, история переходов права, обременения, перепланировки, долги по коммуналке и капремонту. По продавцу: дееспособность, банкротство, исполнительные производства, согласие супруга, права отказников от приватизации и наследников.</p></div></div>
-          <div class="algo-step"><div><b>Торг и сделка</b><p>Обоснованный торг — не «дайте скидку», а аргументы из проверки и рынка. Авансовое соглашение, безопасные расчёты, регистрация, приём квартиры по акту.</p></div></div>
-            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Письменное заключение по объекту: что проверено и какие риски остаются</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Цену ниже стартовой там, где для торга есть основания</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Право собственности, зарегистрированное без приостановок</span></li>
-            </ul></div>
+            <ol class="algo-brief"><li><span class="num">1</span>Подбор и отсев</li><li><span class="num">2</span>Проверка объекта и продавца</li><li><span class="num">3</span>Торг и сделка</li></ol>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить покупку</a>
               <a class="btn btn-line" href="/uslugi/pokupka-kvartiry/">Подробнее об услуге</a>
@@ -1188,14 +1172,7 @@ textarea{resize:vertical;min-height:84px}
           <div class="algo">
             <div class="algo-h"><span class="t">Что я делаю</span>
               <span class="term"><i>Ориентир доходности</i>10–20% годовых</span></div>
-          <div class="algo-step"><div><b>Профиль инвестора и отбор объектов</b><p>Сумма, горизонт, отношение к риску, нужен ли рост стоимости или только поток. Дальше — стрит-ретейл, помещения свободного назначения или офисные блоки: трафик, витрина, соседи по улице, парковка и вход.</p></div></div>
-          <div class="algo-step"><div><b>Проверка арендного потока</b><p>Договор аренды, срок и условия расторжения, история платежей, устойчивость арендатора. Считаю доходность по факту, а не по обещанию.</p></div></div>
-          <div class="algo-step"><div><b>Юридика, техника и сделка</b><p>Назначение помещения, перепланировки, электрическая мощность, вентиляция, ограничения по видам деятельности. Расчёты и переоформление аренды и коммунальных на нового собственника.</p></div></div>
-            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Расчёт доходности и окупаемости с учётом налогов и простоя</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Объект с действующим договором аренды и понятным арендатором</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>План действий, если арендатор уходит</span></li>
-            </ul></div>
+            <ol class="algo-brief"><li><span class="num">1</span>Профиль инвестора и отбор объектов</li><li><span class="num">2</span>Проверка арендного потока</li><li><span class="num">3</span>Юридика, техника и сделка</li></ol>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить инвестицию</a>
               <a class="btn btn-line" href="/uslugi/kommercheskaya-nedvizhimost/">Подробнее об услуге</a>
@@ -1232,14 +1209,7 @@ textarea{resize:vertical;min-height:84px}
           <div class="algo">
             <div class="algo-h"><span class="t">Что я делаю</span>
               <span class="term"><i>Типичный срок</i>4 недели</span></div>
-          <div class="algo-step"><div><b>Сценарий использования</b><p>Круглогодичное проживание, дача или инвестиция — от этого зависят требования к дороге, коммуникациям и посёлку.</p></div></div>
-          <div class="algo-step"><div><b>Проверка земли и дома</b><p>Категория, вид разрешённого использования, межевание и границы по факту, охранные зоны, сервитуты, подъезд. По дому: оформлен ли, соответствует ли фактическая площадь документам, состояние конструктива и инженерии.</p></div></div>
-          <div class="algo-step"><div><b>Коммуникации и сделка</b><p>Газ, электричество и выделенная мощность, вода и её качество, септик, интернет — по документам и на месте, а не по словам продавца. Договор, регистрация и реальные расходы на содержание.</p></div></div>
-            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Участок и дом с чистыми документами и понятными границами</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Честный расчёт стоимости владения в год</span></li>
-            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Понимание, за сколько это можно будет продать</span></li>
-            </ul></div>
+            <ol class="algo-brief"><li><span class="num">1</span>Сценарий использования</li><li><span class="num">2</span>Проверка земли и дома</li><li><span class="num">3</span>Коммуникации и сделка</li></ol>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить загородную</a>
               <a class="btn btn-line" href="/uslugi/zagorodnaya-nedvizhimost/">Подробнее об услуге</a>
@@ -1404,8 +1374,7 @@ textarea{resize:vertical;min-height:84px}
 
     <nav class="ftr-nav" aria-label="Разделы сайта">
       <a href="/uslugi/">Услуги и стоимость</a><a href="/slozhnye-sdelki/">Сложные сделки</a><a href="/statyi/">Статьи</a>
-      <a href="/yuao/">ЮАО</a><a href="/yuzao/">ЮЗАО</a><a href="/novaya-moskva/">Новая Москва</a><a href="/domodedovo/">Домодедово</a>
-      <a href="/obo-mne/">Обо мне</a><a href="/kontakty/">Контакты</a><a href="/forma-96/">Проект дома Forma 96</a>
+      <a href="/kontakty/">Контакты</a><a href="/forma-96/">Проект дома Forma 96</a>
     </nav>
     <div class="ftr-bot">
       <span>© <span id="yr">2026</span> Дмитрий Минаев. Москва</span>

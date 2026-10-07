@@ -35,7 +35,12 @@
   {%- for c in crumbs %},{"@type":"ListItem","position":{{ loop.index + 1 }},"name":{{ c.title | dump | safe }},"item":"{{ site.url }}{{ c.url }}"}{% endfor %}
  ]},
  {"@type":"WebPage","@id":"{{ canonical }}#webpage","url":"{{ canonical }}","name":{{ title | dump | safe }},"inLanguage":"ru-RU",
-  "isPartOf":{"@id":"{{ site.url }}/#site"},"about":{"@id":"{{ site.url }}/#agent"}}
+  "isPartOf":{"@id":"{{ site.url }}/#site"},"about":{"@id":"{{ site.url }}/#agent"}},
+ {"@type":"RealEstateAgent","@id":"{{ site.url }}/#agent","name":"Дмитрий Минаев — риелтор и брокер по недвижимости","url":"{{ site.url }}/",
+  "telephone":"+7-926-397-77-75","image":"{{ site.url }}/img/og.jpg",
+  "address":{"@type":"PostalAddress","addressLocality":"Москва","addressCountry":"RU","streetAddress":"ул. Проектируемый проезд № 4062, д. 6, стр. 16, БЦ Port Plaza"},
+  "parentOrganization":{"@type":"Organization","name":"ООО «Лендис Эстейт»"},"employee":{"@id":"{{ site.url }}/#person"}},
+ {"@type":"Person","@id":"{{ site.url }}/#person","name":"Минаев Дмитрий Михайлович","jobTitle":"Риелтор, брокер по недвижимости","worksFor":{"@id":"{{ site.url }}/#agent"}}
  {%- if schema %},{{ schema | safe }}{% endif %}
 ]}
 </script>
@@ -118,13 +123,16 @@
       <div class="ftr-links">
         <h2>{{ m.title }}</h2>
         {%- for i in m.items %}{% if not i.muted %}<a href="{{ i.url }}">{{ i.title }}</a>{% endif %}{% endfor %}
-        {%- if loop.last %}<a href="/obo-mne/">Обо мне</a><a href="/forma-96/">Проект дома Forma 96</a>{% endif %}
       </div>
       {%- endif %}{% endfor %}
+      <div class="ftr-links">
+        <h2>Сайт</h2>
+        <a href="/uslugi/">Услуги и стоимость</a><a href="/statyi/">Статьи</a><a href="/kontakty/">Контакты</a><a href="/forma-96/">Проект дома Forma 96</a>
+      </div>
     </div>
     <div class="ftr-bot">
       <span>© 2026 Дмитрий Минаев. Москва</span>
-      <span><a href="/statyi/">Статьи</a> · <a href="/obo-mne/">Обо мне</a> · <a href="/kontakty/">Контакты</a> · <a href="/politika-konfidencialnosti/">Политика конфиденциальности</a></span>
+      <a href="/politika-konfidencialnosti/">Политика конфиденциальности</a>
     </div>
   </div>
 </footer>

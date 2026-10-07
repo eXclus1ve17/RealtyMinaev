@@ -351,3 +351,16 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 .ch .t b{display:block;font-size:15.5px}
 .ch .t span{display:block;font-size:13px;color:var(--ink-3)}
 .ch .arw{color:var(--ink-3)}
+
+/* ссылка внутри текста и черновая пометка о будущем блоке */
+.lnk{color:var(--accent-ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.draft{max-width:80ch;font-size:15px}
+/* самопроверка «сложная ли у вас сделка» */
+.check{display:grid;gap:10px}
+.check a{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line-2);
+  border-radius:var(--r-md);padding:18px 22px;transition:border-color .25s,transform .25s}
+.check a:hover{border-color:rgba(var(--accent-rgb),.45);transform:translateX(4px)}
+.check .n{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink-3);color:var(--ink-3);display:grid;place-items:center;font-weight:700;font-size:13px}
+.check b{display:block;font-size:16.5px;letter-spacing:-.015em}
+.check span.to{font-size:14px;font-weight:600;color:var(--accent-ink);white-space:nowrap}
+@media (max-width:640px){.check a{grid-template-columns:28px minmax(0,1fr)}.check span.to{grid-column:2}}
