@@ -177,12 +177,14 @@ section[id]{scroll-margin-top:96px}
 .eyebrow.on-photo{color:#fff}
 .eyebrow.on-photo::before{background:var(--accent)}
 .h1{font-size:24.1cqw;line-height:1.02;letter-spacing:-.045em;font-weight:600}
-/* Обе строки имени одной ширины. Кегль считается от ширины колонки (cqw),
-   поэтому подобранный трекинг держится на любом экране, а не только здесь.
-   Отрицательный отступ снимает пробел после последней буквы. */
+/* Обе строки имени одной ширины по краям самих букв: «М» стоит точно под «Д»,
+   «в» кончается на одной вертикали с «й». Трекинг у строк общий, фамилия
+   набрана крупнее (1.175em), а отрицательный отступ слева снимает лишнее
+   поле перед «М». Кегль считается от ширины колонки (cqw), поэтому
+   выравнивание держится на любом экране. */
 .h1 .ln{display:block;white-space:nowrap}
 .h1 .ln-1{letter-spacing:-.0216em;margin-right:.0216em}
-.h1 .ln-2{letter-spacing:.1053em;margin-right:-.1053em}
+.h1 .ln-2{letter-spacing:-.0216em;margin:0 .0216em 0 -.0654em;font-size:1.175em;line-height:.98}
 .h2{font-size:clamp(28px,4.2vw,52px)}
 .h3{font-size:clamp(20px,2.3vw,28px);letter-spacing:-.02em}
 .h4{font-size:clamp(17px,1.6vw,20px);letter-spacing:-.015em;font-weight:600}
@@ -307,10 +309,11 @@ section[id]{scroll-margin-top:96px}
   justify-content:space-between;align-items:flex-end;flex:none;width:min(46%,470px)}
 .hero-copy{width:380px;max-width:100%;flex:none;container-type:inline-size}
 .hero-copy h1{color:#fff;margin:0 0 3.68cqw}
-/* Кегль подобран так, что строка занимает всю ширину колонки при обычных
-   пробелах — растягивать её выключкой не нужно. */
-.hero-role{display:block;font-size:8.867cqw;font-weight:400;letter-spacing:-.02em;
-  color:rgba(255,255,255,.86);margin-top:3.16cqw;
+/* Кегль и сдвиг подобраны так, что края букв строки совпадают с краями
+   имени: «Б» под «Д» и «М», последняя «и» под «й» и «в». Значения общие
+   для всех экранов — всё считается от ширины колонки. */
+.hero-role{display:block;font-size:8.505cqw;font-weight:400;letter-spacing:-.02em;
+  color:rgba(255,255,255,.86);margin-top:3.16cqw;margin-left:-.354cqw;
   hyphens:none;-webkit-hyphens:none;white-space:nowrap}
 /* Кегль и отступ считаются от ширины колонки, поэтому разбивка на строки
    одна и та же на любом экране: строки не «перепрыгивают» при изменении
@@ -672,7 +675,7 @@ textarea{resize:vertical;min-height:84px}
   .hero-row{flex-direction:row;align-items:stretch;flex:none;width:100%}
   .hero-copy{width:min(300px,52%);flex:none;display:block}
   .hero-copy h1{margin:0 0 3.2cqw}
-  .hero-role{font-size:8.69cqw;margin-top:0}
+  .hero-role{margin-top:0}
   .marks-narrow{display:flex;margin:18px 0 0;gap:10px}
   .marks-narrow .mark{width:54px;height:54px}
   /* в узкой колонке выключка по формату рвёт пробелы — ровняем по левому краю */
@@ -706,9 +709,8 @@ textarea{resize:vertical;min-height:84px}
      должности доходила до лица. Колонка уже — буквы не достают. */
   .hero-copy{width:58%;flex:1;display:flex;flex-direction:column}
   .hero-copy h1{margin:3.4cqw 0 1cqw}
-  /* должность ровно под ширину имени: на телефоне колонка уже, трекинг иной;
-     и прижата к фамилии — между ними только межстрочный просвет */
-  .hero-role{font-size:8.69cqw;margin-top:0}
+  /* должность прижата к фамилии — между ними только межстрочный просвет */
+  .hero-role{margin-top:0}
   /* овалы стоят по центру нижнего края, отступы слева и справа равны */
   .hero-pills{align-self:center;justify-items:center}
   /* В узкой колонке выключка по формату рвёт пробелы — на телефоне
