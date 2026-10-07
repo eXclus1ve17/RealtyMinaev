@@ -1,3 +1,4 @@
 send-config.php
 *.log
 __pycache__/
+_preview/
