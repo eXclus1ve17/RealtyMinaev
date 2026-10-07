@@ -10,6 +10,7 @@
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://realtyminaev.ru/">
 <meta name="theme-color" content="#101A2C">
+<meta name="google-site-verification" content="qyT_vMnswKHXzj3KTHAk0JMDKD8ExCJlGaEmdbB0PmE">
 <meta property="og:url" content="https://realtyminaev.ru/">
 <meta property="og:site_name" content="Дмитрий Минаев">
 <meta property="og:locale" content="ru_RU">
@@ -25,7 +26,21 @@
 <!-- Onest лежит на своём домене: fonts.googleapis.com у части посетителей
      в России не открывается, и страница оставалась без фирменного шрифта. -->
 <link rel="preload" as="font" type="font/woff2" href="fonts/onest-cyrillic.woff2?v=c3f4223046fb" crossorigin>
-<link rel="stylesheet" href="fonts.css?v=db2ff084a264">
+<!-- @font-face встроены прямо в страницу: отдельный fonts.css блокировал отрисовку (~0,8 с на мобильных). -->
+<style>
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
+  src:url("fonts/onest-cyrillic-ext.woff2?v=8b55db3131aa") format("woff2");
+  unicode-range:U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
+  src:url("fonts/onest-cyrillic.woff2?v=c3f4223046fb") format("woff2");
+  unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
+  src:url("fonts/onest-latin-ext.woff2?v=f72bdc75595b") format("woff2");
+  unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:"Onest";font-style:normal;font-weight:400 700;font-display:swap;
+  src:url("fonts/onest-latin.woff2?v=cc61cbd632bb") format("woff2");
+  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+</style>
 <style>
 /* ============================================================
    Дмитрий Минаев — просто о недвижимости
@@ -64,7 +79,7 @@ html[data-theme="steel"]{
   --ink:         #101A2C;   /* основной текст                    */
   --ink-rgb:     16,26,44;  /* он же для линий и теней           */
   --ink-2:       #525C6B;   /* абзацы, описания                  */
-  --ink-3:       #7C8593;   /* подписи, плейсхолдеры             */
+  --ink-3:       #687180;   /* подписи, плейсхолдеры             */
 
   /* акцент — кнопки и активные состояния */
   --accent:      #2F4A7A;   /* стальной синий                    */
@@ -94,7 +109,7 @@ html[data-theme="graphite"]{
   --ink:         #16191D;
   --ink-rgb:     22,25,29;
   --ink-2:       #5C636B;
-  --ink-3:       #8B929A;
+  --ink-3:       #6E757D;
 
   --accent:      #8A6A33;   /* шампань, приглушённая             */
   --accent-rgb:  138,106,51;
@@ -121,7 +136,7 @@ html[data-theme="emerald"]{
   --ink:         #1B2422;
   --ink-rgb:     27,36,34;
   --ink-2:       #586460;
-  --ink-3:       #87918D;
+  --ink-3:       #69736F;
 
   --accent:      #14312A;   /* зелень как акцент                 */
   --accent-rgb:  20,49,42;
@@ -181,6 +196,9 @@ section[id]{scroll-margin-top:96px}
    поэтому подобранный трекинг держится на любом экране, а не только здесь.
    Отрицательный отступ снимает пробел после последней буквы. */
 .h1 .ln{display:block;white-space:nowrap}
+/* Подпись «Брокер по недвижимости» — часть H1 для поиска, вид прежний. */
+.h1 .hero-role{line-height:1.6}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .h1 .ln-1{letter-spacing:-.0216em;margin-right:.0216em}
 .h1 .ln-2{letter-spacing:.1053em;margin-right:-.1053em}
 .h2{font-size:clamp(28px,4.2vw,52px)}
@@ -563,6 +581,8 @@ textarea{resize:vertical;min-height:84px}
   padding:clamp(18px,2vw,24px) 0 calc(clamp(18px,2vw,24px) + env(safe-area-inset-bottom));
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   font-size:12.5px;color:rgba(255,255,255,.45)}
+.ftr-legal a{color:rgba(255,255,255,.72);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.3)}
+.ftr-legal a:hover{color:#fff}
 
 /* ---------- липкая панель на мобильных ---------- */
 .sticky-bar{
@@ -828,18 +848,8 @@ textarea{resize:vertical;min-height:84px}
   "inLanguage":"ru-RU","publisher":{"@id":"https://realtyminaev.ru/#agent"}}
 ]}
 </script>
-<!-- Яндекс.Метрика, счётчик 112500819. Скрипт грузится асинхронно
-     и уже после отрисовки страницы — на скорость первого экрана не влияет. -->
-<script>
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-   ym(112500819, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer",
-                          accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/112500819" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<!-- Яндекс.Метрика и цели — в /consent.js: счётчик запускается только после согласия на cookie. -->
+<script src="/consent.js?v=1" defer></script>
 <style>
 .pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,#c9d4e6 47%,#2f4a7a 64%,#101a2c 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
 </style></head>
@@ -928,8 +938,9 @@ textarea{resize:vertical;min-height:84px}
         <h1 class="h1">
           <span class="ln ln-1">Дмитрий</span>
           <span class="ln ln-2">Минаев</span>
+          <span class="vh"> — </span>
+          <span class="hero-role">Брокер по недвижимости</span>
         </h1>
-        <span class="hero-role">Брокер по недвижимости</span>
         <div class="marks marks-narrow">
           <a class="mark" href="#attestat" aria-label="Гильдия риэлторов Москвы — к разделу об аттестате" title="Гильдия риэлторов Москвы"><picture><source type="image/webp" srcset="img/grm.webp?v=bb97e2f3c382"><img src="img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></a>
           <a class="mark" href="#attestat" aria-label="Российская гильдия риэлторов — к разделу об аттестате" title="Российская гильдия риэлторов"><picture><source type="image/webp" srcset="img/rgr.webp?v=cc48daf510ab"><img src="img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></a>
@@ -1286,7 +1297,7 @@ textarea{resize:vertical;min-height:84px}
       <!-- уточнить: можно добавить строку вида «провёл — таких сделок», когда будет цифра -->
       <div class="cases-cta">
         <span class="t">Не нашли свой случай? Опишите ситуацию — скажу, что для этого понадобится.</span>
-        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram"="Здравствуйте! У меня непростая ситуация со сделкой: ">Описать ситуацию</a>
+        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="describe_case">Описать ситуацию</a>
       </div>
     </div>
   </div>
@@ -1375,6 +1386,7 @@ textarea{resize:vertical;min-height:84px}
 
     <div class="ftr-bot">
       <span>© <span id="yr">2026</span> Дмитрий Минаев. Москва</span>
+      <span class="ftr-legal"><a href="/privacy/">Политика обработки персональных данных</a> · <a href="#" data-cookie-settings>Настройки cookie</a></span>
     </div>
   </div>
 </footer>
@@ -1527,10 +1539,6 @@ textarea{resize:vertical;min-height:84px}
 
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();
-</script>
-<script>
-/* цель Метрики: клик по полоске проекта Forma 96 */
-document.addEventListener('click',function(e){var g=e.target.closest('[data-goal]');if(g&&window.ym)ym(112500819,'reachGoal',g.getAttribute('data-goal'))});
 </script>
 </body>
 </html>

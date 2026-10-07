@@ -1,0 +1,26 @@
+# ============================================================
+# realtyminaev.ru — редиректы (виртуальный хостинг Рег.ру, Apache за nginx)
+# ============================================================
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# www.realtyminaev.ru → https://realtyminaev.ru (одним шагом, сразу на HTTPS)
+RewriteCond %{HTTP_HOST} ^www\.realtyminaev\.ru$ [NC]
+RewriteRule ^(.*)$ https://realtyminaev.ru/$1 [R=301,L]
+
+# /index.html → /   и   /forma-96/index.html → /forma-96/
+# (проверяем исходный запрос, чтобы не зациклиться на DirectoryIndex)
+RewriteCond %{THE_REQUEST} \s/+((?:[^\s?]*/)?)index\.html[\s?] [NC]
+RewriteRule ^ https://realtyminaev.ru/%1 [R=301,L]
+</IfModule>
+
+# Служебные файлы не отдаём наружу
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(README\.md|\.htaccess)$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
