@@ -1,0 +1,15 @@
+{%- from "partials/icons.njk" import icon -%}
+{%- macro cta(title, text, goal="call") -%}
+<section class="section"><div class="wrap">
+  <div class="cta">
+    <div>
+      <h2 class="h2">{{ title }}</h2>
+      <p>{{ text }}</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-metal" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} +7 (926) 397-77-75</a>
+      <a class="btn btn-ghost" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
+    </div>
+  </div>
+</div></section>
+{%- endmacro -%}

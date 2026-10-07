@@ -1,0 +1,147 @@
+{%- from "partials/icons.njk" import icon -%}
+{%- set canonical = site.url + page.url -%}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<link rel="canonical" href="{{ canonical }}">
+{%- if prototype %}
+<meta name="robots" content="noindex, nofollow">
+{%- endif %}
+<meta name="theme-color" content="#101A2C">
+<meta property="og:type" content="{{ ogType or 'website' }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:title" content="{{ ogTitle or title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:image" content="{{ site.url }}{{ ogImage or '/img/og.jpg' }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="font" type="font/woff2" href="/fonts/onest-cyrillic.woff2?v=c3f4223046fb" crossorigin>
+<link rel="stylesheet" href="/fonts.css?v=db2ff084a264">
+<link rel="stylesheet" href="{{ '/assets/site.css' | ver }}">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Главная","item":"{{ site.url }}/"}
+  {%- for c in crumbs %},{"@type":"ListItem","position":{{ loop.index + 1 }},"name":{{ c.title | dump | safe }},"item":"{{ site.url }}{{ c.url }}"}{% endfor %}
+ ]},
+ {"@type":"WebPage","@id":"{{ canonical }}#webpage","url":"{{ canonical }}","name":{{ title | dump | safe }},"inLanguage":"ru-RU",
+  "isPartOf":{"@id":"{{ site.url }}/#site"},"about":{"@id":"{{ site.url }}/#agent"}}
+ {%- if schema %},{{ schema | safe }}{% endif %}
+]}
+</script>
+</head>
+<body>
+<a class="sr" href="#main">К содержанию</a>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/"><b>Дмитрий Минаев</b><span>брокер по недвижимости</span></a>
+    <nav aria-label="Разделы сайта">
+      <ul class="nav">
+      {%- for m in site.menu %}
+        <li>
+        {%- if m.items %}
+          {%- set ddId = "dd-" + loop.index %}
+          <button class="nav-a" aria-expanded="false" aria-controls="{{ ddId }}">{{ m.title }} {{ icon("down") | safe }}</button>
+          <div class="dd" id="{{ ddId }}">
+            {%- for i in m.items %}<a href="{{ i.url }}"{% if i.muted %} class="more"{% endif %}{% if i.url == page.url %} aria-current="page"{% endif %}>{{ i.title }}</a>{% endfor %}
+          </div>
+        {%- else %}
+          <a class="nav-a" href="{{ m.url }}"{% if page.url.startsWith(m.url) %} aria-current="page"{% endif %}>{{ m.title }}</a>
+        {%- endif %}
+        </li>
+      {%- endfor %}
+      </ul>
+    </nav>
+    <div class="hdr-act">
+      <a class="hdr-tel" href="{{ site.phoneHref }}" data-goal="call">{{ site.phone }}</a>
+      <a class="btn btn-accent btn-sm" href="{{ site.telegram }}" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
+      <button class="burger" data-mnav="open" aria-label="Открыть меню"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Меню">
+  <div class="mnav-top">
+    <a class="brand" href="/"><b>Дмитрий Минаев</b><span>брокер по недвижимости</span></a>
+    <button class="mnav-close" data-mnav="close" aria-label="Закрыть меню">×</button>
+  </div>
+  {%- for m in site.menu %}
+    {%- if m.items %}
+  <details{% if m.items | hasUrl(page.url) %} open{% endif %}>
+    <summary>{{ m.title }}</summary>
+    <ul>{% for i in m.items %}<li><a href="{{ i.url }}">{{ i.title }}</a></li>{% endfor %}</ul>
+  </details>
+    {%- else %}
+  <a class="ml" href="{{ m.url }}">{{ m.title }}</a>
+    {%- endif %}
+  {%- endfor %}
+  <div class="mnav-call">
+    <a class="btn btn-accent" href="{{ site.phoneHref }}" data-goal="call">{{ icon("phone") | safe }} {{ site.phone }}</a>
+    <a class="btn btn-line" href="{{ site.telegram }}" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать в Telegram</a>
+  </div>
+</div>
+
+<main id="main">
+  {%- if crumbs %}
+  <nav class="wrap crumbs" aria-label="Вы здесь">
+    <ol>
+      <li><a href="/">Главная</a></li>
+      {%- for c in crumbs %}<li>{% if loop.last %}<span aria-current="page">{{ c.title }}</span>{% else %}<a href="{{ c.url }}">{{ c.title }}</a>{% endif %}</li>{% endfor %}
+    </ol>
+  </nav>
+  {%- endif %}
+  {{ content | safe }}
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="ftr-who">
+        <h2>Брокер</h2>
+        <a class="tel" href="{{ site.phoneHref }}" data-goal="call">{{ site.phone }}</a>
+        <span>Минаев Дмитрий Михайлович, аттестованный брокер РГР</span>
+        <span>{{ site.agency }}</span>
+        <span>{{ site.address }} · м. «{{ site.metro }}»</span>
+      </div>
+      {%- for m in site.menu %}{% if m.items %}
+      <div class="ftr-links">
+        <h2>{{ m.title }}</h2>
+        {%- for i in m.items %}{% if not i.muted %}<a href="{{ i.url }}">{{ i.title }}</a>{% endif %}{% endfor %}
+        {%- if loop.index == 3 %}<a href="/forma-96/">Проект дома Forma 96</a>{% endif %}
+      </div>
+      {%- endif %}{% endfor %}
+    </div>
+    <div class="ftr-bot">
+      <span>© 2026 Дмитрий Минаев. Москва</span>
+      <span><a href="/statyi/">Статьи</a> · <a href="/obo-mne/">Обо мне</a> · <a href="/kontakty/">Контакты</a> · <a href="/politika-konfidencialnosti/">Политика конфиденциальности</a></span>
+    </div>
+  </div>
+</footer>
+
+<nav class="sticky-bar" aria-label="Быстрая связь">
+  <a class="call" href="{{ site.phoneHref }}" data-goal="call">{{ icon("phone") | safe }}<span>Позвонить</span></a>
+  <a href="{{ site.telegram }}" target="_blank" rel="noopener" aria-label="Telegram" data-goal="write_telegram">{{ icon("tg") | safe }}<span>TG</span></a>
+  <a href="{{ site.whatsapp }}" target="_blank" rel="noopener" aria-label="WhatsApp" data-goal="write_whatsapp">{{ icon("wa") | safe }}<span>WA</span></a>
+  <a href="{{ site.max }}" target="_blank" rel="noopener" aria-label="MAX" data-goal="write_max">{{ icon("max") | safe }}<span>MAX</span></a>
+</nav>
+
+<div class="cookie" id="cookie" role="region" aria-label="Согласие на cookie">
+  <p>Сайт использует cookie и Яндекс Метрику, чтобы понимать, какие страницы полезны. Подробнее — в <a href="/politika-konfidencialnosti/">политике конфиденциальности</a>.</p>
+  <div class="btn-row"><button class="btn btn-accent btn-sm" data-cookie="yes">Согласен</button><button class="btn btn-line btn-sm" data-cookie="no">Только необходимые</button></div>
+</div>
+
+<script>window.YM_ID={{ site.metrika }};</script>
+<script src="{{ '/assets/site.js' | ver }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "realtyminaev-site",
+  "private": true,
+  "description": "Сайт realtyminaev.ru. Сборка: npm run build → папка _site выкладывается на хостинг.",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.6"
+  },
+  "type": "module"
+}

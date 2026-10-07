@@ -1,0 +1,70 @@
+---
+layout: layouts/base.njk
+permalink: /yuao/
+prototype: true
+title: "Риелтор в ЮАО — брокер Дмитрий Минаев, офис у м. Технопарк"
+description: "Продажа и покупка квартир в Южном округе Москвы. Офис у метро «Технопарк». Знаю дома и цены сделок по районам ЮАО. Аттестованный брокер РГР."
+crumbs:
+  - { title: "Риелтор в ЮАО", url: "/yuao/" }
+---
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/cta.njk" import cta -%}
+
+<section class="ph"><div class="wrap ph-grid">
+  <div class="ph-main">
+    <span class="eyebrow">Район · Южный округ</span>
+    <h1 class="h1">Риелтор в&nbsp;ЮАО</h1>
+    <p class="lead"><span class="fill">[ЗАПОЛНИТЬ: 2–3 предложения, почему вы работаете в ЮАО и чем ваш опыт здесь полезен клиенту]</span></p>
+    <div class="btn-row">
+      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} Позвонить</a>
+      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
+    </div>
+  </div>
+  <div class="office">
+    <span class="ic">{{ icon("pin") | safe }}</span>
+    <div><b>Офис в ЮАО, м. «Технопарк»</b><span>БЦ Port Plaza, Проектируемый проезд № 4062, д. 6, стр. 16</span></div>
+    <a class="btn btn-line btn-sm" href="/kontakty/">Как добраться</a>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="head">
+    <span class="eyebrow">Районы округа</span>
+    <h2 class="h2">Где я провожу сделки в ЮАО</h2>
+    <p class="lead">Только районы, где у меня были сделки. По каждому — что важно знать продавцу и покупателю.</p>
+  </div>
+  <div class="areas">
+    <div class="area"><h3><span class="fill">[Район]</span></h3><p class="meta">Метро: <span class="fill">[ЗАПОЛНИТЬ]</span></p><p><span class="fill">[ЗАПОЛНИТЬ: типичные дома, на что смотреть, ваш опыт]</span></p></div>
+    <div class="area"><h3><span class="fill">[Район]</span></h3><p class="meta">Метро: <span class="fill">[ЗАПОЛНИТЬ]</span></p><p><span class="fill">[ЗАПОЛНИТЬ]</span></p></div>
+    <div class="area"><h3><span class="fill">[Район]</span></h3><p class="meta">Метро: <span class="fill">[ЗАПОЛНИТЬ]</span></p><p><span class="fill">[ЗАПОЛНИТЬ]</span></p></div>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="panel split">
+    <div class="head" style="margin:0">
+      <span class="eyebrow">На что смотреть</span>
+      <h2 class="h2">Особенности сделок в ЮАО</h2>
+      <p class="lead">Этот блок отличает страницу от шаблонной. Без него Яндекс сочтёт её дорвеем.</p>
+    </div>
+    <ul class="checks">
+      <li><span class="tick">{{ icon("tick") | safe }}</span><span class="fill">[ЗАПОЛНИТЬ: например, дома под реновацию — как это влияет на цену и сделку]</span></li>
+      <li><span class="tick">{{ icon("tick") | safe }}</span><span class="fill">[ЗАПОЛНИТЬ: новостройки на месте бывших промзон — что проверять]</span></li>
+      <li><span class="tick">{{ icon("tick") | safe }}</span><span class="fill">[ЗАПОЛНИТЬ: ваше наблюдение по рынку округа]</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="head">
+    <span class="eyebrow">Чем помогу в ЮАО</span>
+    <h2 class="h2">Услуги</h2>
+  </div>
+  <div class="cards">
+    <a class="card" href="/uslugi/prodazha-kvartiry/"><span class="k">Продать</span><h3>Продажа квартиры</h3><p>Цена по реальным сделкам в вашем доме и районе.</p><span class="go">Подробнее →</span></a>
+    <a class="card" href="/uslugi/pokupka-kvartiry/"><span class="k">Купить</span><h3>Вторичка с проверкой</h3><p>История права, продавец, обоснованный торг.</p><span class="go">Подробнее →</span></a>
+    <a class="card" href="/uslugi/novostrojki/"><span class="k">Новостройки</span><h3>Подбор бесплатно</h3><p>Сравнение ЖК и лотов, приёмка с приёмщиком.</p><span class="go">Подробнее →</span></a>
+  </div>
+</div></section>
+
+{{ cta("Квартира в ЮАО?", "Расскажите, что продаёте или ищете. Отвечу, сколько это стоит по сделкам в районе и с чего начать.") }}
