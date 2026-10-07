@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="steel">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Дмитрий Минаев — риелтор и брокер по недвижимости в Москве</title>
+<meta name="description" content="Аттестованный риелтор и брокер в Москве. Вторичка, новостройки с бесплатным подбором, коммерция, загородная. Сложные сделки: опека, наследство, доли.">
+<meta property="og:title" content="Дмитрий Минаев — риелтор и брокер по недвижимости в Москве">
+<meta property="og:description" content="Аттестованный брокер. Проверяю объект до того, как вы внесёте первый рубль, и довожу до записи в ЕГРН.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://realtyminaev.ru/">
+<meta name="theme-color" content="#101A2C">
+<meta property="og:url" content="https://realtyminaev.ru/">
+<meta property="og:site_name" content="Дмитрий Минаев">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://realtyminaev.ru/img/og.jpg?v=1f83e50df966">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Дмитрий Минаев, брокер по недвижимости в Москве">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico?v=b3d294b8a968" sizes="32x32">
+<link rel="icon" href="/icon-512.png?v=61635c6374b2" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2dce23ee3f4f">
+<script>document.documentElement.className += " js";</script>
+<!-- Onest лежит на своём домене: fonts.googleapis.com у части посетителей
+     в России не открывается, и страница оставалась без фирменного шрифта. -->
+<link rel="preload" as="font" type="font/woff2" href="fonts/onest-cyrillic.woff2?v=c3f4223046fb" crossorigin>
+<link rel="stylesheet" href="fonts.css?v=db2ff084a264">
+<style>
+/* ============================================================
+   Дмитрий Минаев — просто о недвижимости
+   Светлая тема: карточка-герой во всю ширину, плавающие отзывы
+   поверх фото. Все цвета — в блоке «ПАЛИТРА САЙТА» ниже.
+   ============================================================ */
+
+/* ════════════════════════════════════════════════════════════════════
+   ПАЛИТРА САЙТА — весь цвет живёт только здесь.
+
+   ЧТОБЫ СМЕНИТЬ ПАЛИТРУ ЦЕЛИКОМ: в самом верху файла, во второй
+   строке, в теге <html ... data-theme="steel"> замените слово steel
+   на одно из трёх:
+
+        steel      — Полночный синий и сталь   (сейчас включена)
+        graphite   — Графит и шампань
+        emerald    — Изумруд и латунь
+
+   ЧТОБЫ ПОПРАВИТЬ ОТДЕЛЬНЫЙ ЦВЕТ: найдите его ниже в блоке нужной
+   палитры и замените код цвета. Менять можно прямо здесь, все три
+   палитры всегда рабочие — ничего раскомментировать не нужно.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── ПАЛИТРА 1 · ПОЛНОЧНЫЙ СИНИЙ И СТАЛЬ ───────── data-theme="steel" ── */
+:root,
+html[data-theme="steel"]{
+  /* поверхности */
+  --bg:          #F4F5F7;   /* фон страницы, холодный мрамор     */
+  --bg-rgb:      244,245,247;
+  --surface:     #FFFFFF;   /* карточки, панели                  */
+  --surface-2:   #F7F8FA;   /* мягкая подложка внутри карточек   */
+  --dark:        #101A2C;   /* тёмные блоки: канал, плитка лого  */
+  --dark-hi:     #1B2942;   /* тот же, при наведении             */
+
+  /* текст */
+  --ink:         #101A2C;   /* основной текст                    */
+  --ink-rgb:     16,26,44;  /* он же для линий и теней           */
+  --ink-2:       #525C6B;   /* абзацы, описания                  */
+  --ink-3:       #7C8593;   /* подписи, плейсхолдеры             */
+
+  /* акцент — кнопки и активные состояния */
+  --accent:      #2F4A7A;   /* стальной синий                    */
+  --accent-rgb:  47,74,122;
+  --accent-hi:   #3A5B94;   /* акцент при наведении              */
+  --accent-ink:  #2A4370;   /* акцент как текст (надзаголовки)   */
+  --accent-soft: #E5EAF3;   /* светлая заливка акцента           */
+  --on-accent:   #FFFFFF;   /* текст на акцентной кнопке         */
+
+  /* металл — только аттестат и звёзды отзывов */
+  --metal:       #9C7B46;   /* бронза на светлом фоне            */
+  --metal-lite:  #C6A46B;   /* бронза на тёмном фоне             */
+
+  /* затемнение фотографии в первом экране */
+  --overlay-rgb: 8,14,26;
+}
+
+/* ── ПАЛИТРА 2 · ГРАФИТ И ШАМПАНЬ ────────────── data-theme="graphite" ── */
+html[data-theme="graphite"]{
+  --bg:          #F7F6F4;   /* тёплая почти белая бумага         */
+  --bg-rgb:      247,246,244;
+  --surface:     #FFFFFF;
+  --surface-2:   #FAF9F7;
+  --dark:        #16191D;   /* графит                            */
+  --dark-hi:     #242930;
+
+  --ink:         #16191D;
+  --ink-rgb:     22,25,29;
+  --ink-2:       #5C636B;
+  --ink-3:       #8B929A;
+
+  --accent:      #8A6A33;   /* шампань, приглушённая             */
+  --accent-rgb:  138,106,51;
+  --accent-hi:   #A07C3E;
+  --accent-ink:  #7A5C2A;
+  --accent-soft: #F0E9DB;
+  --on-accent:   #FFFFFF;
+
+  --metal:       #B79155;
+  --metal-lite:  #D2B27A;
+
+  --overlay-rgb: 14,16,19;
+}
+
+/* ── ПАЛИТРА 3 · ИЗУМРУД И ЛАТУНЬ ─────────────── data-theme="emerald" ── */
+html[data-theme="emerald"]{
+  --bg:          #F5F3ED;   /* слоновая кость                    */
+  --bg-rgb:      245,243,237;
+  --surface:     #FFFFFF;
+  --surface-2:   #FAF8F3;
+  --dark:        #14312A;   /* глубокая зелень                   */
+  --dark-hi:     #1E4238;
+
+  --ink:         #1B2422;
+  --ink-rgb:     27,36,34;
+  --ink-2:       #586460;
+  --ink-3:       #87918D;
+
+  --accent:      #14312A;   /* зелень как акцент                 */
+  --accent-rgb:  20,49,42;
+  --accent-hi:   #1E4238;
+  --accent-ink:  #1A3C33;
+  --accent-soft: #E2EAE5;
+  --on-accent:   #FFFFFF;
+
+  --metal:       #A8834E;   /* латунь                            */
+  --metal-lite:  #C9A96F;
+
+  --overlay-rgb: 10,24,20;
+}
+
+/* ── РАЗМЕРЫ И ТЕНИ (общие для всех палитр) ────────────────────── */
+:root{
+  --line:      rgba(var(--ink-rgb),.10);  /* тонкие линии          */
+  --line-2:    rgba(var(--ink-rgb),.06);  /* совсем светлые линии  */
+  --shadow:    0 18px 50px -22px rgba(var(--ink-rgb),.32);
+  --shadow-sm: 0 8px 24px -12px rgba(var(--ink-rgb),.28);
+  --r-xl:      44px;   /* скругление больших карточек */
+  --r-lg:      28px;
+  --r-md:      20px;
+  --pad:       clamp(16px, 3.4vw, 44px);   /* поля страницы  */
+  --inner:     clamp(20px, 3.6vw, 56px);   /* поля в герое   */
+  --maxw:      1440px;                     /* ширина контента */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-weight:400;font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+picture{display:contents}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:left}
+h1,h2,h3,h4{margin:0;font-weight:600;line-height:1.06;letter-spacing:-.03em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px;border-radius:6px}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.section{padding:clamp(48px,6.5vw,104px) 0}
+section[id]{scroll-margin-top:96px}
+
+/* ---------- типографика ---------- */
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);flex:none}
+.eyebrow.on-photo{color:#fff}
+.eyebrow.on-photo::before{background:var(--accent)}
+.h1{font-size:24.1cqw;line-height:1.02;letter-spacing:-.045em;font-weight:600}
+/* Обе строки имени одной ширины. Кегль считается от ширины колонки (cqw),
+   поэтому подобранный трекинг держится на любом экране, а не только здесь.
+   Отрицательный отступ снимает пробел после последней буквы. */
+.h1 .ln{display:block;white-space:nowrap}
+.h1 .ln-1{letter-spacing:-.0216em;margin-right:.0216em}
+.h1 .ln-2{letter-spacing:.1053em;margin-right:-.1053em}
+.h2{font-size:clamp(28px,4.2vw,52px)}
+.h3{font-size:clamp(20px,2.3vw,28px);letter-spacing:-.02em}
+.h4{font-size:clamp(17px,1.6vw,20px);letter-spacing:-.015em;font-weight:600}
+.lead{font-size:clamp(15.5px,1.35vw,18.5px);color:var(--ink-2);max-width:56ch;font-weight:400}
+.small{font-size:14.5px;color:var(--ink-2)}
+.tiny{font-size:12.5px;color:var(--ink-3);line-height:1.5}
+.ph{color:var(--ink-3)}
+.head{margin-bottom:clamp(28px,3.6vw,52px)}
+.head .h2{margin-top:16px;max-width:19ch}
+.head .lead{margin-top:18px}
+
+/* ---------- кнопки ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  height:52px;padding:0 24px;border-radius:999px;border:1px solid transparent;
+  font-size:15px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;
+  transition:transform .2s ease, background-color .25s, border-color .25s, color .25s, box-shadow .25s;
+}
+.btn:active{transform:scale(.985)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-accent{background:var(--accent);color:var(--on-accent);box-shadow:0 10px 26px -14px rgba(var(--accent-rgb),.55)}
+.btn-accent:hover{background:var(--accent-hi)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:var(--dark-hi)}
+/* кнопка на тёмной плашке: акцентный синий на тёмно-синем не читается */
+.btn-metal{background:var(--metal-lite);color:#1A1408}
+.btn-metal:hover{background:var(--metal)}
+.btn-line{border-color:var(--line);color:var(--ink);background:var(--surface)}
+.btn-line:hover{border-color:var(--ink);background:var(--surface)}
+.btn-glass{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.34);color:#fff;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.btn-glass:hover{background:rgba(255,255,255,.28)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
+.btn-tel small{display:block;font-size:11px;font-weight:500;opacity:.72;letter-spacing:.02em;line-height:1.1;text-align:center}
+.btn-tel span{display:block;line-height:1.15}
+.btn-tel{height:56px;flex-direction:row;align-items:center;gap:11px}
+
+/* ---------- липкая шапка (появляется при скролле) ---------- */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:70;padding:0 var(--pad);
+  background:rgba(var(--bg-rgb),.86);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line-2);
+  transform:translateY(-100%);transition:transform .35s cubic-bezier(.22,.8,.3,1);
+}
+.topbar.show{transform:none}
+/* Та же сетка, что у карточки первого экрана: поля страницы снаружи,
+   внутренние поля карточки внутри. Меню не прыгает при прокрутке. */
+.topbar-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--inner);display:flex;align-items:center;justify-content:space-between;gap:20px;height:70px}
+.topbar .nav a{color:var(--ink-2)}
+.topbar .nav a:hover{color:var(--ink)}
+
+/* логотип */
+.logo{display:flex;align-items:center;gap:11px;flex:none}
+.logo-tile{
+  width:44px;height:44px;border-radius:13px;background:var(--ink);flex:none;
+  display:grid;place-items:center;overflow:hidden;
+}
+.logo-tile img{width:30px;height:auto}
+.logo-txt b{display:block;font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;line-height:1.1}
+.logo-txt span{display:block;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
+.logo.on-photo .logo-tile{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.logo.on-photo .logo-txt b{color:#fff}
+.logo.on-photo .logo-txt span{color:rgba(255,255,255,.66)}
+
+.nav{display:flex;gap:26px;font-size:15px;font-weight:500}
+.hero-actions .btn .lbl{font-size:17px}
+.nav a{transition:color .2s}
+.nav.on-photo a{color:rgba(255,255,255,.82)}
+.nav.on-photo a:hover{color:#fff}
+
+.burger{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);place-items:center;background:var(--surface);flex:none}
+.burger.on-photo{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.32);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.burger span{display:block;width:17px;height:1.5px;background:var(--ink);position:relative;border-radius:2px}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:17px;height:1.5px;background:var(--ink);border-radius:2px}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger.on-photo span,.burger.on-photo span::before,.burger.on-photo span::after{background:#fff}
+
+/* мобильное меню */
+.mnav{position:fixed;inset:0;z-index:90;background:var(--bg);padding:88px var(--pad) 32px;display:none;flex-direction:column}
+.mnav.open{display:flex}
+.mnav a.ml{font-size:30px;font-weight:600;letter-spacing:-.03em;padding:14px 0;border-bottom:1px solid var(--line-2)}
+.mnav-close{position:absolute;top:22px;right:var(--pad);width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:var(--surface);font-size:24px;line-height:1}
+
+/* ---------- ГЕРОЙ ---------- */
+.hero-outer{padding:var(--pad) var(--pad) 0}
+.hero{
+  position:relative;max-width:var(--maxw);margin:0 auto;
+  border-radius:var(--r-xl);overflow:hidden;
+  min-height:min(88vh,860px);
+  display:flex;flex-direction:column;
+  box-shadow:0 40px 90px -40px rgba(var(--ink-rgb),.45);
+  isolation:isolate;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+/* Фотография вертикальная, по ширине вписывается впритык — хода вбок нет.
+   Чтобы сдвинуть фигуру вправо, кадр приближается: масштаб даёт запас,
+   сдвиг его расходует. scale 1.15 → фигура примерно на 55% ширины. */
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;
+  transform:scale(1.15) translateX(3.85%);transform-origin:50% 38%;
+  /* сама фотография чуть светлее; контраст добавлен, чтобы не «поплыла» */
+  filter:brightness(1.14) contrast(1.04) saturate(1.03)}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(var(--overlay-rgb),.58) 0%, rgba(var(--overlay-rgb),.12) 26%, rgba(var(--overlay-rgb),.16) 54%, rgba(var(--overlay-rgb),.58) 100%),
+    linear-gradient(96deg, rgba(var(--overlay-rgb),.88) 0%, rgba(var(--overlay-rgb),.64) 32%, rgba(var(--overlay-rgb),.14) 58%, rgba(var(--overlay-rgb),0) 78%);
+}
+.hero-top{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:var(--inner) var(--inner) 0}
+/* логотипа слева больше нет: прижимаем кнопки вправо явно,
+   иначе на узких экранах они уезжают влево */
+.hero-actions{display:flex;align-items:center;gap:10px;flex:none;margin-left:auto}
+
+/* Текст прижат к верху карточки: между меню и именем остаётся воздух
+   в пол-экрана, а не треть. Овалы держатся нижней строки абзаца и едут вместе. */
+.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:center;
+  padding:clamp(36px,4vw,56px) var(--inner)}
+/* Текст и овалы — одна строка, выключка по нижнему краю: последний овал
+   встаёт вровень с последней строкой абзаца напротив. */
+.hero-row{display:flex;align-items:stretch;gap:clamp(24px,4vw,64px);width:100%}
+/* правый столбец тянется на высоту текста: знаки прижаты к его верху,
+   овалы — к низу. Никаких вычисленных отступов, границы общие с колонкой. */
+.hero-side{margin-left:auto;display:flex;flex-direction:column;
+  justify-content:space-between;align-items:flex-end;flex:none;width:min(46%,470px)}
+.hero-copy{width:380px;max-width:100%;flex:none;container-type:inline-size}
+.hero-copy h1{color:#fff;margin:0 0 3.68cqw}
+/* Кегль подобран так, что строка занимает всю ширину колонки при обычных
+   пробелах — растягивать её выключкой не нужно. */
+.hero-role{display:block;font-size:8.867cqw;font-weight:400;letter-spacing:-.02em;
+  color:rgba(255,255,255,.86);margin-top:3.16cqw;
+  hyphens:none;-webkit-hyphens:none;white-space:nowrap}
+/* Кегль и отступ считаются от ширины колонки, поэтому разбивка на строки
+   одна и та же на любом экране: строки не «перепрыгивают» при изменении
+   размера окна. Переносы отключены, последняя строка тоже выключена
+   по формату — правый край ровный сверху донизу. */
+.hero-copy .lead{color:rgba(255,255,255,.80);max-width:none;font-size:3.95cqw;
+  margin-top:4.74cqw;text-align:justify;text-align-last:left;
+  hyphens:none;-webkit-hyphens:none}
+
+/* значок аттестата — круг в правом столбце героя */
+/* Знаки организаций, выдавших аттестат. Логотипы цветные, поэтому лежат
+   на белом круге — на фотографии они читаются как печати, а не как пятна. */
+/* Верх знаков совпадает с верхом строки «Дмитрий»: та же сумма отступов,
+   что у текстовой колонки — поля карточки, высота шапки, отступ тела и отбивка h1. */
+.marks{z-index:3;display:flex;gap:clamp(10px,1vw,14px)}
+.marks-wide{margin-top:0}
+.marks-narrow{display:none}
+.mark{width:clamp(72px,6.2vw,88px);height:clamp(72px,6.2vw,88px);border-radius:50%;
+  background:#fff;overflow:hidden;display:grid;place-items:center;flex:none;
+  box-shadow:0 10px 26px -12px rgba(0,0,0,.55);
+  transition:transform .3s cubic-bezier(.22,.8,.3,1),box-shadow .3s}
+.mark img{width:100%;height:100%;object-fit:cover}
+.mark:hover,.mark:focus-visible{transform:scale(1.07);box-shadow:0 16px 34px -14px rgba(0,0,0,.7)}
+
+.rev{
+  background:var(--surface);border-radius:var(--r-lg);padding:22px 24px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:14px;
+}
+.rev.tint{background:var(--accent-soft)}
+.rev.lift{margin-bottom:26px}
+.rev .stars{display:flex;gap:3px;color:var(--metal)}
+.rev .stars svg{width:14px;height:14px}
+.rev p{font-size:14.5px;line-height:1.5;color:var(--ink);letter-spacing:-.01em}
+.rev .who{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid var(--line-2);margin-top:auto}
+.rev .who b{font-size:13.5px;font-weight:600}
+.rev .who span{font-size:12px;color:var(--ink-3)}
+
+/* ---------- направления: овалы в правом нижнем углу ---------- */
+.hero-pills{
+  display:flex;flex-direction:column;align-items:flex-end;gap:12px;
+  max-width:100%;
+}
+.pill{
+  display:inline-flex;align-items:center;border-radius:999px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  color:#fff;font-weight:500;line-height:1.25;letter-spacing:-.01em;text-align:right;
+  transition:transform .3s cubic-bezier(.22,.8,.3,1),background-color .3s,border-color .3s,color .3s,box-shadow .3s;
+}
+.pill:hover,.pill:focus-visible{
+  transform:scale(1.05);
+  background:rgba(255,255,255,.94);border-color:#fff;color:var(--ink);
+  box-shadow:0 18px 44px -20px rgba(var(--ink-rgb),.65);
+}
+/* Правый край общий, но у каждой строки свой небольшой разбег вправо —
+   ряд читается как ровный, при этом не выглядит машинным.
+   Кегль различается едва заметно: 14–15,5 px. */
+/* Первая строка — пара овалов рядом, чтобы столбик остался в четыре ряда. */
+.pl-min{display:none}
+.pill-row{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.hero-pills .pill-row{margin-right:0}
+.pill-row .pill:nth-child(1){font-size:15.5px;padding:13px 23px}
+.pill-row .pill:nth-child(2){font-size:15px;  padding:13px 22px}
+.hero-pills > .pill:nth-of-type(1){font-size:14.5px;padding:12px 21px;margin-right:14px}
+.hero-pills > .pill:nth-of-type(2){font-size:15px;  padding:13px 22px;margin-right:26px}
+.hero-pills > .pill:nth-of-type(3){font-size:14px;  padding:12px 20px;margin-right:6px}
+
+/* ---------- сегменты ---------- */
+/* ---------- сложные сделки: тёмная карточка ---------- */
+.cases{background:var(--dark);border-radius:var(--r-xl);padding:clamp(24px,3.4vw,56px);color:#fff}
+.cases .eyebrow{color:var(--metal-lite)}
+.cases .eyebrow::before{background:var(--metal-lite)}
+.cases-head{margin-bottom:clamp(26px,3.2vw,44px)}
+.cases-head .h2{margin-top:16px;font-size:clamp(26px,3.4vw,44px);max-width:20ch}
+.cases-head .lead{color:rgba(255,255,255,.70);margin-top:16px;max-width:58ch}
+/* сетка на волосяных линиях: зазор в 1px показывает фон-подложку */
+.cases-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);
+  border-radius:var(--r-md);overflow:hidden}
+.case{background:var(--dark);padding:clamp(20px,2.2vw,30px);
+  display:flex;flex-direction:column;gap:11px;transition:background-color .3s}
+.case:hover{background:var(--dark-hi)}
+.case .ic{width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.10);
+  display:grid;place-items:center;color:var(--metal-lite);margin-bottom:3px}
+.case .ic svg{width:19px;height:19px}
+.case h3{font-size:17px;font-weight:600;letter-spacing:-.022em;line-height:1.25}
+.case p{font-size:14px;line-height:1.55;color:rgba(255,255,255,.64)}
+.cases-cta{margin-top:clamp(24px,3vw,40px);display:flex;align-items:center;
+  gap:14px;flex-wrap:wrap}
+.cases-cta .t{font-size:15.5px;color:rgba(255,255,255,.76);flex:1;min-width:240px}
+.tag{font-size:11.5px;font-weight:500;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line-2);border-radius:999px;padding:5px 11px}
+
+/* ---------- аттестат ---------- */
+.panel{background:var(--surface);border-radius:var(--r-xl);padding:clamp(24px,3.4vw,56px)}
+.att{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(26px,4vw,64px);align-items:center}
+.att-frame{background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--r-lg);padding:clamp(12px,1.4vw,20px)}
+.att-frame img{border-radius:12px;box-shadow:var(--shadow-sm);width:100%;height:auto}
+.att-marks{display:flex;align-items:center;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line-2)}
+.att-marks .t{font-size:12.5px;line-height:1.45;color:var(--ink-3)}
+.mark-lite{box-shadow:none;border:1px solid var(--line-2);width:46px;height:46px}
+.att-rows{margin-top:26px}
+.att-rows li{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:15px 0;border-top:1px solid var(--line-2)}
+.att-rows li span:first-child{font-size:13.5px;color:var(--ink-3);flex:none}
+.att-rows li span:last-child{font-size:15px;font-weight:600;text-align:right;letter-spacing:-.01em}
+
+/* ---------- сценарии: плитки выбора и панель под ними ---------- */
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-rows:1fr;gap:12px;
+  margin-bottom:clamp(24px,3vw,40px)}
+.tile{position:relative;background:var(--surface);border:1px solid var(--line-2);
+  border-radius:var(--r-md);padding:22px 20px 20px;min-height:168px;
+  display:flex;flex-direction:column;gap:10px;
+  transition:transform .3s cubic-bezier(.22,.8,.3,1),border-color .3s,box-shadow .3s,background-color .3s,color .3s}
+.tile .ic{width:40px;height:40px;border-radius:12px;background:var(--accent-soft);
+  display:grid;place-items:center;color:var(--accent-ink);transition:background-color .3s,color .3s}
+.tile .ic svg{width:20px;height:20px}
+.tile .t{font-size:16.5px;font-weight:600;letter-spacing:-.022em;line-height:1.25;margin-top:auto}
+.tile .s{font-size:13px;color:var(--ink-3);line-height:1.4;transition:color .3s}
+.tile:hover{transform:translateY(-4px);background:var(--accent-soft);
+  border-color:rgba(var(--accent-rgb),.45);box-shadow:var(--shadow-sm)}
+.tile:hover .ic{background:var(--accent);color:#fff}
+.tile[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);
+  box-shadow:0 16px 40px -20px rgba(var(--accent-rgb),.7)}
+.tile[aria-selected="true"] .ic{background:rgba(255,255,255,.18);color:#fff}
+.tile[aria-selected="true"] .s{color:rgba(255,255,255,.72)}
+f}
+.tile[aria-selected="true"]:hover .ic{background:rgba(255,255,255,.18);color:#fff}
+/* уголок-указатель от активной плитки к панели */
+.tile[aria-selected="true"]::after{content:"";position:absolute;left:50%;bottom:-1px;
+  width:14px;height:14px;background:var(--accent);transform:translate(-50%,50%) rotate(45deg);border-radius:2px}
+
+/* плавное раскрытие по высоте: 0fr → 1fr, без фиксированных пикселей */
+.drop{display:grid;grid-template-rows:0fr;transition:grid-template-rows .42s cubic-bezier(.22,.8,.3,1)}
+.drop > div{overflow:hidden;min-height:0}
+.drop.open{grid-template-rows:1fr}
+/* возврат к выбору задачи из конца длинной панели */
+.sc-close{display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;margin-top:18px;height:50px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);
+  font-size:15px;font-weight:600;color:var(--ink-2);transition:border-color .25s,color .25s}
+.sc-close:hover{border-color:var(--ink-3);color:var(--ink)}
+.sc-close svg{width:17px;height:17px}
+.sc-panel{display:none}
+.sc-panel.on{display:block;animation:fade .45s cubic-bezier(.22,.8,.3,1)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.sc-grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(24px,3.4vw,56px);align-items:start}
+.sc-intro .h2{margin:16px 0 16px;font-size:clamp(26px,3.4vw,42px)}
+/* пары «боль клиента — что я делаю»: тревога сверху, ответ под ней */
+/* плашка про бесплатные услуги — акцентная, но не кричащая */
+.sc-free{display:flex;gap:12px;align-items:flex-start;margin-top:20px;
+  padding:14px 16px;border-radius:var(--r-md);
+  background:var(--accent-soft);border:1px solid rgba(var(--accent-rgb),.22);
+  font-size:14px;line-height:1.5;color:var(--accent-ink)}
+.sc-free b{font-weight:700}
+.sc-free .ic{flex:none;width:22px;height:22px;color:var(--accent)}
+.sc-free .ic svg{width:22px;height:22px}
+.sc-pairs{margin-top:26px;border-top:1px solid var(--line-2)}
+.sc-pair{padding:16px 0;border-bottom:1px solid var(--line-2)}
+/* Боль клиента помечена вопросом, ответ — галочкой в акцентном круге:
+   пара читается как «вопрос — решён» без единой подписи. */
+.sc-pair .q,.sc-pair .a{display:grid;grid-template-columns:22px 1fr;gap:12px}
+.sc-pair .q::before,.sc-pair .a::before{width:22px;height:22px;border-radius:50%;
+  display:grid;place-items:center;font-size:13px;font-weight:700;line-height:1;margin-top:2px}
+.sc-pair .q{font-size:15px;font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+.sc-pair .q::before{content:"?";border:1.5px solid var(--ink-3);color:var(--ink-3)}
+.sc-pair .a{margin-top:8px;font-size:14.5px;line-height:1.5;color:var(--ink-2)}
+.sc-pair .a::before{content:"\2713";background:var(--accent);color:#fff;font-size:12px}
+
+.algo{background:var(--surface);border-radius:var(--r-xl);overflow:hidden}
+.algo-h{padding:20px clamp(20px,2.4vw,32px);border-bottom:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.algo-h .t{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
+/* срок и доходность — одинаковая плашка во всех сценариях */
+.algo-h .term{display:inline-flex;align-items:baseline;gap:8px;
+  font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--accent-ink);
+  background:var(--accent-soft);border-radius:999px;padding:7px 14px}
+.algo-h .term i{font-style:normal;font-size:11px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3)}
+.algo-step{padding:18px clamp(20px,2.4vw,32px);border-bottom:1px solid var(--line-2)}
+.algo-step:last-of-type{border-bottom:0}
+.algo-step b{display:block;font-size:16px;font-weight:600;letter-spacing:-.02em;margin-bottom:5px}
+.algo-step p{font-size:14px;color:var(--ink-2);line-height:1.5}
+.algo-out{padding:24px clamp(20px,2.4vw,32px);background:var(--accent-soft)}
+.algo-out .t{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:14px}
+.algo-out li{display:grid;grid-template-columns:20px 1fr;gap:12px;padding:7px 0;font-size:14.5px}
+.algo-out .tick{width:20px;height:20px;border-radius:50%;background:var(--accent);display:grid;place-items:center;margin-top:2px}
+.algo-out .tick svg{width:11px;height:11px;color:#fff}
+.algo-cta{padding:20px clamp(20px,2.4vw,32px);display:flex;gap:10px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line-2)}
+
+/* ---------- отзывы (секция) ---------- */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rev-grid .rev{min-height:220px;box-shadow:none;border:1px solid var(--line-2)}
+.rev-grid .rev:nth-child(3n+2){background:var(--surface-2)}
+
+/* ---------- канал ---------- */
+.tg{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,3.2vw,48px);align-items:center;background:var(--dark);border-radius:var(--r-xl);padding:clamp(24px,3.4vw,52px);color:#fff}
+.tg img{width:clamp(116px,13vw,168px);border-radius:var(--r-md)}
+.tg h3{font-size:clamp(24px,3vw,38px);margin:14px 0 12px}
+.tg p{color:rgba(255,255,255,.68);font-size:16px;max-width:52ch}
+.tg .eyebrow{color:var(--metal-lite)}
+.tg .eyebrow::before{background:var(--metal-lite)}
+
+/* ---------- контакты ---------- */
+.ct{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.req{margin-top:clamp(20px,2.6vw,30px);border-top:1px solid var(--line-2)}
+.req li{display:flex;justify-content:space-between;align-items:baseline;gap:24px;
+  padding:15px 0;border-bottom:1px solid var(--line-2)}
+.req li span:first-child{font-size:13.5px;color:var(--ink-3);flex:none}
+.req li span:last-child{font-size:15.5px;font-weight:600;letter-spacing:-.01em;text-align:right}
+.req a:hover{color:var(--accent-ink)}
+.big-tel{font-size:clamp(30px,4.4vw,54px);font-weight:600;letter-spacing:-.04em;display:inline-block;margin:14px 0 10px}
+.ch-list{display:grid;gap:0;margin-top:26px}
+.ch{display:grid;grid-template-columns:46px 1fr auto;gap:15px;align-items:center;padding:16px 0;border-top:1px solid var(--line-2);transition:padding-left .24s}
+.ch:hover{padding-left:8px}
+.ch-ic{width:46px;height:46px;border-radius:14px;background:var(--surface);border:1px solid var(--line-2);display:grid;place-items:center;color:var(--ink)}
+.ch-ic svg{width:19px;height:19px}
+.ch .t b{display:block;font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+.ch .t span{display:block;font-size:13px;color:var(--ink-3)}
+.ch .arw{color:var(--ink-3)}
+
+form{background:var(--surface);border-radius:var(--r-xl);padding:clamp(24px,3vw,44px)}
+.field{margin-bottom:18px}
+label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+input,select,textarea{
+  width:100%;background:var(--surface-2);border:1px solid var(--line-2);border-radius:14px;
+  color:var(--ink);font:inherit;font-size:16px;padding:14px 16px;transition:border-color .22s,background-color .22s;
+}
+input::placeholder,textarea::placeholder{color:var(--ink-3)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 24px,calc(100% - 15px) 24px;background-size:5px 5px;background-repeat:no-repeat}
+textarea{resize:vertical;min-height:84px}
+.form-note{font-size:12px;color:var(--ink-3);margin-top:14px;line-height:1.5}
+
+/* ---------- футер ---------- */
+/* Подвал — тёмная плита в цвете сайта. Два уровня и больше ничего:
+   тихая справка о том, кто отвечает за сделку, и правовая строка под линией.
+   Ни навигации, ни повторов кнопок — всё это уже есть выше по странице. */
+.ftr{background:var(--dark);color:#fff;padding:clamp(34px,4vw,54px) 0 0;margin-top:clamp(48px,6.5vw,104px)}
+/* Данные о брокере — теми же строками «метка — значение», что и в блоке
+   аттестата: страница закрывается тем же приёмом, каким ведётся. */
+.ftr-rows{padding-bottom:clamp(18px,2.2vw,26px)}
+.ftr-rows li{display:grid;grid-template-columns:124px minmax(0,1fr);gap:20px;align-items:baseline;
+  padding:13px 0;border-top:1px solid rgba(255,255,255,.10)}
+.ftr-rows li:first-child{border-top:0;padding-top:0}
+.ftr-rows li span:first-child{font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--metal-lite)}
+.ftr-rows li span:last-child{font-size:15px;line-height:1.6;color:rgba(255,255,255,.82)}
+.ftr-bot{border-top:1px solid rgba(255,255,255,.12);
+  padding:clamp(18px,2vw,24px) 0 calc(clamp(18px,2vw,24px) + env(safe-area-inset-bottom));
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12.5px;color:rgba(255,255,255,.45)}
+
+/* ---------- липкая панель на мобильных ---------- */
+.sticky-bar{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;
+  background:rgba(var(--bg-rgb),.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;
+}
+.sticky-bar a{display:flex;align-items:center;justify-content:center;gap:8px;height:50px;
+  border-radius:999px;font-size:14px;font-weight:600;
+  background:var(--surface);border:1px solid var(--line-2);color:var(--ink);
+  transition:background-color .22s,border-color .22s,color .22s}
+.sticky-bar a.call{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+/* три мессенджера — одинаковые кружки, знак в цвете сайта */
+.sticky-bar a:not(.call){width:50px;padding:0;color:var(--ink-2)}
+.sticky-bar a:not(.call):active{background:var(--accent-soft);border-color:rgba(var(--accent-rgb),.4);color:var(--accent-ink)}
+.sticky-bar a:not(.call) span{display:none}
+.sticky-bar svg{width:20px;height:20px;flex:none}
+.sticky-bar a.call svg{width:18px;height:18px}
+
+/* появление блоков */
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,.8,.3,1),transform .7s cubic-bezier(.22,.8,.3,1)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- адаптив ---------- */
+@media (max-width:1180px){
+  .cases-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rev-grid{grid-template-columns:1fr 1fr}
+}
+/* Ноутбук: кадр 4:3 ложится в героя без запаса по краям, поэтому фигура
+   попадает под правый край текста. Сужаем колонку и уводим кадр правее. */
+/* Десктоп и широкий экран: кадр поднят так, чтобы макушка вставала
+   на уровень верха буквы «Д» в имени. */
+@media (min-width:821px){
+  .hero-bg img{object-position:50% 46%}
+}
+/* на очень широких экранах карточка выше, кадр растянут сильнее —
+   доля смещения чуть другая */
+@media (min-width:1600px){
+  .hero-bg img{object-position:50% 45.3%}
+}
+/* Ноутбук: кадр поднят тем же правилом, что десктоп и широкий экран, —
+   макушка встаёт на уровень верха буквы «Д». Колонка уже, кадр правее. */
+@media (min-width:821px) and (max-width:1180px){
+  .hero-copy{width:330px}
+  .hero-bg img{transform:scale(1.22) translateX(6.5%)}
+}
+@media (max-width:1024px){
+  .nav{display:none}
+  .burger{display:grid}
+  .hero-actions .btn-tel small{display:none}
+  .att,.sc-grid,.ct{grid-template-columns:1fr}
+  .rev.lift{margin-bottom:0}
+  .ftr-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  :root{--r-xl:32px}
+  /* Узкий экран: текст ложится на небо в верхней части кадра, фигура
+     остаётся открытой в середине, овалы прижаты к низу. Высота — ровно
+     экран за вычетом полей страницы и липкой панели снизу. */
+  .hero{min-height:calc(100vh - var(--pad) - 86px);min-height:calc(100svh - var(--pad) - 86px)}
+  .hero-body{flex-direction:column;align-items:stretch;padding-top:clamp(14px,3.5vw,24px);padding-bottom:clamp(10px,2.5vw,18px)}
+  .hero-row{flex:1;min-height:0}
+  .hero-copy{width:78%}
+  /* на узких экранах знаки встают в поток между должностью и абзацем */
+  .marks-wide{display:none}
+  .marks-narrow{display:flex;margin:clamp(18px,5vw,30px) 0 0;gap:10px}
+  .mark{width:60px;height:60px}
+  /* на узких экранах в шапке остаются звонок и бургер: «написать» и остальные
+     каналы всегда под рукой в липкой панели снизу и в меню */
+  .hero-actions{gap:8px}
+  .hero-actions .btn{width:46px;height:46px;padding:0;border-radius:50%;flex:none}
+  .hero-actions .btn span{display:none}
+  /* звонок и «написать» в первом экране прячем: обе кнопки есть
+     в закреплённой панели снизу, дублировать их наверху незачем */
+  .hero-top .hero-actions .btn{display:none}
+  .topbar .hero-actions .btn{display:none}
+  /* по вертикали кадр упирается в экран, свободы нет; двигаем только вбок,
+     чтобы фигура встала в правой трети, вне текста */
+  .hero-bg img{object-position:38% 50%;transform:none}
+  /* на телефоне овалы становятся обычным столбиком под текстом, слева */
+  .hero-row{flex-direction:column;align-items:flex-start;gap:0}
+  .hero-side{width:100%;margin-left:0;align-items:stretch;flex:none}
+  .hero-pills{max-width:100%;align-items:flex-start;gap:8px;margin-left:0;
+    margin-top:auto;padding-top:clamp(16px,4vw,26px);padding-bottom:0}
+  .hero-pills .pill,
+  .hero-pills > .pill:nth-of-type(n){max-width:100%;text-align:left;margin-right:0;
+    font-size:13.5px;padding:10px 17px;background:rgba(var(--overlay-rgb),.42);
+    border-color:rgba(255,255,255,.30)}
+  .pill-row{justify-content:flex-start;gap:8px;margin-right:0}
+  .pill:hover,.pill:focus-visible{transform:none}
+  .sticky-bar{display:grid}
+  body{padding-bottom:80px}
+  .tg{grid-template-columns:1fr}
+  .sc-grid{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .tile{min-height:140px;padding:18px 16px 16px}
+  .tile:hover{transform:none}
+  .tile[aria-selected="true"]::after{display:none}
+}
+/* ── ПЛАНШЕТ ── строится по образцу десктопа: текст узкой колонкой слева,
+   овалы справа напротив него, фигура в просвете между ними. Первый экран
+   помещается ровно в высоту окна за вычетом полей и нижней панели. */
+@media (min-width:561px) and (max-width:820px){
+  .hero{min-height:calc(100vh - var(--pad) - 86px);min-height:calc(100svh - var(--pad) - 86px)}
+  .hero-body{flex-direction:row;align-items:center;padding:clamp(18px,2.6vw,28px) var(--inner)}
+  .hero-row{flex-direction:row;align-items:stretch;flex:none;width:100%}
+  .hero-copy{width:min(300px,52%);flex:none;display:block}
+  .hero-copy h1{margin:0 0 3.2cqw}
+  .hero-role{font-size:8.69cqw;margin-top:0}
+  .marks-narrow{display:flex;margin:18px 0 0;gap:10px}
+  .marks-narrow .mark{width:54px;height:54px}
+  /* в узкой колонке выключка по формату рвёт пробелы — ровняем по левому краю */
+  .hero-copy .lead{font-size:14px;line-height:1.55;color:rgba(255,255,255,.86);
+    margin-top:18px;text-align:left;text-align-last:left}
+  .hero-side{width:auto;max-width:236px;margin-left:auto;flex:none;
+    align-items:flex-end;justify-content:flex-end}
+  .hero-pills{display:flex;flex-direction:column;align-items:flex-end;gap:8px;
+    padding:0;max-width:100%;margin-top:0}
+  .pill-row{display:contents}
+  .hero-pills .pill,
+  .hero-pills .pill-row .pill:nth-child(n),
+  .hero-pills > .pill:nth-of-type(n){font-size:13px;padding:9px 15px;margin-right:0;
+    text-align:right;justify-content:flex-end;max-width:100%;background:rgba(var(--overlay-rgb),.42);
+    border-color:rgba(255,255,255,.30)}
+  /* короткие подписи, как на телефоне: длинные не оставляют места фигуре */
+  .pl-full{display:none}
+  .pl-min{display:inline}
+  /* кадр приближен, чтобы фигура встала правее текстовой колонки */
+  .hero-bg img{object-position:50% 50%;transform:scale(1.3) translateX(12%);transform-origin:50% 50%}
+}
+@media (max-width:560px){
+  /* Телефон: кадр приближен и поднят, чтобы фигура встала в просвет
+     между текстом сверху и овалами снизу. */
+  .hero-bg img{transform:scale(1.38) translate(14%,5%);transform-origin:50% 50%}
+  /* Имя и должность держатся верха, абзац уходит вниз к овалам:
+     середина кадра остаётся свободной, фигуру ничто не перекрывает. */
+  /* Колонка уже: имя, должность и абзац упираются в один правый край,
+     а кегль имени считается от неё же — заголовок стал мельче и открыл лицо. */
+  /* 58, а не 62: при короткой высоте экрана кадр поднимается, и строка
+     должности доходила до лица. Колонка уже — буквы не достают. */
+  .hero-copy{width:58%;flex:1;display:flex;flex-direction:column}
+  .hero-copy h1{margin:3.4cqw 0 1cqw}
+  /* должность ровно под ширину имени: на телефоне колонка уже, трекинг иной;
+     и прижата к фамилии — между ними только межстрочный просвет */
+  .hero-role{font-size:8.69cqw;margin-top:0}
+  /* овалы стоят по центру нижнего края, отступы слева и справа равны */
+  .hero-pills{align-self:center;justify-items:center}
+  /* В узкой колонке выключка по формату рвёт пробелы — на телефоне
+     ровняем только по левому краю: промежутки между словами одинаковые. */
+  .hero-copy .lead{margin-top:auto;font-size:15px;line-height:1.55;
+    color:rgba(255,255,255,.88);text-align:left;text-align-last:left}
+  /* блок текста поднят под самую шапку */
+  .hero-body{padding-top:6px;padding-bottom:var(--inner)}
+  /* Овалы — сетка в два столбца: пары одинаковой ширины, последний во всю строку. */
+  .hero-pills{display:grid;grid-template-columns:1fr 1fr;gap:7px;
+    padding-top:clamp(12px,3.2vw,18px);padding-bottom:0;max-width:100%}
+  .pill-row{display:contents}
+  /* три селектора сразу: иначе десктопные правила с :nth-child перебивают мобильные */
+  .hero-pills .pill,
+  .hero-pills .pill-row .pill:nth-child(n),
+  .hero-pills > .pill:nth-of-type(n){font-size:12.5px;padding:9px 12px;margin-right:0;
+    justify-content:center;text-align:center;max-width:100%}
+  .hero-pills > .pill:last-child{grid-column:1 / -1}
+  .pl-full{display:none}
+  .pl-min{display:inline}
+  .rev .who{flex-direction:column;align-items:flex-start;gap:3px}
+  .tiles{grid-template-columns:1fr}
+  .tile{min-height:0;flex-direction:row;align-items:center;gap:14px;padding:14px 16px}
+  .tile .ic{width:36px;height:36px;flex:none}
+  .tile .t{margin-top:0}
+  .tile .s{display:none}
+}
+@media (max-width:430px){
+  .logo-txt span{display:none}
+  .logo-tile{width:40px;height:40px;border-radius:12px}
+}
+@media (max-width:560px){
+  .cases-grid,.rev-grid{grid-template-columns:1fr}
+  .ftr-grid{grid-template-columns:1fr}
+  .ftr-rows li{grid-template-columns:1fr;gap:5px}
+  .sticky-bar a span{display:none}
+  .sticky-bar a.call span{display:inline}
+  .att-rows li{flex-direction:column;gap:4px}
+  .att-rows li span:last-child{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+}
+
+
+/* ---------- полоска проекта Forma 96 (вариант C «Чертёж на свету») ----------
+   градиент от белого к синему сайта; на белом — планировка с мебелью, справа название и кнопка */
+.pstrip{position:relative;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);min-height:clamp(240px,22vw,300px);border-radius:var(--r-xl);overflow:hidden;color:#fff;
+  background:linear-gradient(112deg,#FFFFFF 0%,#FFFFFF 30%,#DCE4F0 39%,var(--accent) 55%,var(--dark) 100%)}
+.pstrip-plan{position:relative;padding:clamp(18px,2.4vw,30px) 0 0 clamp(18px,2.4vw,34px);display:flex;align-items:flex-end}
+.pstrip-dim{position:absolute;left:clamp(18px,2.4vw,34px);top:clamp(16px,2vw,24px);font-size:12px;font-weight:600;color:var(--ink-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.pstrip .plan-mini{display:block;width:min(310px,84%);height:auto;margin-bottom:-7%;filter:drop-shadow(0 20px 30px rgba(var(--ink-rgb),.12))}
+.pstrip-txt{position:relative;z-index:1;padding:clamp(24px,3.4vw,48px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px}
+.pstrip .eyebrow{color:var(--metal-lite)}
+.pstrip .eyebrow::before{background:var(--metal-lite)}
+.pstrip-title{font-size:clamp(52px,6.4vw,92px);font-weight:600;letter-spacing:-.055em;line-height:.92;white-space:nowrap}
+.pstrip-title span{font-weight:500;color:var(--metal-lite)}
+.pstrip-sub{font-size:15.5px;line-height:1.5;color:rgba(255,255,255,.72);max-width:34ch}
+.pstrip .btn{margin-top:6px}
+.pstrip .btn svg{transition:transform .25s}
+.pstrip:hover .btn{background:var(--metal)}
+.pstrip:hover .btn svg{transform:translateX(3px)}
+.pstrip:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+/* планировка «Чертёж» */
+.plan-mini .pw{fill:#1B2942}
+.plan-mini .pr,.plan-mini .wr-openings{fill:#fff}
+.plan-mini .pt{fill:#EADCC3}
+.plan-mini .wr-glass{fill:#fff;stroke:#1B2942;stroke-width:1.5}
+.plan-mini .wr-glass-line{fill:none;stroke:#1B2942;stroke-width:1.8}
+.plan-mini .wr-glass-leaf{fill:#fff;stroke:#101A2C;stroke-width:1.8}
+.plan-mini .wr-door-leaf,.plan-mini .wr-sliding-panel{fill:#E9DFCF;stroke:#101A2C;stroke-width:1.6}
+.plan-mini .wr-door-arc,.plan-mini .wr-sliding-track,.plan-mini .wr-door-glazing{fill:none;stroke:#7C8593;stroke-width:1.3}
+.plan-mini .wr-sliding-closed{fill:none;stroke:#7C8593;stroke-dasharray:5 5}
+.plan-mini .pf *{fill:#fff;stroke:#101A2C;stroke-width:.75;vector-effect:non-scaling-stroke}
+.plan-mini .pf .f-soft2{fill:#F1F3F6}
+.plan-mini .pf .f-rug{fill:none;stroke:#7C8593;stroke-dasharray:3 3}
+.plan-mini .pf .f-screen{fill:#101A2C}
+.plan-mini .pf .f-line{fill:none}
+@media (max-width:760px){
+  .pstrip{grid-template-columns:minmax(0,1fr);border-radius:var(--r-lg);background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 42%,#C9D4E6 48%,var(--accent) 55%,var(--dark) 100%)}
+  .pstrip-plan{justify-content:center;padding:44px 16px 0}
+  .pstrip .plan-mini{margin-bottom:0;width:min(280px,80%)}
+  .pstrip .btn{width:100%}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"RealEstateAgent","@id":"https://realtyminaev.ru/#agent",
+  "name":"Дмитрий Минаев — риелтор и брокер по недвижимости",
+  "url":"https://realtyminaev.ru/","image":"https://realtyminaev.ru/img/og.jpg?v=1f83e50df966","logo":"https://realtyminaev.ru/icon-512.png?v=61635c6374b2",
+  "telephone":"+7-926-397-77-75",
+  "description":"Аттестованный риелтор и брокер по недвижимости в Москве. Вторичное жильё, новостройки, коммерция под доход, загородная недвижимость. Сложные сделки: опека, наследство, доли, ипотека.",
+  "areaServed":{"@type":"City","name":"Москва"},
+  "address":{"@type":"PostalAddress","addressLocality":"Москва","addressRegion":"Москва","addressCountry":"RU",
+    "streetAddress":"ул. Проектируемый проезд № 4062, д. 6, стр. 16, БЦ Port Plaza"},
+  "parentOrganization":{"@type":"Organization","name":"ООО «Лендис Эстейт»"},
+  "employee":{"@id":"https://realtyminaev.ru/#person"},
+  "knowsAbout":["Купля-продажа квартир","Подбор новостройки","Сделки с органами опеки","Наследство и квартира","Продажа доли в квартире","Загородная недвижимость","Коммерческая недвижимость под доход","Юридическая проверка объекта","Сопровождение сделки до регистрации в ЕГРН"],
+  "hasOfferCatalog":{"@type":"OfferCatalog","name":"Услуги","itemListElement":[
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Продажа квартиры"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Покупка вторичного жилья"}},
+    {"@type":"Offer","price":"0","priceCurrency":"RUB","itemOffered":{"@type":"Service","name":"Бесплатный подбор новостройки и сопровождение"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Загородный дом или участок"}},
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Коммерция под доход"}}]},
+  "sameAs":["https://t.me/RealtyMinaev","https://www.cian.ru/agents/139925930/"]},
+ {"@type":"Person","@id":"https://realtyminaev.ru/#person",
+  "name":"Минаев Дмитрий Михайлович","alternateName":"Дмитрий Минаев",
+  "jobTitle":"Риелтор, брокер по недвижимости",
+  "worksFor":{"@id":"https://realtyminaev.ru/#agent"},
+  "image":"https://realtyminaev.ru/img/og.jpg?v=1f83e50df966","url":"https://realtyminaev.ru/",
+  "hasCredential":{"@type":"EducationalOccupationalCredential",
+    "credentialCategory":"Аттестат брокера по недвижимости",
+    "recognizedBy":{"@type":"Organization","name":"Российская гильдия риэлторов"}}},
+ {"@type":"WebSite","@id":"https://realtyminaev.ru/#site","url":"https://realtyminaev.ru/",
+  "name":"Дмитрий Минаев — риелтор и брокер по недвижимости в Москве",
+  "inLanguage":"ru-RU","publisher":{"@id":"https://realtyminaev.ru/#agent"}}
+]}
+</script>
+<!-- Яндекс.Метрика, счётчик 112500819. Скрипт грузится асинхронно
+     и уже после отрисовки страницы — на скорость первого экрана не влияет. -->
+<script>
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(112500819, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer",
+                          accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112500819" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<style>
+.pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,#c9d4e6 47%,#2f4a7a 64%,#101a2c 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
+</style></head>
+<body>
+
+<!-- ================= ЛИПКАЯ ШАПКА ================= -->
+<header class="topbar" id="topbar">
+  <div class="topbar-in">
+    <nav class="nav">
+      <a href="#scenarios">Как я работаю</a>
+      <a href="#cases">Сложные сделки</a>
+      <a href="#attestat">Аттестат</a>
+    </nav>
+    <div class="hero-actions">
+      <a class="btn btn-accent btn-tel" href="tel:+79263977775">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg>
+        <span><small>Позвонить</small>+7 (926) 397-77-75</span>
+      </a>
+      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>
+        <span class="lbl">Написать</span>
+      </a>
+      <button class="burger" data-menu aria-label="Меню"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- мобильное меню -->
+<div class="mnav" id="mnav">
+  <button class="mnav-close" id="mnavClose" aria-label="Закрыть">×</button>
+  <a class="ml" href="#scenarios">Как я работаю</a>
+  <a class="ml" href="#cases">Сложные сделки</a>
+  <a class="ml" href="#attestat">Аттестат</a>
+  <div class="btn-row" style="margin-top:auto;padding-top:26px">
+    <a class="btn btn-accent" href="tel:+79263977775" style="flex:1">+7 (926) 397-77-75</a>
+    <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Написать</a>
+  </div>
+</div>
+
+<!-- ================= ГЕРОЙ ================= -->
+<div class="hero-outer" id="top">
+  <section class="hero">
+    <div class="hero-bg">
+      <!-- Три размера одного снимка: браузер берёт подходящий под экран и плотность
+           пикселей. sizes намеренно больше 100vw: кадр увеличен масштабом и обрезается
+           по принципу cover, поэтому реально отрисовывается шире экрана. На телефоне
+           экран узкий и высокий — там перекрытие ещё больше, отсюда 185vw. -->
+      <picture>
+        <source type="image/webp" sizes="(max-width:560px) 95vw, (max-width:820px) 90vw, (max-width:1180px) 85vw, (max-width:1500px) 66vw, 1000px"
+                srcset="img/hero-sm.webp?v=722fb69b7aea 900w, img/hero-mm.webp?v=eccd8fd6fa7a 1200w, img/hero-md.webp?v=fe9edc462b92 1500w,
+                        img/hero-2k.webp?v=09554ab978bc 2000w, img/hero-lg.webp?v=20a5a36859f4 2400w">
+        <img src="img/hero-md.jpg?v=0cf05471bcbb" width="1500" height="2000"
+             srcset="img/hero-sm.jpg?v=a8571eb11002 900w, img/hero-mm.jpg?v=0f5149730f27 1200w, img/hero-md.jpg?v=0cf05471bcbb 1500w,
+                     img/hero-2k.jpg?v=6095db7e7a8e 2000w, img/hero-lg.jpg?v=ffb791629de0 2400w"
+             sizes="(max-width:560px) 95vw, (max-width:820px) 90vw, (max-width:1180px) 85vw, (max-width:1500px) 66vw, 1000px"
+             alt="Дмитрий Минаев, риелтор и брокер по недвижимости в Москве" fetchpriority="high">
+      </picture>
+    </div>
+
+    <!-- верхняя панель внутри карточки -->
+    <div class="hero-top">
+      <nav class="nav on-photo">
+        <a href="#scenarios">Как я работаю</a>
+        <a href="#cases">Сложные сделки</a>
+        <a href="#attestat">Аттестат</a>
+        </nav>
+      <div class="hero-actions">
+        <a class="btn btn-accent btn-tel" href="tel:+79263977775">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg>
+          <span><small>Позвонить</small>+7 (926) 397-77-75</span>
+        </a>
+        <a class="btn btn-glass" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>
+          <span class="lbl">Написать</span>
+        </a>
+        <button class="burger on-photo" data-menu aria-label="Меню"><span></span></button>
+      </div>
+    </div>
+
+    <!-- значок аттестата -->
+
+    <!-- заголовок -->
+    <div class="hero-body">
+      <div class="hero-row">
+      <div class="hero-copy">
+        <h1 class="h1">
+          <span class="ln ln-1">Дмитрий</span>
+          <span class="ln ln-2">Минаев</span>
+        </h1>
+        <span class="hero-role">Брокер по недвижимости</span>
+        <div class="marks marks-narrow">
+          <a class="mark" href="#attestat" aria-label="Гильдия риэлторов Москвы — к разделу об аттестате" title="Гильдия риэлторов Москвы"><picture><source type="image/webp" srcset="img/grm.webp?v=bb97e2f3c382"><img src="img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></a>
+          <a class="mark" href="#attestat" aria-label="Российская гильдия риэлторов — к разделу об аттестате" title="Российская гильдия риэлторов"><picture><source type="image/webp" srcset="img/rgr.webp?v=cc48daf510ab"><img src="img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></a>
+        </div>
+        <p class="lead">
+          Веду сделки с городским жильём, новостройками, коммерцией и загородными домами.
+          Проверяю объект до того, как вы внесёте первый рубль, и довожу до записи в ЕГРН.
+        </p>
+      </div>
+
+      <div class="hero-side">
+        <div class="marks marks-wide">
+          <a class="mark" href="#attestat" aria-label="Гильдия риэлторов Москвы — к разделу об аттестате" title="Гильдия риэлторов Москвы"><picture><source type="image/webp" srcset="img/grm.webp?v=bb97e2f3c382"><img src="img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></a>
+          <a class="mark" href="#attestat" aria-label="Российская гильдия риэлторов — к разделу об аттестате" title="Российская гильдия риэлторов"><picture><source type="image/webp" srcset="img/rgr.webp?v=cc48daf510ab"><img src="img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></a>
+            </div>
+        <!-- направления: овалы справа, нижний край общий с текстом -->
+        <div class="hero-pills">
+        <div class="pill-row">
+            <a class="pill" href="#scenarios" data-go="sell">Продать</a>
+            <a class="pill" href="#scenarios" data-go="second">Купить вторичку</a>
+          </div>
+        <a class="pill" href="#scenarios" data-go="new"><span class="pl-full">Бесплатный подбор новостроек</span><span class="pl-min">Новостройки</span></a>
+        <a class="pill" href="#scenarios" data-go="country"><span class="pl-full">Загородный дом или участок</span><span class="pl-min">Загородный дом</span></a>
+          <a class="pill" href="#scenarios" data-go="comm"><span class="pl-full">Коммерция с подтверждённой доходностью</span><span class="pl-min">Коммерция под доход</span></a>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<!-- ================= СЦЕНАРИИ ================= -->
+<section class="section" id="scenarios">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="eyebrow">Как я работаю</div>
+      <h2 class="h2">Выберите задачу — покажу решение</h2>
+    </div>
+
+    <!-- Плитки выбора. Клик открывает панель ниже, повторный клик закрывает. -->
+    <div class="tiles rv" role="tablist" aria-label="Сценарии работы">
+      <button class="tile" role="tab" aria-selected="false" aria-controls="sc-sell" data-id="sell">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9l7 7-7 7-9-9V7Z"/><circle cx="9" cy="11" r="1.6"/></svg></span>
+        <span class="t">Хочу продать</span>
+        <span class="s">Квартира, дом или доля</span>
+      </button>
+      <button class="tile" role="tab" aria-selected="false" aria-controls="sc-new" data-id="new">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l6-3v16"/><path d="M10 21V10l7 3v8"/><path d="M3 21h18"/></svg></span>
+        <span class="t">Хочу новостройку</span>
+        <span class="s">Подбор бесплатный</span>
+      </button>
+      <button class="tile" role="tab" aria-selected="false" aria-controls="sc-second" data-id="second">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
+        <span class="t">Хочу вторичку</span>
+        <span class="s">С проверкой документов</span>
+      </button>
+      <button class="tile" role="tab" aria-selected="false" aria-controls="sc-comm" data-id="comm">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 5 4h14l2 5"/><path d="M4 9h16v11H4z"/><path d="M9 20v-6h6v6"/></svg></span>
+        <span class="t">Хочу доход с аренды</span>
+        <span class="s">Считаем доход с аренды</span>
+      </button>
+      <button class="tile" role="tab" aria-selected="false" aria-controls="sc-country" data-id="country">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M6 20v-9l5-4 5 4v9"/><path d="M18 20v-5"/><path d="M18 15a3 3 0 1 0 0-6"/></svg></span>
+        <span class="t">Хочу дом за городом</span>
+        <span class="s">Земля, дом, коммуникации</span>
+      </button>
+    </div>
+
+
+    <!-- Панели сценариев: открыта всегда только одна -->
+    <div class="drop" id="scDrop"><div>
+
+      <!-- ПРОДАТЬ -->
+      <div class="sc-panel" id="sc-sell" role="tabpanel">
+        <div class="sc-grid">
+          <div class="sc-intro">
+            <h3 class="h2">Продать и не жить в режиме показов</h3>
+            <p class="lead">Вы хотите нормальные деньги и понятный срок. Не «выставили и ждём», а понимание, что происходит с квартирой каждую неделю.</p>
+            <div class="sc-pairs">
+            <div class="sc-pair">
+              <div class="q">Не понимаю, сколько моя квартира стоит на самом деле</div>
+              <div class="a">Показываю цены реальных закрытых сделок в вашем доме, а не хотелки соседей в объявлениях</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Звонят одни агенты, а покупателей нет</div>
+              <div class="a">Беру звонки и показы на себя, до вас доходят только те, кто действительно готов покупать</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Надо продать и сразу купить другое, боюсь остаться без жилья</div>
+              <div class="a">Веду обе сделки как одну цепочку: деньги и ключи меняются в один день</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">В квартире доля, ипотека или наследство, не знаю, с чего начать</div>
+              <div class="a">Сначала собираю документы и снимаю ограничения, и только потом выводим квартиру на рынок</div>
+            </div>
+          </div>
+          </div>
+          <div class="algo">
+            <div class="algo-h"><span class="t">Что я делаю</span>
+              <span class="term"><i>Типичный срок</i>6 недель</span></div>
+          <div class="algo-step"><div><b>Оценка и предпродажная подготовка</b><p>Смотрю цены реальных закрытых сделок в вашем доме и районе, а не хотелки в объявлениях. Говорю, что стоит исправить, а на что не тратить деньги. Съёмка, планировка, текст объявления.</p></div></div>
+          <div class="algo-step"><div><b>Вывод на рынок и показы</b><p>Площадки, работа с базой покупателей и агентов, отбор адекватных заявок. Показы веду сам — вам не нужно отпрашиваться с работы.</p></div></div>
+          <div class="algo-step"><div><b>Торг, сделка и деньги</b><p>Переговоры по цене и условиям, аванс или задаток так, чтобы покупатель не сорвался. Аккредитив или ячейка, подача в Росреестр, передача объекта по акту.</p></div></div>
+            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Деньги на счёте после регистрации, а не обещания</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Регулярный отчёт: просмотры, звонки, показы и предложения по цене</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Готовый пакет документов и закрытые «хвосты» по прописке и коммуналке</span></li>
+            </ul></div>
+            <div class="algo-cta">
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить продажу</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- КУПИТЬ НОВОСТРОЙКУ -->
+      <div class="sc-panel" id="sc-new" role="tabpanel">
+        <div class="sc-grid">
+          <div class="sc-intro">
+            <h3 class="h2">Новостройка без сюрпризов на приёмке</h3>
+            <p class="lead">Застройщик покажет вам свой проект. Я сравниваю проекты между собой и говорю, где риск по срокам, а где переплата за красивый рендер.</p>
+            <p class="sc-free">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.7 12.6 11 5.3a2 2 0 0 1 1.4-.6h5.2a2 2 0 0 1 2 2v5.2a2 2 0 0 1-.6 1.4l-7.3 7.3a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8Z"/><circle cx="15.6" cy="8.4" r="1.3"/></svg></span>
+              <span><b>Бесплатно для вас:</b> подбор, сопровождение до сделки и профессиональный приёмщик
+              на приёмке квартиры. Моё вознаграждение платит застройщик, а цена квартиры не выше,
+              чем напрямую, — по части проектов ниже за счёт скидок брокеру.</span>
+            </p>
+            <div class="sc-pairs">
+            <div class="sc-pair">
+              <div class="q">Десятки ЖК, и все обещают лучшую локацию</div>
+              <div class="a">Отсекаю девять из десяти по вашим условиям и объясняю, почему остались именно эти</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Не понимаю, чем корпус 3 хуже корпуса 7 и почему разница в цене</div>
+              <div class="a">Разбираю конкретный лот: этаж, сторона, вид, соседи, въезд — отсюда и разница</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Боюсь, что дом не сдадут вовремя</div>
+              <div class="a">Смотрю историю сдачи застройщика и темпы стройки по факту, а не по его отчётам</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Запутался в ипотеке, рассрочке и субсидированной ставке</div>
+              <div class="a">Считаю переплату по каждой программе в рублях, чтобы было видно, что дороже на самом деле</div>
+            </div>
+          </div>
+          </div>
+          <div class="algo">
+            <div class="algo-h"><span class="t">Что я делаю</span>
+              <span class="term"><i>Типичный срок</i>1 неделя</span></div>
+          <div class="algo-step"><div><b>Критерии и проверка застройщика</b><p>Бюджет, транспорт, школы, срок сдачи, горизонт владения — фильтры, которые отсекают девять вариантов из десяти. По каждому оставшемуся: история сдачи объектов, эскроу, проектная декларация, темпы стройки по факту.</p></div></div>
+          <div class="algo-step"><div><b>Выбор конкретного лота</b><p>Корпус, этаж, сторона, вид из окна, соседи по площадке, расположение относительно въезда и школы. Здесь и рождается разница в цене перепродажи.</p></div></div>
+          <div class="algo-step"><div><b>Договор и приёмка</b><p>Сравнение ипотечных программ и рассрочки, бронирование, проверка ДДУ до подписания. Приёмка с профессиональным приёмщиком — бесплатно для вас, с фиксацией недостатков и контролем их устранения до подписания акта.</p></div></div>
+            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Сравнительную таблицу проектов с плюсами, минусами и рисками</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Проверенный ДДУ и понятную схему расчётов</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Квартиру, принятую по акту с зафиксированными замечаниями</span></li>
+            </ul></div>
+            <div class="algo-cta">
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить новостройку</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- КУПИТЬ ВТОРИЧКУ -->
+      <div class="sc-panel" id="sc-second" role="tabpanel">
+        <div class="sc-grid">
+          <div class="sc-intro">
+            <h3 class="h2">Вторичка с проверенной историей</h3>
+            <p class="lead">Главный риск вторички не в ремонте, а в документах. Хорошая квартира с плохой историей права — это не покупка, а будущий суд.</p>
+            <div class="sc-pairs">
+            <div class="sc-pair">
+              <div class="q">Квартира нравится, но собственники менялись каждый год</div>
+              <div class="a">Поднимаю всю историю переходов права и говорю прямо: брать или искать дальше</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">В сделке участвуют дети, материнский капитал или наследство</div>
+              <div class="a">Заранее проверяю, чьё согласие нужно, чтобы сделку нельзя было оспорить потом</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Не умею торговаться и боюсь переплатить</div>
+              <div class="a">Торгуюсь не «дайте скидку», а тем, что нашли при проверке: находки и снижают цену</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Надо продать своё и купить это одновременно</div>
+              <div class="a">Собираю цепочку и свожу сроки, чтобы вы не оказались с деньгами, но без квартиры</div>
+            </div>
+          </div>
+          </div>
+          <div class="algo">
+            <div class="algo-h"><span class="t">Что я делаю</span>
+              <span class="term"><i>Типичный срок</i>4 недели</span></div>
+          <div class="algo-step"><div><b>Подбор и отсев</b><p>Формирую короткий список из вариантов, которые действительно подходят, и объезжаю их до того, как везти вас.</p></div></div>
+          <div class="algo-step"><div><b>Проверка объекта и продавца</b><p>ЕГРН, история переходов права, обременения, перепланировки, долги по коммуналке и капремонту. По продавцу: дееспособность, банкротство, исполнительные производства, согласие супруга, права отказников от приватизации и наследников.</p></div></div>
+          <div class="algo-step"><div><b>Торг и сделка</b><p>Обоснованный торг — не «дайте скидку», а аргументы из проверки и рынка. Авансовое соглашение, безопасные расчёты, регистрация, приём квартиры по акту.</p></div></div>
+            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Письменное заключение по объекту: что проверено и какие риски остаются</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Цену ниже стартовой там, где для торга есть основания</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Право собственности, зарегистрированное без приостановок</span></li>
+            </ul></div>
+            <div class="algo-cta">
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить покупку</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- КОММЕРЦИЯ ПОД ДОХОД -->
+      <div class="sc-panel" id="sc-comm" role="tabpanel">
+        <div class="sc-grid">
+          <div class="sc-intro">
+            <h3 class="h2">Коммерция, которая платит вам каждый месяц</h3>
+            <p class="lead">Покупаете не стены, а деньги, которые они приносят. Поэтому сначала смотрю на арендатора и договор, а потом на ремонт и витрину.</p>
+            <div class="sc-pairs">
+            <div class="sc-pair">
+              <div class="q">Продавец обещает доходность, но подтверждения нет</div>
+              <div class="a">Считаю доход по договору аренды и выпискам о платежах, а не по словам продавца</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">А если арендатор съедет?</div>
+              <div class="a">Смотрю, кому ещё можно сдать это помещение и за сколько, до того как вы его купите</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Не понимаю, выгоднее это или вклад</div>
+              <div class="a">Считаю доходность с учётом налогов и простоя и кладу рядом с другими вариантами</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Запутался с назначением помещения и налогами</div>
+              <div class="a">Проверяю назначение, мощность и ограничения по видам деятельности, чтобы арендатор не упёрся в запрет</div>
+            </div>
+          </div>
+          </div>
+          <div class="algo">
+            <div class="algo-h"><span class="t">Что я делаю</span>
+              <span class="term"><i>Ориентир доходности</i>10–20% годовых</span></div>
+          <div class="algo-step"><div><b>Профиль инвестора и отбор объектов</b><p>Сумма, горизонт, отношение к риску, нужен ли рост стоимости или только поток. Дальше — стрит-ретейл, помещения свободного назначения или офисные блоки: трафик, витрина, соседи по улице, парковка и вход.</p></div></div>
+          <div class="algo-step"><div><b>Проверка арендного потока</b><p>Договор аренды, срок и условия расторжения, история платежей, устойчивость арендатора. Считаю доходность по факту, а не по обещанию.</p></div></div>
+          <div class="algo-step"><div><b>Юридика, техника и сделка</b><p>Назначение помещения, перепланировки, электрическая мощность, вентиляция, ограничения по видам деятельности. Расчёты и переоформление аренды и коммунальных на нового собственника.</p></div></div>
+            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Расчёт доходности и окупаемости с учётом налогов и простоя</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Объект с действующим договором аренды и понятным арендатором</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>План действий, если арендатор уходит</span></li>
+            </ul></div>
+            <div class="algo-cta">
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить инвестицию</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ЗАГОРОДНЫЙ ДОМ ИЛИ УЧАСТОК -->
+      <div class="sc-panel" id="sc-country" role="tabpanel">
+        <div class="sc-grid">
+          <div class="sc-intro">
+            <h3 class="h2">Дом за городом без проблем с землёй</h3>
+            <p class="lead">За городом главное не дом, а земля под ним и то, что к нему подведено. Красивый дом на неправильной земле продать потом почти невозможно.</p>
+            <div class="sc-pairs">
+            <div class="sc-pair">
+              <div class="q">Не понимаю разницу между ИЖС, СНТ и сельхозземлёй</div>
+              <div class="a">Объясняю на вашем участке, что можно строить и где можно прописаться, а где нельзя</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Дом построен, но оформлен как баня или не оформлен вовсе</div>
+              <div class="a">Проверяю, что стоит на участке по документам, и говорю, во что обойдётся привести в порядок</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Границы участка на деле не такие, как в бумагах</div>
+              <div class="a">Сверяю межевание с забором на месте, до задатка, а не после</div>
+            </div>
+            <div class="sc-pair">
+              <div class="q">Обещают газ, но непонятно когда</div>
+              <div class="a">Смотрю документы на подключение, а не обещания: подведено, оплачено или «по программе»</div>
+            </div>
+          </div>
+          </div>
+          <div class="algo">
+            <div class="algo-h"><span class="t">Что я делаю</span>
+              <span class="term"><i>Типичный срок</i>4 недели</span></div>
+          <div class="algo-step"><div><b>Сценарий использования</b><p>Круглогодичное проживание, дача или инвестиция — от этого зависят требования к дороге, коммуникациям и посёлку.</p></div></div>
+          <div class="algo-step"><div><b>Проверка земли и дома</b><p>Категория, вид разрешённого использования, межевание и границы по факту, охранные зоны, сервитуты, подъезд. По дому: оформлен ли, соответствует ли фактическая площадь документам, состояние конструктива и инженерии.</p></div></div>
+          <div class="algo-step"><div><b>Коммуникации и сделка</b><p>Газ, электричество и выделенная мощность, вода и её качество, септик, интернет — по документам и на месте, а не по словам продавца. Договор, регистрация и реальные расходы на содержание.</p></div></div>
+            <div class="algo-out"><div class="t">Что получаете вы</div><ul>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Участок и дом с чистыми документами и понятными границами</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Честный расчёт стоимости владения в год</span></li>
+            <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span><span>Понимание, за сколько это можно будет продать</span></li>
+            </ul></div>
+            <div class="algo-cta">
+              <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить загородную</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <button class="sc-close" id="scClose" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>
+        Свернуть
+      </button>
+    </div></div>
+  </div>
+</section>
+
+<!-- ================= НАПРАВЛЕНИЯ ================= -->
+<section class="section" id="cases" style="padding-top:0">
+  <div class="wrap">
+    <div class="cases rv">
+      <div class="cases-head">
+        <div class="eyebrow">Сложные сделки</div>
+        <h2 class="h2">Работаю там, где обычная сделка ломается</h2>
+        <p class="lead">Простую квартиру продаст кто угодно. Разница видна там, где есть доли,
+          долги, дети или доверенность: здесь цена ошибки — не комиссия, а само право собственности.</p>
+      </div>
+
+      <div class="cases-grid">
+        <article class="case">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v8h8"/></svg></span>
+          <h3>Доли, наследство и дети</h3>
+          <p>Продажа доли с уведомлением сособственников, наследственные квартиры до и после шести месяцев, согласие опеки, выделение долей детям. Разбираю, кто и в каком порядке должен подписать, до выхода на сделку.</p>
+        </article>
+
+        <article class="case">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a4 4 0 0 0 6 .5l2-2a4 4 0 1 0-6-6l-1 1"/><path d="M14 11a4 4 0 0 0-6-.5l-2 2a4 4 0 1 0 6 6l1-1"/></svg></span>
+          <h3>Альтернативные цепочки</h3>
+          <p>Продать своё и купить другое одной сделкой, иногда в три-четыре звена. Свожу сроки, авансы и одновременную регистрацию так, чтобы вы не остались ни без денег, ни без жилья между звеньями.</p>
+        </article>
+
+        <article class="case">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <h3>Ипотека и обременения</h3>
+          <p>Продажа из-под ипотеки, залог, аресты, долги по коммуналке. Выстраиваю расчёты так, чтобы долг гасился внутри сделки, а обременение снималось до перехода права к покупателю.</p>
+        </article>
+
+        <article class="case">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4-2.9 7.6-7 8.5-4.1-.9-7-4.5-7-8.5V6l7-3Z"/><path d="M9.5 12h5M12 9.5v5"/></svg></span>
+          <h3>Материнский капитал и субсидии</h3>
+          <p>Маткапитал, военная ипотека, господдержка. Выделение долей детям, согласование с банком и Соцфондом — чтобы сделку не оспорили через несколько лет, когда дети вырастут.</p>
+        </article>
+
+        <article class="case">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="m9 14.5 2 2 4-4"/></svg></span>
+          <h3>Проверка рисков продавца</h3>
+          <p>Банкротство, исполнительные производства, дееспособность, отказники от приватизации. Смотрю не только выписку из ЕГРН, но и самого продавца: именно отсюда приходят иски спустя годы.</p>
+        </article>
+
+        <article class="case">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><path d="M12 4a13 13 0 0 1 0 16 13 13 0 0 1 0-16"/></svg></span>
+          <h3>Дистанционные сделки</h3>
+          <p>Собственник в другом городе или за границей. Доверенность с правильным набором полномочий, электронная регистрация, безопасные расчёты без личного присутствия на сделке.</p>
+        </article>
+      </div>
+
+      <!-- уточнить: можно добавить строку вида «провёл — таких сделок», когда будет цифра -->
+      <div class="cases-cta">
+        <span class="t">Не нашли свой случай? Опишите ситуацию — скажу, что для этого понадобится.</span>
+        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram"="Здравствуйте! У меня непростая ситуация со сделкой: ">Описать ситуацию</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= АТТЕСТАТ ================= -->
+<section class="section" id="attestat" style="padding-top:0">
+  <div class="wrap">
+    <div class="panel att rv">
+      <div class="att-frame">
+        <picture><source type="image/webp" sizes="(max-width:1024px) 90vw, 34vw" srcset="img/attestat-sm.webp?v=68e6d2229b25 900w, img/attestat.webp?v=7c4188ee0e6b 1254w">
+          <img src="img/attestat.jpg?v=b475684cf2d0" width="1254" height="1800" sizes="(max-width:1024px) 90vw, 34vw" srcset="img/attestat-sm.jpg?v=ab4f779f41c2 900w, img/attestat.jpg?v=b475684cf2d0 1254w" alt="Аттестат брокера по недвижимости РГР на имя Минаева Дмитрия Михайловича" loading="lazy"></picture>
+        <div class="att-marks">
+          <span class="mark mark-lite"><picture><source type="image/webp" srcset="img/grm.webp?v=bb97e2f3c382"><img src="img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></span>
+          <span class="mark mark-lite"><picture><source type="image/webp" srcset="img/rgr.webp?v=cc48daf510ab"><img src="img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></span>
+          <span class="t">Гильдия риэлторов Москвы<br>Российская гильдия риэлторов</span>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">Документ</div>
+        <h2 class="h2" style="margin:16px 0 18px">Аттестат,<br>а не просто визитка</h2>
+        <p class="lead">
+          Профессия риэлтора в России не лицензируется — работать может кто угодно,
+          без образования и без ответственности. Аттестат Российской гильдии риэлторов
+          сдаётся на экзамене, подтверждается раз в несколько лет и отзывается за нарушения.
+          Это единственная в стране проверка, которую риэлтор проходит добровольно.
+        </p>
+        <ul class="att-rows">
+          <li><span>Реестровый номер</span><span>РОСС RU РГР ТОС 77 БН 809</span></li>
+          <li><span>Квалификация</span><span>Специалист по недвижимости — брокер</span></li>
+          <li><span>Действителен до</span><span>12.02.2029</span></li>
+          <li><span>Агентство</span><span>ООО «Лендис Эстейт»</span></li>
+          <li><span>Профсообщество</span><span>ТОС НП «Гильдия риэлторов Москвы»</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ПРОЕКТ ДОМА: ПОЛОСКА ================= -->
+<section class="pstrip-sec" aria-label="Проект дома">
+  <div class="wrap">
+    <a class="pstrip" href="/forma-96/" data-goal="forma96_strip">
+      <span class="pstrip-plan"><span class="pstrip-dim">11,9 × 11,9 м</span><svg class="plan-mini" aria-hidden="true" viewBox="108 86 1380 1330"><defs><clipPath id="wr-furn-clip-3"><path d="M170 148H524V536H170Z"></path></clipPath><clipPath id="wr-furn-clip-2"><path d="M1009 148H1371V539H783V418H1009Z"></path></clipPath><clipPath id="wr-furn-clip-1"><path d="M551 566H1101V1348H769V1146H837V911H551Z"></path></clipPath><clipPath id="wr-furn-clip-4"><path d="M170 563H524V828H170Z"></path></clipPath><clipPath id="wr-furn-clip-5"><path d="M170 973H352V1348H170Z"></path></clipPath><clipPath id="wr-furn-clip-6"><path d="M170 844H524V1121H368V957H170Z"></path></clipPath><clipPath id="wr-furn-clip-7"><path d="M551 148H767V402H551Z"></path></clipPath><clipPath id="wr-furn-clip-8"><path d="M783 148H993V402H783Z"></path></clipPath><clipPath id="wr-furn-clip-9"><path d="M368 1137H524V1348H368Z"></path></clipPath><clipPath id="wr-furn-clip-10"><path d="M551 911H686V1146H753V1348H551Z"></path></clipPath><clipPath id="wr-furn-clip-12"><path d="M702 927H821V1129H702Z"></path></clipPath><clipPath id="wr-furn-clip-13"><path d="M1141 581H1464.62V1282.18H1141Z"></path></clipPath></defs><path class="pw" d="M130 108H1411V581H1141V1388H130Z"/><path class="pr" d="M551 566H1101V1348H769V1146H837V911H551Z"/><path class="pr" d="M1009 148H1371V539H783V418H1009Z"/><path class="pr" d="M170 148H524V536H170Z"/><path class="pr" d="M170 563H524V828H170Z"/><path class="pr" d="M170 973H352V1348H170Z"/><path class="pr" d="M170 844H524V1121H368V957H170Z"/><path class="pr" d="M551 148H767V402H551Z"/><path class="pr" d="M783 148H993V402H783Z"/><path class="pr" d="M368 1137H524V1348H368Z"/><path class="pr" d="M551 911H686V1146H753V1348H551Z"/><path class="pr" d="M551 418H767V539H686V566H551Z"/><path class="pr" d="M702 927H821V1129H702Z"/><path class="pr pt" d="M1141 581H1464.62V1282.18H1141Z"/>
+      <g id="wr-rooms"></g>
+      <g id="wr-furnishings" class="wr-furnishings" pointer-events="none" aria-hidden="true"></g>
+      <g class="wr-openings">
+        <path d="M524 434V521H551V434Z M681 402H756V418H681Z M850 402H926V418H850Z M767 434H783V521H767Z M551 539H686V566H551Z M524 717H551V802H524Z M524 927H551V1003H524Z M272 957H348V973H272Z M524 1206H551V1280H524Z M821 1064H837V1129H821Z M577 1348H684V1388H577Z M244 1348H341V1388H244Z"/>
+      </g>
+      <g class="wr-glass">
+        <path d="M130 311H170V461H130Z M1371 311H1411V461H1371Z M130 663H170V765H130Z M130 870H170V930H130Z M856 1348H1007V1388H856Z"/>
+        <path id="wr-upper-glass" d="M1101 656H1141V887H1101Z"/>
+        <path id="wr-lower-glass" d="M1101 1156H1141V1253H1101Z"/>
+      </g>
+      <g class="wr-glass-line"><path d="M150 311V461 M1391 311V461 M150 663V765 M150 870V930 M856 1368H1007"/>
+        <g aria-label="Двухстворчатый стеклянный выход: обе створки подвижные, проход открыт сверху на плане">
+          <path d="M1107 656V887 M1135 656V887" class="wr-sliding-track"/>
+          <path d="M1110 751H1117V866.5H1110Z M1125 767H1132V882.5H1125Z" class="wr-glass-leaf"/>
+        </g>
+      </g>
+      <g class="pd"><g aria-label="Спальня слева: открывание внутрь"><path d="M524,434 A87 87 0 0 0 437,521" class="wr-door-arc"></path><polygon points="524,517.5 437,517.5 437,524.5 524,524.5" class="wr-door-leaf"></polygon></g><g aria-label="Спальня справа: открывание внутрь"><path d="M783,434 A87 87 0 0 1 870,521" class="wr-door-arc"></path><polygon points="783,524.5 870,524.5 870,517.5 783,517.5" class="wr-door-leaf"></polygon></g><g aria-label="Кабинет: открывание внутрь"><path d="M524,717 A85 85 0 0 0 439,802" class="wr-door-arc"></path><polygon points="524,798.5 439,798.5 439,805.5 524,805.5" class="wr-door-leaf"></polygon></g><g aria-label="Санузел сверху: открывание внутрь"><path d="M681,402 A75 75 0 0 1 756,327" class="wr-door-arc"></path><polygon points="759.5,402 759.5,327 752.5,327 752.5,402" class="wr-door-leaf"></polygon></g><g aria-label="Санузел у входа: открывание внутрь"><path d="M524,927 A76 76 0 0 0 448,1003" class="wr-door-arc"></path><polygon points="524,999.5 448,999.5 448,1006.5 524,1006.5" class="wr-door-leaf"></polygon></g><g aria-label="Входная дверь, петли справа при взгляде с улицы: открывание наружу"><path d="M577,1388 A107 107 0 0 0 684,1495" class="wr-door-arc"></path><polygon points="680.5,1388 680.5,1495 687.5,1495 687.5,1388" class="wr-door-leaf"></polygon></g><g aria-label="Дверь кухни на террасу: открывание наружу"><path d="M1141,1253 A97 97 0 0 0 1238,1156" class="wr-door-arc"></path><polygon points="1141,1159.5 1238,1159.5 1238,1152.5 1141,1152.5" class="wr-door-leaf"></polygon></g><g aria-label="Остеклённая наружная дверь котельной: открывание наружу"><path d="M341,1388 A97 97 0 0 1 244,1485" class="wr-door-arc"></path><polygon points="240.5,1388 240.5,1485 247.5,1485 247.5,1388" class="wr-door-leaf wr-door-glazed"></polygon><path d="M244,1398 L244,1475" class="wr-door-glazing"></path></g><g aria-label="Панель котельной открыта влево, со стороны санузла; пунктиром показано закрытое положение"><path d="M183 940H355" class="wr-sliding-track"></path><rect x="269" y="944" width="82" height="7" class="wr-sliding-closed"></rect><rect x="187" y="944" width="82" height="7" class="wr-sliding-panel"></rect></g><g aria-label="Панель кладовой открыта вверх по наружной стене со стороны кухни; пунктиром показано закрытое положение"><path d="M856 981V1136" class="wr-sliding-track"></path><rect x="843" y="1061" width="7" height="71" class="wr-sliding-closed"></rect><rect x="843" y="990" width="7" height="71" class="wr-sliding-panel"></rect></g></g><g class="pf"><g clip-path="url(#wr-furn-clip-3)" aria-label="Спальня: кровать 160×200, две тумбы, шкаф у двери, кресло у окна"><rect x="198" y="262" width="210" height="190" rx="8" class="f-rug"></rect><rect x="216" y="150" width="173" height="216" rx="10" class="f-soft"></rect><rect x="228" y="162" width="68.5" height="38" rx="10" class="f-white"></rect><rect x="308.5" y="162" width="68.5" height="38" rx="10" class="f-white"></rect><rect x="216" y="245.04000000000002" width="173" height="120.96000000000001" rx="10" class="f-soft2"></rect><path d="M222 261.04H383" class="f-line"></path><rect x="172" y="154" width="40" height="40" rx="6" class="f-wood"></rect><rect x="393" y="154" width="40" height="40" rx="6" class="f-wood"></rect><rect x="457" y="150" width="65" height="226" rx="3" class="f-wood"></rect><path d="M457 225H522 M457 300H522" class="f-line"></path><rect x="184" y="440" width="72" height="72" rx="18" class="f-soft"></rect><circle cx="284" cy="476" r="18" class="f-wood"></circle></g><g clip-path="url(#wr-furn-clip-2)" aria-label="Мастер-спальня: кровать 180×200, две тумбы, макияжный столик в углу"><rect x="1072" y="262" width="236" height="190" rx="8" class="f-rug"></rect><rect x="1093" y="150" width="194" height="216" rx="10" class="f-soft"></rect><rect x="1105" y="162" width="79" height="38" rx="10" class="f-white"></rect><rect x="1196" y="162" width="79" height="38" rx="10" class="f-white"></rect><rect x="1093" y="245.04000000000002" width="194" height="120.96000000000001" rx="10" class="f-soft2"></rect><path d="M1099 261.04H1281" class="f-line"></path><rect x="1043" y="154" width="44" height="40" rx="6" class="f-wood"></rect><rect x="1293" y="154" width="44" height="40" rx="6" class="f-wood"></rect><rect x="1262" y="490" width="108" height="48" rx="4" class="f-wood"></rect><rect x="1296" y="492" width="40" height="6" rx="2" class="f-glass"></rect><circle cx="1316" cy="462" r="20" class="f-soft2"></circle></g><g clip-path="url(#wr-furn-clip-1)" aria-label="Кухня-гостиная: ТВ-консоль, растение в углу, диван ближе к ТВ с проходом позади, стол у стены на четверых, угловая кухня"><rect x="690" y="622" width="290" height="180" rx="10" class="f-rug"></rect><rect x="740" y="571" width="200" height="36" rx="4" class="f-wood"></rect><rect x="772" y="575" width="136" height="7" rx="2" class="f-screen"></rect><circle cx="1064" cy="604" r="34" class="f-soft2"></circle><path d="M1064 572V636 M1032 604H1096 M1041 581L1087 627 M1087 581L1041 627" class="f-line"></path><circle cx="1064" cy="604" r="12" class="f-white"></circle><ellipse cx="830" cy="667" rx="54" ry="27" class="f-wood"></ellipse><rect x="700" y="724" width="262" height="98" rx="16" class="f-soft"></rect><rect x="700" y="792" width="262" height="30" rx="12" class="f-soft2"></rect><rect x="1013" y="953" width="86" height="151" rx="5" class="f-wood"></rect><rect x="950" y="970" width="40" height="40" rx="11" class="f-soft2"></rect><rect x="950" y="1047" width="40" height="40" rx="11" class="f-soft2"></rect><rect x="1036" y="908" width="40" height="40" rx="11" class="f-soft2"></rect><rect x="1036" y="1108" width="40" height="40" rx="11" class="f-soft2"></rect><rect x="719" y="888" width="86" height="20" rx="4" class="f-white"></rect><path d="M727 900H797" class="f-line"></path><path d="M771 1152H836V1283H1099V1346H771Z" class="f-stone"></path><rect x="1034" y="1283" width="65" height="63" rx="3" class="f-white"></rect><path d="M1040 1290H1093 M1040 1296H1093" class="f-line"></path><rect x="893" y="1292" width="66" height="44" rx="10" class="f-white"></rect><circle cx="926" cy="1300" r="4" class="f-line"></circle><rect x="779" y="1162" width="50" height="62" rx="5" class="f-white"></rect><circle cx="792" cy="1176" r="9" class="f-line"></circle><circle cx="816" cy="1176" r="9" class="f-line"></circle><circle cx="792" cy="1206" r="9" class="f-line"></circle><circle cx="816" cy="1206" r="9" class="f-line"></circle></g><g clip-path="url(#wr-furn-clip-4)" aria-label="Кабинет: стол в углу, кресло для чтения с торшером в другом углу, угловой стеллаж с книгами"><rect x="172" y="762" width="130" height="64" rx="4" class="f-wood"></rect><circle cx="237" cy="733" r="21" class="f-soft"></circle><rect x="174" y="567" width="70" height="70" rx="18" class="f-soft"></rect><circle cx="266" cy="586" r="13" class="f-white"></circle><path d="M258 586H274 M266 578V594" class="f-line"></path><rect x="330" y="565" width="192" height="36" rx="3" class="f-wood"></rect><rect x="486" y="601" width="36" height="106" rx="3" class="f-wood"></rect><path d="M378 565V601 M426 565V601 M474 565V601 M486 654H522" class="f-line"></path></g><g clip-path="url(#wr-furn-clip-5)" aria-label="Котельная: стиральная машина в углу у прохода в санузел, дальше по стене котёл, бойлер косвенного нагрева, расширительный бак, коллектор, фильтры, гидроаккумулятор; электрощит на противоположной стене"><rect x="174" y="977" width="62" height="62" rx="7" class="f-white"></rect><circle cx="205" cy="1008" r="19" class="f-line"></circle><rect x="176" y="1052" width="46" height="50" rx="4" class="f-white"></rect><circle cx="199" cy="1087" r="6" class="f-line"></circle><path d="M182 1064H216" class="f-line"></path><circle cx="205" cy="1140" r="30" class="f-white"></circle><circle cx="205" cy="1140" r="20" class="f-line"></circle><circle cx="200" cy="1190" r="15" class="f-white"></circle><rect x="174" y="1214" width="18" height="72" rx="3" class="f-stone"></rect><path d="M174 1232H192 M174 1250H192 M174 1268H192" class="f-line"></path><circle cx="214" cy="1232" r="11" class="f-white"></circle><circle cx="214" cy="1266" r="11" class="f-white"></circle><circle cx="206" cy="1316" r="24" class="f-white"></circle><rect x="338" y="1226" width="12" height="66" rx="2" class="f-screen"></rect></g><g clip-path="url(#wr-furn-clip-6)" aria-label="Санузел с душем: унитаз у окна, тумба с раковиной в углу у двери, душ с тропической лейкой со стороны открывания двери"><rect x="174" y="868" width="26" height="58" rx="4" class="f-white"></rect><ellipse cx="230" cy="897" rx="31" ry="24" class="f-white"></ellipse><rect x="410" y="847" width="112" height="54" rx="4" class="f-stone"></rect><ellipse cx="466" cy="874" rx="36" ry="17" class="f-white"></ellipse><rect x="370" y="1012" width="152" height="107" rx="4" class="f-white"></rect><path d="M370 1008H505" class="f-line"></path><circle cx="404" cy="1090" r="5" class="f-line"></circle><circle cx="492" cy="1044" r="18" class="f-white"></circle><circle cx="486" cy="1038" r="2" class="f-line"></circle><circle cx="498" cy="1038" r="2" class="f-line"></circle><circle cx="486" cy="1050" r="2" class="f-line"></circle><circle cx="498" cy="1050" r="2" class="f-line"></circle><circle cx="492" cy="1044" r="2" class="f-line"></circle></g><g clip-path="url(#wr-furn-clip-7)" aria-label="Санузел с ванной: ванна, унитаз рядом с ванной, тумба с раковиной рядом с унитазом"><rect x="555" y="152" width="208" height="86" rx="30" class="f-white"></rect><ellipse cx="659" cy="195" rx="86" ry="28" class="f-line"></ellipse><rect x="554" y="248" width="24" height="54" rx="4" class="f-white"></rect><ellipse cx="604" cy="275" rx="26" ry="22" class="f-white"></ellipse><rect x="554" y="318" width="50" height="80" rx="4" class="f-stone"></rect><ellipse cx="578" cy="358" rx="14" ry="24" class="f-white"></ellipse></g><g clip-path="url(#wr-furn-clip-8)" aria-label="Гардеробная: шкафы на всю глубину вдоль боковых стен, напротив входа свободно"><rect x="785" y="150" width="65" height="250" rx="3" class="f-wood"></rect><path d="M785 212H850 M785 275H850 M785 338H850" class="f-line"></path><rect x="928" y="150" width="65" height="250" rx="3" class="f-wood"></rect><path d="M928 212H993 M928 275H993 M928 338H993" class="f-line"></path></g><g clip-path="url(#wr-furn-clip-9)" aria-label="Гардеробная: шкафы на всю глубину вдоль стен, напротив входа свободно"><rect x="370" y="1139" width="152" height="65" rx="3" class="f-wood"></rect><path d="M421 1139V1204 M472 1139V1204" class="f-line"></path><rect x="370" y="1281" width="152" height="65" rx="3" class="f-wood"></rect><path d="M421 1281V1346 M472 1281V1346" class="f-line"></path></g><g clip-path="url(#wr-furn-clip-10)" aria-label="Прихожая: комод и банкетка в нише правее входной двери"><rect x="707" y="1152" width="44" height="86" rx="4" class="f-wood"></rect><path d="M707 1195H751" class="f-line"></path><rect x="704" y="1248" width="47" height="96" rx="10" class="f-soft2"></rect></g><g clip-path="url(#wr-furn-clip-12)" aria-label="Кладовая: стеллажи"><rect x="704" y="929" width="115" height="34" rx="3" class="f-wood"></rect><rect x="704" y="963" width="34" height="164" rx="3" class="f-wood"></rect></g><g clip-path="url(#wr-furn-clip-13)" aria-label="Терраса: двухместный диван, стол, два кресла по центру, газовый гриль в углу напротив двери из кухни"><rect x="1216" y="592" width="173" height="92" rx="18" class="f-soft"></rect><rect x="1216" y="592" width="173" height="26" rx="12" class="f-soft2"></rect><rect x="1227" y="740" width="151" height="76" rx="10" class="f-wood"></rect><rect x="1202" y="862" width="86" height="86" rx="20" class="f-soft"></rect><rect x="1317" y="862" width="86" height="86" rx="20" class="f-soft"></rect><rect x="1396" y="1146" width="62" height="130" rx="6" class="f-white"></rect><rect x="1404" y="1160" width="46" height="70" rx="4" class="f-line"></rect><path d="M1404 1176H1450 M1404 1192H1450 M1404 1208H1450" class="f-line"></path><circle cx="1427" cy="1252" r="7" class="f-line"></circle></g></g></svg></span>
+      <span class="pstrip-txt">
+        <span class="eyebrow">Проект одноэтажного дома</span>
+        <span class="pstrip-title">Forma <span>96</span></span>
+        <span class="pstrip-sub">Компактный дом для участка от 5 соток. Всё на одном этаже.</span>
+        <span class="btn btn-metal">Смотреть проект <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- ================= ОТЗЫВЫ ================= -->
+
+
+<!-- ================= КОНТАКТЫ ================= -->
+
+<!-- ================= ФУТЕР ================= -->
+<footer class="ftr">
+  <div class="wrap">
+
+    <ul class="ftr-rows">
+      <li><span>Брокер</span><span>Минаев Дмитрий Михайлович</span></li>
+      <li><span>Агентство</span><span>ООО «Лендис Эстейт»</span></li>
+      <li><span>Адрес</span><span>г. Москва, БЦ Port Plaza, ул. Проектируемый проезд № 4062, д. 6, стр. 16 · м. «Технопарк»</span></li>
+    </ul>
+
+    <div class="ftr-bot">
+      <span>© <span id="yr">2026</span> Дмитрий Минаев. Москва</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= ЛИПКАЯ ПАНЕЛЬ (МОБАЙЛ) ================= -->
+<nav class="sticky-bar" aria-label="Быстрая связь">
+  <a class="call" href="tel:+79263977775"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg><span>Позвонить</span></a>
+  <a href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg><span>TG</span></a>
+  <a href="https://wa.me/79263977775" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.55 15.2L2 22.4l5.35-1.4A10 10 0 1 0 12 2Zm0 1.9a8.1 8.1 0 1 1-4.2 15.02l-.3-.18-3.1.81.83-3.02-.2-.31A8.1 8.1 0 0 1 12 3.9Zm4.55 10.55c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.11-.51.12-.15.23-.59.74-.72.9-.13.15-.27.17-.5.06-.23-.12-.97-.36-1.85-1.14-.68-.6-1.14-1.36-1.28-1.59-.13-.23-.01-.35.1-.47.11-.1.23-.27.35-.4.11-.14.15-.24.23-.39.08-.16.04-.29-.02-.4-.06-.12-.51-1.24-.7-1.69-.19-.44-.37-.38-.51-.39h-.44c-.15 0-.39.06-.6.29-.2.23-.79.77-.79 1.88s.81 2.18.92 2.33c.12.16 1.6 2.44 3.87 3.42.54.23.96.37 1.29.48.54.17 1.03.15 1.42.09.44-.07 1.36-.55 1.55-1.09.19-.54.19-1 .13-1.1-.06-.1-.21-.16-.44-.28Z"/></svg><span>WA</span></a>
+  <a href="https://max.ru/u/f9LHodD0cOLOddl8uSfAqW5N_rbCdWMLwxxzn1UOibarOU6eByK8-xW5caw" target="_blank" rel="noopener" aria-label="MAX"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.6 2.4a9.5 9.5 0 1 1-5.3 17.4c-.85.55-1.85.92-2.94 1.05-.6.07-.99-.58-.7-1.12.42-.79.68-1.66.75-2.58A9.5 9.5 0 0 1 12.6 2.4Zm0 3.3a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4Z"/><path d="M12.9 8.1a4.15 4.15 0 1 1-3.2 6.8c-.33.23-.72.4-1.15.48-.29.05-.48-.28-.34-.54.2-.37.32-.79.36-1.23A4.15 4.15 0 0 1 12.9 8.1Z"/></svg><span>MAX</span></a>
+</nav>
+
+<script>
+(function(){
+  'use strict';
+  var PHONE = '79263977775';
+
+  /* ---------- липкая шапка: показываем, когда герой ушёл вверх ---------- */
+  var topbar = document.getElementById('topbar');
+  var hero = document.querySelector('.hero');
+  function onScroll(){
+    var past = hero ? (hero.getBoundingClientRect().bottom < 80) : (window.scrollY > 400);
+    topbar.classList.toggle('show', past);
+  }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---------- мобильное меню ---------- */
+  var mnav = document.getElementById('mnav');
+  var lastMenuBtn = null;
+  document.querySelectorAll('[data-menu]').forEach(function(b){
+    b.addEventListener('click', function(){
+      lastMenuBtn = b;
+      mnav.classList.add('open'); document.body.style.overflow='hidden';
+      var first = mnav.querySelector('a, button');
+      if(first) first.focus();
+    });
+  });
+  function closeNav(){
+    if(!mnav.classList.contains('open')) return;
+    mnav.classList.remove('open'); document.body.style.overflow='';
+    if(lastMenuBtn) lastMenuBtn.focus();
+  }
+  /* Esc закрывает, Tab не выпускает фокус из открытого меню */
+  document.addEventListener('keydown', function(e){
+    if(!mnav.classList.contains('open')) return;
+    if(e.key === 'Escape'){ e.preventDefault(); closeNav(); return; }
+    if(e.key !== 'Tab') return;
+    var f = [].slice.call(mnav.querySelectorAll('a[href], button')).filter(function(el){ return el.offsetParent !== null; });
+    if(!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  });
+  document.getElementById('mnavClose').addEventListener('click', closeNav);
+  mnav.addEventListener('click', function(e){ if(e.target.tagName === 'A') closeNav(); });
+
+  /* ---------- якоря ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var href = a.getAttribute('href');
+      if(href === '#') return;
+      var t = document.querySelector(href);
+      if(!t) return;
+      e.preventDefault(); closeNav();
+      window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 88, behavior:'smooth'});
+    });
+  });
+
+  /* ---------- сценарии: плитки и одна открытая панель ---------- */
+  var tiles  = [].slice.call(document.querySelectorAll('.tile'));
+  var panels = [].slice.call(document.querySelectorAll('.sc-panel'));
+  var scDrop = document.getElementById('scDrop');
+
+  function openScenario(id){
+    var tile = document.querySelector('.tile[data-id="' + id + '"]');
+    if(!tile) return;
+    var wasOpen = tile.getAttribute('aria-selected') === 'true';
+    tiles.forEach(function(t){ t.setAttribute('aria-selected', 'false'); });
+
+    if(wasOpen){                       /* повторный клик закрывает */
+      scDrop.classList.remove('open');
+      panels.forEach(function(pn){ pn.classList.remove('on'); });
+      return;
+    }
+    tile.setAttribute('aria-selected', 'true');
+    panels.forEach(function(pn){ pn.classList.toggle('on', pn.id === 'sc-' + id); });
+    scDrop.classList.add('open');
+    /* на узком экране панель длинная — подводим её начало под шапку */
+    if(window.matchMedia('(max-width: 820px)').matches){
+      setTimeout(function(){
+        var y = scDrop.getBoundingClientRect().top + window.scrollY - 76;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }, 60);
+    }
+  }
+
+  tiles.forEach(function(t){
+    t.addEventListener('click', function(){ openScenario(t.dataset.id); });
+    /* стрелками влево-вправо, как положено вкладкам */
+    t.addEventListener('keydown', function(e){
+      var i = tiles.indexOf(t), n = null;
+      if(e.key === 'ArrowRight') n = tiles[(i + 1) % tiles.length];
+      if(e.key === 'ArrowLeft')  n = tiles[(i - 1 + tiles.length) % tiles.length];
+      if(n){ e.preventDefault(); n.focus(); }
+    });
+  });
+
+  var scClose = document.getElementById('scClose');
+  if(scClose) scClose.addEventListener('click', function(){
+    var open = document.querySelector('.tile[aria-selected="true"]');
+    if(open){
+      openScenario(open.dataset.id);
+      var y = document.querySelector('.tiles').getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
+  });
+
+  /* овал в первом экране открывает свой сценарий и ведёт к нему */
+  document.querySelectorAll('.pill[data-go]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var tile = document.querySelector('.tile[data-id="' + a.dataset.go + '"]');
+      if(tile && tile.getAttribute('aria-selected') !== 'true') openScenario(a.dataset.go);
+    });
+  });
+
+  /* CTA внутри сценария — WhatsApp с готовым текстом */
+  document.querySelectorAll('[data-wa]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      window.open('https://wa.me/' + PHONE + '?text=' + encodeURIComponent(a.dataset.wa), '_blank', 'noopener');
+    });
+  });
+
+  /* ---------- появление блоков ---------- */
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.06});
+    document.querySelectorAll('.rv').forEach(function(el,i){
+      el.style.transitionDelay = (Math.min(i,3) * 60) + 'ms';
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
+  }
+  /* страховка: что бы ни случилось с observer, через 2.5 с показываем всё */
+  setTimeout(function(){
+    document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 2500);
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+<script>
+/* цель Метрики: клик по полоске проекта Forma 96 */
+document.addEventListener('click',function(e){var g=e.target.closest('[data-goal]');if(g&&window.ym)ym(112500819,'reachGoal',g.getAttribute('data-goal'))});
+</script>
+</body>
+</html>
