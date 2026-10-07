@@ -1,117 +1,25 @@
 ---
-layout: layouts/base.njk
-permalink: /uslugi/prodazha-kvartiry/
+layout: "layouts/service.njk"
+permalink: "/uslugi/prodazha-kvartiry/"
 prototype: true
+crumbs: [{"title": "Услуги", "url": "/uslugi/"}, {"title": "Продажа квартиры", "url": "/uslugi/prodazha-kvartiry/"}]
 title: "Продажа квартиры с риелтором в Москве — Дмитрий Минаев"
 description: "Продам вашу квартиру по цене реальных сделок, а не объявлений. Показы веду сам, расчёты через аккредитив или ячейку. Аттестованный брокер РГР."
-crumbs:
-  - { title: "Услуги", url: "/uslugi/" }
-  - { title: "Продажа квартиры", url: "/uslugi/prodazha-kvartiry/" }
-schema: '{"@type":"Service","name":"Продажа квартиры с риелтором","serviceType":"Сопровождение продажи квартиры","areaServed":{"@type":"City","name":"Москва"},"provider":{"@id":"https://realtyminaev.ru/#agent"}}'
+eyebrow: "Услуга · продажа"
+h1: "Продажа квартиры с&nbsp;риелтором в&nbsp;Москве"
+lead: "Вы хотите нормальные деньги и понятный срок. Не «выставили и ждём», а понимание, что происходит с квартирой каждую неделю."
+ctaBtn: "Обсудить продажу"
+briefItems: [["Типичный срок", "6 недель"], ["Показы", "веду сам"], ["Расчёты", "аккредитив или ячейка"], ["Стоимость", "<span class=\"fill\">[ЗАПОЛНИТЬ: комиссия]</span>"]]
+pairsTitle: "Что обычно мешает продать"
+pairs: [{"q": "Не понимаю, сколько моя квартира стоит на самом деле", "a": "Показываю цены реальных закрытых сделок в вашем доме, а не хотелки соседей в объявлениях."}, {"q": "Звонят одни агенты, а покупателей нет", "a": "Беру звонки и показы на себя, до вас доходят только те, кто действительно готов покупать."}, {"q": "Надо продать и сразу купить другое, боюсь остаться без жилья", "a": "Веду обе сделки как одну цепочку: деньги и ключи меняются в один день. <a class=\"more-link\" href=\"/slozhnye-sdelki/alternativnaya-sdelka/\">Как устроена альтернативная сделка →</a>"}, {"q": "В квартире доля, ипотека или наследство, не знаю, с чего начать", "a": "Сначала собираю документы и снимаю ограничения, и только потом выводим квартиру на рынок."}]
+stepsTitle: "Три этапа от оценки до денег на счёте"
+term: {"label": "Типичный срок", "value": "6 недель"}
+steps: [{"t": "Оценка и предпродажная подготовка", "p": "Смотрю цены реальных закрытых сделок в вашем доме и районе, а не хотелки в объявлениях. Говорю, что стоит исправить, а на что не тратить деньги. Съёмка, планировка, текст объявления."}, {"t": "Вывод на рынок и показы", "p": "Площадки, работа с базой покупателей и агентов, отбор адекватных заявок. Показы веду сам — вам не нужно отпрашиваться с работы."}, {"t": "Торг, сделка и деньги", "p": "Переговоры по цене и условиям, аванс или задаток так, чтобы покупатель не сорвался. Аккредитив или ячейка, подача в Росреестр, передача объекта по акту."}]
+out: ["Деньги на счёте после регистрации, а не обещания", "Регулярный отчёт: просмотры, звонки, показы и предложения по цене", "Готовый пакет документов и закрытые «хвосты» по прописке и коммуналке"]
+deals: [{"url": "/slozhnye-sdelki/prodazha-doli/", "t": "Продажа доли", "p": "Уведомление сособственников и порядок подписания до выхода на сделку."}, {"url": "/slozhnye-sdelki/nasledstvo/", "t": "Квартира по наследству", "p": "Что можно сделать до и после шести месяцев."}, {"url": "/slozhnye-sdelki/prodazha-v-ipoteke/", "t": "Квартира в ипотеке", "p": "Долг гасится внутри сделки, обременение снимается до перехода права."}, {"url": "/slozhnye-sdelki/materinskij-kapital/", "t": "Маткапитал и доли детей", "p": "Согласие опеки и выделение долей — чтобы сделку не оспорили."}]
+articles: [{"k": "Продажа", "t": "Как узнать реальную цену своей квартиры", "p": "Почему цены в объявлениях — не ориентир.", "url": "/statyi/realnaya-cena-kvartiry/", "go": "Читать →"}, {"k": "Статьи", "t": "Все статьи", "p": "Продажа, покупка, новостройки, сложные сделки.", "url": "/statyi/", "go": "Перейти →"}]
+ctaTitle: "Обсудим вашу квартиру"
+ctaText: "Позвоните или напишите: скажу, сколько квартира стоит по реальным сделкам и что подготовить до выхода на рынок."
+schema: "{\"@type\":\"Service\",\"name\":\"Продажа квартиры с риелтором\",\"areaServed\":{\"@type\":\"City\",\"name\":\"Москва\"},\"provider\":{\"@id\":\"https://realtyminaev.ru/#agent\"}}"
 ---
-{%- from "partials/icons.njk" import icon -%}
-{%- from "partials/cta.njk" import cta -%}
 
-<section class="ph"><div class="wrap ph-grid">
-  <div class="ph-main">
-    <span class="eyebrow">Услуга · продажа</span>
-    <h1 class="h1">Продажа квартиры с&nbsp;риелтором в&nbsp;Москве</h1>
-    <p class="lead">Вы хотите нормальные деньги и понятный срок. Не «выставили и ждём», а понимание, что происходит с квартирой каждую неделю.</p>
-    <div class="btn-row">
-      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} Обсудить продажу</a>
-      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
-    </div>
-  </div>
-  <aside class="brief" aria-label="Коротко об услуге">
-    <p class="t">Коротко</p>
-    <ul>
-      <li><span>Типичный срок</span><span>6 недель</span></li>
-      <li><span>Показы</span><span>веду сам</span></li>
-      <li><span>Расчёты</span><span>аккредитив или ячейка</span></li>
-      <li><span>Стоимость</span><span class="fill">[ЗАПОЛНИТЬ: комиссия]</span></li>
-    </ul>
-    <div class="att"><img src="/img/rgr.webp" alt="" width="44" height="44">Аттестат брокера РГР № РОСС RU РГР ТОС 77 БН 809, действителен до 12.02.2029</div>
-  </aside>
-</div></section>
-
-<section class="section"><div class="wrap">
-  <div class="head">
-    <span class="eyebrow">С чем приходят</span>
-    <h2 class="h2">Что обычно мешает продать</h2>
-  </div>
-  <div class="pairs">
-    <div class="pair"><p class="q">Не понимаю, сколько моя квартира стоит на самом деле</p><p class="a">Показываю цены реальных закрытых сделок в вашем доме, а не хотелки соседей в объявлениях.</p></div>
-    <div class="pair"><p class="q">Звонят одни агенты, а покупателей нет</p><p class="a">Беру звонки и показы на себя, до вас доходят только те, кто действительно готов покупать.</p></div>
-    <div class="pair"><p class="q">Надо продать и сразу купить другое, боюсь остаться без жилья</p><p class="a"><span>Веду обе сделки как одну цепочку: деньги и ключи меняются в один день. <a class="more-link" href="/slozhnye-sdelki/alternativnaya-sdelka/">Как устроена альтернативная сделка →</a></span></p></div>
-    <div class="pair"><p class="q">В квартире доля, ипотека или наследство, не знаю, с чего начать</p><p class="a">Сначала собираю документы и снимаю ограничения, и только потом выводим квартиру на рынок.</p></div>
-  </div>
-</div></section>
-
-<section class="section"><div class="wrap">
-  <div class="head">
-    <span class="eyebrow">Как я работаю</span>
-    <h2 class="h2">Три этапа от оценки до денег на счёте</h2>
-  </div>
-  <div class="algo">
-    <div>
-      <div class="algo-h"><span class="t">Что я делаю</span><span class="term"><i>Типичный срок</i>6 недель</span></div>
-      <ol class="algo-steps">
-        <li class="algo-step"><div><b>Оценка и предпродажная подготовка</b><p>Смотрю цены реальных закрытых сделок в вашем доме и районе, а не хотелки в объявлениях. Говорю, что стоит исправить, а на что не тратить деньги. Съёмка, планировка, текст объявления.</p></div></li>
-        <li class="algo-step"><div><b>Вывод на рынок и показы</b><p>Площадки, работа с базой покупателей и агентов, отбор адекватных заявок. Показы веду сам — вам не нужно отпрашиваться с работы.</p></div></li>
-        <li class="algo-step"><div><b>Торг, сделка и деньги</b><p>Переговоры по цене и условиям, аванс или задаток так, чтобы покупатель не сорвался. Аккредитив или ячейка, подача в Росреестр, передача объекта по акту.</p></div></li>
-      </ol>
-    </div>
-    <div class="algo-out">
-      <p class="t">Что получаете вы</p>
-      <ul>
-        <li><span class="tick">{{ icon("tick") | safe }}</span>Деньги на счёте после регистрации, а не обещания</li>
-        <li><span class="tick">{{ icon("tick") | safe }}</span>Регулярный отчёт: просмотры, звонки, показы и предложения по цене</li>
-        <li><span class="tick">{{ icon("tick") | safe }}</span>Готовый пакет документов и закрытые «хвосты» по прописке и коммуналке</li>
-      </ul>
-      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">Обсудить продажу</a>
-    </div>
-  </div>
-</div></section>
-
-<section class="section"><div class="wrap">
-  <div class="cases">
-    <div class="head">
-      <span class="eyebrow">Если в квартире есть сложность</span>
-      <h2 class="h2">Отдельно разбираю каждый случай</h2>
-      <p class="lead">Здесь цена ошибки — не комиссия, а само право собственности.</p>
-    </div>
-    <div class="cases-grid" style="--cols:4">
-      <a class="case" href="/slozhnye-sdelki/prodazha-doli/"><h3>Продаю долю</h3><p>Уведомление сособственников и порядок подписания до выхода на сделку.</p><span class="go">Подробнее →</span></a>
-      <a class="case" href="/slozhnye-sdelki/nasledstvo/"><h3>Квартира по наследству</h3><p>Что можно сделать до и после шести месяцев.</p><span class="go">Подробнее →</span></a>
-      <a class="case" href="/slozhnye-sdelki/prodazha-v-ipoteke/"><h3>Квартира в ипотеке</h3><p>Долг гасится внутри сделки, обременение снимается до перехода права.</p><span class="go">Подробнее →</span></a>
-      <a class="case" href="/slozhnye-sdelki/materinskij-kapital/"><h3>Есть доли детей</h3><p>Согласие опеки и выделение долей — чтобы сделку не оспорили.</p><span class="go">Подробнее →</span></a>
-    </div>
-  </div>
-</div></section>
-
-<section class="section"><div class="wrap split">
-  <div class="head">
-    <span class="eyebrow">Вопросы</span>
-    <h2 class="h2">Что спрашивают перед продажей</h2>
-    <p class="lead">Блок и разметка FAQPage появятся, только когда будут реальные вопросы клиентов.</p>
-  </div>
-  <div class="faq">
-    <details open><summary>Сколько стоят ваши услуги?</summary><p><span class="fill">[ЗАПОЛНИТЬ: размер комиссии, что в неё входит, когда оплачивается]</span></p></details>
-    <details><summary><span class="fill">[ЗАПОЛНИТЬ: вопрос клиента]</span></summary><p><span class="fill">[ЗАПОЛНИТЬ: ответ]</span></p></details>
-    <details><summary><span class="fill">[ЗАПОЛНИТЬ: вопрос клиента]</span></summary><p><span class="fill">[ЗАПОЛНИТЬ: ответ]</span></p></details>
-  </div>
-</div></section>
-
-<section class="section"><div class="wrap">
-  <div class="head">
-    <span class="eyebrow">Почитать</span>
-    <h2 class="h2">Статьи о продаже</h2>
-  </div>
-  <div class="cards">
-    <a class="card" href="/statyi/realnaya-cena-kvartiry/"><span class="k">Продажа</span><h3>Как узнать реальную цену своей квартиры</h3><p>Почему цены в объявлениях — не ориентир.</p><span class="go">Читать →</span></a>
-    <a class="card" href="/statyi/"><span class="k">Продажа</span><h3><span class="fill">[статья из канала]</span></h3><p>Подберу после выгрузки Telegram-канала.</p><span class="go">Читать →</span></a>
-    <a class="card" href="/statyi/"><span class="k">Сделка</span><h3><span class="fill">[статья из канала]</span></h3><p>Подберу после выгрузки Telegram-канала.</p><span class="go">Читать →</span></a>
-  </div>
-</div></section>
-
-{{ cta("Обсудим вашу квартиру", "Позвоните или напишите: скажу, сколько квартира стоит по реальным сделкам и что подготовить до выхода на рынок.") }}

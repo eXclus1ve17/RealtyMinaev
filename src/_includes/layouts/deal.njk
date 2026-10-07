@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+---
+{#- Страница сложной сделки. Всё содержимое — в front matter страницы. -#}
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/cta.njk" import cta -%}
+{%- from "partials/blocks.njk" import brief, cardsBlock -%}
+
+<section class="ph"><div class="wrap ph-grid">
+  <div class="ph-main">
+    <span class="eyebrow">Сложная сделка</span>
+    <h1 class="h1">{{ h1 | safe }}</h1>
+    <p class="lead">{{ lead | safe }}</p>
+    <div class="btn-row">
+      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} Разобрать мой случай</a>
+      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
+    </div>
+  </div>
+  {{ brief(briefItems, false, "Главное") }}
+</div></section>
+
+<section class="section"><div class="wrap split">
+  <div class="head"><span class="eyebrow">Порядок</span><h2 class="h2">{{ stepsTitle }}</h2>{% if stepsNote %}<p class="lead">{{ stepsNote | safe }}</p>{% endif %}</div>
+  <div class="algo" style="grid-template-columns:1fr">
+    <ol class="algo-steps">
+      {%- for s in steps %}<li class="algo-step"><div><b>{{ s.t | safe }}</b><p>{{ s.p | safe }}</p></div></li>{% endfor %}
+    </ol>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="panel split">
+    <div class="head" style="margin:0"><span class="eyebrow">{{ risksEyebrow or "Риски" }}</span><h2 class="h2">{{ risksTitle }}</h2></div>
+    <ul class="checks">{% for r in risks %}<li><span class="tick">{{ icon("tick") | safe }}</span><span>{{ r | safe }}</span></li>{% endfor %}</ul>
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="head"><span class="eyebrow">Из практики</span><h2 class="h2">Похожие случаи</h2>
+    <p class="lead">Без настоящих кейсов блок на сайт не выводится.</p></div>
+  <div class="cards" style="--cols:2">
+    <div class="card"><span class="k">Кейс</span><h3><span class="fill">[ЗАПОЛНИТЬ: обезличенный кейс]</span></h3><p>Ситуация, что мешало, как решили, срок. Без имён и адресов.</p></div>
+    <div class="card"><span class="k">Кейс</span><h3><span class="fill">[ЗАПОЛНИТЬ: обезличенный кейс]</span></h3><p>Ситуация, что мешало, как решили, срок.</p></div>
+  </div>
+</div></section>
+
+{{ cardsBlock("Связано", "Что ещё может понадобиться", related) }}
+
+{{ cta(ctaTitle or "Опишите вашу ситуацию", ctaText or "Расскажите, что за квартира и кто собственники. Скажу, какой порядок подойдёт и сколько это займёт.") }}

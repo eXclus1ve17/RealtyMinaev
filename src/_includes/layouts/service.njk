@@ -1,0 +1,76 @@
+---
+layout: layouts/base.njk
+---
+{#- Страница услуги. Всё содержимое — в front matter страницы. -#}
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/cta.njk" import cta -%}
+{%- from "partials/blocks.njk" import brief, cardsBlock -%}
+
+<section class="ph"><div class="wrap ph-grid">
+  <div class="ph-main">
+    <span class="eyebrow">{{ eyebrow }}</span>
+    <h1 class="h1">{{ h1 | safe }}</h1>
+    <p class="lead">{{ lead | safe }}</p>
+    {%- if free %}<p class="free">{{ free | safe }}</p>{% endif %}
+    <div class="btn-row">
+      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} {{ ctaBtn or "Позвонить" }}</a>
+      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
+    </div>
+  </div>
+  {{ brief(briefItems, true) }}
+</div></section>
+
+{%- if pairs %}
+<section class="section"><div class="wrap">
+  <div class="head"><span class="eyebrow">С чем приходят</span><h2 class="h2">{{ pairsTitle }}</h2></div>
+  <div class="pairs">
+    {%- for p in pairs %}<div class="pair"><p class="q">{{ p.q }}</p><p class="a"><span>{{ p.a | safe }}</span></p></div>{% endfor %}
+  </div>
+</div></section>
+{%- endif %}
+
+<section class="section"><div class="wrap">
+  <div class="head"><span class="eyebrow">Как я работаю</span><h2 class="h2">{{ stepsTitle }}</h2></div>
+  <div class="algo">
+    <div>
+      <div class="algo-h"><span class="t">Что я делаю</span>{% if term %}<span class="term"><i>{{ term.label }}</i>{{ term.value }}</span>{% endif %}</div>
+      <ol class="algo-steps">
+        {%- for s in steps %}<li class="algo-step"><div><b>{{ s.t }}</b><p>{{ s.p | safe }}</p></div></li>{% endfor %}
+      </ol>
+    </div>
+    <div class="algo-out">
+      <p class="t">Что получаете вы</p>
+      <ul>{% for o in out %}<li><span class="tick">{{ icon("tick") | safe }}</span>{{ o | safe }}</li>{% endfor %}</ul>
+      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ ctaBtn or "Обсудить" }}</a>
+    </div>
+  </div>
+</div></section>
+
+{%- if deals %}
+<section class="section"><div class="wrap">
+  <div class="cases">
+    <div class="head"><span class="eyebrow">Если есть сложность</span><h2 class="h2">{{ dealsTitle or "Отдельно разбираю каждый случай" }}</h2>
+      <p class="lead">Здесь цена ошибки — не комиссия, а само право собственности.</p></div>
+    <div class="cases-grid" style="--cols:{{ deals.length if deals.length < 4 else 4 }}">
+      {%- for d in deals %}<a class="case" href="{{ d.url }}"><h3>{{ d.t }}</h3><p>{{ d.p }}</p><span class="go">Подробнее →</span></a>{% endfor %}
+    </div>
+  </div>
+</div></section>
+{%- endif %}
+
+{{ content | safe }}
+
+<section class="section"><div class="wrap split">
+  <div class="head"><span class="eyebrow">Вопросы</span><h2 class="h2">Что спрашивают чаще всего</h2>
+    <p class="lead">Блок появится на сайте, когда будут реальные вопросы клиентов.</p></div>
+  <div class="faq">
+    <details open><summary>Сколько стоят ваши услуги?</summary><p><span class="fill">[ЗАПОЛНИТЬ: стоимость, что входит, когда оплачивается]</span></p></details>
+    <details><summary><span class="fill">[ЗАПОЛНИТЬ: вопрос клиента]</span></summary><p><span class="fill">[ЗАПОЛНИТЬ: ответ]</span></p></details>
+  </div>
+</div></section>
+
+{{ cardsBlock("Почитать", "Статьи по теме", articles or [
+  { k: "Статьи", t: "Все статьи", p: "Продажа, покупка, новостройки, сложные сделки.", url: "/statyi/", go: "Перейти →" }
+]) }}
+
+{{ cta(ctaTitle, ctaText) }}

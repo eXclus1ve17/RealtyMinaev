@@ -114,11 +114,11 @@
         <span>{{ site.agency }}</span>
         <span>{{ site.address }} · м. «{{ site.metro }}»</span>
       </div>
-      {%- for m in site.menu %}{% if m.items %}
+      {%- for m in site.menu.concat(site.footer) %}{% if m.items %}
       <div class="ftr-links">
         <h2>{{ m.title }}</h2>
         {%- for i in m.items %}{% if not i.muted %}<a href="{{ i.url }}">{{ i.title }}</a>{% endif %}{% endfor %}
-        {%- if loop.index == 3 %}<a href="/forma-96/">Проект дома Forma 96</a>{% endif %}
+        {%- if loop.last %}<a href="/obo-mne/">Обо мне</a><a href="/forma-96/">Проект дома Forma 96</a>{% endif %}
       </div>
       {%- endif %}{% endfor %}
     </div>

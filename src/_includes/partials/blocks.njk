@@ -1,0 +1,22 @@
+{%- from "partials/icons.njk" import icon -%}
+
+{#- Карточка «Коротко» справа от заголовка -#}
+{%- macro brief(items, withAtt=false, title="Коротко") -%}
+<aside class="brief" aria-label="{{ title }}">
+  <p class="t">{{ title }}</p>
+  <ul>{% for i in items %}<li><span>{{ i[0] }}</span><span>{{ i[1] | safe }}</span></li>{% endfor %}</ul>
+  {%- if withAtt %}
+  <div class="att"><img src="/img/rgr.webp" alt="" width="44" height="44">Аттестат брокера РГР № РОСС RU РГР ТОС 77 БН 809, действителен до 12.02.2029</div>
+  {%- endif %}
+</aside>
+{%- endmacro -%}
+
+{#- Ряд светлых карточек-ссылок -#}
+{%- macro cardsBlock(eyebrow, title, items) -%}
+<section class="section"><div class="wrap">
+  <div class="head"><span class="eyebrow">{{ eyebrow }}</span><h2 class="h2">{{ title }}</h2></div>
+  <div class="cards"{% if items.length < 3 %} style="--cols:{{ items.length }}"{% endif %}>
+    {%- for c in items %}<a class="card" href="{{ c.url }}"><span class="k">{{ c.k }}</span><h3>{{ c.t | safe }}</h3><p>{{ c.p }}</p><span class="go">{{ c.go or "Подробнее →" }}</span></a>{% endfor %}
+  </div>
+</div></section>
+{%- endmacro -%}

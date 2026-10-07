@@ -12,6 +12,7 @@ export default {
   address: "г. Москва, БЦ Port Plaza, ул. Проектируемый проезд № 4062, д. 6, стр. 16",
   metro: "Технопарк",
   metrika: 112500819,
+  // Верхнее меню. Районы и «Обо мне» — только в подвале (footer ниже).
   menu: [
     { title: "Услуги", items: [
       { title: "Продать квартиру", url: "/uslugi/prodazha-kvartiry/" },
@@ -31,14 +32,15 @@ export default {
       { title: "Проверка квартиры", url: "/slozhnye-sdelki/proverka-kvartiry/" },
       { title: "Все сложные сделки", url: "/slozhnye-sdelki/", muted: true },
     ]},
+    { title: "Статьи", url: "/statyi/" },
+    { title: "Контакты", url: "/kontakty/" },
+  ],
+  footer: [
     { title: "Районы", items: [
       { title: "ЮАО", url: "/yuao/" },
       { title: "ЮЗАО", url: "/yuzao/" },
       { title: "Новая Москва", url: "/novaya-moskva/" },
       { title: "Домодедово", url: "/domodedovo/" },
     ]},
-    { title: "Статьи", url: "/statyi/" },
-    { title: "Обо мне", url: "/obo-mne/" },
-    { title: "Контакты", url: "/kontakty/" },
   ],
 };

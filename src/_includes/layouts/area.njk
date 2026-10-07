@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+---
+{#- Страница района. Делается только при наличии уникального содержания. -#}
+{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/cta.njk" import cta -%}
+{%- from "partials/blocks.njk" import cardsBlock -%}
+{%- set F = '<span class="fill">[ЗАПОЛНИТЬ]</span>' -%}
+
+<section class="ph"><div class="wrap ph-grid">
+  <div class="ph-main">
+    <span class="eyebrow">{{ eyebrow }}</span>
+    <h1 class="h1">{{ h1 | safe }}</h1>
+    <p class="lead"><span class="fill">[ЗАПОЛНИТЬ: 2–3 предложения, почему вы работаете {{ where }} и чем ваш опыт здесь полезен клиенту]</span></p>
+    <div class="btn-row">
+      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} Позвонить</a>
+      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
+    </div>
+  </div>
+  {%- if office %}
+  <div class="office">
+    <span class="ic">{{ icon("pin") | safe }}</span>
+    <div><b>Офис рядом, м. «Технопарк»</b><span>БЦ Port Plaza, Проектируемый проезд № 4062, д. 6, стр. 16</span></div>
+    <a class="btn btn-line btn-sm" href="/kontakty/">Как добраться</a>
+  </div>
+  {%- endif %}
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="head"><span class="eyebrow">{{ partsEyebrow }}</span><h2 class="h2">{{ partsTitle }}</h2>
+    <p class="lead">Только места, где у меня были сделки. По каждому — что важно знать продавцу и покупателю.</p></div>
+  <div class="areas">
+    {%- for n in [1,2,3] %}<div class="area"><h3><span class="fill">[{{ partName }}]</span></h3><p class="meta">{{ partMeta }}: {{ F | safe }}</p><p><span class="fill">[ЗАПОЛНИТЬ: типичные дома, на что смотреть, ваш опыт]</span></p></div>{% endfor %}
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="panel split">
+    <div class="head" style="margin:0"><span class="eyebrow">На что смотреть</span><h2 class="h2">Особенности сделок {{ where }}</h2>
+      <p class="lead">Этот блок отличает страницу от шаблонной. Без него Яндекс сочтёт её дорвеем — страницу не публикуем.</p></div>
+    <ul class="checks">{% for h in hints %}<li><span class="tick">{{ icon("tick") | safe }}</span><span><span class="fill">[ЗАПОЛНИТЬ: {{ h }}]</span></span></li>{% endfor %}</ul>
+  </div>
+</div></section>
+
+{{ cardsBlock("Чем помогу", "Услуги " + where, services) }}
+
+{{ cta(ctaTitle, "Расскажите, что продаёте или ищете. Отвечу, сколько это стоит по сделкам рядом и с чего начать.") }}

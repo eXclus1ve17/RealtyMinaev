@@ -326,3 +326,28 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
   .brief li span:last-child{text-align:left}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* плашка «бесплатно для вас» — как на главной в сценарии новостроек */
+.free{background:var(--accent-soft);border:1px solid rgba(var(--accent-rgb),.22);border-radius:var(--r-md);
+  padding:14px 16px;font-size:14.5px;line-height:1.5;color:var(--accent-ink);max-width:60ch}
+.free b{font-weight:700}
+
+/* таблица услуг и стоимости */
+.tbl-wrap{overflow-x:auto;background:var(--surface);border-radius:var(--r-lg)}
+.price{width:100%;border-collapse:collapse;min-width:640px;font-size:15px}
+.price th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:18px 22px;border-bottom:1px solid var(--line)}
+.price td{padding:18px 22px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+.price tr:last-child td{border-bottom:0}
+.price td b{display:block;font-size:16px;letter-spacing:-.015em}
+.price td span:not(.fill){display:block;font-size:13.5px;color:var(--ink-2);margin-top:3px}
+.price td:last-child{text-align:right}
+
+/* каналы связи на странице контактов */
+.ch-list{display:grid}
+.ch{display:grid;grid-template-columns:46px 1fr auto;gap:15px;align-items:center;padding:16px 0;border-top:1px solid var(--line-2);transition:padding-left .24s}
+.ch:hover{padding-left:8px}
+.ch-ic{width:46px;height:46px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line-2);display:grid;place-items:center}
+.ch-ic svg{width:19px;height:19px}
+.ch .t b{display:block;font-size:15.5px}
+.ch .t span{display:block;font-size:13px;color:var(--ink-3)}
+.ch .arw{color:var(--ink-3)}

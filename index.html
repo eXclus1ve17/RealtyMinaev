@@ -847,6 +847,14 @@ textarea{resize:vertical;min-height:84px}
 <noscript><div><img src="https://mc.yandex.ru/watch/112500819" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <style>
 .pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,#c9d4e6 47%,#2f4a7a 64%,#101a2c 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
+
+/* ссылки на страницы разделов: «Подробнее» в карточках сложных сделок и ряд ссылок в подвале */
+.case .go{margin-top:auto;padding-top:4px;font-size:13.5px;font-weight:600;color:var(--metal-lite);display:flex;flex-wrap:wrap;gap:4px 10px}
+.case .go a:hover{color:#fff}
+.ftr-nav{display:flex;flex-wrap:wrap;gap:8px 22px;padding:4px 0 22px;font-size:14px}
+.ftr-nav a{color:rgba(255,255,255,.72)}
+.ftr-nav a:hover{color:#fff}
+.ftr-bot a{color:rgba(255,255,255,.6);text-decoration:underline;text-underline-offset:3px}
 </style></head>
 <body>
 
@@ -854,9 +862,10 @@ textarea{resize:vertical;min-height:84px}
 <header class="topbar" id="topbar">
   <div class="topbar-in">
     <nav class="nav">
-      <a href="#scenarios">Как я работаю</a>
-      <a href="#cases">Сложные сделки</a>
-      <a href="#attestat">Аттестат</a>
+      <a href="/uslugi/">Услуги</a>
+      <a href="/slozhnye-sdelki/">Сложные сделки</a>
+      <a href="/statyi/">Статьи</a>
+      <a href="/kontakty/">Контакты</a>
     </nav>
     <div class="hero-actions">
       <a class="btn btn-accent btn-tel" href="tel:+79263977775">
@@ -875,9 +884,10 @@ textarea{resize:vertical;min-height:84px}
 <!-- мобильное меню -->
 <div class="mnav" id="mnav">
   <button class="mnav-close" id="mnavClose" aria-label="Закрыть">×</button>
-  <a class="ml" href="#scenarios">Как я работаю</a>
-  <a class="ml" href="#cases">Сложные сделки</a>
-  <a class="ml" href="#attestat">Аттестат</a>
+  <a class="ml" href="/uslugi/">Услуги</a>
+  <a class="ml" href="/slozhnye-sdelki/">Сложные сделки</a>
+  <a class="ml" href="/statyi/">Статьи</a>
+  <a class="ml" href="/kontakty/">Контакты</a>
   <div class="btn-row" style="margin-top:auto;padding-top:26px">
     <a class="btn btn-accent" href="tel:+79263977775" style="flex:1">+7 (926) 397-77-75</a>
     <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Написать</a>
@@ -909,9 +919,10 @@ textarea{resize:vertical;min-height:84px}
     <!-- верхняя панель внутри карточки -->
     <div class="hero-top">
       <nav class="nav on-photo">
-        <a href="#scenarios">Как я работаю</a>
-        <a href="#cases">Сложные сделки</a>
-        <a href="#attestat">Аттестат</a>
+        <a href="/uslugi/">Услуги</a>
+        <a href="/slozhnye-sdelki/">Сложные сделки</a>
+        <a href="/statyi/">Статьи</a>
+        <a href="/kontakty/">Контакты</a>
         </nav>
       <div class="hero-actions">
         <a class="btn btn-accent btn-tel" href="tel:+79263977775">
@@ -1049,6 +1060,7 @@ textarea{resize:vertical;min-height:84px}
             </ul></div>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить продажу</a>
+              <a class="btn btn-line" href="/uslugi/prodazha-kvartiry/">Подробнее об услуге</a>
             </div>
           </div>
         </div>
@@ -1098,6 +1110,7 @@ textarea{resize:vertical;min-height:84px}
             </ul></div>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить новостройку</a>
+              <a class="btn btn-line" href="/uslugi/novostrojki/">Подробнее об услуге</a>
             </div>
           </div>
         </div>
@@ -1141,6 +1154,7 @@ textarea{resize:vertical;min-height:84px}
             </ul></div>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить покупку</a>
+              <a class="btn btn-line" href="/uslugi/pokupka-kvartiry/">Подробнее об услуге</a>
             </div>
           </div>
         </div>
@@ -1184,6 +1198,7 @@ textarea{resize:vertical;min-height:84px}
             </ul></div>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить инвестицию</a>
+              <a class="btn btn-line" href="/uslugi/kommercheskaya-nedvizhimost/">Подробнее об услуге</a>
             </div>
           </div>
         </div>
@@ -1227,6 +1242,7 @@ textarea{resize:vertical;min-height:84px}
             </ul></div>
             <div class="algo-cta">
               <a class="btn btn-accent" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Обсудить загородную</a>
+              <a class="btn btn-line" href="/uslugi/zagorodnaya-nedvizhimost/">Подробнее об услуге</a>
             </div>
           </div>
         </div>
@@ -1257,43 +1273,49 @@ textarea{resize:vertical;min-height:84px}
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v8h8"/></svg></span>
           <h3>Доли, наследство и дети</h3>
           <p>Продажа доли с уведомлением сособственников, наследственные квартиры до и после шести месяцев, согласие опеки, выделение долей детям. Разбираю, кто и в каком порядке должен подписать, до выхода на сделку.</p>
+          <span class="go"><a href="/slozhnye-sdelki/prodazha-doli/">Продажа доли →</a> · <a href="/slozhnye-sdelki/nasledstvo/">Наследство →</a> · <a href="/slozhnye-sdelki/materinskij-kapital/">Дети и опека →</a></span>
         </article>
 
         <article class="case">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a4 4 0 0 0 6 .5l2-2a4 4 0 1 0-6-6l-1 1"/><path d="M14 11a4 4 0 0 0-6-.5l-2 2a4 4 0 1 0 6 6l1-1"/></svg></span>
           <h3>Альтернативные цепочки</h3>
           <p>Продать своё и купить другое одной сделкой, иногда в три-четыре звена. Свожу сроки, авансы и одновременную регистрацию так, чтобы вы не остались ни без денег, ни без жилья между звеньями.</p>
+          <span class="go"><a href="/slozhnye-sdelki/alternativnaya-sdelka/">Подробнее →</a></span>
         </article>
 
         <article class="case">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
           <h3>Ипотека и обременения</h3>
           <p>Продажа из-под ипотеки, залог, аресты, долги по коммуналке. Выстраиваю расчёты так, чтобы долг гасился внутри сделки, а обременение снималось до перехода права к покупателю.</p>
+          <span class="go"><a href="/slozhnye-sdelki/prodazha-v-ipoteke/">Подробнее →</a></span>
         </article>
 
         <article class="case">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4-2.9 7.6-7 8.5-4.1-.9-7-4.5-7-8.5V6l7-3Z"/><path d="M9.5 12h5M12 9.5v5"/></svg></span>
           <h3>Материнский капитал и субсидии</h3>
           <p>Маткапитал, военная ипотека, господдержка. Выделение долей детям, согласование с банком и Соцфондом — чтобы сделку не оспорили через несколько лет, когда дети вырастут.</p>
+          <span class="go"><a href="/slozhnye-sdelki/materinskij-kapital/">Подробнее →</a></span>
         </article>
 
         <article class="case">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="m9 14.5 2 2 4-4"/></svg></span>
           <h3>Проверка рисков продавца</h3>
           <p>Банкротство, исполнительные производства, дееспособность, отказники от приватизации. Смотрю не только выписку из ЕГРН, но и самого продавца: именно отсюда приходят иски спустя годы.</p>
+          <span class="go"><a href="/slozhnye-sdelki/proverka-kvartiry/">Подробнее →</a></span>
         </article>
 
         <article class="case">
           <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><path d="M12 4a13 13 0 0 1 0 16 13 13 0 0 1 0-16"/></svg></span>
           <h3>Дистанционные сделки</h3>
           <p>Собственник в другом городе или за границей. Доверенность с правильным набором полномочий, электронная регистрация, безопасные расчёты без личного присутствия на сделке.</p>
+          <span class="go"><a href="/slozhnye-sdelki/distancionnaya-sdelka/">Подробнее →</a></span>
         </article>
       </div>
 
       <!-- уточнить: можно добавить строку вида «провёл — таких сделок», когда будет цифра -->
       <div class="cases-cta">
         <span class="t">Не нашли свой случай? Опишите ситуацию — скажу, что для этого понадобится.</span>
-        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram"="Здравствуйте! У меня непростая ситуация со сделкой: ">Описать ситуацию</a>
+        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">Описать ситуацию</a>
       </div>
     </div>
   </div>
@@ -1380,8 +1402,14 @@ textarea{resize:vertical;min-height:84px}
       <li><span>Адрес</span><span>г. Москва, БЦ Port Plaza, ул. Проектируемый проезд № 4062, д. 6, стр. 16 · м. «Технопарк»</span></li>
     </ul>
 
+    <nav class="ftr-nav" aria-label="Разделы сайта">
+      <a href="/uslugi/">Услуги и стоимость</a><a href="/slozhnye-sdelki/">Сложные сделки</a><a href="/statyi/">Статьи</a>
+      <a href="/yuao/">ЮАО</a><a href="/yuzao/">ЮЗАО</a><a href="/novaya-moskva/">Новая Москва</a><a href="/domodedovo/">Домодедово</a>
+      <a href="/obo-mne/">Обо мне</a><a href="/kontakty/">Контакты</a><a href="/forma-96/">Проект дома Forma 96</a>
+    </nav>
     <div class="ftr-bot">
       <span>© <span id="yr">2026</span> Дмитрий Минаев. Москва</span>
+      <a href="/politika-konfidencialnosti/">Политика конфиденциальности</a>
     </div>
   </div>
 </footer>
