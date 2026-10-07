@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://realtyminaev.ru/kupit-kvartiru/">
 <meta property="og:title" content="Купить квартиру на вторичке в Москве с проверкой — Дмитрий Минаев">
 <meta property="og:description" content="Покупка квартиры на вторичке в Москве: подбор, проверка истории права и продавца, обоснованный торг, безопасные расчёты и регистрация. Письменное заключение по объекту.">
-<meta property="og:image" content="https://realtyminaev.ru/img/og.jpg?v=1f83e50df966">
+<meta property="og:image" content="https://realtyminaev.ru/img/og.jpg?v=fd20851e03ad">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -187,15 +187,14 @@ section[id]{scroll-margin-top:96px}
 .eyebrow.on-photo{color:#fff}
 .eyebrow.on-photo::before{background:var(--accent)}
 .h1{font-size:24.1cqw;line-height:1.02;letter-spacing:-.045em;font-weight:600}
-/* Обе строки имени одной ширины. Кегль считается от ширины колонки (cqw),
-   поэтому подобранный трекинг держится на любом экране, а не только здесь.
-   Отрицательный отступ снимает пробел после последней буквы. */
+/* Обе строки имени набраны с одинаковым трекингом и выровнены по левому краю,
+   как в классической вёрстке: без растягивания второй строки под ширину первой. */
 .h1 .ln{display:block;white-space:nowrap}
 /* Подпись «Брокер по недвижимости» — часть H1 для поиска, вид прежний. */
 .h1 .hero-role{line-height:1.6}
 .vh{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .h1 .ln-1{letter-spacing:-.0216em;margin-right:.0216em}
-.h1 .ln-2{letter-spacing:.1053em;margin-right:-.1053em}
+.h1 .ln-2{letter-spacing:-.0216em;margin-right:.0216em}
 .h2{font-size:clamp(28px,4.2vw,52px)}
 .h3{font-size:clamp(20px,2.3vw,28px);letter-spacing:-.02em}
 .h4{font-size:clamp(17px,1.6vw,20px);letter-spacing:-.015em;font-weight:600}
@@ -813,36 +812,13 @@ textarea{resize:vertical;min-height:84px}
 
 <style>
 /* ===== Внутренние страницы: дополнение к стилям главной ===== */
-body{padding-top:70px}
-.topbar{transform:none}
-.brand{display:flex;flex-direction:column;line-height:1.15;flex:none}
-.brand b{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
-.brand small{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
-.tb-left{display:flex;align-items:center;gap:clamp(20px,3vw,44px)}
-.nav a[aria-current="page"]{color:var(--ink)}
-
-/* первый экран: текст на тёмной карточке + фото */
-.ph{padding-top:clamp(12px,2vw,24px)}
-.ph-card{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
-  background:var(--dark);color:#fff;border-radius:var(--r-xl);overflow:hidden;min-height:clamp(460px,46vw,600px)}
-.ph-txt{position:relative;z-index:1;padding:clamp(26px,4vw,64px);display:flex;flex-direction:column;gap:18px;justify-content:center}
-.crumbs{font-size:13px;color:rgba(255,255,255,.62);display:flex;flex-wrap:wrap;gap:6px}
-.crumbs a{color:rgba(255,255,255,.82)}
-.crumbs a:hover{color:#fff}
-.ph-txt .eyebrow{color:var(--metal-lite)}
-.ph-txt .eyebrow::before{background:var(--metal-lite)}
-.ph-h1{font-size:clamp(34px,4.6vw,68px);line-height:1.03;letter-spacing:-.04em;font-weight:600;max-width:15ch;margin:0}
-.ph-lead{font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:rgba(255,255,255,.78);max-width:52ch;margin:0}
-.ph-txt .btn-row{margin-top:8px}
-.ph-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:clamp(10px,2vw,26px);
-  background:rgba(255,255,255,.12);border-radius:18px;overflow:hidden}
-.ph-facts div{background:var(--dark);padding:14px 16px;display:flex;flex-direction:column;gap:2px}
-.ph-facts b{font-size:clamp(16px,1.5vw,20px);font-weight:600;letter-spacing:-.02em;color:#fff}
-.ph-facts span{font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.72)}
-.ph-photo{position:relative;overflow:hidden}
-.ph-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 58%;
-  transform:scale(1.65);transform-origin:48% 62%}
-.ph-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--dark) 0%,rgba(16,26,44,0) 38%)}
+/* H1 страницы — в первом экране, под именем, тем же приёмом, что и абзац на главной */
+.hero-copy .ph-h1{color:#fff;font-size:7.2cqw;line-height:1.14;font-weight:600;letter-spacing:-.025em;margin:4.2cqw 0 2.6cqw;text-wrap:balance}
+.hero-copy div.h1{color:#fff;margin:0 0 3.68cqw}
+@media (min-width:561px) and (max-width:820px){.hero-copy div.h1{margin:0 0 3.2cqw}}
+@media (max-width:560px){.hero-copy div.h1{margin:3.4cqw 0 1cqw}}
+.pill[aria-current="page"]{background:#fff;color:var(--ink);border-color:#fff}
+@media (max-width:560px){.hero-copy .ph-h1{font-size:22px;margin:14px 0 8px}}
 
 /* разделы */
 .sec{padding:clamp(40px,5.5vw,88px) 0 0}
@@ -930,16 +906,6 @@ a.case .more{margin-top:auto;font-size:13px;font-weight:600;color:var(--metal-li
   .cx{grid-template-columns:1fr}
 }
 @media (max-width:820px){
-  body{padding-top:64px}
-  .topbar-in{height:64px}
-  .topbar .nav{display:none}
-  .burger{display:grid}
-  .ph-card{grid-template-columns:1fr;min-height:0}
-  .ph-photo{order:-1;height:clamp(300px,86vw,420px)}
-  .ph-photo img{transform:none;object-position:48% 46%}
-  .ph-photo::after{background:linear-gradient(0deg,var(--dark) 0%,rgba(16,26,44,0) 45%)}
-  .ph-txt{padding-top:6px}
-  .ph-facts{grid-template-columns:1fr}
   .price,.cta{grid-template-columns:1fr}
   .cta .btn-row{justify-content:flex-start}
   .proj{grid-template-columns:1fr}
@@ -955,47 +921,120 @@ a.case .more{margin-top:auto;font-size:13px;font-weight:600;color:var(--metal-li
 </head>
 <body>
 <!-- Страница собрана скриптом _build/build.py из _build/pages.py. Правьте тексты там. -->
-<header class="topbar show" id="topbar">
+<header class="topbar" id="topbar">
   <div class="topbar-in">
-    <div class="tb-left">
-      <a class="brand" href="/"><b>Дмитрий Минаев</b><small>Брокер по недвижимости</small></a>
-      <nav class="nav"><a href="/#scenarios" aria-current="page">Как я работаю</a><a href="/slozhnye-sdelki/">Сложные сделки</a><a href="/#attestat" aria-current="page">Аттестат</a></nav>
-    </div>
+    <nav class="nav">
+      <a href="/#scenarios">Как я работаю</a>
+      <a href="/slozhnye-sdelki/">Сложные сделки</a>
+      <a href="/#attestat">Аттестат</a>
+    </nav>
     <div class="hero-actions">
-      <a class="btn btn-accent btn-tel" href="tel:+79263977775"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg><span><small>Позвонить</small>+7 (926) 397-77-75</span></a>
-      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg><span class="lbl">Написать</span></a>
+      <a class="btn btn-accent btn-tel" href="tel:+79263977775">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg>
+        <span><small>Позвонить</small>+7 (926) 397-77-75</span>
+      </a>
+      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>
+        <span class="lbl">Написать</span>
+      </a>
       <button class="burger" data-menu aria-label="Меню"><span></span></button>
     </div>
   </div>
 </header>
+
+<!-- мобильное меню -->
 <div class="mnav" id="mnav">
   <button class="mnav-close" id="mnavClose" aria-label="Закрыть">×</button>
-  <a class="ml" href="/">Главная</a><a class="ml" href="/#scenarios">Как я работаю</a><a class="ml" href="/slozhnye-sdelki/">Сложные сделки</a><a class="ml" href="/#attestat">Аттестат</a>
+  <a class="ml" href="/#scenarios">Как я работаю</a>
+  <a class="ml" href="/slozhnye-sdelki/">Сложные сделки</a>
+  <a class="ml" href="/#attestat">Аттестат</a>
   <div class="btn-row" style="margin-top:auto;padding-top:26px">
     <a class="btn btn-accent" href="tel:+79263977775" style="flex:1">+7 (926) 397-77-75</a>
     <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Написать</a>
   </div>
 </div>
+
+
 <main>
-<div class="wrap ph">
-  <section class="ph-card">
-    <div class="ph-txt">
-      <nav class="crumbs" aria-label="Навигация"><a href="/">Главная</a><span aria-hidden="true">/</span><span>Купить вторичку</span></nav>
-      <div class="eyebrow">Покупка вторички</div>
-      <h1 class="ph-h1">Купить квартиру на вторичке с проверкой</h1>
-      <p class="ph-lead">Главный риск вторички не в ремонте, а в документах. Проверяю историю права и продавца до того, как вы внесёте аванс.</p>
-      <div class="btn-row">
-        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" data-lead="second">Проверить квартиру</a>
-        <a class="btn btn-glass" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>Написать в Telegram</a>
-      </div>
-      <div class="ph-facts"><div><b>4 недели</b><span>типичный срок покупки</span></div><div><b>Заключение</b><span>письменно: что проверено и какие риски</span></div><div><b>Торг</b><span>по фактам из проверки</span></div></div>
-    </div>
-    <div class="ph-photo" aria-hidden="true">
+<div class="hero-outer" id="top">
+  <section class="hero">
+    <div class="hero-bg">
+      <!-- Три размера одного снимка: браузер берёт подходящий под экран и плотность
+           пикселей. sizes намеренно больше 100vw: кадр увеличен масштабом и обрезается
+           по принципу cover, поэтому реально отрисовывается шире экрана. На телефоне
+           экран узкий и высокий — там перекрытие ещё больше, отсюда 185vw. -->
       <picture>
-        <source type="image/webp" sizes="(max-width:820px) 190vw, 60vw" srcset="/img/hero-sm.webp?v=722fb69b7aea 900w, /img/hero-mm.webp?v=eccd8fd6fa7a 1200w, /img/hero-md.webp?v=fe9edc462b92 1500w, /img/hero-2k.webp?v=09554ab978bc 2000w, /img/hero-lg.webp?v=20a5a36859f4 2400w">
-        <img src="/img/hero-md.jpg?v=0cf05471bcbb" width="1500" height="2000" alt="" fetchpriority="high">
+        <source type="image/webp" sizes="(max-width:560px) 95vw, (max-width:820px) 90vw, (max-width:1180px) 85vw, (max-width:1500px) 66vw, 1000px"
+                srcset="/img/hero-sm.webp?v=e7bc0e6282c7 900w, /img/hero-mm.webp?v=6a7f13887bbf 1200w, /img/hero-md.webp?v=f077f0b1c3cf 1500w,
+                        /img/hero-2k.webp?v=5b0f8af51c8d 2000w, /img/hero-lg.webp?v=67184461bf93 2400w">
+        <img src="/img/hero-md.jpg?v=1c6cefcc3447" width="1500" height="2000"
+             srcset="/img/hero-sm.jpg?v=b97d0ed80d68 900w, /img/hero-mm.jpg?v=22d0b54e23a6 1200w, /img/hero-md.jpg?v=1c6cefcc3447 1500w,
+                     /img/hero-2k.jpg?v=1df1e36d79d3 2000w, /img/hero-lg.jpg?v=e2724545080a 2400w"
+             sizes="(max-width:560px) 95vw, (max-width:820px) 90vw, (max-width:1180px) 85vw, (max-width:1500px) 66vw, 1000px"
+             alt="Дмитрий Минаев, риелтор и брокер по недвижимости в Москве" fetchpriority="high">
       </picture>
     </div>
+
+    <!-- верхняя панель внутри карточки -->
+    <div class="hero-top">
+      <nav class="nav on-photo">
+        <a href="/#scenarios">Как я работаю</a>
+        <a href="/slozhnye-sdelki/">Сложные сделки</a>
+        <a href="/#attestat">Аттестат</a>
+        </nav>
+      <div class="hero-actions">
+        <a class="btn btn-accent btn-tel" href="tel:+79263977775">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg>
+          <span><small>Позвонить</small>+7 (926) 397-77-75</span>
+        </a>
+        <a class="btn btn-glass" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>
+          <span class="lbl">Написать</span>
+        </a>
+        <button class="burger on-photo" data-menu aria-label="Меню"><span></span></button>
+      </div>
+    </div>
+
+    <!-- значок аттестата -->
+
+    <!-- заголовок -->
+    <div class="hero-body">
+      <div class="hero-row">
+      <div class="hero-copy">
+        <div class="h1">
+          <span class="ln ln-1">Дмитрий</span>
+          <span class="ln ln-2">Минаев</span>
+          <span class="vh"> — </span>
+          <span class="hero-role">Брокер по недвижимости</span>
+        </div>
+        <div class="marks marks-narrow">
+          <a class="mark" href="/#attestat" aria-label="Гильдия риэлторов Москвы — к разделу об аттестате" title="Гильдия риэлторов Москвы"><picture><source type="image/webp" srcset="/img/grm.webp?v=bb97e2f3c382"><img src="/img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></a>
+          <a class="mark" href="/#attestat" aria-label="Российская гильдия риэлторов — к разделу об аттестате" title="Российская гильдия риэлторов"><picture><source type="image/webp" srcset="/img/rgr.webp?v=cc48daf510ab"><img src="/img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></a>
+        </div>
+        <h1 class="ph-h1">Купить квартиру на вторичке с проверкой</h1>
+        <p class="lead">Главный риск вторички не в ремонте, а в документах. Проверяю историю права и продавца до того, как вы внесёте аванс.</p>
+      </div>
+
+      <div class="hero-side">
+        <div class="marks marks-wide">
+          <a class="mark" href="/#attestat" aria-label="Гильдия риэлторов Москвы — к разделу об аттестате" title="Гильдия риэлторов Москвы"><picture><source type="image/webp" srcset="/img/grm.webp?v=bb97e2f3c382"><img src="/img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></a>
+          <a class="mark" href="/#attestat" aria-label="Российская гильдия риэлторов — к разделу об аттестате" title="Российская гильдия риэлторов"><picture><source type="image/webp" srcset="/img/rgr.webp?v=cc48daf510ab"><img src="/img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></a>
+            </div>
+        <!-- направления: овалы справа, нижний край общий с текстом -->
+        <div class="hero-pills">
+        <div class="pill-row">
+            <a class="pill" href="/prodat-kvartiru/">Продать</a>
+            <a class="pill" href="/kupit-kvartiru/" aria-current="page">Купить вторичку</a>
+          </div>
+        <a class="pill" href="/novostrojki/"><span class="pl-full">Бесплатный подбор новостроек</span><span class="pl-min">Новостройки</span></a>
+        <a class="pill" href="/zagorodnaya-nedvizhimost/"><span class="pl-full">Загородный дом или участок</span><span class="pl-min">Загородный дом</span></a>
+          <a class="pill" href="/kommercheskaya-nedvizhimost/"><span class="pl-full">Коммерция с подтверждённой доходностью</span><span class="pl-min">Коммерция под доход</span></a>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
   </section>
 </div>
 <section class="sec" id="kak-rabotayu">
@@ -1090,29 +1129,146 @@ a.case .more{margin-top:auto;font-size:13px;font-weight:600;color:var(--metal-li
   <a href="https://wa.me/79263977775" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.55 15.2L2 22.4l5.35-1.4A10 10 0 1 0 12 2Zm0 1.9a8.1 8.1 0 1 1-4.2 15.02l-.3-.18-3.1.81.83-3.02-.2-.31A8.1 8.1 0 0 1 12 3.9Zm4.55 10.55c-.23-.12-1.36-.67-1.57-.75-.21-.08-.36-.11-.51.12-.15.23-.59.74-.72.9-.13.15-.27.17-.5.06-.23-.12-.97-.36-1.85-1.14-.68-.6-1.14-1.36-1.28-1.59-.13-.23-.01-.35.1-.47.11-.1.23-.27.35-.4.11-.14.15-.24.23-.39.08-.16.04-.29-.02-.4-.06-.12-.51-1.24-.7-1.69-.19-.44-.37-.38-.51-.39h-.44c-.15 0-.39.06-.6.29-.2.23-.79.77-.79 1.88s.81 2.18.92 2.33c.12.16 1.6 2.44 3.87 3.42.54.23.96.37 1.29.48.54.17 1.03.15 1.42.09.44-.07 1.36-.55 1.55-1.09.19-.54.19-1 .13-1.1-.06-.1-.21-.16-.44-.28Z"/></svg><span>WA</span></a>
   <a href="https://max.ru/u/f9LHodD0cOLOddl8uSfAqW5N_rbCdWMLwxxzn1UOibarOU6eByK8-xW5caw" target="_blank" rel="noopener" aria-label="MAX"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.6 2.4a9.5 9.5 0 1 1-5.3 17.4c-.85.55-1.85.92-2.94 1.05-.6.07-.99-.58-.7-1.12.42-.79.68-1.66.75-2.58A9.5 9.5 0 0 1 12.6 2.4Zm0 3.3a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4Z"/><path d="M12.9 8.1a4.15 4.15 0 1 1-3.2 6.8c-.33.23-.72.4-1.15.48-.29.05-.48-.28-.34-.54.2-.37.32-.79.36-1.23A4.15 4.15 0 0 1 12.9 8.1Z"/></svg><span>MAX</span></a>
 </nav>
-
 <script>
 (function(){
   'use strict';
-  var mnav = document.getElementById('mnav'), last = null;
+  var PHONE = '79263977775';
+
+  /* ---------- липкая шапка: показываем, когда герой ушёл вверх ---------- */
+  var topbar = document.getElementById('topbar');
+  var hero = document.querySelector('.hero');
+  function onScroll(){
+    var past = hero ? (hero.getBoundingClientRect().bottom < 80) : (window.scrollY > 400);
+    topbar.classList.toggle('show', past);
+  }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---------- мобильное меню ---------- */
+  var mnav = document.getElementById('mnav');
+  var lastMenuBtn = null;
   document.querySelectorAll('[data-menu]').forEach(function(b){
-    b.addEventListener('click', function(){ last = b; mnav.classList.add('open'); document.body.style.overflow='hidden';
-      var f = mnav.querySelector('a,button'); if(f) f.focus(); });
-  });
-  function close(){ if(!mnav.classList.contains('open')) return; mnav.classList.remove('open'); document.body.style.overflow=''; if(last) last.focus(); }
-  document.getElementById('mnavClose').addEventListener('click', close);
-  mnav.addEventListener('click', function(e){ if(e.target.tagName === 'A') close(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      var t = document.querySelector(a.getAttribute('href')); if(!t) return;
-      e.preventDefault(); history.replaceState(null, '', a.getAttribute('href'));
-      window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 84, behavior: 'smooth'});
+    b.addEventListener('click', function(){
+      lastMenuBtn = b;
+      mnav.classList.add('open'); document.body.style.overflow='hidden';
+      var first = mnav.querySelector('a, button');
+      if(first) first.focus();
     });
   });
-  var yr = document.getElementById('yr'); if(yr) yr.textContent = new Date().getFullYear();
+  function closeNav(){
+    if(!mnav.classList.contains('open')) return;
+    mnav.classList.remove('open'); document.body.style.overflow='';
+    if(lastMenuBtn) lastMenuBtn.focus();
+  }
+  /* Esc закрывает, Tab не выпускает фокус из открытого меню */
+  document.addEventListener('keydown', function(e){
+    if(!mnav.classList.contains('open')) return;
+    if(e.key === 'Escape'){ e.preventDefault(); closeNav(); return; }
+    if(e.key !== 'Tab') return;
+    var f = [].slice.call(mnav.querySelectorAll('a[href], button')).filter(function(el){ return el.offsetParent !== null; });
+    if(!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  });
+  document.getElementById('mnavClose').addEventListener('click', closeNav);
+  mnav.addEventListener('click', function(e){ if(e.target.tagName === 'A') closeNav(); });
+
+  /* ---------- якоря ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var href = a.getAttribute('href');
+      if(href === '#') return;
+      var t = document.querySelector(href);
+      if(!t) return;
+      e.preventDefault(); closeNav();
+      window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 88, behavior:'smooth'});
+    });
+  });
+
+  /* ---------- сценарии: плитки и одна открытая панель ---------- */
+  var tiles  = [].slice.call(document.querySelectorAll('.tile'));
+  var panels = [].slice.call(document.querySelectorAll('.sc-panel'));
+  var scDrop = document.getElementById('scDrop');
+
+  function openScenario(id){
+    var tile = document.querySelector('.tile[data-id="' + id + '"]');
+    if(!tile) return;
+    var wasOpen = tile.getAttribute('aria-selected') === 'true';
+    tiles.forEach(function(t){ t.setAttribute('aria-selected', 'false'); });
+
+    if(wasOpen){                       /* повторный клик закрывает */
+      scDrop.classList.remove('open');
+      panels.forEach(function(pn){ pn.classList.remove('on'); });
+      return;
+    }
+    tile.setAttribute('aria-selected', 'true');
+    panels.forEach(function(pn){ pn.classList.toggle('on', pn.id === 'sc-' + id); });
+    scDrop.classList.add('open');
+    /* на узком экране панель длинная — подводим её начало под шапку */
+    if(window.matchMedia('(max-width: 820px)').matches){
+      setTimeout(function(){
+        var y = scDrop.getBoundingClientRect().top + window.scrollY - 76;
+        window.scrollTo({top: y, behavior: 'smooth'});
+      }, 60);
+    }
+  }
+
+  tiles.forEach(function(t){
+    t.addEventListener('click', function(){ openScenario(t.dataset.id); });
+    /* стрелками влево-вправо, как положено вкладкам */
+    t.addEventListener('keydown', function(e){
+      var i = tiles.indexOf(t), n = null;
+      if(e.key === 'ArrowRight') n = tiles[(i + 1) % tiles.length];
+      if(e.key === 'ArrowLeft')  n = tiles[(i - 1 + tiles.length) % tiles.length];
+      if(n){ e.preventDefault(); n.focus(); }
+    });
+  });
+
+  var scClose = document.getElementById('scClose');
+  if(scClose) scClose.addEventListener('click', function(){
+    var open = document.querySelector('.tile[aria-selected="true"]');
+    if(open){
+      openScenario(open.dataset.id);
+      var y = document.querySelector('.tiles').getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
+  });
+
+  /* овал в первом экране открывает свой сценарий и ведёт к нему */
+  document.querySelectorAll('.pill[data-go]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var tile = document.querySelector('.tile[data-id="' + a.dataset.go + '"]');
+      if(tile && tile.getAttribute('aria-selected') !== 'true') openScenario(a.dataset.go);
+    });
+  });
+
+  /* CTA внутри сценария — WhatsApp с готовым текстом */
+  document.querySelectorAll('[data-wa]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      window.open('https://wa.me/' + PHONE + '?text=' + encodeURIComponent(a.dataset.wa), '_blank', 'noopener');
+    });
+  });
+
+  /* ---------- появление блоков ---------- */
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:.06});
+    document.querySelectorAll('.rv').forEach(function(el,i){
+      el.style.transitionDelay = (Math.min(i,3) * 60) + 'ms';
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); });
+  }
+  /* страховка: что бы ни случилось с observer, через 2.5 с показываем всё */
+  setTimeout(function(){
+    document.querySelectorAll('.rv:not(.in)').forEach(function(el){ el.classList.add('in'); });
+  }, 2500);
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
 })();
 </script>
-
 </body>
 </html>

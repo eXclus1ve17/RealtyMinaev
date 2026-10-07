@@ -42,52 +42,24 @@ FOOTER = grab(r'<footer class="ftr">.*?</footer>')
 STICKY = grab(r'<nav class="sticky-bar".*?</nav>')
 THEME = re.search(r'<html lang="ru" data-theme="(\w+)"', INDEX).group(1)
 GOOGLE = grab(r'<meta name="google-site-verification"[^>]*>')
-HERO_WEBP = re.search(r'<source type="image/webp" sizes="[^"]*"\s*srcset="([^"]+)"', INDEX).group(1)
-HERO_JPG = re.search(r'<img src="(img/hero-md\.jpg[^"]*)"', INDEX).group(1)
+HERO_BLOCK = grab(r'<div class="hero-outer" id="top">.*?</section>\s*</div>')
+TOPBAR_BLOCK = grab(r'<header class="topbar" id="topbar">.*?(?=<!-- =+ ГЕРОЙ)')
+MAIN_JS = grab(r'<script>\s*\(function\(\)\{\s*\'use strict\';\s*var PHONE.*?</script>')
 
 
-def absimg(srcset):
-    """img/… → /img/… (внутренние страницы лежат в подпапках)"""
-    return re.sub(r'(^|\s)img/', r'\1/img/', srcset.strip())
 
-
-HERO_WEBP = re.sub(r'\s+', ' ', absimg(HERO_WEBP))
-HERO_JPG = '/' + HERO_JPG
 
 # ---------- стили внутренних страниц ----------
 INNER_CSS = """
 <style>
 /* ===== Внутренние страницы: дополнение к стилям главной ===== */
-body{padding-top:70px}
-.topbar{transform:none}
-.brand{display:flex;flex-direction:column;line-height:1.15;flex:none}
-.brand b{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
-.brand small{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-top:3px}
-.tb-left{display:flex;align-items:center;gap:clamp(20px,3vw,44px)}
-.nav a[aria-current="page"]{color:var(--ink)}
-
-/* первый экран: текст на тёмной карточке + фото */
-.ph{padding-top:clamp(12px,2vw,24px)}
-.ph-card{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
-  background:var(--dark);color:#fff;border-radius:var(--r-xl);overflow:hidden;min-height:clamp(460px,46vw,600px)}
-.ph-txt{position:relative;z-index:1;padding:clamp(26px,4vw,64px);display:flex;flex-direction:column;gap:18px;justify-content:center}
-.crumbs{font-size:13px;color:rgba(255,255,255,.62);display:flex;flex-wrap:wrap;gap:6px}
-.crumbs a{color:rgba(255,255,255,.82)}
-.crumbs a:hover{color:#fff}
-.ph-txt .eyebrow{color:var(--metal-lite)}
-.ph-txt .eyebrow::before{background:var(--metal-lite)}
-.ph-h1{font-size:clamp(34px,4.6vw,68px);line-height:1.03;letter-spacing:-.04em;font-weight:600;max-width:15ch;margin:0}
-.ph-lead{font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:rgba(255,255,255,.78);max-width:52ch;margin:0}
-.ph-txt .btn-row{margin-top:8px}
-.ph-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:clamp(10px,2vw,26px);
-  background:rgba(255,255,255,.12);border-radius:18px;overflow:hidden}
-.ph-facts div{background:var(--dark);padding:14px 16px;display:flex;flex-direction:column;gap:2px}
-.ph-facts b{font-size:clamp(16px,1.5vw,20px);font-weight:600;letter-spacing:-.02em;color:#fff}
-.ph-facts span{font-size:12.5px;line-height:1.4;color:rgba(255,255,255,.72)}
-.ph-photo{position:relative;overflow:hidden}
-.ph-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 58%;
-  transform:scale(1.65);transform-origin:48% 62%}
-.ph-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--dark) 0%,rgba(16,26,44,0) 38%)}
+/* H1 страницы — в первом экране, под именем, тем же приёмом, что и абзац на главной */
+.hero-copy .ph-h1{color:#fff;font-size:7.2cqw;line-height:1.14;font-weight:600;letter-spacing:-.025em;margin:4.2cqw 0 2.6cqw;text-wrap:balance}
+.hero-copy div.h1{color:#fff;margin:0 0 3.68cqw}
+@media (min-width:561px) and (max-width:820px){.hero-copy div.h1{margin:0 0 3.2cqw}}
+@media (max-width:560px){.hero-copy div.h1{margin:3.4cqw 0 1cqw}}
+.pill[aria-current="page"]{background:#fff;color:var(--ink);border-color:#fff}
+@media (max-width:560px){.hero-copy .ph-h1{font-size:22px;margin:14px 0 8px}}
 
 /* разделы */
 .sec{padding:clamp(40px,5.5vw,88px) 0 0}
@@ -175,16 +147,6 @@ a.case .more{margin-top:auto;font-size:13px;font-weight:600;color:var(--metal-li
   .cx{grid-template-columns:1fr}
 }
 @media (max-width:820px){
-  body{padding-top:64px}
-  .topbar-in{height:64px}
-  .topbar .nav{display:none}
-  .burger{display:grid}
-  .ph-card{grid-template-columns:1fr;min-height:0}
-  .ph-photo{order:-1;height:clamp(300px,86vw,420px)}
-  .ph-photo img{transform:none;object-position:48% 46%}
-  .ph-photo::after{background:linear-gradient(0deg,var(--dark) 0%,rgba(16,26,44,0) 45%)}
-  .ph-txt{padding-top:6px}
-  .ph-facts{grid-template-columns:1fr}
   .price,.cta{grid-template-columns:1fr}
   .cta .btn-row{justify-content:flex-start}
   .proj{grid-template-columns:1fr}
@@ -193,90 +155,43 @@ a.case .more{margin-top:auto;font-size:13px;font-weight:600;color:var(--metal-li
 </style>
 """
 
-INNER_JS = """
-<script>
-(function(){
-  'use strict';
-  var mnav = document.getElementById('mnav'), last = null;
-  document.querySelectorAll('[data-menu]').forEach(function(b){
-    b.addEventListener('click', function(){ last = b; mnav.classList.add('open'); document.body.style.overflow='hidden';
-      var f = mnav.querySelector('a,button'); if(f) f.focus(); });
-  });
-  function close(){ if(!mnav.classList.contains('open')) return; mnav.classList.remove('open'); document.body.style.overflow=''; if(last) last.focus(); }
-  document.getElementById('mnavClose').addEventListener('click', close);
-  mnav.addEventListener('click', function(e){ if(e.target.tagName === 'A') close(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(e){
-      var t = document.querySelector(a.getAttribute('href')); if(!t) return;
-      e.preventDefault(); history.replaceState(null, '', a.getAttribute('href'));
-      window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 84, behavior: 'smooth'});
-    });
-  });
-  var yr = document.getElementById('yr'); if(yr) yr.textContent = new Date().getFullYear();
-})();
-</script>
-"""
-
-TG_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>'
 TEL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg>'
 TICK = '<span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L19 7"/></svg></span>'
 
 E = html.escape
 
 
+PILL_PAGES = {'sell': '/prodat-kvartiru/', 'second': '/kupit-kvartiru/', 'new': '/novostrojki/',
+              'country': '/zagorodnaya-nedvizhimost/', 'comm': '/kommercheskaya-nedvizhimost/'}
+
+
+def fix_links(block):
+    """Ссылки с главной → абсолютные: якоря ведут на главную, «Сложные сделки» — на свою страницу."""
+    block = block.replace('href="#cases"', 'href="/slozhnye-sdelki/"')
+    block = re.sub(r'href="#', 'href="/#', block)
+    block = re.sub(r'(src|srcset)="img/', r'\1="/img/', block)
+    block = re.sub(r'(,\s*)img/', r'\1/img/', block)
+    return block
+
+
 def topbar(current):
-    nav = [('/#scenarios', 'Как я работаю', None), ('/slozhnye-sdelki/', 'Сложные сделки', 'complex'), ('/#attestat', 'Аттестат', None)]
-    links = ''.join(f'<a href="{h}"{" aria-current=\"page\"" if k == current else ""}>{t}</a>' for h, t, k in nav)
-    mlinks = ''.join(f'<a class="ml" href="{h}">{t}</a>' for h, t, k in [('/', 'Главная', None)] + nav)
-    return f'''<header class="topbar show" id="topbar">
-  <div class="topbar-in">
-    <div class="tb-left">
-      <a class="brand" href="/"><b>Дмитрий Минаев</b><small>Брокер по недвижимости</small></a>
-      <nav class="nav">{links}</nav>
-    </div>
-    <div class="hero-actions">
-      <a class="btn btn-accent btn-tel" href="tel:+79263977775">{TEL_SVG}<span><small>Позвонить</small>+7 (926) 397-77-75</span></a>
-      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">{TG_SVG}<span class="lbl">Написать</span></a>
-      <button class="burger" data-menu aria-label="Меню"><span></span></button>
-    </div>
-  </div>
-</header>
-<div class="mnav" id="mnav">
-  <button class="mnav-close" id="mnavClose" aria-label="Закрыть">×</button>
-  {mlinks}
-  <div class="btn-row" style="margin-top:auto;padding-top:26px">
-    <a class="btn btn-accent" href="tel:+79263977775" style="flex:1">+7 (926) 397-77-75</a>
-    <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Написать</a>
-  </div>
-</div>'''
+    return fix_links(TOPBAR_BLOCK)
 
 
 def hero(p):
-    crumbs = '<a href="/">Главная</a><span aria-hidden="true">/</span><span>' + E(p['crumb']) + '</span>'
-    facts = ''.join(f'<div><b>{E(a)}</b><span>{E(b)}</span></div>' for a, b in p['facts'])
-    cta_label, cta_topic = p['cta']
-    return f'''<div class="wrap ph">
-  <section class="ph-card">
-    <div class="ph-txt">
-      <nav class="crumbs" aria-label="Навигация">{crumbs}</nav>
-      <div class="eyebrow">{E(p['eyebrow'])}</div>
-      <h1 class="ph-h1">{E(p['h1'])}</h1>
-      <p class="ph-lead">{E(p['lead'])}</p>
-      <div class="btn-row">
-        <a class="btn btn-metal" href="https://t.me/RealtyMinaev" data-lead="{cta_topic}">{E(cta_label)}</a>
-        <a class="btn btn-glass" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">{TG_SVG}Написать в Telegram</a>
-      </div>
-      <div class="ph-facts">{facts}</div>
-    </div>
-    <div class="ph-photo" aria-hidden="true">
-      <picture>
-        <source type="image/webp" sizes="(max-width:820px) 190vw, 60vw" srcset="{HERO_WEBP}">
-        <img src="{HERO_JPG}" width="1500" height="2000" alt="" fetchpriority="high">
-      </picture>
-    </div>
-  </section>
-</div>'''
+    h = fix_links(HERO_BLOCK)
+    # имя остаётся тем же визуальным блоком, но H1 на странице — заголовок услуги
+    h = h.replace('<h1 class="h1">', '<div class="h1">', 1).replace('</h1>', '</div>', 1)
+    h = re.sub(r'<p class="lead">.*?</p>',
+               f'<h1 class="ph-h1">{E(p["h1"])}</h1>\n        <p class="lead">{E(p["lead"])}</p>', h, count=1, flags=re.S)
+    # овалы: вместо открытия сценария — переход на страницу услуги
+    def pill(m):
+        key = m.group(1)
+        url = PILL_PAGES[key]
+        cur = ' aria-current="page"' if url == p['url'] else ''
+        return f'<a class="pill" href="{url}"{cur}>'
+    h = re.sub(r'<a class="pill" href="/#scenarios" data-go="(\w+)">', pill, h)
+    return h
 
 
 def work(p):
@@ -471,7 +386,7 @@ def page_html(p):
 <meta property="og:url" content="{url}">
 <meta property="og:title" content="{E(p['title'])}">
 <meta property="og:description" content="{E(p['description'])}">
-<meta property="og:image" content="{SITE}/img/og.jpg?v=1f83e50df966">
+<meta property="og:image" content="{SITE}/img/og.jpg?v=fd20851e03ad">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -497,7 +412,7 @@ def page_html(p):
         '</main>',
         FOOTER.replace('href="/privacy/"', 'href="/privacy/"'),
         STICKY,
-        INNER_JS,
+        MAIN_JS,
         '</body>\n</html>\n',
     ])
     return head + body
