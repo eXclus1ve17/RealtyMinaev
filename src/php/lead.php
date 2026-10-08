@@ -57,7 +57,17 @@ $where = ($topic !== '' ? $topic : '—') . ' (' . $page . ')';
 // 1. запись на хостинге — до отправки письма
 $dir = $cfg['storage'] ?? dirname(__DIR__) . '/leads';
 if (!is_dir($dir)) @mkdir($dir, 0700, true);
-$saved = @file_put_contents($dir . '/leads.csv',
+$log = $dir . '/leads.csv';
+// срок хранения — 1 год (согласие и политика): старые строки удаляются при каждой новой заявке
+if (is_file($log)) {
+    $keep = [];
+    foreach (file($log, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $d = DateTime::createFromFormat('d.m.Y H:i', trim(explode(';', $line)[0], '"'));
+        if ($d && $d > new DateTime('-1 year')) $keep[] = $line;
+    }
+    @file_put_contents($log, $keep ? implode("\n", $keep) . "\n" : '', LOCK_EX);
+}
+$saved = @file_put_contents($log,
     implode(';', array_map(fn($v) => '"' . str_replace('"', '""', $v) . '"', [$when, $name, $phone, $where, 'согласие: да'])) . "\n",
     FILE_APPEND | LOCK_EX) !== false;
 
