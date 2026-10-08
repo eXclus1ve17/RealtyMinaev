@@ -8,7 +8,7 @@
   <form class="lead-c lead-c--light" action="/lead.php" method="post" data-lead>
     <div class="lead-c-txt">
       <h2 class="lead-c-h">{{ title }}</h2>
-      <p>{{ note }}</p>
+      {%- if note %}<p>{{ note }}</p>{% endif %}
       <p class="lead-c-hours">{% if site.hours %}{{ site.hours }}{% else %}<span class="fill">[ЗАПОЛНИТЬ: часы работы]</span>{% endif %}</p>
     </div>
     <div class="lead-c-row">
