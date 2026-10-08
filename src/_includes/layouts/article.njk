@@ -1,0 +1,35 @@
+---
+layout: layouts/base.njk
+ogType: article
+---
+{#- Статья. Текст — в теле страницы, оглавление и связанные материалы — в front matter. -#}
+{%- from "partials/cta.njk" import cta with context -%}
+{%- from "partials/blocks.njk" import cardsBlock -%}
+<section class="ph" style="padding-bottom:24px"><div class="wrap">
+  <div class="ph-main" style="max-width:900px">
+    <span class="eyebrow">{{ kicker }}</span>
+    <h1 class="h1" style="font-size:clamp(30px,4.2vw,54px)">{{ h1 | safe }}</h1>
+    <div class="art-meta"><span>Дмитрий Минаев, аттестованный брокер</span><span>{{ published }}</span><span>{{ readTime }} чтения</span></div>
+  </div>
+</div></section>
+
+<section class="section" style="padding-top:0"><div class="wrap art">
+  <article class="prose">
+    {{ content | safe }}
+    <div class="note"><b>Новые разборы — в Telegram-канале</b>«Минаев | Просто о недвижимости»: сделки, документы и рынок простыми словами. <a href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="tg_subscribe">Подписаться →</a></div>
+  </article>
+  <aside class="toc">
+    <nav aria-label="Содержание статьи">
+      <p class="t">Содержание</p>
+      {%- for t in toc %}<a href="#{{ t.id }}">{{ t.t }}</a>{% endfor %}
+    </nav>
+    <div class="author">
+      <img src="/img/avatar-160.webp" alt="Дмитрий Минаев" width="64" height="64" loading="lazy">
+      <div><b>Дмитрий Минаев</b><span>Брокер по недвижимости, аттестат РГР</span></div>
+    </div>
+  </aside>
+</div></section>
+
+{{ cardsBlock("По теме", "Чем могу помочь", related) }}
+
+{{ cta(ctaTitle, ctaText) }}
