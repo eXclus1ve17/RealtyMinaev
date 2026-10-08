@@ -16,17 +16,26 @@ ogType: article
 <section class="section" style="padding-top:0"><div class="wrap art">
   <article class="prose">
     {{ content | safe }}
-    <div class="note"><b>Новые разборы — в Telegram-канале</b>«Минаев | Просто о недвижимости»: сделки, документы и рынок простыми словами. <a href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="tg_subscribe">Подписаться →</a></div>
+    <div class="author-card">
+      <picture><source type="image/webp" srcset="/img/author-320.webp 320w, /img/author-640.webp 640w" sizes="(max-width:600px) 100vw, 240px"><img src="/img/author-640.jpg" srcset="/img/author-320.jpg 320w, /img/author-640.jpg 640w" sizes="(max-width:600px) 100vw, 240px" alt="Дмитрий Минаев в офисе" width="640" height="640" loading="lazy"></picture>
+      <div>
+        <span class="eyebrow">Автор</span>
+        <b>Дмитрий Минаев</b>
+        <p>Брокер по недвижимости, аттестат РГР. Веду сделки с жильём и коммерцией в Москве и Подмосковье — от подбора и проверки до расчётов.</p>
+        <a href="/kontakty/">Связаться →</a>
+      </div>
+    </div>
+    <a class="channel" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="tg_subscribe">
+      <picture><source type="image/webp" srcset="/img/kanal-96.webp 1x, /img/kanal-192.webp 2x"><img src="/img/kanal-96.jpg" srcset="/img/kanal-192.jpg 2x" alt="" width="56" height="56" loading="lazy"></picture>
+      <span><b>Минаев | Просто о недвижимости</b>Telegram-канал: сделки, документы и рынок простыми словами</span>
+      <em>Подписаться →</em>
+    </a>
   </article>
   <aside class="toc">
     <nav aria-label="Содержание статьи">
       <p class="t">Содержание</p>
       {%- for t in toc %}<a href="#{{ t.id }}">{{ t.t }}</a>{% endfor %}
     </nav>
-    <div class="author">
-      <img src="/img/avatar-160.webp" alt="Дмитрий Минаев" width="64" height="64" loading="lazy">
-      <div><b>Дмитрий Минаев</b><span>Брокер по недвижимости, аттестат РГР</span></div>
-    </div>
   </aside>
 </div></section>
 
