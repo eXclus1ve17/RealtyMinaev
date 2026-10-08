@@ -4,7 +4,7 @@ layout: layouts/base.njk
 {#- Страница услуги. Всё содержимое — в front matter страницы. -#}
 {%- from "partials/icons.njk" import icon -%}
 {%- from "partials/cta.njk" import cta with context -%}
-{%- from "partials/blocks.njk" import brief, cardsBlock -%}
+{%- from "partials/blocks.njk" import brief, cardsBlock, faqBlock -%}
 
 <section class="ph"><div class="wrap ph-grid">
   <div class="ph-main">
@@ -49,8 +49,8 @@ layout: layouts/base.njk
 {%- if deals %}
 <section class="section"><div class="wrap">
   <div class="cases">
-    <div class="head"><span class="eyebrow">Если есть сложность</span><h2 class="h2">{{ dealsTitle or "Отдельно разбираю каждый случай" }}</h2>
-      <p class="lead">Здесь цена ошибки — не комиссия, а само право собственности.</p></div>
+    <div class="head"><span class="eyebrow">Если есть сложность</span><h2 class="h2">{{ dealsTitle or "Отдельно разбираю каждый случай" }}</h2>{% if dealsLead %}
+      <p class="lead">{{ dealsLead | safe }}</p>{% endif %}</div>
     <div class="cases-grid" style="--cols:{{ deals.length if deals.length < 4 else 4 }}">
       {%- for d in deals %}<a class="case" href="{{ d.url }}"><h3>{{ d.t }}</h3><p>{{ d.p }}</p><span class="go">Подробнее →</span></a>{% endfor %}
     </div>
@@ -60,14 +60,22 @@ layout: layouts/base.njk
 
 {{ content | safe }}
 
-{%- if faq %}
-<section class="section"><div class="wrap split">
-  <div class="head"><span class="eyebrow">Вопросы</span><h2 class="h2">Что спрашивают чаще всего</h2></div>
-  <div class="faq">{% for q in faq %}<details{% if loop.first %} open{% endif %}><summary>{{ q.q }}</summary><p>{{ q.a | safe }}</p></details>{% endfor %}</div>
+{%- if cases %}
+<section class="section"><div class="wrap">
+  <div class="head"><span class="eyebrow">Из практики</span><h2 class="h2">Как это было у других</h2></div>
+  <div class="cards" style="--cols:{{ cases.length if cases.length < 3 else 3 }}">{% for c in cases %}<div class="card"><span class="k">Кейс</span><h3>{{ c.t }}</h3><p>{{ c.p }}</p></div>{% endfor %}</div>
 </div></section>
 {%- elif site.draft %}
 <section class="section"><div class="wrap">
-  <p class="draft"><span class="fill">[ЗАПОЛНИТЬ: 3–5 вопросов клиентов по этой услуге с ответами — появится блок «Вопросы» с разметкой FAQ. Без вопросов блока на сайте не будет.]</span></p>
+  <p class="draft"><span class="fill">[ЗАПОЛНИТЬ: 1–2 обезличенных кейса по этой услуге — ситуация, что мешало, что сделали, срок, итог. Без кейсов блока на сайте не будет.]</span></p>
+</div></section>
+{%- endif %}
+
+{%- if faq %}
+{{ faqBlock(faq, faqTitle or "Что спрашивают чаще всего") }}
+{%- elif site.draft %}
+<section class="section"><div class="wrap">
+  <p class="draft"><span class="fill">[ЧЕРНОВИК: вопросы по этой услуге подготовлю после вашего одобрения.]</span></p>
 </div></section>
 {%- endif %}
 

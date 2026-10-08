@@ -44,6 +44,8 @@
   "address":{"@type":"PostalAddress","addressLocality":"Москва","addressCountry":"RU","streetAddress":"ул. Проектируемый проезд № 4062, д. 6, стр. 16, БЦ Port Plaza"},
   "parentOrganization":{"@type":"Organization","name":"ООО «Лендис Эстейт»"},"employee":{"@id":"{{ site.url }}/#person"}},
  {"@type":"Person","@id":"{{ site.url }}/#person","name":"Минаев Дмитрий Михайлович","jobTitle":"Риелтор, брокер по недвижимости","worksFor":{"@id":"{{ site.url }}/#agent"}}
+ {%- if faq and faq.length %},{"@type":"FAQPage","@id":"{{ canonical }}#faq","mainEntity":[
+  {%- for q in faq %}{"@type":"Question","name":{{ q.q | striptags | dump | safe }},"acceptedAnswer":{"@type":"Answer","text":{{ q.a | striptags | dump | safe }}}}{% if not loop.last %},{% endif %}{% endfor %}]}{% endif %}
  {%- if schema %},{{ schema | safe }}{% endif %}
 ]}
 </script>

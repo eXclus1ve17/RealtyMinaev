@@ -20,3 +20,11 @@
   </div>
 </div></section>
 {%- endmacro -%}
+
+{#- Частые вопросы. Разметка FAQPage строится в base.njk из того же faq. -#}
+{%- macro faqBlock(faq, title="Что спрашивают чаще всего") -%}
+<section class="section"><div class="wrap split">
+  <div class="head"><span class="eyebrow">Вопросы</span><h2 class="h2">{{ title }}</h2></div>
+  <div class="faq">{% for q in faq %}<details{% if loop.first %} open{% endif %}><summary>{{ q.q }}</summary><p>{{ q.a | safe }}</p></details>{% endfor %}</div>
+</div></section>
+{%- endmacro -%}
