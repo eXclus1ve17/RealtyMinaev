@@ -896,6 +896,15 @@ textarea{resize:vertical;min-height:84px}
 .ic .acc{stroke:var(--acc)}
 .tile .ic,.case .ic{width:46px;height:46px}
 .tile .ic svg,.case .ic svg{width:24px;height:24px}
+
+/* Овалы первого экрана никогда не переносят текст. Если полная подпись не
+   помещается (узкий экран, увеличенный шрифт в настройках телефона, другой
+   шрифт в Safari), скрипт ниже включает короткую — «Коммерция под доход». */
+.hero-pills .pill{white-space:nowrap}
+.hero-pills .pill.short .pl-full{display:none}
+.hero-pills .pill.short .pl-min{display:inline}
+.hero-pills.tight .pill{font-size:11.5px!important;padding:8px 10px!important}
+.hero-pills.one-col{grid-template-columns:1fr!important}
 </style></head>
 <body>
 
@@ -1544,6 +1553,32 @@ textarea{resize:vertical;min-height:84px}
   }, 2500);
 
   document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+<script>
+/* Подгонка овалов: короткая подпись, если полная не помещается в колонку или вылезает за карточку. */
+(function(){
+  var side=document.querySelector('.hero-side'), hero=document.querySelector('.hero');
+  if(!side||!hero) return;
+  var pills=[].slice.call(document.querySelectorAll('.hero-pills .pill'));
+  var box=document.querySelector('.hero-pills');
+  function tight(p){
+    var b=p.getBoundingClientRect(), room=side.getBoundingClientRect(), card=hero.getBoundingClientRect();
+    return b.width>room.width+1 || b.left<card.left+8 || b.right>card.right-8 || p.scrollWidth>p.clientWidth+1;
+  }
+  function fit(){
+    box.classList.remove('one-col','tight');
+    pills.forEach(function(p){ p.classList.remove('short'); });
+    // 1) короткие подписи там, где полная не помещается
+    pills.forEach(function(p){ if(p.querySelector('.pl-full') && tight(p)) p.classList.add('short'); });
+    // 2) не помещается и так — овалы чуть мельче, 3) крайний случай — одна колонка
+    box.classList.remove('tight');
+    if(pills.some(tight)) box.classList.add('tight');
+    if(pills.some(tight)) box.classList.add('one-col');
+  }
+  fit();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+  var t; window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(fit,80); });
 })();
 </script>
 <div class="cookie" id="cookie" role="region" aria-label="Согласие на cookie">

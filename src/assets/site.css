@@ -80,7 +80,10 @@ ul,ol{margin:0;padding:0;list-style:none}
   display:flex;align-items:center;gap:clamp(16px,2.4vw,36px)}
 .brand{display:flex;flex-direction:column;line-height:1.1;flex:none}
 .brand b{font-size:16px;font-weight:700;letter-spacing:-.02em}
-.brand span{font-size:11px;color:var(--ink-3);letter-spacing:.02em;margin-top:3px}
+/* «брокер по недвижимости» той же ширины, что имя, по краям букв:
+   кегль подобран под Onest (имя 16 px, 700), сдвиг снимает поле перед «б». */
+.brand span{font-size:10.78px;color:var(--ink-3);letter-spacing:0;margin:3px 0 0 -.34px;white-space:nowrap}
+.brand b{white-space:nowrap}
 .nav{display:flex;align-items:center;gap:4px;font-size:15px;font-weight:500}
 .nav > li{position:relative}
 .nav-a{display:flex;align-items:center;gap:6px;height:42px;padding:0 12px;border-radius:999px;color:var(--ink-2);transition:color .2s,background-color .2s}
