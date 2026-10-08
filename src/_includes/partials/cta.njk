@@ -1,43 +1,15 @@
-{%- from "partials/icons.njk" import icon -%}
-{#- Финальный блок страницы: звонок, мессенджер и короткая заявка «Перезвоните мне».
-    Стили — в /assets/lead.css, он подключён и на главной, и на внутренних страницах. -#}
-{%- macro cta(title, text) -%}
-<section class="section lead-sec" id="zayavka"><div class="wrap">
-  <div class="lead-box">
-    <div class="lead-txt">
-      <h2 class="lead-h">{{ title }}</h2>
-      <p>{{ text }}</p>
-      <div class="lead-btns">
-        <a class="lead-btn lead-btn-metal" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} +7 (926) 397-77-75</a>
-        <a class="lead-btn lead-btn-ghost" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
-      </div>
-      <p class="lead-hours">{% if site.hours %}{{ site.hours }}{% else %}<span class="fill">[ЗАПОЛНИТЬ: часы работы и как быстро отвечаете, например «Отвечаю с 9 до 21, обычно в течение 15 минут»]</span>{% endif %}</p>
-    </div>
-    <form class="lead-form" action="/lead.php" method="post" data-lead>
-      <p class="lead-ft">Перезвоню сам</p>
-      <label for="lead-name">Как к вам обращаться</label>
-      <input id="lead-name" name="name" autocomplete="given-name" maxlength="60">
-      <label for="lead-phone">Телефон</label>
-      <input id="lead-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="+7" maxlength="30">
-      <input type="hidden" name="page" value="">
-      <input type="hidden" name="topic" value="">
-      <div class="lead-hp" aria-hidden="true"><label for="lead-site">Сайт</label><input id="lead-site" name="website" tabindex="-1" autocomplete="off"></div>
-      <label class="lead-check"><input type="checkbox" name="consent" value="1" required> <span>Даю <a href="/soglasie/" target="_blank">согласие на обработку персональных данных</a></span></label>
-      <button class="lead-btn lead-btn-accent" type="submit">Жду звонка</button>
-      <p class="lead-msg" role="status" aria-live="polite"></p>
-    </form>
-  </div>
-</div></section>
-{%- endmacro -%}
+{#- Финальный блок страницы — компактная заявка с текстом под задачу страницы.
+    Импортировать с контекстом: {% from "partials/cta.njk" import cta with context %} -#}
+{%- macro cta(title, text) -%}{{ leadCompact(title, text) }}{%- endmacro -%}
 
-{#- Компактная заявка в одну строку: имя, телефон, кнопка; согласие под ними.
-    variant: "light" — белая карточка, "dark" — тёмная плита. -#}
-{%- macro leadCompact(title, note, variant="light") -%}
+{#- Компактная заявка в одну строку: имя, телефон, кнопка; согласие под ними. -#}
+{%- macro leadCompact(title, note) -%}
 <section class="section lead-sec" id="zayavka"><div class="wrap">
-  <form class="lead-c lead-c--{{ variant }}" action="/lead.php" method="post" data-lead>
+  <form class="lead-c lead-c--light" action="/lead.php" method="post" data-lead>
     <div class="lead-c-txt">
       <h2 class="lead-c-h">{{ title }}</h2>
       <p>{{ note }}</p>
+      <p class="lead-c-hours">{% if site.hours %}{{ site.hours }}{% else %}<span class="fill">[ЗАПОЛНИТЬ: часы работы]</span>{% endif %}</p>
     </div>
     <div class="lead-c-row">
       <label class="lead-sr" for="lc-name">Имя</label>

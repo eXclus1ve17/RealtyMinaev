@@ -3,7 +3,7 @@ layout: layouts/base.njk
 ---
 {#- Страница сложной сделки. Всё содержимое — в front matter страницы. -#}
 {%- from "partials/icons.njk" import icon -%}
-{%- from "partials/cta.njk" import cta -%}
+{%- from "partials/cta.njk" import cta with context -%}
 {%- from "partials/blocks.njk" import brief, cardsBlock -%}
 
 <section class="ph"><div class="wrap ph-grid">

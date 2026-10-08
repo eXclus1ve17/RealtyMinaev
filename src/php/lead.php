@@ -43,7 +43,7 @@ if (!$consent) done(false, 'consent');
 // не чаще одной заявки в 30 секунд с одного адреса
 $ip = $_SERVER['REMOTE_ADDR'] ?? '';
 $lock = sys_get_temp_dir() . '/lead_' . md5($ip);
-if (is_file($lock) && time() - filemtime($lock) < 30) done(false, 'rate');
+if (is_file($lock) && time() - filemtime($lock) < 30) done(true);   // повтор в течение 30 с — уже приняли
 @touch($lock);
 
 $cfg = ['email' => 'd.m.minaev@landis-estate.com', 'from' => 'no-reply@realtyminaev.ru'];

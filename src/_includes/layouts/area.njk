@@ -3,7 +3,7 @@ layout: layouts/base.njk
 ---
 {#- Страница района. Делается только при наличии уникального содержания. -#}
 {%- from "partials/icons.njk" import icon -%}
-{%- from "partials/cta.njk" import cta -%}
+{%- from "partials/cta.njk" import cta with context -%}
 {%- from "partials/blocks.njk" import cardsBlock -%}
 {%- set F = '<span class="fill">[ЗАПОЛНИТЬ]</span>' -%}
 

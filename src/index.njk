@@ -3,7 +3,7 @@ permalink: /index.html
 eleventyExcludeFromCollections: true
 ---
 {%- import "partials/nav.njk" as nav -%}
-{%- from "partials/cta.njk" import leadCompact -%}
+{%- from "partials/cta.njk" import leadCompact with context -%}
 <!DOCTYPE html>
 <html lang="ru" data-theme="steel">
 <head>
@@ -1376,7 +1376,7 @@ textarea{resize:vertical;min-height:84px}
 
 <!-- ================= КОНТАКТЫ ================= -->
 
-{{ leadCompact("Перезвоню и подскажу, с чего начать", site.hours + ". Оставьте номер — наберу сам.", leadVariant or "light") }}
+{{ leadCompact("Перезвоню и подскажу, с чего начать", "Оставьте номер — наберу сам.") }}
 
 <!-- ================= ФУТЕР ================= -->
 <footer class="ftr">
