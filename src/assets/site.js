@@ -87,7 +87,20 @@
           msg.className = 'lead-msg err';
           msg.innerHTML = 'Не получилось отправить. Позвоните: <a href="tel:+79263977775">+7 (926) 397-77-75</a>';
         })
-        .finally(function () { btn.disabled = false; });
+        .finally(function () { btn.disabled = !f.consent.checked; });
     });
+  });
+})();
+
+// Кнопка «Жду звонка» активна только после галочки согласия.
+// Делается скриптом: без JavaScript кнопка не блокируется, а галочку проверит браузер (required).
+(function () {
+  document.querySelectorAll('form[data-lead]').forEach(function (f) {
+    var box = f.querySelector('input[name=consent]'), btn = f.querySelector('button[type=submit]');
+    if (!box || !btn) return;
+    var sync = function () { btn.disabled = !box.checked; btn.title = box.checked ? '' : 'Отметьте согласие на обработку данных'; };
+    box.addEventListener('change', sync);
+    f.addEventListener('reset', function () { setTimeout(sync, 0); });
+    sync();
   });
 })();

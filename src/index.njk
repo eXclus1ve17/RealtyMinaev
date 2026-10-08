@@ -887,6 +887,15 @@ textarea{resize:vertical;min-height:84px}
 .cookie a{color:var(--accent-ink);text-decoration:underline}
 .btn-sm{height:44px;padding:0 18px;font-size:14px}
 @media (max-width:560px){.cookie{left:12px;right:12px;bottom:84px;max-width:none}}
+
+/* Иконки сценариев и сложных сделок — двухцветные: суть иконки (лупа, замок,
+   колышки участка, ребёнок) выделена бронзой, остальное — основным цветом. */
+.tile .ic{color:var(--ink);--acc:var(--metal)}
+.tile:hover .ic,.tile[aria-selected="true"] .ic{color:#fff;--acc:var(--metal-lite)}
+.case .ic{color:rgba(255,255,255,.88);--acc:var(--metal-lite)}
+.ic .acc{stroke:var(--acc)}
+.tile .ic,.case .ic{width:46px;height:46px}
+.tile .ic svg,.case .ic svg{width:24px;height:24px}
 </style></head>
 <body>
 
@@ -1011,27 +1020,27 @@ textarea{resize:vertical;min-height:84px}
     <!-- Плитки выбора. Клик открывает панель ниже, повторный клик закрывает. -->
     <div class="tiles rv" role="tablist" aria-label="Сценарии работы">
       <button class="tile" role="tab" aria-selected="false" aria-controls="sc-sell" data-id="sell">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9l7 7-7 7-9-9V7Z"/><circle cx="9" cy="11" r="1.6"/></svg></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V3h13"/><rect x="8" y="7" width="12" height="8" rx="1" class="acc"/><path d="M10 6v1M18 6v1" class="acc"/><path d="M11 11h6" class="acc"/></svg></span>
         <span class="t">Хочу продать</span>
         <span class="s">Квартира, дом или доля</span>
       </button>
       <button class="tile" role="tab" aria-selected="false" aria-controls="sc-new" data-id="new">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l6-3v16"/><path d="M10 21V10l7 3v8"/><path d="M3 21h18"/></svg></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 21V4"/><path d="M4 21h7"/><path d="M4 4h16"/><path d="m7 8 4-4"/><path d="M17 4v6" class="acc"/><rect x="15.5" y="10" width="3" height="2.5" rx=".5" class="acc"/><path d="M7 12h2.5M7 16h2.5"/></svg></span>
         <span class="t">Хочу новостройку</span>
         <span class="s">Подбор бесплатный</span>
       </button>
       <button class="tile" role="tab" aria-selected="false" aria-controls="sc-second" data-id="second">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 7-6 7 6"/><path d="M5 9.5V19h6.5"/><circle cx="16.5" cy="15.5" r="3.2" class="acc"/><path d="m18.8 17.8 2.7 2.7" class="acc"/></svg></span>
         <span class="t">Хочу вторичку</span>
         <span class="s">С проверкой документов</span>
       </button>
       <button class="tile" role="tab" aria-selected="false" aria-controls="sc-comm" data-id="comm">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 5 4h14l2 5"/><path d="M4 9h16v11H4z"/><path d="M9 20v-6h6v6"/></svg></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 17V7h3a2.5 2.5 0 0 1 0 5H8.5" class="acc"/><path d="M8.5 14.5h5" class="acc"/></svg></span>
         <span class="t">Хочу доход с аренды</span>
         <span class="s">Считаем доход с аренды</span>
       </button>
       <button class="tile" role="tab" aria-selected="false" aria-controls="sc-country" data-id="country">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M6 20v-9l5-4 5 4v9"/><path d="M18 20v-5"/><path d="M18 15a3 3 0 1 0 0-6"/></svg></span>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 17.5 7 5.5l13 3-2.5 11Z"/><path d="M9.5 15v-3l2.5-2 2.5 2v3Z"/><circle cx="3.5" cy="17.5" r="1" class="acc"/><circle cx="7" cy="5.5" r="1" class="acc"/><circle cx="20" cy="8.5" r="1" class="acc"/><circle cx="17.5" cy="19.5" r="1" class="acc"/></svg></span>
         <span class="t">Хочу дом за городом</span>
         <span class="s">Земля, дом, коммуникации</span>
       </button>
@@ -1254,42 +1263,42 @@ textarea{resize:vertical;min-height:84px}
 
       <div class="cases-grid">
         <article class="case">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4v8h8"/></svg></span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 9-7 9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M12 7v13" class="acc"/><path d="M5 14.5h7" class="acc"/></svg></span>
           <h3>Доли, наследство и дети</h3>
           <p>Продажа доли с уведомлением сособственников, наследственные квартиры до и после шести месяцев, согласие опеки, выделение долей детям. Разбираю, кто и в каком порядке должен подписать, до выхода на сделку.</p>
           <span class="go"><a href="/slozhnye-sdelki/prodazha-doli/">Продажа доли →</a> · <a href="/slozhnye-sdelki/nasledstvo/">Наследство →</a> · <a href="/slozhnye-sdelki/materinskij-kapital/">Дети и опека →</a></span>
         </article>
 
         <article class="case">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a4 4 0 0 0 6 .5l2-2a4 4 0 1 0-6-6l-1 1"/><path d="M14 11a4 4 0 0 0-6-.5l-2 2a4 4 0 1 0 6 6l1-1"/></svg></span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20v-5l3.5-3 3.5 3v5Z"/><path d="M14 20v-5l3.5-3 3.5 3v5Z"/><path d="M6.5 8.5C8.5 4.5 15.5 4.5 17.5 8.5" class="acc"/><path d="m15.3 8.3 2.2.5.6-2.3" class="acc"/></svg></span>
           <h3>Альтернативные цепочки</h3>
           <p>Продать своё и купить другое одной сделкой, иногда в три-четыре звена. Свожу сроки, авансы и одновременную регистрацию так, чтобы вы не остались ни без денег, ни без жилья между звеньями.</p>
           <span class="go"><a href="/slozhnye-sdelki/alternativnaya-sdelka/">Подробнее →</a></span>
         </article>
 
         <article class="case">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2" class="acc"/><path d="M12 15v2"/></svg></span>
           <h3>Ипотека и обременения</h3>
           <p>Продажа из-под ипотеки, залог, аресты, долги по коммуналке. Выстраиваю расчёты так, чтобы долг гасился внутри сделки, а обременение снималось до перехода права к покупателю.</p>
           <span class="go"><a href="/slozhnye-sdelki/prodazha-v-ipoteke/">Подробнее →</a></span>
         </article>
 
         <article class="case">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4-2.9 7.6-7 8.5-4.1-.9-7-4.5-7-8.5V6l7-3Z"/><path d="M9.5 12h5M12 9.5v5"/></svg></span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="6" r="2.5"/><path d="M4 20v-5a4 4 0 0 1 8 0v5"/><circle cx="17" cy="10" r="2" class="acc"/><path d="M14 20v-3a3 3 0 0 1 6 0v3" class="acc"/></svg></span>
           <h3>Материнский капитал и субсидии</h3>
           <p>Маткапитал, военная ипотека, господдержка. Выделение долей детям, согласование с банком и Соцфондом — чтобы сделку не оспорили через несколько лет, когда дети вырастут.</p>
           <span class="go"><a href="/slozhnye-sdelki/materinskij-kapital/">Подробнее →</a></span>
         </article>
 
         <article class="case">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="m9 14.5 2 2 4-4"/></svg></span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><path d="M3 20v-2a6 6 0 0 1 9-5.2"/><circle cx="16.5" cy="15.5" r="3" class="acc"/><path d="m18.7 17.7 2.8 2.8" class="acc"/></svg></span>
           <h3>Проверка рисков продавца</h3>
           <p>Банкротство, исполнительные производства, дееспособность, отказники от приватизации. Смотрю не только выписку из ЕГРН, но и самого продавца: именно отсюда приходят иски спустя годы.</p>
           <span class="go"><a href="/slozhnye-sdelki/proverka-kvartiry/">Подробнее →</a></span>
         </article>
 
         <article class="case">
-          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><path d="M12 4a13 13 0 0 1 0 16 13 13 0 0 1 0-16"/></svg></span>
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/><path d="M8 12c1-1.5 2-1.5 2.5 0s1.5 1.5 3.5-1" class="acc"/></svg></span>
           <h3>Дистанционные сделки</h3>
           <p>Собственник в другом городе или за границей. Доверенность с правильным набором полномочий, электронная регистрация, безопасные расчёты без личного присутствия на сделке.</p>
           <span class="go"><a href="/slozhnye-sdelki/distancionnaya-sdelka/">Подробнее →</a></span>
