@@ -3,7 +3,7 @@ permalink: /index.html
 eleventyExcludeFromCollections: true
 ---
 {%- import "partials/nav.njk" as nav -%}
-{%- from "partials/cta.njk" import cta -%}
+{%- from "partials/cta.njk" import leadCompact -%}
 <!DOCTYPE html>
 <html lang="ru" data-theme="steel">
 <head>
@@ -1340,8 +1340,6 @@ textarea{resize:vertical;min-height:84px}
 </section>
 
 <!-- ================= ПРОЕКТ ДОМА: ПОЛОСКА ================= -->
-{{ cta("Обсудим вашу задачу", "Позвоните, напишите или оставьте номер — перезвоню и скажу, с чего начать и сколько это займёт.") }}
-
 <section class="pstrip-sec" aria-label="Проект дома">
   <div class="wrap">
     <a class="pstrip" href="/forma-96/" data-goal="forma96_strip">
@@ -1377,6 +1375,8 @@ textarea{resize:vertical;min-height:84px}
 
 
 <!-- ================= КОНТАКТЫ ================= -->
+
+{{ leadCompact("Перезвоню и подскажу, с чего начать", site.hours + ". Оставьте номер — наберу сам.", leadVariant or "light") }}
 
 <!-- ================= ФУТЕР ================= -->
 <footer class="ftr">

@@ -2,11 +2,8 @@
 // Заявка «Перезвоните мне».
 // 1) Заявка записывается в файл на хостинге (первичная запись персональных
 //    данных — на территории РФ, ч. 5 ст. 18 152-ФЗ).
-// 2) Полные данные уходят на почту (лучше российский почтовый сервис).
-// 3) В Telegram — только сигнал о заявке без имени и телефона. Полные данные
-//    в Telegram включаются настройкой telegram_full, если подано уведомление
-//    Роскомнадзору о трансграничной передаче (ч. 3 ст. 12 152-ФЗ).
-// Настройки — в lead-config.php вне репозитория, образец: lead-config.example.php.
+// 2) Полные данные уходят письмом на почту брокера.
+// Почта задана ниже; переопределить можно в lead-config.php вне репозитория.
 
 declare(strict_types=1);
 date_default_timezone_set('Europe/Moscow');
@@ -49,47 +46,27 @@ $lock = sys_get_temp_dir() . '/lead_' . md5($ip);
 if (is_file($lock) && time() - filemtime($lock) < 30) done(false, 'rate');
 @touch($lock);
 
-$cfg = null;
+$cfg = ['email' => 'd.m.minaev@landis-estate.com', 'from' => 'no-reply@realtyminaev.ru'];
 foreach ([dirname(__DIR__) . '/lead-config.php', __DIR__ . '/lead-config.php'] as $f) {
-    if (is_file($f)) { $cfg = require $f; break; }
+    if (is_file($f)) { $cfg = array_merge($cfg, (array)require $f); break; }
 }
-if (!is_array($cfg)) done(false, 'config');
 
 $when = date('d.m.Y H:i');
 $where = ($topic !== '' ? $topic : '—') . ' (' . $page . ')';
 
-// 1. запись на хостинге — до любой отправки
+// 1. запись на хостинге — до отправки письма
 $dir = $cfg['storage'] ?? dirname(__DIR__) . '/leads';
 if (!is_dir($dir)) @mkdir($dir, 0700, true);
 $saved = @file_put_contents($dir . '/leads.csv',
     implode(';', array_map(fn($v) => '"' . str_replace('"', '""', $v) . '"', [$when, $name, $phone, $where, 'согласие: да'])) . "\n",
     FILE_APPEND | LOCK_EX) !== false;
-if (!$saved) done(false, 'storage');
 
-$full = "Заявка с сайта\nИмя: " . ($name !== '' ? $name : '—') . "\nТелефон: " . $phone
-      . "\nСтраница: " . $where . "\nСогласие на обработку ПД: да, " . $when;
-$sent = false;
+// 2. письмо брокеру
+$body = "Заявка с сайта realtyminaev.ru\n\nИмя: " . ($name !== '' ? $name : '—') . "\nТелефон: " . $phone
+      . "\nСтраница: " . $where . "\nВремя: " . $when . "\nСогласие на обработку ПД: да";
+$subject = '=?UTF-8?B?' . base64_encode('Заявка с сайта: ' . ($topic !== '' ? $topic : 'перезвонить')) . '?=';
+$headers = "Content-Type: text/plain; charset=utf-8\r\nFrom: " . $cfg['from'];
+$mailed = @mail($cfg['email'], $subject, $body, $headers);
 
-// 2. почта с полными данными
-if (!empty($cfg['email'])) {
-    $subject = '=?UTF-8?B?' . base64_encode('Заявка с сайта realtyminaev.ru') . '?=';
-    $sent = @mail($cfg['email'], $subject, $full, "Content-Type: text/plain; charset=utf-8\r\nFrom: " . ($cfg['from'] ?? 'no-reply@realtyminaev.ru')) || $sent;
-}
-
-// 3. Telegram: по умолчанию без персональных данных
-if (!empty($cfg['token']) && !empty($cfg['chat_id'])) {
-    $tg = !empty($cfg['telegram_full'])
-        ? $full
-        : "Новая заявка с сайта\nСтраница: " . $where . "\n" . $when . "\nИмя и телефон — в почте.";
-    $ctx = stream_context_create(['http' => [
-        'method'  => 'POST',
-        'header'  => "Content-Type: application/x-www-form-urlencoded\r\n",
-        'content' => http_build_query(['chat_id' => $cfg['chat_id'], 'text' => $tg]),
-        'timeout' => 10,
-    ]]);
-    $res = @file_get_contents('https://api.telegram.org/bot' . $cfg['token'] . '/sendMessage', false, $ctx);
-    $sent = ($res !== false && (json_decode($res, true)['ok'] ?? false)) || $sent;
-}
-
-// заявка уже записана на хостинге — даже если уведомления не ушли, она не потеряется
-done(true);
+// заявка считается принятой, если записана или отправлена
+done($saved || $mailed, ($saved || $mailed) ? '' : 'send');

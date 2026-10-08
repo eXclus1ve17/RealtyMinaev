@@ -4,7 +4,8 @@ export default {
   // Перед публикацией поставить false.
   draft: true,
   // Часы работы и скорость ответа — под кнопками связи. Пусто = пометка [ЗАПОЛНИТЬ].
-  hours: "",
+  hours: "Пн–пт с 10 до 19, отвечаю быстро",
+  email: "d.m.minaev@landis-estate.com",
   url: "https://realtyminaev.ru",
   name: "Дмитрий Минаев",
   phone: "+7 (926) 397-77-75",

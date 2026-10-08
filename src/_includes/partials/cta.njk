@@ -29,3 +29,27 @@
   </div>
 </div></section>
 {%- endmacro -%}
+
+{#- Компактная заявка в одну строку: имя, телефон, кнопка; согласие под ними.
+    variant: "light" — белая карточка, "dark" — тёмная плита. -#}
+{%- macro leadCompact(title, note, variant="light") -%}
+<section class="section lead-sec" id="zayavka"><div class="wrap">
+  <form class="lead-c lead-c--{{ variant }}" action="/lead.php" method="post" data-lead>
+    <div class="lead-c-txt">
+      <h2 class="lead-c-h">{{ title }}</h2>
+      <p>{{ note }}</p>
+    </div>
+    <div class="lead-c-row">
+      <label class="lead-sr" for="lc-name">Имя</label>
+      <input id="lc-name" name="name" placeholder="Имя" autocomplete="given-name" maxlength="60">
+      <label class="lead-sr" for="lc-phone">Телефон</label>
+      <input id="lc-phone" name="phone" type="tel" placeholder="Телефон" autocomplete="tel" inputmode="tel" required maxlength="30">
+      <button class="lead-btn lead-btn-accent" type="submit">Жду звонка</button>
+    </div>
+    <input type="hidden" name="page" value=""><input type="hidden" name="topic" value="">
+    <div class="lead-hp" aria-hidden="true"><label for="lc-site">Сайт</label><input id="lc-site" name="website" tabindex="-1" autocomplete="off"></div>
+    <label class="lead-check"><input type="checkbox" name="consent" value="1" required> <span>Даю <a href="/soglasie/" target="_blank">согласие на обработку персональных данных</a></span></label>
+    <p class="lead-msg" role="status" aria-live="polite"></p>
+  </form>
+</div></section>
+{%- endmacro -%}

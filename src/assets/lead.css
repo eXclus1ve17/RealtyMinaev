@@ -19,7 +19,7 @@
 .lead-form input[type=tel],.lead-form input:not([type]){width:100%;height:50px;border-radius:14px;border:1px solid rgba(16,26,44,.14);
   background:#F7F8FA;padding:0 16px;font:inherit;font-size:16px;color:#101A2C;margin-bottom:8px}
 .lead-form input:focus{outline:2px solid #2F4A7A;outline-offset:1px;background:#fff}
-.lead-check{display:grid!important;grid-template-columns:20px 1fr;gap:10px;align-items:start;font-weight:400!important;font-size:13px!important;line-height:1.45;margin:4px 0}
+.lead-check{text-transform:none!important;letter-spacing:0!important;color:inherit;display:grid!important;grid-template-columns:20px 1fr;gap:10px;align-items:start;font-weight:400!important;font-size:13px!important;line-height:1.45;margin:4px 0}
 .lead-check input{width:18px;height:18px;margin:1px 0 0;accent-color:#2F4A7A}
 .lead-check a{color:#2A4370;text-decoration:underline}
 .lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -28,3 +28,39 @@
 @media (max-width:900px){.lead-box{grid-template-columns:1fr;border-radius:28px}}
 /* пометка о недостающих данных — видна сразу, с ней блок не публикуется */
 .lead-box .fill{background:#FBF1DE;color:#7A5520;border-radius:6px;padding:1px 6px;font-weight:500}
+
+/* ---------- компактная заявка в одну строку ---------- */
+.lead-c{border-radius:28px;padding:clamp(20px,2.6vw,32px) clamp(20px,3vw,40px);
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:10px 32px;align-items:center}
+.lead-c-h{font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-.025em;line-height:1.15;margin:0}
+.lead-c-txt p{margin:6px 0 0;font-size:14px}
+.lead-c-row{display:grid;grid-template-columns:1fr 1.2fr auto;gap:10px}
+.lead-c-row input{height:52px;border-radius:999px;padding:0 20px;font:inherit;font-size:16px;width:100%}
+.lead-c-row .lead-btn-accent{width:auto;margin:0}
+.lead-c .lead-check{grid-column:2;margin:0}
+.lead-c .lead-msg{grid-column:2;margin:0;min-height:0}
+.lead-c .lead-msg:empty{display:none}
+.lead-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* светлая карточка */
+.lead-c--light{background:#fff;color:#101A2C;border:1px solid rgba(16,26,44,.08);box-shadow:0 18px 50px -30px rgba(16,26,44,.35)}
+.lead-c--light .lead-c-txt p{color:#525C6B}
+.lead-c--light input{border:1px solid rgba(16,26,44,.14);background:#F7F8FA;color:#101A2C}
+.lead-c--light .lead-check{color:#525C6B}
+/* тёмная плита */
+.lead-c--dark{background:#101A2C;color:#fff}
+.lead-c--dark .lead-c-txt p{color:rgba(255,255,255,.65)}
+.lead-c--dark input{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff}
+.lead-c--dark input::placeholder{color:rgba(255,255,255,.55)}
+.lead-c--dark .lead-check{color:rgba(255,255,255,.7)}
+.lead-c--dark .lead-check a{color:#C6A46B}
+.lead-c--dark .lead-btn-accent{background:#C6A46B;color:#1A1408}
+.lead-c input:focus{outline:2px solid #2F4A7A;outline-offset:1px}
+@media (max-width:900px){
+  .lead-c{grid-template-columns:1fr}
+  .lead-c .lead-check,.lead-c .lead-msg{grid-column:1}
+  .lead-c-row{grid-template-columns:1fr 1fr}
+  .lead-c-row .lead-btn-accent{grid-column:1/-1;width:100%}
+}
+@media (max-width:480px){.lead-c-row{grid-template-columns:1fr}}
+/* компактная заявка стоит последней перед подвалом: свой нижний отступ не нужен */
+.lead-sec:has(.lead-c){padding-top:clamp(24px,3vw,40px);padding-bottom:0}
