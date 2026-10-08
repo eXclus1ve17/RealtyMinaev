@@ -35,6 +35,4 @@ export default {
     { title: "Статьи", url: "/statyi/" },
     { title: "Контакты", url: "/kontakty/" },
   ],
-  // Районы появятся в подвале, когда по ним будет своё содержание (см. src/yuao.njk и др.).
-  footer: [],
 };

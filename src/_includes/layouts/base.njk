@@ -111,25 +111,11 @@
 
 <footer class="ftr">
   <div class="wrap">
-    <div class="ftr-grid">
-      <div class="ftr-who">
-        <h2>Брокер</h2>
-        <a class="tel" href="{{ site.phoneHref }}" data-goal="call">{{ site.phone }}</a>
-        <span>Минаев Дмитрий Михайлович, аттестованный брокер РГР</span>
-        <span>{{ site.agency }}</span>
-        <span>{{ site.address }} · м. «{{ site.metro }}»</span>
-      </div>
-      {%- for m in site.menu.concat(site.footer) %}{% if m.items %}
-      <div class="ftr-links">
-        <h2>{{ m.title }}</h2>
-        {%- for i in m.items %}{% if not i.muted %}<a href="{{ i.url }}">{{ i.title }}</a>{% endif %}{% endfor %}
-      </div>
-      {%- endif %}{% endfor %}
-      <div class="ftr-links">
-        <h2>Сайт</h2>
-        <a href="/uslugi/">Услуги и стоимость</a><a href="/statyi/">Статьи</a><a href="/kontakty/">Контакты</a><a href="/forma-96/">Проект дома Forma 96</a>
-      </div>
-    </div>
+    <ul class="ftr-rows">
+      <li><span>Брокер</span><span>Минаев Дмитрий Михайлович</span></li>
+      <li><span>Агентство</span><span>{{ site.agency }}</span></li>
+      <li><span>Адрес</span><span>{{ site.address }} · м. «{{ site.metro }}»</span></li>
+    </ul>
     <div class="ftr-bot">
       <span>© 2026 Дмитрий Минаев. Москва</span>
       <a href="/politika-konfidencialnosti/">Политика конфиденциальности</a>

@@ -266,17 +266,15 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 .author b{display:block;font-size:16px}
 .author span{font-size:13.5px;color:var(--ink-2);line-height:1.45;display:block}
 
-/* ---------- подвал ---------- */
-.ftr{background:var(--dark);color:#fff;padding:clamp(40px,5vw,72px) 0 0;margin-top:clamp(48px,6.5vw,104px)}
-.ftr-grid{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:32px}
-.ftr h2{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--metal-lite);margin-bottom:14px}
-.ftr-links a{display:block;padding:5px 0;font-size:14.5px;color:rgba(255,255,255,.72)}
-.ftr-links a:hover{color:#fff}
-.ftr-who{display:flex;flex-direction:column;gap:12px;font-size:14.5px;color:rgba(255,255,255,.72)}
-.ftr-who .tel{font-size:24px;font-weight:600;letter-spacing:-.03em;color:#fff}
-.ftr-bot{border-top:1px solid rgba(255,255,255,.12);margin-top:clamp(32px,4vw,52px);
-  padding:20px 0 calc(20px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-size:12.5px;color:rgba(255,255,255,.5)}
+/* ---------- подвал: как на главной — кто отвечает за сделку и правовая строка ---------- */
+.ftr{background:var(--dark);color:#fff;padding:clamp(34px,4vw,54px) 0 0;margin-top:clamp(48px,6.5vw,104px)}
+.ftr-rows{padding-bottom:clamp(18px,2.2vw,26px)}
+.ftr-rows li{display:grid;grid-template-columns:124px minmax(0,1fr);gap:20px;align-items:baseline;padding:13px 0;border-top:1px solid rgba(255,255,255,.10)}
+.ftr-rows li:first-child{border-top:0;padding-top:0}
+.ftr-rows li span:first-child{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--metal-lite)}
+.ftr-rows li span:last-child{font-size:15px;line-height:1.6;color:rgba(255,255,255,.82)}
+.ftr-bot{border-top:1px solid rgba(255,255,255,.12);padding:20px 0 calc(20px + env(safe-area-inset-bottom));
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.5)}
 .ftr-bot a{text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- липкая панель связи на телефоне ---------- */
@@ -303,7 +301,6 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
   .art{grid-template-columns:1fr}
   .toc{position:static;order:-1}
   .toc .author{display:none}
-  .ftr-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:900px){
   .ph-grid,.split,.algo,.cta{grid-template-columns:1fr}
@@ -318,7 +315,6 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
   .hdr .hdr-act .btn{display:none}
   .cases-grid,.cards,.areas{grid-template-columns:1fr}
   .post.big{grid-column:auto}
-  .ftr-grid{grid-template-columns:1fr}
   .office{grid-template-columns:auto 1fr}
   .office .btn{grid-column:1/-1}
   .cookie{left:12px;right:12px;bottom:84px;max-width:none}
