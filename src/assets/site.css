@@ -274,6 +274,24 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 .channel span{font-size:14.5px;line-height:1.45}
 .channel b{display:block;font-size:16px;color:var(--ink)}
 .channel em{font-style:normal;font-weight:600;white-space:nowrap}
+.cmp-wrap{background:var(--surface);border-radius:var(--r-md);overflow:hidden}
+.cmp{width:100%;border-collapse:collapse;font-size:15.5px;line-height:1.5}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:14px 18px;border-top:1px solid var(--line-2)}
+.cmp thead th{border-top:0;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);padding-top:16px;padding-bottom:12px}
+.cmp tbody th{font-weight:600;width:28%;color:var(--ink)}
+.cmp td{color:var(--ink-2);width:36%}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:640px){
+  .cmp thead{display:none}
+  .cmp,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:auto}
+  .cmp tr{padding:14px 16px;border-top:1px solid var(--line-2)}
+  .cmp tr:first-child{border-top:0}
+  .cmp th,.cmp td{padding:0;border:0}
+  .cmp tbody th,.cmp td{width:auto}
+  .cmp tbody th{margin-bottom:8px}
+  .cmp td{display:grid;grid-template-columns:44px 1fr;gap:10px;font-size:15px;margin-top:6px}
+  .cmp td::before{content:attr(data-l);font-size:12px;font-weight:600;color:var(--accent-ink);padding-top:2px}
+}
 @media (max-width:760px){.author-card{grid-template-columns:150px 1fr;gap:18px}.author-card p{font-size:14.5px}}
 @media (max-width:520px){.author-card{grid-template-columns:1fr;gap:16px;padding:14px}}
 
