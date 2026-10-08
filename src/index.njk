@@ -1,3 +1,9 @@
+---
+permalink: /index.html
+eleventyExcludeFromCollections: true
+---
+{%- import "partials/nav.njk" as nav -%}
+{%- from "partials/cta.njk" import cta -%}
 <!DOCTYPE html>
 <html lang="ru" data-theme="steel">
 <head>
@@ -28,6 +34,7 @@
 <!-- Фото первого экрана грузится сразу, параллельно со стилями. Те же файлы и sizes, что в <picture>. -->
 <link rel="preload" as="image" type="image/avif" media="(max-width:560px)" imagesizes="140vw" imagesrcset="img/hero-m-500.avif?v=83cff3000ad1 500w, img/hero-m-750.avif?v=16a76ae3fa7a 750w, img/hero-m-990.avif?v=41cf4483397e 990w" fetchpriority="high">
 <link rel="preload" as="image" type="image/avif" media="(min-width:561px)" imagesizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" imagesrcset="img/hero-800.avif?v=d603ce3620a3 800w, img/hero-1100.avif?v=016e89cc094f 1100w, img/hero-1500.avif?v=8167b03ba80e 1500w" fetchpriority="high">
+<link rel="stylesheet" href="{{ '/assets/lead.css' | ver }}">
 <link rel="stylesheet" href="fonts.css?v=db2ff084a264">
 <style>
 /* ============================================================
@@ -833,18 +840,7 @@ textarea{resize:vertical;min-height:84px}
   "inLanguage":"ru-RU","publisher":{"@id":"https://realtyminaev.ru/#agent"}}
 ]}
 </script>
-<!-- Яндекс.Метрика, счётчик 112500819. Скрипт грузится асинхронно
-     и уже после отрисовки страницы — на скорость первого экрана не влияет. -->
-<script>
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-   ym(112500819, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer",
-                          accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/112500819" style="position:absolute;left:-9999px" alt=""></div></noscript>
+<!-- Яндекс Метрика подключается из /assets/site.js только после согласия на cookie (баннер внизу страницы). -->
 <style>
 .pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,#c9d4e6 47%,#2f4a7a 64%,#101a2c 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
 
@@ -857,24 +853,53 @@ textarea{resize:vertical;min-height:84px}
 .algo-brief{list-style:none;margin:0;padding:20px clamp(20px,2.4vw,32px);display:grid;gap:12px;border-bottom:1px solid var(--line-2)}
 .algo-brief li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:center;font-size:16px;font-weight:600;letter-spacing:-.015em}
 .algo-brief .num{width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center;font-size:13px}
+
+/* ---------- меню с выпадающими списками (то же, что на внутренних страницах) ---------- */
+.nav{list-style:none;margin:0;padding:0;align-items:center;gap:4px}
+.nav > li{position:relative}
+.nav-a{display:flex;align-items:center;gap:6px;height:40px;padding:0 12px;border-radius:999px;font-size:15px;font-weight:500;color:var(--ink-2);transition:color .2s,background-color .2s}
+.nav-a svg{width:12px;height:12px;transition:transform .25s}
+.nav-a[aria-expanded="true"] svg{transform:rotate(180deg)}
+.nav-a:hover,.nav-a[aria-expanded="true"]{color:var(--ink);background:var(--surface)}
+.nav.on-photo .nav-a{color:rgba(255,255,255,.86)}
+.nav.on-photo .nav-a:hover,.nav.on-photo .nav-a[aria-expanded="true"]{color:#fff;background:rgba(255,255,255,.16)}
+.dd{position:absolute;top:calc(100% + 8px);left:0;min-width:280px;z-index:20;background:var(--surface);border-radius:var(--r-md);
+  box-shadow:var(--shadow);border:1px solid var(--line-2);padding:8px;display:none}
+.dd.open{display:block}
+@media (hover:hover){.nav > li:hover > .dd{display:block}.nav > li:hover > .dd::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}}
+.nav .dd a,.nav.on-photo .dd a{display:block;padding:10px 14px;border-radius:12px;font-size:15px;color:var(--ink)}
+.nav .dd a:hover{background:var(--accent-soft);color:var(--accent-ink)}
+.nav .dd a.more{color:var(--ink-3);font-size:14px;border-top:1px solid var(--line-2);border-radius:0 0 12px 12px;margin-top:4px}
+.hero-top{z-index:5}
+/* мобильное меню: разделы раскрываются */
+.mnav details{border-bottom:1px solid var(--line-2)}
+.mnav summary{display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-size:30px;font-weight:600;letter-spacing:-.03em;cursor:pointer;list-style:none}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary::after{content:"+";font-weight:400;color:var(--ink-3)}
+.mnav details[open] summary::after{content:"–"}
+.mnav details a{display:block;padding:9px 0 9px 14px;font-size:17px;color:var(--ink-2)}
+.mnav details ul{list-style:none;margin:0;padding:0 0 12px}
+.mnav{overflow-y:auto}
+/* согласие на cookie */
+.cookie{position:fixed;left:var(--pad);bottom:var(--pad);z-index:85;max-width:440px;background:var(--surface);border-radius:var(--r-md);
+  box-shadow:var(--shadow);border:1px solid var(--line-2);padding:18px 20px;display:none;flex-direction:column;gap:12px;font-size:14px;color:var(--ink-2)}
+.cookie.show{display:flex}
+.cookie a{color:var(--accent-ink);text-decoration:underline}
+.btn-sm{height:44px;padding:0 18px;font-size:14px}
+@media (max-width:560px){.cookie{left:12px;right:12px;bottom:84px;max-width:none}}
 </style></head>
 <body>
 
 <!-- ================= ЛИПКАЯ ШАПКА ================= -->
 <header class="topbar" id="topbar">
   <div class="topbar-in">
-    <nav class="nav">
-      <a href="/uslugi/">Услуги</a>
-      <a href="/slozhnye-sdelki/">Сложные сделки</a>
-      <a href="/statyi/">Статьи</a>
-      <a href="/kontakty/">Контакты</a>
-    </nav>
+    <nav aria-label="Разделы сайта">{{ nav.desktop(site.menu, "/", "tdd") }}</nav>
     <div class="hero-actions">
-      <a class="btn btn-accent btn-tel" href="tel:+79263977775">
+      <a class="btn btn-accent btn-tel" href="tel:+79263977775" data-goal="call">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg>
         <span><small>Позвонить</small>+7 (926) 397-77-75</span>
       </a>
-      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">
+      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>
         <span class="lbl">Написать</span>
       </a>
@@ -886,13 +911,10 @@ textarea{resize:vertical;min-height:84px}
 <!-- мобильное меню -->
 <div class="mnav" id="mnav">
   <button class="mnav-close" id="mnavClose" aria-label="Закрыть">×</button>
-  <a class="ml" href="/uslugi/">Услуги</a>
-  <a class="ml" href="/slozhnye-sdelki/">Сложные сделки</a>
-  <a class="ml" href="/statyi/">Статьи</a>
-  <a class="ml" href="/kontakty/">Контакты</a>
+  {{ nav.mobile(site.menu, "/") }}
   <div class="btn-row" style="margin-top:auto;padding-top:26px">
     <a class="btn btn-accent" href="tel:+79263977775" style="flex:1">+7 (926) 397-77-75</a>
-    <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">Написать</a>
+    <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">Написать</a>
   </div>
 </div>
 
@@ -920,18 +942,13 @@ textarea{resize:vertical;min-height:84px}
 
     <!-- верхняя панель внутри карточки -->
     <div class="hero-top">
-      <nav class="nav on-photo">
-        <a href="/uslugi/">Услуги</a>
-        <a href="/slozhnye-sdelki/">Сложные сделки</a>
-        <a href="/statyi/">Статьи</a>
-        <a href="/kontakty/">Контакты</a>
-        </nav>
+      <nav aria-label="Разделы сайта">{{ nav.desktop(site.menu, "/", "hdd", "on-photo") }}</nav>
       <div class="hero-actions">
-        <a class="btn btn-accent btn-tel" href="tel:+79263977775">
+        <a class="btn btn-accent btn-tel" href="tel:+79263977775" data-goal="call">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7C10.6 18.5 5.5 13.4 4.8 5.3 4.7 4.3 5.5 3.5 6.5 3.5Z"/></svg>
           <span><small>Позвонить</small>+7 (926) 397-77-75</span>
         </a>
-        <a class="btn btn-glass" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener">
+        <a class="btn btn-glass" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.04 15.42 8.7 20.2c.5 0 .72-.22.98-.48l2.35-2.25 4.87 3.57c.9.5 1.53.24 1.77-.83l3.2-15c.29-1.33-.48-1.85-1.35-1.53L1.6 9.5c-1.3.5-1.28 1.23-.22 1.56l4.9 1.53L17.6 5.9c.53-.35 1.02-.16.62.2L9.04 15.42Z"/></svg>
           <span class="lbl">Написать</span>
         </a>
@@ -968,12 +985,12 @@ textarea{resize:vertical;min-height:84px}
         <!-- направления: овалы справа, нижний край общий с текстом -->
         <div class="hero-pills">
         <div class="pill-row">
-            <a class="pill" href="#scenarios" data-go="sell">Продать</a>
-            <a class="pill" href="#scenarios" data-go="second">Купить вторичку</a>
+            <a class="pill" href="/uslugi/prodazha-kvartiry/">Продать</a>
+            <a class="pill" href="/uslugi/pokupka-kvartiry/">Купить вторичку</a>
           </div>
-        <a class="pill" href="#scenarios" data-go="new"><span class="pl-full">Бесплатный подбор новостроек</span><span class="pl-min">Новостройки</span></a>
-        <a class="pill" href="#scenarios" data-go="country"><span class="pl-full">Загородный дом или участок</span><span class="pl-min">Загородный дом</span></a>
-          <a class="pill" href="#scenarios" data-go="comm"><span class="pl-full">Коммерция с подтверждённой доходностью</span><span class="pl-min">Коммерция под доход</span></a>
+        <a class="pill" href="/uslugi/novostrojki/"><span class="pl-full">Бесплатный подбор новостроек</span><span class="pl-min">Новостройки</span></a>
+        <a class="pill" href="/uslugi/zagorodnaya-nedvizhimost/"><span class="pl-full">Загородный дом или участок</span><span class="pl-min">Загородный дом</span></a>
+          <a class="pill" href="/uslugi/kommercheskaya-nedvizhimost/"><span class="pl-full">Коммерция с подтверждённой доходностью</span><span class="pl-min">Коммерция под доход</span></a>
         </div>
       </div>
 
@@ -1323,6 +1340,8 @@ textarea{resize:vertical;min-height:84px}
 </section>
 
 <!-- ================= ПРОЕКТ ДОМА: ПОЛОСКА ================= -->
+{{ cta("Обсудим вашу задачу", "Позвоните, напишите или оставьте номер — перезвоню и скажу, с чего начать и сколько это займёт.") }}
+
 <section class="pstrip-sec" aria-label="Проект дома">
   <div class="wrap">
     <a class="pstrip" href="/forma-96/" data-goal="forma96_strip">
@@ -1489,13 +1508,6 @@ textarea{resize:vertical;min-height:84px}
     }
   });
 
-  /* овал в первом экране открывает свой сценарий и ведёт к нему */
-  document.querySelectorAll('.pill[data-go]').forEach(function(a){
-    a.addEventListener('click', function(){
-      var tile = document.querySelector('.tile[data-id="' + a.dataset.go + '"]');
-      if(tile && tile.getAttribute('aria-selected') !== 'true') openScenario(a.dataset.go);
-    });
-  });
 
   /* CTA внутри сценария — WhatsApp с готовым текстом */
   document.querySelectorAll('[data-wa]').forEach(function(a){
@@ -1525,9 +1537,11 @@ textarea{resize:vertical;min-height:84px}
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();
 </script>
-<script>
-/* цель Метрики: клик по полоске проекта Forma 96 */
-document.addEventListener('click',function(e){var g=e.target.closest('[data-goal]');if(g&&window.ym)ym(112500819,'reachGoal',g.getAttribute('data-goal'))});
-</script>
+<div class="cookie" id="cookie" role="region" aria-label="Согласие на cookie">
+  <p>Сайт использует cookie и Яндекс Метрику, чтобы понимать, какие страницы полезны. Подробнее — в <a href="/politika-konfidencialnosti/">политике конфиденциальности</a>.</p>
+  <div class="btn-row"><button class="btn btn-accent btn-sm" data-cookie="yes">Согласен</button><button class="btn btn-line btn-sm" data-cookie="no">Только необходимые</button></div>
+</div>
+<script>window.YM_ID={{ site.metrika }};</script>
+<script src="{{ '/assets/site.js' | ver }}" defer></script>
 </body>
 </html>

@@ -40,7 +40,7 @@ layout: layouts/base.njk
   <div class="head"><span class="eyebrow">Из практики</span><h2 class="h2">Похожие случаи</h2></div>
   <div class="cards" style="--cols:2">{% for c in cases %}<div class="card"><span class="k">Кейс</span><h3>{{ c.t }}</h3><p>{{ c.p }}</p></div>{% endfor %}</div>
 </div></section>
-{%- elif prototype %}
+{%- elif site.draft %}
 <section class="section"><div class="wrap">
   <p class="draft"><span class="fill">[ЗАПОЛНИТЬ: 1–2 обезличенных случая из практики — ситуация, что мешало, как решили, срок. Без кейсов блока на сайте не будет.]</span></p>
 </div></section>

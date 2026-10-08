@@ -1,5 +1,7 @@
 {%- from "partials/icons.njk" import icon -%}
+{%- import "partials/nav.njk" as nav -%}
 {%- set canonical = site.url + page.url -%}
+{%- set waText = "Здравствуйте! Пишу с сайта" + ((": " + (crumbs | last).title) if crumbs else "") + "." -%}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,8 +10,8 @@
 <title>{{ title }}</title>
 <meta name="description" content="{{ description }}">
 <link rel="canonical" href="{{ canonical }}">
-{%- if prototype %}
-<meta name="robots" content="noindex, nofollow">
+{%- if site.draft or noindex %}
+<meta name="robots" content="noindex, {{ 'nofollow' if site.draft else 'follow' }}">
 {%- endif %}
 <meta name="theme-color" content="#101A2C">
 <meta property="og:type" content="{{ ogType or 'website' }}">
@@ -28,6 +30,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/fonts/onest-cyrillic.woff2?v=c3f4223046fb" crossorigin>
 <link rel="stylesheet" href="/fonts.css?v=db2ff084a264">
 <link rel="stylesheet" href="{{ '/assets/site.css' | ver }}">
+<link rel="stylesheet" href="{{ '/assets/lead.css' | ver }}">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"BreadcrumbList","itemListElement":[
@@ -52,21 +55,7 @@
   <div class="hdr-in">
     <a class="brand" href="/"><b>Дмитрий Минаев</b><span>брокер по недвижимости</span></a>
     <nav aria-label="Разделы сайта">
-      <ul class="nav">
-      {%- for m in site.menu %}
-        <li>
-        {%- if m.items %}
-          {%- set ddId = "dd-" + loop.index %}
-          <button class="nav-a" aria-expanded="false" aria-controls="{{ ddId }}">{{ m.title }} {{ icon("down") | safe }}</button>
-          <div class="dd" id="{{ ddId }}">
-            {%- for i in m.items %}<a href="{{ i.url }}"{% if i.muted %} class="more"{% endif %}{% if i.url == page.url %} aria-current="page"{% endif %}>{{ i.title }}</a>{% endfor %}
-          </div>
-        {%- else %}
-          <a class="nav-a" href="{{ m.url }}"{% if page.url.startsWith(m.url) %} aria-current="page"{% endif %}>{{ m.title }}</a>
-        {%- endif %}
-        </li>
-      {%- endfor %}
-      </ul>
+      {{ nav.desktop(site.menu, page.url) }}
     </nav>
     <div class="hdr-act">
       <a class="hdr-tel" href="{{ site.phoneHref }}" data-goal="call">{{ site.phone }}</a>
@@ -81,16 +70,7 @@
     <a class="brand" href="/"><b>Дмитрий Минаев</b><span>брокер по недвижимости</span></a>
     <button class="mnav-close" data-mnav="close" aria-label="Закрыть меню">×</button>
   </div>
-  {%- for m in site.menu %}
-    {%- if m.items %}
-  <details{% if m.items | hasUrl(page.url) %} open{% endif %}>
-    <summary>{{ m.title }}</summary>
-    <ul>{% for i in m.items %}<li><a href="{{ i.url }}">{{ i.title }}</a></li>{% endfor %}</ul>
-  </details>
-    {%- else %}
-  <a class="ml" href="{{ m.url }}">{{ m.title }}</a>
-    {%- endif %}
-  {%- endfor %}
+  {{ nav.mobile(site.menu, page.url) }}
   <div class="mnav-call">
     <a class="btn btn-accent" href="{{ site.phoneHref }}" data-goal="call">{{ icon("phone") | safe }} {{ site.phone }}</a>
     <a class="btn btn-line" href="{{ site.telegram }}" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать в Telegram</a>
@@ -126,7 +106,7 @@
 <nav class="sticky-bar" aria-label="Быстрая связь">
   <a class="call" href="{{ site.phoneHref }}" data-goal="call">{{ icon("phone") | safe }}<span>Позвонить</span></a>
   <a href="{{ site.telegram }}" target="_blank" rel="noopener" aria-label="Telegram" data-goal="write_telegram">{{ icon("tg") | safe }}<span>TG</span></a>
-  <a href="{{ site.whatsapp }}" target="_blank" rel="noopener" aria-label="WhatsApp" data-goal="write_whatsapp">{{ icon("wa") | safe }}<span>WA</span></a>
+  <a href="{{ site.whatsapp }}?text={{ waText | urlencode }}" target="_blank" rel="noopener" aria-label="WhatsApp" data-goal="write_whatsapp">{{ icon("wa") | safe }}<span>WA</span></a>
   <a href="{{ site.max }}" target="_blank" rel="noopener" aria-label="MAX" data-goal="write_max">{{ icon("max") | safe }}<span>MAX</span></a>
 </nav>
 

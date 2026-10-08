@@ -61,3 +61,33 @@
     if (g && window.ym) ym(ID, 'reachGoal', g.getAttribute('data-goal'));
   });
 })();
+
+// Заявка «Перезвоните мне»: отправка без перезагрузки, цель Метрики lead_form.
+(function () {
+  document.querySelectorAll('form[data-lead]').forEach(function (f) {
+    var h1 = document.querySelector('h1');
+    f.page.value = location.pathname;
+    f.topic.value = h1 ? h1.textContent.replace(/\s+/g, ' ').trim() : document.title;
+    f.addEventListener('submit', function (e) {
+      if (!window.fetch) return;            // старый браузер — обычная отправка формы
+      e.preventDefault();
+      var msg = f.querySelector('.lead-msg'), btn = f.querySelector('button');
+      var digits = (f.phone.value.match(/\d/g) || []).length;
+      if (digits < 10) { msg.className = 'lead-msg err'; msg.textContent = 'Проверьте номер: нужно 10–11 цифр.'; f.phone.focus(); return; }
+      btn.disabled = true; msg.className = 'lead-msg'; msg.textContent = 'Отправляю…';
+      fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'X-Requested-With': 'fetch' } })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d.ok) throw new Error(d.error || 'fail');
+          msg.className = 'lead-msg ok'; msg.textContent = 'Спасибо! Перезвоню в ближайшее время.';
+          var t = f.topic.value; f.reset(); f.page.value = location.pathname; f.topic.value = t;
+          if (window.ym) ym(window.YM_ID, 'reachGoal', 'lead_form');
+        })
+        .catch(function () {
+          msg.className = 'lead-msg err';
+          msg.innerHTML = 'Не получилось отправить. Позвоните: <a href="tel:+79263977775">+7 (926) 397-77-75</a>';
+        })
+        .finally(function () { btn.disabled = false; });
+    });
+  });
+})();

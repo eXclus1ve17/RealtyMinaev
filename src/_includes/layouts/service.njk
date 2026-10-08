@@ -65,7 +65,7 @@ layout: layouts/base.njk
   <div class="head"><span class="eyebrow">Вопросы</span><h2 class="h2">Что спрашивают чаще всего</h2></div>
   <div class="faq">{% for q in faq %}<details{% if loop.first %} open{% endif %}><summary>{{ q.q }}</summary><p>{{ q.a | safe }}</p></details>{% endfor %}</div>
 </div></section>
-{%- elif prototype %}
+{%- elif site.draft %}
 <section class="section"><div class="wrap">
   <p class="draft"><span class="fill">[ЗАПОЛНИТЬ: 3–5 вопросов клиентов по этой услуге с ответами — появится блок «Вопросы» с разметкой FAQ. Без вопросов блока на сайте не будет.]</span></p>
 </div></section>

@@ -1,0 +1,30 @@
+/* Блок заявки: тёмная плита, слева звонок и мессенджер, справа форма «Перезвоните мне».
+   Классы lead-* не пересекаются со стилями главной и внутренних страниц. */
+.lead-box{background:#101A2C;color:#fff;border-radius:44px;padding:clamp(28px,4vw,60px);
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:28px clamp(28px,4vw,64px);align-items:start}
+.lead-h{font-size:clamp(26px,3.4vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:0;max-width:18ch}
+.lead-txt > p{color:rgba(255,255,255,.72);margin:14px 0 0;max-width:50ch}
+.lead-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.lead-btn{font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:9px;height:52px;padding:0 24px;border-radius:999px;
+  border:1px solid transparent;font:600 15px/1 inherit;font-family:inherit;white-space:nowrap;cursor:pointer;transition:background-color .25s,border-color .25s}
+.lead-btn svg{width:18px;height:18px;flex:none}
+.lead-btn-metal{background:#C6A46B;color:#1A1408}.lead-btn-metal:hover{background:#9C7B46}
+.lead-btn-ghost{border-color:rgba(255,255,255,.3);color:#fff}.lead-btn-ghost:hover{border-color:#fff}
+.lead-btn-accent{background:#2F4A7A;color:#fff;width:100%;margin-top:6px}.lead-btn-accent:hover{background:#3A5B94}
+.lead-btn[disabled]{opacity:.6;cursor:default}
+.lead-hours{font-size:14px;color:rgba(255,255,255,.6);margin-top:18px!important}
+.lead-form{background:#fff;color:#101A2C;border-radius:28px;padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:8px}
+.lead-ft{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#2A4370;margin:0 0 6px}
+.lead-form label{display:block;font-size:13px;font-weight:600;color:#525C6B;text-transform:none;letter-spacing:0;margin:0}
+.lead-form input[type=tel],.lead-form input:not([type]){width:100%;height:50px;border-radius:14px;border:1px solid rgba(16,26,44,.14);
+  background:#F7F8FA;padding:0 16px;font:inherit;font-size:16px;color:#101A2C;margin-bottom:8px}
+.lead-form input:focus{outline:2px solid #2F4A7A;outline-offset:1px;background:#fff}
+.lead-check{display:grid!important;grid-template-columns:20px 1fr;gap:10px;align-items:start;font-weight:400!important;font-size:13px!important;line-height:1.45;margin:4px 0}
+.lead-check input{width:18px;height:18px;margin:1px 0 0;accent-color:#2F4A7A}
+.lead-check a{color:#2A4370;text-decoration:underline}
+.lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.lead-msg{font-size:14px;margin:4px 0 0;min-height:1.4em}
+.lead-msg.ok{color:#1F6B3A;font-weight:600}.lead-msg.err{color:#A3321F}
+@media (max-width:900px){.lead-box{grid-template-columns:1fr;border-radius:28px}}
+/* пометка о недостающих данных — видна сразу, с ней блок не публикуется */
+.lead-box .fill{background:#FBF1DE;color:#7A5520;border-radius:6px;padding:1px 6px;font-weight:500}
