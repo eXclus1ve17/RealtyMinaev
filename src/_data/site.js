@@ -2,7 +2,7 @@
 export default {
   // Черновик: страницы закрыты от индексации, видны пометки [ЗАПОЛНИТЬ].
   // Перед публикацией поставить false.
-  draft: true,
+  draft: false,
   // Часы работы и скорость ответа — под кнопками связи. Пусто = пометка [ЗАПОЛНИТЬ].
   email: "d.m.minaev@landis-estate.com",
   url: "https://realtyminaev.ru",
