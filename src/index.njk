@@ -420,9 +420,6 @@ section[id]{scroll-margin-top:96px}
 
 /* ---------- аттестат ---------- */
 .panel{background:var(--surface);border-radius:var(--r-xl);padding:clamp(24px,3.4vw,56px)}
-.att{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(26px,4vw,64px);align-items:center}
-.att-frame{background:var(--surface-2);border:1px solid var(--line-2);border-radius:var(--r-lg);padding:clamp(12px,1.4vw,20px)}
-.att-frame img{border-radius:12px;box-shadow:var(--shadow-sm);width:100%;height:auto}
 .att-marks{display:flex;align-items:center;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line-2)}
 .att-marks .t{font-size:12.5px;line-height:1.45;color:var(--ink-3)}
 .mark-lite{box-shadow:none;border:1px solid var(--line-2);width:46px;height:46px}
@@ -456,6 +453,36 @@ section[id]{scroll-margin-top:96px}
 .cx:hover{background:var(--dark-hi)}
 .cx:hover i{transform:translateX(3px)}
 
+/* ---------- опыт и аттестат: один блок доверия ---------- */
+.trust{display:flex;flex-direction:column;gap:clamp(22px,2.6vw,34px)}
+.trust-head .h2{margin-top:16px}
+.trust-head .lead{margin-top:14px;max-width:60ch}
+.trust .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.trust .stat{background:var(--surface-2);border:1px solid var(--line-2)}
+.trust-doc{display:grid;grid-template-columns:160px minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:start}
+.trust-thumb{display:flex;flex-direction:column;gap:8px;align-items:center;color:var(--accent-ink);font-size:13px;font-weight:600}
+.trust-thumb img{width:160px;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .3s}
+.trust-thumb:hover img{transform:translateY(-3px)}
+.trust-data .att-rows{margin-top:0}
+.trust-data .att-rows li:first-child{border-top:0;padding-top:0}
+.trust-cta{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px}
+.trust-cta .btn svg{width:16px;height:16px}
+.trust-cta .att-marks{margin:0;padding:0;border:0}
+@media (max-width:820px){
+  .trust .stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+}
+@media (max-width:560px){
+  .trust .stats{grid-template-columns:1fr 1fr}
+  .trust .stat:first-child{grid-column:1/-1}
+  .trust-doc{grid-template-columns:1fr;gap:16px}
+  .trust-thumb{flex-direction:row;justify-content:flex-start;gap:14px}
+  .trust-thumb img{width:72px}
+  .trust-data .att-rows li{flex-direction:column;align-items:flex-start;gap:2px;padding:10px 0}
+  .trust-data .att-rows li:first-child{padding-top:10px;border-top:1px solid var(--line-2)}
+  .trust-data .att-rows li span:last-child{text-align:left}
+  .trust-cta .btn{width:100%;justify-content:center}
+  .trust-cta .att-marks{width:100%;justify-content:center}
+}
 /* ---------- опыт: цифры ---------- */
 .fill{background:#FBF1DE;color:#7A5520;border-radius:6px;padding:1px 6px;font-weight:500;font-size:.8em;letter-spacing:0}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -840,8 +867,10 @@ textarea{resize:vertical;min-height:84px}
   "jobTitle":"Риелтор, брокер по недвижимости",
   "worksFor":{"@id":"https://realtyminaev.ru/#agent"},
   "image":"https://realtyminaev.ru/img/og.jpg?v=1f83e50df966","url":"https://realtyminaev.ru/",
+  "sameAs":["https://reestr.rgr.ru/agentstvo-lendis-esteyt-21921/agent-minaev-dmitriy-mihaylovich-151600/"],
   "hasCredential":{"@type":"EducationalOccupationalCredential",
-    "credentialCategory":"Аттестат брокера по недвижимости",
+    "name":"Аттестат брокера РГР","credentialCategory":"Аттестат брокера по недвижимости",
+    "identifier":"РОСС RU РГР ТОС 77 БН 809","expires":"2029-02-12","url":"https://reestr.rgr.ru/agentstvo-lendis-esteyt-21921/agent-minaev-dmitriy-mihaylovich-151600/",
     "recognizedBy":{"@type":"Organization","name":"Российская гильдия риэлторов"}}},
  {"@type":"WebSite","@id":"https://realtyminaev.ru/#site","url":"https://realtyminaev.ru/",
   "name":"Дмитрий Минаев — риелтор и брокер по недвижимости в Москве",
@@ -1098,51 +1127,41 @@ textarea{resize:vertical;min-height:84px}
   </div>
 </section>
 
-<!-- ================= ОПЫТ ================= -->
-<section class="section" id="opyt" style="padding-top:0">
-  <div class="wrap">
-    <div class="head rv">
-      <div class="eyebrow">Опыт</div>
-      <h2 class="h2">Что за этим стоит</h2>
-    </div>
-    <div class="stats rv">
-      {%- for st in proof.stats %}
-      {%- if st.n %}<div class="stat"><b>{{ st.n }}</b><span>{{ st.t }}</span></div>
-      {%- elif site.draft %}<div class="stat"><b><span class="fill">[ЗАПОЛНИТЬ]</span></b><span>{{ st.t }}</span></div>{% endif %}
-      {%- endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ================= АТТЕСТАТ ================= -->
+<!-- ================= ОПЫТ И АТТЕСТАТ ================= -->
 <section class="section" id="attestat" style="padding-top:0">
   <div class="wrap">
-    <div class="panel att rv">
-      <div class="att-frame">
-        <picture><source type="image/webp" sizes="(max-width:1024px) 90vw, 34vw" srcset="img/attestat-sm.webp?v=68e6d2229b25 900w, img/attestat.webp?v=7c4188ee0e6b 1254w">
-          <img src="img/attestat.jpg?v=b475684cf2d0" width="1254" height="1800" sizes="(max-width:1024px) 90vw, 34vw" srcset="img/attestat-sm.jpg?v=ab4f779f41c2 900w, img/attestat.jpg?v=b475684cf2d0 1254w" alt="Аттестат брокера по недвижимости РГР на имя Минаева Дмитрия Михайловича" loading="lazy"></picture>
-        <div class="att-marks">
-          <span class="mark mark-lite"><picture><source type="image/webp" srcset="img/grm.webp?v=bb97e2f3c382"><img src="img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></span>
-          <span class="mark mark-lite"><picture><source type="image/webp" srcset="img/rgr.webp?v=cc48daf510ab"><img src="img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></span>
-          <span class="t">Гильдия риэлторов Москвы<br>Российская гильдия риэлторов</span>
-        </div>
+    <div class="panel trust rv">
+      <div class="trust-head">
+        <div class="eyebrow">Опыт и квалификация</div>
+        <h2 class="h2">Аттестат брокера РГР</h2>
+        <p class="lead">Экзамен, проверка опыта и членство в Гильдии риэлторов Москвы. Данные аттестата можно проверить в открытом реестре РГР.</p>
       </div>
-      <div>
-        <div class="eyebrow">Документ</div>
-        <h2 class="h2" style="margin:16px 0 18px">Аттестат,<br>а не просто визитка</h2>
-        <p class="lead">
-          Профессия риэлтора в России не лицензируется — работать может кто угодно,
-          без образования и без ответственности. Аттестат Российской гильдии риэлторов
-          сдаётся на экзамене, подтверждается раз в несколько лет и отзывается за нарушения.
-          Это единственная в стране проверка, которую риэлтор проходит добровольно.
-        </p>
-        <ul class="att-rows">
-          <li><span>Реестровый номер</span><span>РОСС RU РГР ТОС 77 БН 809</span></li>
-          <li><span>Квалификация</span><span>Специалист по недвижимости — брокер</span></li>
-          <li><span>Действителен до</span><span>12.02.2029</span></li>
-          <li><span>Агентство</span><span>ООО «Лендис Эстейт»</span></li>
-          <li><span>Профсообщество</span><span>ТОС НП «Гильдия риэлторов Москвы»</span></li>
-        </ul>
+      <div class="stats">
+        {%- for st in proof.stats %}{% if st.n %}<div class="stat"><b>{{ st.n }}</b><span>{{ st.t }}</span></div>{% endif %}{% endfor %}
+      </div>
+      <div class="trust-doc">
+        <a class="trust-thumb" href="img/attestat.jpg?v=b475684cf2d0" target="_blank" rel="noopener" aria-label="Открыть аттестат крупно">
+          <picture><source type="image/webp" srcset="img/attestat-240.webp 240w, img/attestat-480.webp 480w" sizes="160px">
+            <img src="img/attestat-240.jpg" srcset="img/attestat-240.jpg 240w, img/attestat-480.jpg 480w" sizes="160px" width="240" height="344" alt="Аттестат брокера по недвижимости РГР на имя Минаева Дмитрия Михайловича" loading="lazy"></picture>
+          <span>Открыть крупно</span>
+        </a>
+        <div class="trust-data">
+          <ul class="att-rows">
+            <li><span>Номер аттестата</span><span>РОСС RU РГР ТОС 77 БН 809</span></li>
+            <li><span>Квалификация</span><span>Специалист по недвижимости — брокер</span></li>
+            <li><span>Действителен до</span><span>12.02.2029</span></li>
+            <li><span>Агентство</span><span>ООО «Лендис Эстейт»</span></li>
+            <li><span>Гильдия</span><span>ТОС НП «Гильдия риэлторов Москвы»</span></li>
+          </ul>
+          <div class="trust-cta">
+            <a class="btn btn-accent" href="https://reestr.rgr.ru/agentstvo-lendis-esteyt-21921/agent-minaev-dmitriy-mihaylovich-151600/" target="_blank" rel="noopener" data-goal="rgr_registry">Проверить в реестре РГР
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+            <span class="att-marks">
+              <span class="mark mark-lite"><picture><source type="image/webp" srcset="img/grm.webp?v=bb97e2f3c382"><img src="img/grm.png?v=5b8237995fc4" width="140" height="140" alt="Гильдия риэлторов Москвы" loading="lazy"></picture></span>
+              <span class="mark mark-lite"><picture><source type="image/webp" srcset="img/rgr.webp?v=cc48daf510ab"><img src="img/rgr.png?v=075687451c7f" width="140" height="140" alt="Российская гильдия риэлторов" loading="lazy"></picture></span>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
