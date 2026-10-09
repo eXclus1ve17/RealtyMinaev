@@ -12,10 +12,6 @@ layout: layouts/base.njk
     <h1 class="h1">{{ h1 | safe }}</h1>
     <p class="lead">{{ lead | safe }}</p>
     {%- if free %}<p class="free">{{ free | safe }}</p>{% endif %}
-    <div class="btn-row">
-      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ icon("phone") | safe }} {{ ctaBtn or "Позвонить" }}</a>
-      <a class="btn btn-line" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
-    </div>
   </div>
   {{ brief(briefItems, true) }}
 </div></section>
@@ -41,7 +37,6 @@ layout: layouts/base.njk
     <div class="algo-out">
       <p class="t">Что получаете вы</p>
       <ul>{% for o in out %}<li><span class="tick">{{ icon("tick") | safe }}</span>{{ o | safe }}</li>{% endfor %}</ul>
-      <a class="btn btn-accent" href="tel:+79263977775" data-goal="call">{{ ctaBtn or "Обсудить" }}</a>
     </div>
   </div>
 </div></section>
