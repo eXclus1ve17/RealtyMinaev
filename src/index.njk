@@ -3,7 +3,6 @@ permalink: /index.html
 eleventyExcludeFromCollections: true
 ---
 {%- import "partials/nav.njk" as nav -%}
-{%- from "partials/cta.njk" import leadCompact with context -%}
 <!DOCTYPE html>
 <html lang="ru" data-theme="steel">
 <head>
@@ -34,7 +33,6 @@ eleventyExcludeFromCollections: true
 <!-- Фото первого экрана грузится сразу, параллельно со стилями. Те же файлы и sizes, что в <picture>. -->
 <link rel="preload" as="image" type="image/avif" media="(max-width:560px)" imagesizes="140vw" imagesrcset="img/hero-m-500.avif?v=83cff3000ad1 500w, img/hero-m-750.avif?v=16a76ae3fa7a 750w, img/hero-m-990.avif?v=41cf4483397e 990w" fetchpriority="high">
 <link rel="preload" as="image" type="image/avif" media="(min-width:561px)" imagesizes="(max-width:820px) 150vw, (max-width:1540px) 115vw, 1660px" imagesrcset="img/hero-800.avif?v=d603ce3620a3 800w, img/hero-1100.avif?v=016e89cc094f 1100w, img/hero-1500.avif?v=8167b03ba80e 1500w" fetchpriority="high">
-<link rel="stylesheet" href="{{ '/assets/lead.css' | ver }}">
 <link rel="stylesheet" href="fonts.css?v=db2ff084a264">
 <style>
 /* ============================================================
@@ -1204,7 +1202,6 @@ textarea{resize:vertical;min-height:84px}
 
 <!-- ================= КОНТАКТЫ ================= -->
 
-{{ leadCompact("Перезвоню и подскажу, с чего начать") }}
 
 <!-- ================= ФУТЕР ================= -->
 <footer class="ftr">
