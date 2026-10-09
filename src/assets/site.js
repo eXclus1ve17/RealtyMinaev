@@ -104,3 +104,48 @@
     sync();
   });
 })();
+
+// Политика и согласие открываются окном поверх страницы.
+// По прямой ссылке (и без JavaScript) это обычные страницы.
+(function () {
+  var DOCS = /^\/(politika-konfidencialnosti|soglasie)\/$/, dlg;
+  var CSS = '.docdlg{width:min(720px,calc(100vw - 24px));max-height:min(86vh,900px);padding:0;border:0;border-radius:22px;background:#fff;color:#101A2C;box-shadow:0 30px 80px -20px rgba(16,26,44,.45);overflow:hidden}'
+    + '.docdlg::backdrop{background:rgba(16,26,44,.55);backdrop-filter:blur(3px)}'
+    + '.docdlg-b{max-height:min(86vh,900px);overflow:auto;padding:28px clamp(18px,4vw,40px) 30px;font-size:14.5px;line-height:1.6;color:#525C6B}'
+    + '.docdlg-x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:0;background:#F4F5F7;font-size:24px;line-height:1;color:#101A2C;cursor:pointer}'
+    + '.docdlg h1{font-size:22px;line-height:1.25;letter-spacing:-.02em;color:#101A2C;margin:6px 48px 12px 0}'
+    + '.docdlg h2{font-size:15px;font-weight:600;color:#101A2C;margin:20px 0 6px}'
+    + '.docdlg p+p{margin-top:8px}.docdlg a{color:#2A4370;text-decoration:underline}'
+    + '.docdlg .doc-k{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6E7785}'
+    + '.docdlg .doc-f{margin-top:20px;padding-top:12px;border-top:1px solid rgba(16,26,44,.08);font-size:13px}'
+    + '.docdlg table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}'
+    + '.docdlg th,.docdlg td{text-align:left;vertical-align:top;padding:8px 8px;border-bottom:1px solid rgba(16,26,44,.08)}.docdlg th{color:#101A2C;font-weight:600}'
+    + '@media (max-width:640px){.docdlg table,.docdlg tbody,.docdlg tr,.docdlg th,.docdlg td{display:block}.docdlg tr{padding:6px 0;border-bottom:1px solid rgba(16,26,44,.08)}.docdlg th,.docdlg td{border:0;padding:2px 0}}';
+
+  function box() {
+    if (dlg) return dlg;
+    var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
+    dlg = document.createElement('dialog'); dlg.className = 'docdlg';
+    dlg.innerHTML = '<button class="docdlg-x" type="button" aria-label="Закрыть">×</button><div class="docdlg-b"></div>';
+    document.body.appendChild(dlg);
+    dlg.querySelector('.docdlg-x').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    return dlg;
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || !window.HTMLDialogElement) return;
+    var u; try { u = new URL(a.href, location.href); } catch (x) { return; }
+    if (u.origin !== location.origin || !DOCS.test(u.pathname) || u.pathname === location.pathname) return;
+    e.preventDefault();
+    var d = box(), body = d.querySelector('.docdlg-b');
+    body.innerHTML = '<p>Загружаю…</p>';
+    if (!d.open) d.showModal();
+    fetch(u.pathname).then(function (r) { return r.text(); }).then(function (h) {
+      var doc = new DOMParser().parseFromString(h, 'text/html').getElementById('doc');
+      if (!doc) { location.href = u.pathname; return; }
+      body.innerHTML = doc.innerHTML; body.scrollTop = 0;
+    }).catch(function () { location.href = u.pathname; });
+  });
+})();

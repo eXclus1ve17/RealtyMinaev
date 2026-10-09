@@ -405,9 +405,7 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 
 /* Шапка страницы: крупный заголовок, латунная линия, «паспорт» услуги в строку, лёгкая сетка-чертёж */
 .ph{position:relative;isolation:isolate}
-.ph::before{content:"";position:absolute;inset:0 0 0 45%;z-index:-1;opacity:.6;pointer-events:none;
-  background-image:linear-gradient(rgba(47,74,122,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(47,74,122,.07) 1px,transparent 1px);
-  background-size:48px 48px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 40%);mask-image:linear-gradient(90deg,transparent,#000 40%)}
+.ph::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(var(--accent-rgb),.07),rgba(var(--accent-rgb),0) 92%)}
 .ph .ph-grid{grid-template-columns:1fr!important;gap:26px!important}
 .ph .h1{font-size:clamp(38px,5.6vw,80px);letter-spacing:-.045em;max-width:17ch}
 .ph .ph-main{border-bottom:2px solid var(--metal-lite);padding-bottom:26px}
@@ -421,10 +419,10 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 
 /* Разделы: номер и заголовок слева, содержание справа */
 body{counter-reset:sec}
-.section>.wrap:has(>.head),.section>.wrap.split,.panel.split{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr)!important;gap:clamp(24px,4vw,72px);align-items:start}
-.section>.wrap:has(>.head)>.head,.section>.wrap.split>.head,.panel.split>.head{position:sticky;top:calc(var(--hdr) + 28px);counter-increment:sec;margin:0}
-.section>.wrap:has(>.head)>.head::before,.section>.wrap.split>.head::before,.panel.split>.head::before{content:counter(sec,decimal-leading-zero);display:block;font-size:60px;font-weight:700;letter-spacing:-.05em;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--metal-lite);margin-bottom:14px}
-.section>.wrap:has(>.head)>.head .h2,.section>.wrap.split>.head .h2{font-size:clamp(24px,2.4vw,32px)}
+.section>.wrap:has(>.head),.section>.wrap.split:has(>.head),.panel.split{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr)!important;gap:clamp(24px,4vw,72px);align-items:start}
+.section>.wrap:has(>.head)>.head,.section>.wrap.split:has(>.head)>.head,.panel.split>.head{position:sticky;top:calc(var(--hdr) + 28px);counter-increment:sec;margin:0}
+.section>.wrap:has(>.head)>.head::before,.section>.wrap.split:has(>.head)>.head::before,.panel.split>.head::before{content:counter(sec,decimal-leading-zero);display:block;font-size:60px;font-weight:700;letter-spacing:-.05em;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--metal-lite);margin-bottom:14px}
+.section>.wrap:has(>.head)>.head .h2,.section>.wrap.split:has(>.head)>.head .h2{font-size:clamp(24px,2.4vw,32px)}
 
 /* Содержание разделов — на мягких белых панелях, чтобы блоки читались отдельно */
 .pairs,.algo-steps,.faq{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-lg);padding:6px clamp(18px,2.4vw,32px);box-shadow:0 14px 40px -32px rgba(var(--ink-rgb),.35)}
@@ -451,12 +449,11 @@ body{counter-reset:sec}
 .algo-out{margin-top:20px;border-radius:var(--r-md);border:1px solid rgba(var(--accent-rgb),.18)}
 
 @media (max-width:900px){
-  .section>.wrap:has(>.head),.section>.wrap.split,.panel.split{grid-template-columns:1fr!important;gap:22px}
-  .section>.wrap:has(>.head)>.head,.section>.wrap.split>.head,.panel.split>.head{position:static}
-  .section>.wrap:has(>.head)>.head::before,.section>.wrap.split>.head::before,.panel.split>.head::before{font-size:42px;margin-bottom:10px}
+  .section>.wrap:has(>.head),.section>.wrap.split:has(>.head),.panel.split{grid-template-columns:1fr!important;gap:22px}
+  .section>.wrap:has(>.head)>.head,.section>.wrap.split:has(>.head)>.head,.panel.split>.head{position:static}
+  .section>.wrap:has(>.head)>.head::before,.section>.wrap.split:has(>.head)>.head::before,.panel.split>.head::before{font-size:42px;margin-bottom:10px}
   .ph .brief ul{grid-template-columns:1fr 1fr;row-gap:18px}
   .ph .brief li:nth-child(3){border-left:0!important;padding-left:0!important}
-  .ph::before{inset:0 0 0 30%}
 }
 @media (max-width:640px){
   .pair{grid-template-columns:44px minmax(0,1fr);gap:14px;padding:18px 0!important}
@@ -465,3 +462,29 @@ body{counter-reset:sec}
   .pair .q{font-size:16px}
   .ph .brief li span:last-child{font-size:16.5px}
 }
+
+/* Документы: компактный лист */
+.doc-sec{padding-top:clamp(20px,3vw,40px)}
+.doc{max-width:760px;margin:0 auto;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-lg);padding:clamp(22px,3.4vw,44px);font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+.doc h1{font-size:clamp(22px,2.6vw,28px);letter-spacing:-.025em;line-height:1.2;color:var(--ink);margin:6px 0 14px}
+.doc h2{font-size:15px;font-weight:600;color:var(--ink);margin:22px 0 6px;letter-spacing:-.01em}
+.doc p+p{margin-top:8px}
+.doc a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:2px}
+.doc-k{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.doc-f{margin-top:22px!important;padding-top:14px;border-top:1px solid var(--line-2);font-size:13px}
+.doc table{width:100%;border-collapse:collapse;margin:8px 0 10px;font-size:13.5px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line-2)}
+.doc th{color:var(--ink);font-weight:600}
+.doc tr:first-child th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+@media (max-width:640px){.doc table,.doc tbody,.doc tr,.doc th,.doc td{display:block}.doc tr{padding:8px 0;border-bottom:1px solid var(--line-2)}.doc th,.doc td{border:0;padding:2px 0}.doc tr:first-child{display:none}}
+
+/* Контакты: блок «Связь» синим */
+.panel.contact-main{background:var(--accent);color:#fff}
+.contact-main .eyebrow{color:rgba(255,255,255,.75)} .contact-main .eyebrow::before{background:rgba(255,255,255,.6)}
+.contact-main .h2{color:#fff}
+.contact-main .ch{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:14px 16px;margin-top:10px;color:#fff}
+.contact-main .ch:hover{background:rgba(255,255,255,.18);padding-left:16px}
+.contact-main .ch-ic{background:#fff;border:0;color:var(--accent)}
+.contact-main .ch .t span{color:rgba(255,255,255,.72)}
+.contact-main .arw{color:#fff}
+.contact-main .h2{white-space:nowrap;font-size:clamp(26px,3vw,40px)}
