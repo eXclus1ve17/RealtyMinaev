@@ -100,7 +100,6 @@ ul,ol{margin:0;padding:0;list-style:none}
 .dd a:hover,.dd a[aria-current="page"]{background:var(--accent-soft);color:var(--accent-ink)}
 .dd a.more{color:var(--ink-3);font-size:14px;border-top:1px solid var(--line-2);border-radius:0 0 12px 12px;margin-top:4px}
 .hdr-act{margin-left:auto;display:flex;align-items:center;gap:8px;flex:none}
-.hdr-tel{font-weight:600;font-size:15px;letter-spacing:-.01em;padding:0 6px;white-space:nowrap}
 .burger{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);place-items:center;background:var(--surface);flex:none}
 .burger span{display:block;width:17px;height:1.5px;background:var(--ink);position:relative;border-radius:2px}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:17px;height:1.5px;background:var(--ink);border-radius:2px}
@@ -394,3 +393,75 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 .check b{display:block;font-size:16.5px;letter-spacing:-.015em}
 .check span.to{font-size:14px;font-weight:600;color:var(--accent-ink);white-space:nowrap}
 @media (max-width:640px){.check a{grid-template-columns:28px minmax(0,1fr)}.check span.to{grid-column:2}}
+
+/* ================= Оформление внутренних страниц: «отчёт» + иконки болей ================= */
+/* Кнопка телефона в шапке — как на главной: иконка, подпись и номер */
+.hdr-tel{height:48px;padding:0 18px 0 14px;gap:10px;font-weight:600;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
+.hdr-tel svg{width:18px;height:18px;flex:none}
+.hdr-tel span{display:flex;flex-direction:column;align-items:center;line-height:1.15;text-align:center}
+.hdr-tel small{font-size:10.5px;font-weight:500;opacity:.75;letter-spacing:.02em}
+.hdr-write{height:48px}
+.hdr-write svg{width:17px;height:17px;color:var(--accent)}
+
+/* Шапка страницы: крупный заголовок, латунная линия, «паспорт» услуги в строку, лёгкая сетка-чертёж */
+.ph{position:relative;isolation:isolate}
+.ph::before{content:"";position:absolute;inset:0 0 0 45%;z-index:-1;opacity:.6;pointer-events:none;
+  background-image:linear-gradient(rgba(47,74,122,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(47,74,122,.07) 1px,transparent 1px);
+  background-size:48px 48px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 40%);mask-image:linear-gradient(90deg,transparent,#000 40%)}
+.ph .ph-grid{grid-template-columns:1fr!important;gap:26px!important}
+.ph .h1{font-size:clamp(38px,5.6vw,80px);letter-spacing:-.045em;max-width:17ch}
+.ph .ph-main{border-bottom:2px solid var(--metal-lite);padding-bottom:26px}
+.ph .brief{background:none;box-shadow:none;border:0;padding:0}
+.ph .brief .t{display:none}
+.ph .brief ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
+.ph .brief li{display:flex!important;flex-direction:column;align-items:flex-start!important;gap:6px;border:0!important;border-left:1px solid var(--line)!important;padding:2px 20px!important}
+.ph .brief li:first-child{border-left:0!important;padding-left:0!important}
+.ph .brief li span:first-child{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.ph .brief li span:last-child{font-size:19px;font-weight:600;text-align:left!important;letter-spacing:-.02em;color:var(--ink)}
+
+/* Разделы: номер и заголовок слева, содержание справа */
+body{counter-reset:sec}
+.section>.wrap:has(>.head),.section>.wrap.split,.panel.split{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr)!important;gap:clamp(24px,4vw,72px);align-items:start}
+.section>.wrap:has(>.head)>.head,.section>.wrap.split>.head,.panel.split>.head{position:sticky;top:calc(var(--hdr) + 28px);counter-increment:sec;margin:0}
+.section>.wrap:has(>.head)>.head::before,.section>.wrap.split>.head::before,.panel.split>.head::before{content:counter(sec,decimal-leading-zero);display:block;font-size:60px;font-weight:700;letter-spacing:-.05em;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--metal-lite);margin-bottom:14px}
+.section>.wrap:has(>.head)>.head .h2,.section>.wrap.split>.head .h2{font-size:clamp(24px,2.4vw,32px)}
+
+/* Содержание разделов — на мягких белых панелях, чтобы блоки читались отдельно */
+.pairs,.algo-steps,.faq{background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r-lg);padding:6px clamp(18px,2.4vw,32px);box-shadow:0 14px 40px -32px rgba(var(--ink-rgb),.35)}
+.faq{padding-block:4px}
+/* Боли клиента: иконка, вопрос, ответ */
+.pairs{grid-template-columns:1fr!important;gap:0!important}
+.pair{display:grid!important;grid-template-columns:52px minmax(0,1fr);gap:18px;align-items:start;background:none!important;box-shadow:none!important;border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;padding:22px 0!important}
+.pair:first-child{border-top:0!important}
+.pain-ic{width:52px;height:52px;border-radius:14px;background:var(--accent-soft);color:var(--accent-ink);display:grid;place-items:center}
+.pain-ic svg{width:26px;height:26px}
+.pain-ic .acc{stroke:var(--metal)}
+.pair .q,.pair .a{display:block!important}
+.pair .q::before,.pair .a::before{display:none!important}
+.pair .q{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.35}
+.pair .a{margin-top:6px;font-size:15.5px;line-height:1.55;color:var(--ink-2)}
+.pair .more-link{display:inline-block;margin-top:6px}
+
+/* Этапы: без карточки, линии между шагами, «Что получаете» отдельной плашкой */
+.algo{grid-template-columns:1fr!important;background:none;box-shadow:none;border-radius:0;overflow:visible}
+.algo-h{display:none}
+.algo-step{padding:20px 0!important;border-bottom:1px solid var(--line)!important}
+.algo-step:last-child{border-bottom:0!important}
+.algo-step::before{background:var(--accent);color:#fff}
+.algo-out{margin-top:20px;border-radius:var(--r-md);border:1px solid rgba(var(--accent-rgb),.18)}
+
+@media (max-width:900px){
+  .section>.wrap:has(>.head),.section>.wrap.split,.panel.split{grid-template-columns:1fr!important;gap:22px}
+  .section>.wrap:has(>.head)>.head,.section>.wrap.split>.head,.panel.split>.head{position:static}
+  .section>.wrap:has(>.head)>.head::before,.section>.wrap.split>.head::before,.panel.split>.head::before{font-size:42px;margin-bottom:10px}
+  .ph .brief ul{grid-template-columns:1fr 1fr;row-gap:18px}
+  .ph .brief li:nth-child(3){border-left:0!important;padding-left:0!important}
+  .ph::before{inset:0 0 0 30%}
+}
+@media (max-width:640px){
+  .pair{grid-template-columns:44px minmax(0,1fr);gap:14px;padding:18px 0!important}
+  .pain-ic{width:44px;height:44px;border-radius:12px}
+  .pain-ic svg{width:22px;height:22px}
+  .pair .q{font-size:16px}
+  .ph .brief li span:last-child{font-size:16.5px}
+}

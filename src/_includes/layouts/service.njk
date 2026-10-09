@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 ---
 {#- Страница услуги. Всё содержимое — в front matter страницы. -#}
-{%- from "partials/icons.njk" import icon -%}
+{%- from "partials/icons.njk" import icon, pain -%}
 {%- from "partials/cta.njk" import cta with context -%}
 {%- from "partials/blocks.njk" import brief, cardsBlock, faqBlock -%}
 
@@ -20,7 +20,7 @@ layout: layouts/base.njk
 <section class="section"><div class="wrap">
   <div class="head"><span class="eyebrow">С чем приходят</span><h2 class="h2">{{ pairsTitle }}</h2></div>
   <div class="pairs">
-    {%- for p in pairs %}<div class="pair"><p class="q">{{ p.q }}</p><p class="a"><span>{{ p.a | safe }}</span></p></div>{% endfor %}
+    {%- for p in pairs %}<div class="pair">{% if p.ic %}<span class="pain-ic">{{ pain(p.ic) | safe }}</span>{% endif %}<div class="pair-b"><p class="q">{{ p.q }}</p><p class="a">{{ p.a | safe }}</p></div></div>{% endfor %}
   </div>
 </div></section>
 {%- endif %}

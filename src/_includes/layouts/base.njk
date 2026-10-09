@@ -60,8 +60,8 @@
       {{ nav.desktop(site.menu, page.url) }}
     </nav>
     <div class="hdr-act">
-      <a class="hdr-tel" href="{{ site.phoneHref }}" data-goal="call">{{ site.phone }}</a>
-      <a class="btn btn-accent btn-sm" href="{{ site.telegram }}" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
+      <a class="btn btn-accent hdr-tel" href="{{ site.phoneHref }}" data-goal="call" aria-label="Позвонить {{ site.phone }}">{{ icon("phone") | safe }}<span><small>Позвонить</small>{{ site.phone }}</span></a>
+      <a class="btn btn-line hdr-write" href="{{ site.telegram }}" target="_blank" rel="noopener" data-goal="write_telegram">{{ icon("tg") | safe }} Написать</a>
       <button class="burger" data-mnav="open" aria-label="Открыть меню"><span></span></button>
     </div>
   </div>
