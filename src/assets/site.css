@@ -178,9 +178,11 @@ ul,ol{margin:0;padding:0;list-style:none}
 .cases .eyebrow{color:var(--metal-lite)}
 .cases .eyebrow::before{background:var(--metal-lite)}
 .cases .head .lead{color:rgba(255,255,255,.7)}
-.cases-grid{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:var(--r-md);overflow:hidden}
-.case{background:var(--dark);padding:clamp(20px,2.2vw,30px);display:flex;flex-direction:column;gap:10px;transition:background-color .3s}
-a.case:hover{background:var(--dark-hi)}
+/* Карточки растягиваются на всю строку: при любом их числе пустых ячеек нет. */
+.cases-grid{display:flex;flex-wrap:wrap;gap:12px}
+.case{flex:1 1 260px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-md);
+  padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:10px;transition:background-color .3s,border-color .3s}
+a.case:hover{background:rgba(255,255,255,.08);border-color:rgba(198,164,107,.5)}
 .case h3{font-size:17px;font-weight:600;letter-spacing:-.022em;line-height:1.25}
 .case p{font-size:14px;line-height:1.55;color:rgba(255,255,255,.66)}
 .case .go{margin-top:auto;padding-top:6px;font-size:13.5px;font-weight:600;color:var(--metal-lite)}
@@ -335,7 +337,7 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 }
 @media (max-width:900px){
   .ph-grid,.split,.algo,.cta{grid-template-columns:1fr}
-  .cases-grid,.cards,.areas{--cols:2;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards,.areas{--cols:2;grid-template-columns:repeat(2,minmax(0,1fr))}
   .pairs{grid-template-columns:1fr}
   .cta .btn-row{justify-content:flex-start}
 }
@@ -345,7 +347,7 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
   .sticky-bar{display:grid}
   .hdr-tel{display:none}
   .hdr .hdr-act .btn{display:none}
-  .cases-grid,.cards,.areas{grid-template-columns:1fr}
+  .cards,.areas{grid-template-columns:1fr}
   .post.big{grid-column:auto}
   .office{grid-template-columns:auto 1fr}
   .office .btn{grid-column:1/-1}
