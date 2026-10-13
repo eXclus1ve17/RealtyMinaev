@@ -27,7 +27,8 @@ class TelegramAPI:
         self._relay_key = relay_key or ""
 
     def _headers(self, content_type):
-        h = {"Content-Type": content_type}
+        # Cloudflare отклоняет запросы с подписью Python-urllib (403), поэтому своя подпись
+        h = {"Content-Type": content_type, "User-Agent": "RealtyMinaevBot/1.0"}
         if self._relay_key:
             h["X-Relay-Key"] = self._relay_key
         return h

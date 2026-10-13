@@ -79,7 +79,7 @@ if ($cfg['tg_token'] !== '' && $cfg['tg_chat'] !== '') {
     $text = "<b>Заявка с сайта</b>\n\nИмя: " . $h($name !== '' ? $name : '—') . "\nТелефон: " . $h($phone)
           . "\nСтраница: " . $h($where) . "\nВремя: " . $when . " (МСК)\nСогласие на обработку ПД: да";
     $ctx = stream_context_create(['http' => [
-        'method' => 'POST', 'timeout' => 8, 'ignore_errors' => true,
+        'method' => 'POST', 'timeout' => 8, 'ignore_errors' => true, 'user_agent' => 'RealtyMinaevSite/1.0',
         'header' => "Content-Type: application/json\r\n" . ($cfg['tg_relay_key'] !== '' ? 'X-Relay-Key: ' . $cfg['tg_relay_key'] . "\r\n" : ''),
         'content' => json_encode(['chat_id' => $cfg['tg_chat'], 'text' => $text, 'parse_mode' => 'HTML'], JSON_UNESCAPED_UNICODE),
     ]]);
