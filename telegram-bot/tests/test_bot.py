@@ -106,12 +106,10 @@ class BotTest(unittest.TestCase):
         self.assertIn("Дмитрий Минаев", msg["text"])
         btns = buttons(msg["reply_markup"])
         self.assertEqual(btns[0]["web_app"]["url"], Cfg.webapp_url)
-        for key in ("services", "faq", "lead", "site", "channel", "write"):
-            self.assertIn(self.b(key), labels(msg["reply_markup"]))
+        self.assertEqual(labels(msg["reply_markup"]), [
+            self.b("card"), self.b("services"), self.b("faq"), self.b("lead"), self.b("site")])
         urls = {b["text"]: b.get("url") for b in btns}
         self.assertEqual(urls[self.b("site")], "https://realtyminaev.ru")
-        self.assertEqual(urls[self.b("channel")], "https://t.me/EasyRealtyMinaev")
-        self.assertEqual(urls[self.b("write")], "https://t.me/RealtyMinaev")
 
     def test_menu_without_webapp_url_uses_link(self):
         self.bot.cfg = type("C", (), {"admin_chat_id": ADMIN, "webapp_url": ""})()
@@ -141,7 +139,7 @@ class BotTest(unittest.TestCase):
                 msg = self.api.last()
                 self.assertIn(q["q"].replace("<", "&lt;"), msg["text"])
                 lbl = labels(msg["reply_markup"])
-                for key in ("lead", "back", "menu"):
+                for key in ("lead", "write", "back", "menu"):
                     self.assertIn(self.b(key), lbl)
 
     def test_bad_callback_data_does_not_crash(self):
@@ -178,6 +176,27 @@ class BotTest(unittest.TestCase):
             self.assertIn(part, t)
         self.assertEqual(self.api.last()["text"], self.content["lead"]["done"].strip())
         self.assertEqual(self.bot.state.get(USER["id"]), (None, {}))  # заявка не хранится
+
+    def test_name_from_profile_button(self):
+        self.press("lead")
+        self.press("l:t:sell")
+        prompt = self.api.last()
+        self.assertEqual(buttons(prompt["reply_markup"])[0], {"text": "Иван", "callback_data": "l:n:tg"})
+        self.press("l:n:tg")
+        self.assertEqual(self.bot.state.get(USER["id"]), ("consent", self.bot.state.get(USER["id"])[1]))
+        self.assertEqual(self.bot.state.get(USER["id"])[1]["name"], "Иван")
+
+    def test_no_profile_button_for_unusable_name(self):
+        user = {"id": 778, "first_name": "🔥🔥"}
+        self.press("lead", user)
+        self.press("l:t:sell", user)
+        self.assertEqual(labels(self.api.last()["reply_markup"]), [self.b("cancel")])
+
+    def test_services_two_per_row(self):
+        self.press("svc")
+        rows = self.api.last()["reply_markup"]["inline_keyboard"]
+        self.assertTrue(all(len(r) <= 2 for r in rows))
+        self.assertEqual(len(rows[0]), 2)
 
     def test_skip_comment(self):
         self.full_lead(comment=None)

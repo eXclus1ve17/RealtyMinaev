@@ -43,6 +43,14 @@ def format_phone(phone):
     return phone
 
 
+def profile_name(user):
+    """Имя из профиля Telegram для кнопки «назваться одним нажатием»."""
+    name = (user.get("first_name") or "").strip()
+    if not name or len(name) > NAME_MAX or not re.search(r"[^\W\d_]", name):
+        return ""
+    return name[:30]
+
+
 def esc(text):
     return html.escape(text or "", quote=False)
 
@@ -87,6 +95,11 @@ class Bot:
     def kb(rows):
         return {"inline_keyboard": rows}
 
+    @staticmethod
+    def pairs(buttons):
+        """Кнопки по две в ряд — удобно на экране телефона."""
+        return [buttons[i:i + 2] for i in range(0, len(buttons), 2)]
+
     def cb(self, key, data):
         return {"text": self.b(key), "callback_data": data}
 
@@ -112,8 +125,7 @@ class Bot:
             [card],
             [self.cb("services", "svc"), self.cb("faq", "faq")],
             [self.cb("lead", "lead")],
-            [self.url("site", links["site"]), self.url("channel", links["channel"])],
-            [self.btn_write()],
+            [self.url("site", links["site"])],
         ])
 
     # ---------- отправка ----------
@@ -206,7 +218,7 @@ class Bot:
 
     def show_services(self, cq):
         items = self.c["services"]["items"]
-        rows = [[{"text": s["button"], "callback_data": "svc:" + s["key"]}] for s in items]
+        rows = self.pairs([{"text": s["button"], "callback_data": "svc:" + s["key"]} for s in items])
         rows.append([self.btn_menu()])
         self.show(cq, self.c["services"]["title"], self.kb(rows))
 
@@ -222,7 +234,7 @@ class Bot:
 
     def show_faq(self, cq):
         cats = self.c["faq"]["categories"]
-        rows = [[{"text": c["button"], "callback_data": "faq:" + c["key"]}] for c in cats]
+        rows = self.pairs([{"text": c["button"], "callback_data": "faq:" + c["key"]} for c in cats])
         rows.append([self.btn_menu()])
         self.show(cq, self.c["faq"]["title"], self.kb(rows))
 
@@ -245,6 +257,7 @@ class Bot:
         text = "<b>%s</b>\n\n%s" % (esc(q["q"]), q["a"].strip())
         self.show(cq, text, self.kb([
             [self.cb("lead", "lead")],
+            [self.btn_write()],
             [self.cb("back", "faq:" + key), self.btn_menu()],
         ]))
 
@@ -252,24 +265,25 @@ class Bot:
 
     def lead_start(self, user):
         uid = user["id"]
-        self.state.set(uid, TASK, {"username": user.get("username") or ""})
+        self.state.set(uid, TASK, {
+            "username": user.get("username") or "",
+            "tg_name": profile_name(user),
+        })
         self.ask_task(uid)
 
     def ask_task(self, uid):
         tasks = self.c["lead"]["tasks"]
-        rows, row = [], []
-        for t in tasks:
-            row.append({"text": t["button"], "callback_data": "l:t:" + t["key"]})
-            if len(row) == 2:
-                rows.append(row)
-                row = []
-        if row:
-            rows.append(row)
+        rows = self.pairs([{"text": t["button"], "callback_data": "l:t:" + t["key"]} for t in tasks])
         rows.append([self.btn_cancel()])
         self.send(uid, self.c["lead"]["task_prompt"], self.kb(rows))
 
-    def ask_name(self, uid):
-        self.send(uid, self.c["lead"]["name_prompt"], self.kb([[self.btn_cancel()]]))
+    def ask_name(self, uid, data=None):
+        rows = []
+        tg_name = (data or {}).get("tg_name")
+        if tg_name:
+            rows.append([{"text": tg_name, "callback_data": "l:n:tg"}])
+        rows.append([self.btn_cancel()])
+        self.send(uid, self.c["lead"]["name_prompt"], self.kb(rows))
 
     def ask_consent(self, uid):
         text = self.c["lead"]["consent_prompt"].replace("{privacy_url}", self.c["links"]["privacy"])
@@ -317,7 +331,7 @@ class Bot:
         nxt = order[step_done]
         self.state.set(uid, nxt, data)
         if nxt == NAME:
-            self.ask_name(uid)
+            self.ask_name(uid, data)
         elif nxt == CONSENT:
             self.ask_consent(uid)
         elif nxt == PHONE:
@@ -373,6 +387,9 @@ class Bot:
         if action.startswith("t:") and step in (TASK, EDIT):
             data["task"] = action[2:]
             return self.next_after(uid, data, TASK)
+        if action == "n:tg" and step == NAME and data.get("tg_name"):
+            data["name"] = data["tg_name"]
+            return self.next_after(uid, data, NAME)
         if action.startswith("consent:") and step == CONSENT:
             if action.endswith(":yes"):
                 data["consent_at"] = datetime.now(MSK).strftime("%d.%m.%Y %H:%M")
@@ -400,7 +417,7 @@ class Bot:
                 return self.ask_confirm(uid, data)
             data["editing"] = True
             target, ask = {
-                "task": (TASK, self.ask_task), "name": (NAME, self.ask_name),
+                "task": (TASK, self.ask_task), "name": (NAME, lambda u: self.ask_name(u, data)),
                 "phone": (PHONE, self.ask_phone), "comment": (COMMENT, self.ask_comment),
             }.get(field, (None, None))
             if target:

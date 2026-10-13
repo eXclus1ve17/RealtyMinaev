@@ -50,7 +50,7 @@ def validate(data):
         raise ContentError("файл пуст или повреждён")
 
     for path in (
-        "links.site", "links.channel", "links.dmitry", "links.privacy", "links.card_fallback",
+        "links.site", "links.dmitry", "links.privacy", "links.card_fallback",
         "welcome", "menu_text", "fallback", "error",
         "services.title", "faq.title",
         "lead.task_prompt", "lead.name_prompt", "lead.name_invalid", "lead.consent_prompt",
@@ -65,7 +65,7 @@ def validate(data):
 
     buttons = _req(data, "buttons", problems) or {}
     for key in (
-        "card", "services", "faq", "lead", "site", "channel", "write", "back", "menu",
+        "card", "services", "faq", "lead", "site", "write", "back", "menu",
         "more_on_site", "consent_yes", "consent_no", "share_phone", "skip", "send", "edit",
         "cancel", "retry", "edit_task", "edit_name", "edit_phone", "edit_comment",
     ):
