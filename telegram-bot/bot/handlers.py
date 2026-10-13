@@ -77,6 +77,11 @@ class Bot:
                 cq = update["callback_query"]
                 chat_id = (cq.get("message") or {}).get("chat", {}).get("id")
                 self.on_callback(cq)
+            elif "business_connection" in update:
+                self.on_business_connection(update["business_connection"])
+            elif "business_message" in update:
+                # ошибки в личных чатах владельца клиенту не показываем
+                return self.on_business_message(update["business_message"])
         except Exception as e:  # бот не должен молчать
             # в лог — только тип ошибки и стек, без текста сообщений и данных клиента
             log.error("update failed: %s\n%s", type(e).__name__, "".join(traceback.format_tb(e.__traceback__)))
@@ -286,7 +291,9 @@ class Bot:
         self.send(uid, self.c["lead"]["name_prompt"], self.kb(rows))
 
     def ask_consent(self, uid):
-        text = self.c["lead"]["consent_prompt"].replace("{privacy_url}", self.c["links"]["privacy"])
+        links = self.c["links"]
+        text = (self.c["lead"]["consent_prompt"]
+                .replace("{privacy_url}", links["privacy"]).replace("{consent_url}", links["consent"]))
         self.send(uid, text, self.kb([
             [self.cb("consent_yes", "l:consent:yes"), self.cb("consent_no", "l:consent:no")],
             [self.btn_cancel()],
@@ -452,3 +459,60 @@ class Bot:
         if name:
             return "@" + esc(name)
         return '<a href="tg://user?id=%d">профиль</a> (username не указан)' % uid
+
+    # ---------- Telegram Business: автоответ в личных сообщениях ----------
+
+    def _business_rights(self, bc):
+        rights = bc.get("rights") or {}
+        return bool(bc.get("can_reply") or rights.get("can_reply"))
+
+    def on_business_connection(self, bc):
+        owner = (bc.get("user") or {}).get("id")
+        if owner != self.cfg.admin_chat_id:
+            return  # к боту подключился чужой аккаунт — не работаем на него
+        self.state.set_business(bc["id"], owner, self._business_rights(bc), bc.get("is_enabled", True))
+
+    def _business_owner(self, conn_id):
+        known = self.state.get_business(conn_id)
+        if known is None:
+            # подключение было сделано до запуска бота — спрашиваем у Telegram
+            bc = self.api.call("getBusinessConnection", business_connection_id=conn_id)
+            self.on_business_connection(bc)
+            known = self.state.get_business(conn_id)
+        return known
+
+    def on_business_message(self, msg):
+        try:
+            conn_id = msg.get("business_connection_id")
+            if not conn_id or (msg.get("chat") or {}).get("type") != "private":
+                return
+            known = self._business_owner(conn_id)
+            if not known:
+                return
+            owner, can_reply, enabled = known
+            if owner != self.cfg.admin_chat_id or not (can_reply and enabled):
+                return
+            chat_id = msg["chat"]["id"]
+            sender = msg.get("from") or {}
+            salt = getattr(self.cfg, "webhook_secret", "") or str(owner)
+            if sender.get("id") == owner:
+                # вы уже пишете в этот чат сами — автоответ там не нужен
+                self.state.mark_greeted(salt, chat_id)
+                return
+            if sender.get("is_bot") or self.state.was_greeted(salt, chat_id):
+                return
+            biz = self.c["business"]
+            links = self.c["links"]
+            self.api.call(
+                "sendMessage", business_connection_id=conn_id, chat_id=chat_id,
+                text=biz["greeting"].strip(), parse_mode="HTML",
+                link_preview_options={"is_disabled": True},
+                reply_markup=self.kb([
+                    [{"text": self.b("biz_menu"), "url": links["bot"] + "?start=menu"}],
+                    [{"text": self.b("biz_lead"), "url": links["bot"] + "?start=lead"}],
+                    [{"text": self.b("biz_card"), "url": links["card_fallback"]}],
+                ]),
+            )
+            self.state.mark_greeted(salt, chat_id)
+        except Exception as e:
+            log.error("business message failed: %s\n%s", type(e).__name__, "".join(traceback.format_tb(e.__traceback__)))

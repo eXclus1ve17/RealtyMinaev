@@ -46,7 +46,7 @@ def main():
             if not base.startswith("https://"):
                 sys.exit("PUBLIC_URL в .env должен начинаться с https://")
             api.call("setWebhook", url=base + cfg.webhook_path, secret_token=cfg.webhook_secret,
-                     allowed_updates=["message", "callback_query"], drop_pending_updates=True)
+                     allowed_updates=["message", "callback_query", "business_connection", "business_message"], drop_pending_updates=True)
             print("Вебхук установлен: %s%s" % (base, cfg.webhook_path))
         elif cmd == "delete-webhook":
             api.call("deleteWebhook")

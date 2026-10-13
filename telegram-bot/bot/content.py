@@ -58,6 +58,7 @@ def validate(data):
         "lead.comment_prompt", "lead.comment_too_long", "lead.confirm", "lead.edit_prompt",
         "lead.done", "lead.send_failed", "lead.cancelled", "lead.use_buttons",
         "lead.no_comment", "lead.admin_message",
+        "links.bot", "links.consent", "business.greeting",
     ):
         value = _req(data, path, problems)
         if isinstance(value, str):
@@ -68,6 +69,7 @@ def validate(data):
         "card", "services", "faq", "lead", "site", "write", "back", "menu",
         "more_on_site", "consent_yes", "consent_no", "share_phone", "skip", "send", "edit",
         "cancel", "retry", "edit_task", "edit_name", "edit_phone", "edit_comment",
+        "biz_menu", "biz_lead", "biz_card",
     ):
         label = buttons.get(key) if isinstance(buttons, dict) else None
         if not label:

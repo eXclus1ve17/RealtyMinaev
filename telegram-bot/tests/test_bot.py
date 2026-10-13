@@ -343,6 +343,92 @@ class BotTest(unittest.TestCase):
         self.assertNotIn("79261234567", "".join(logs.output))
 
 
+class BusinessTest(unittest.TestCase):
+    """Автоответ в личных сообщениях Дмитрия через Telegram Business."""
+
+    def setUp(self):
+        self.api = FakeAPI()
+        self.content = load(ROOT / "content.yaml")
+        self.bot = Bot(self.api, self.content, StateStore(":memory:"), Cfg())
+
+    def connect(self, owner=ADMIN, can_reply=True, enabled=True, conn="bc1", new_rights=False):
+        bc = {"id": conn, "user": {"id": owner}, "user_chat_id": owner, "is_enabled": enabled}
+        if new_rights:
+            bc["rights"] = {"can_reply": can_reply}
+        else:
+            bc["can_reply"] = can_reply
+        self.bot.handle_update({"update_id": 1, "business_connection": bc})
+
+    def biz(self, sender, chat=900, conn="bc1", text="Здравствуйте, продаю квартиру"):
+        self.bot.handle_update({"update_id": 2, "business_message": {
+            "message_id": 5, "business_connection_id": conn, "from": sender,
+            "chat": {"id": chat, "type": "private"}, "text": text}})
+
+    def greetings(self):
+        return [p for m, p in self.api.calls if m == "sendMessage" and p.get("business_connection_id")]
+
+    def test_greets_new_client_once_with_buttons(self):
+        self.connect()
+        self.biz({"id": 900, "first_name": "Анна"})
+        self.biz({"id": 900, "first_name": "Анна"}, text="ещё вопрос")
+        sent = self.greetings()
+        self.assertEqual(len(sent), 1)
+        self.assertEqual(sent[0]["chat_id"], 900)
+        urls = [b["url"] for b in buttons(sent[0]["reply_markup"])]
+        self.assertIn("https://t.me/RealtyMinaev_bot?start=lead", urls)
+        self.assertIn("https://t.me/RealtyMinaev_bot?start=menu", urls)
+
+    def test_no_greeting_after_owner_wrote_first(self):
+        self.connect()
+        self.biz({"id": ADMIN, "first_name": "Дмитрий"}, chat=901)
+        self.biz({"id": 901, "first_name": "Олег"}, chat=901)
+        self.assertEqual(self.greetings(), [])
+
+    def test_foreign_account_connection_ignored(self):
+        self.connect(owner=12345)
+        self.api.call = lambda method, **p: {"id": "bc1", "user": {"id": 12345}, "can_reply": True, "is_enabled": True}
+        self.biz({"id": 900, "first_name": "Анна"})
+        self.assertIsNone(self.bot.state.get_business("bc1"))
+
+    def test_no_reply_rights_or_disabled(self):
+        self.connect(can_reply=False)
+        self.biz({"id": 900, "first_name": "Анна"})
+        self.connect(conn="bc2", enabled=False)
+        self.biz({"id": 902, "first_name": "Иван"}, chat=902, conn="bc2")
+        self.assertEqual(self.greetings(), [])
+
+    def test_new_style_rights_field(self):
+        self.connect(new_rights=True)
+        self.biz({"id": 900, "first_name": "Анна"})
+        self.assertEqual(len(self.greetings()), 1)
+
+    def test_connection_made_before_launch_is_fetched(self):
+        orig = self.api.call
+
+        def call(method, **p):
+            if method == "getBusinessConnection":
+                self.api.calls.append((method, p))
+                return {"id": p["business_connection_id"], "user": {"id": ADMIN}, "can_reply": True, "is_enabled": True}
+            return orig(method, **p)
+        self.api.call = call
+        self.biz({"id": 900, "first_name": "Анна"}, conn="old")
+        self.assertEqual(len(self.greetings()), 1)
+
+    def test_greeting_failure_is_silent(self):
+        self.connect()
+        self.api.fail_chat = 900
+        with self.assertLogs("bot", level="ERROR"):
+            self.biz({"id": 900, "first_name": "Анна"})
+        self.assertEqual([p for m, p in self.api.calls if m == "sendMessage" and p["chat_id"] == 900 and not p.get("business_connection_id")], [])
+
+    def test_message_text_not_stored(self):
+        self.connect()
+        self.biz({"id": 900, "first_name": "Анна"}, text="мой телефон 89261234567")
+        dump = "\n".join(self.bot.state._conn.iterdump())
+        self.assertNotIn("89261234567", dump)
+        self.assertNotIn("Анна", dump)
+
+
 class PhoneTest(unittest.TestCase):
     def test_formats(self):
         ok = {
