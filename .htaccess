@@ -1,0 +1,47 @@
+# realtyminaev.ru — настройки Apache (хостинг reg.ru, Host-0)
+AddDefaultCharset UTF-8
+Options -Indexes
+ErrorDocument 404 /404.html
+
+AddType image/avif .avif
+AddType image/webp .webp
+AddType font/woff2 .woff2
+AddType text/vcard .vcf
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # www.realtyminaev.ru → https://realtyminaev.ru одним редиректом
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+  # /index.html → / (без дублей страниц)
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+</IfModule>
+
+# Служебные файлы не открываются из интернета
+<FilesMatch "(^\.|\.(csv|log|env|ini|sh|py|yaml|yml|bak|old)$|^lead-config\.php$)">
+  Require all denied
+</FilesMatch>
+<Files "lead.php">
+  Require all granted
+</Files>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # HTML всегда свежий, шрифты — на год, картинки, стили и скрипты — на 30 дней
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(avif|webp|jpe?g|png|svg|ico|css|js)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/xml text/plain text/vcard
+</IfModule>

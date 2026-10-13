@@ -2,8 +2,9 @@
 // Заявка «Перезвоните мне».
 // 1) Заявка записывается в файл на хостинге (первичная запись персональных
 //    данных — на территории РФ, ч. 5 ст. 18 152-ФЗ).
-// 2) Полные данные уходят письмом на почту брокера.
-// Почта задана ниже; переопределить можно в lead-config.php вне репозитория.
+// 2) Полные данные уходят брокеру в Telegram (через бота) и копией на почту.
+// Токен бота и chat_id — только в lead-config.php вне папки сайта, его создаёт
+// скрипт установки бота. Почта задана ниже; переопределить можно там же.
 
 declare(strict_types=1);
 date_default_timezone_set('Europe/Moscow');
@@ -46,7 +47,7 @@ $lock = sys_get_temp_dir() . '/lead_' . md5($ip);
 if (is_file($lock) && time() - filemtime($lock) < 30) done(true);   // повтор в течение 30 с — уже приняли
 @touch($lock);
 
-$cfg = ['email' => 'd.m.minaev@landis-estate.com', 'from' => 'no-reply@realtyminaev.ru'];
+$cfg = ['email' => 'minaevdmitry@gmail.com', 'from' => 'no-reply@realtyminaev.ru', 'tg_token' => '', 'tg_chat' => ''];
 foreach ([dirname(__DIR__) . '/lead-config.php', __DIR__ . '/lead-config.php'] as $f) {
     if (is_file($f)) { $cfg = array_merge($cfg, (array)require $f); break; }
 }
@@ -71,7 +72,21 @@ $saved = @file_put_contents($log,
     implode(';', array_map(fn($v) => '"' . str_replace('"', '""', $v) . '"', [$when, $name, $phone, $where, 'согласие: да'])) . "\n",
     FILE_APPEND | LOCK_EX) !== false;
 
-// 2. письмо брокеру
+// 2. сообщение брокеру в Telegram
+$tg = false;
+if ($cfg['tg_token'] !== '' && $cfg['tg_chat'] !== '') {
+    $h = fn(string $v) => htmlspecialchars($v, ENT_NOQUOTES, 'UTF-8');
+    $text = "<b>Заявка с сайта</b>\n\nИмя: " . $h($name !== '' ? $name : '—') . "\nТелефон: " . $h($phone)
+          . "\nСтраница: " . $h($where) . "\nВремя: " . $when . " (МСК)\nСогласие на обработку ПД: да";
+    $ctx = stream_context_create(['http' => [
+        'method' => 'POST', 'timeout' => 8, 'ignore_errors' => true,
+        'header' => "Content-Type: application/json\r\n",
+        'content' => json_encode(['chat_id' => $cfg['tg_chat'], 'text' => $text, 'parse_mode' => 'HTML'], JSON_UNESCAPED_UNICODE),
+    ]]);
+    $resp = @file_get_contents('https://api.telegram.org/bot' . $cfg['tg_token'] . '/sendMessage', false, $ctx);
+    $tg = is_string($resp) && strpos($resp, '"ok":true') !== false;
+}
+// 3. письмо брокеру
 $body = "Заявка с сайта realtyminaev.ru\n\nИмя: " . ($name !== '' ? $name : '—') . "\nТелефон: " . $phone
       . "\nСтраница: " . $where . "\nВремя: " . $when . "\nСогласие на обработку ПД: да";
 $subject = '=?UTF-8?B?' . base64_encode('Заявка с сайта: ' . ($topic !== '' ? $topic : 'перезвонить')) . '?=';
@@ -79,4 +94,4 @@ $headers = "Content-Type: text/plain; charset=utf-8\r\nFrom: " . $cfg['from'];
 $mailed = @mail($cfg['email'], $subject, $body, $headers);
 
 // заявка считается принятой, если записана или отправлена
-done($saved || $mailed, ($saved || $mailed) ? '' : 'send');
+done($saved || $tg || $mailed, ($saved || $tg || $mailed) ? '' : 'send');

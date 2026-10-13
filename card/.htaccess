@@ -1,0 +1,37 @@
+AddDefaultCharset UTF-8
+AddType text/vcard .vcf
+AddCharset UTF-8 .vcf
+AddType font/woff2 .woff2
+
+# Всегда по https
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /card/
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Короткая ссылка для сохранения контакта
+  RewriteRule ^contact/?$ minaev.vcf [L]
+</IfModule>
+
+# Сжатие текста
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/vcard image/svg+xml
+</IfModule>
+
+# Кэш: страница всегда свежая, шрифты надолго, картинки на неделю
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(jpg|jpeg|png|css)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <Files "minaev.vcf">
+    Header set Cache-Control "no-cache"
+    Header set Content-Disposition "attachment; filename=minaev.vcf"
+  </Files>
+</IfModule>

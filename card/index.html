@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Дмитрий Минаев — брокер по недвижимости</title>
+<meta name="description" content="Вторичка, новостройки без комиссии, загородная недвижимость, коммерция под доход. Москва.">
+<meta name="theme-color" content="#0b0a09">
+<link rel="canonical" href="https://realtyminaev.ru/card/">
+<meta name="robots" content="noindex, follow">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="realtyminaev.ru">
+<meta property="og:url" content="https://realtyminaev.ru/card/">
+<meta property="og:title" content="Дмитрий Минаев — брокер по недвижимости">
+<meta property="og:description" content="Вторичка · Новостройки без комиссии · Загородная недвижимость · Коммерция под доход">
+<meta property="og:image" content="https://realtyminaev.ru/card/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" href="fonts/onest-cyrillic-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root{
+    --bg:#0b0a09; --surface:#151311; --line:rgba(214,193,154,.16);
+    --champ:#d6c19a; --champ-hi:#efe2c6; --champ-lo:#a88d5f; --text:#f4efe7; --muted:#8f877b;
+    --ease:cubic-bezier(.22,.8,.24,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;background:var(--bg)}
+  body{background:var(--bg);color:var(--text);font-family:'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    min-height:100vh;display:flex;justify-content:center;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+  a{color:inherit;text-decoration:none}
+  .glow{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .glow i{position:absolute;border-radius:50%;filter:blur(60px);opacity:0;animation:glowIn 2.4s ease 1s forwards}
+  .glow i:nth-child(1){width:380px;height:380px;left:-140px;top:55%;background:radial-gradient(circle,rgba(214,193,154,.16),transparent 70%)}
+  .glow i:nth-child(2){width:320px;height:320px;right:-150px;top:78%;background:radial-gradient(circle,rgba(168,141,95,.14),transparent 70%)}
+  .glow i:nth-child(1){animation:glowIn 2.4s ease 1s forwards, drift1 26s ease-in-out 1s infinite alternate}
+  .glow i:nth-child(2){animation:glowIn 2.4s ease 1.4s forwards, drift2 32s ease-in-out 1.4s infinite alternate}
+  @keyframes glowIn{to{opacity:1}}
+  @keyframes drift1{0%{transform:translate(0,0)}50%{transform:translate(90px,-60px)}100%{transform:translate(40px,-140px)}}
+  @keyframes drift2{0%{transform:translate(0,0)}50%{transform:translate(-80px,-90px)}100%{transform:translate(-30px,-180px)}}
+  .wrap{position:relative;z-index:1;width:100%;max-width:460px;padding:0 0 calc(36px + env(safe-area-inset-bottom))}
+
+  /* ===== Шапка ===== */
+  .hero{position:relative;aspect-ratio:4/4.5;overflow:hidden}
+  .hero img{width:100%;height:100%;object-fit:cover;object-position:50% 26%;display:block;
+    transform:scale(1.06);animation:heroIn 1.6s var(--ease) forwards}
+  .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(11,10,9,.55) 0%,rgba(11,10,9,0) 20%,rgba(11,10,9,0) 50%,rgba(11,10,9,.88) 82%,var(--bg) 100%)}
+  .mark{position:absolute;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:3;
+    display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:100px;
+    font-size:11px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--champ-hi);
+    background:rgba(11,10,9,.35);border:1px solid rgba(239,226,198,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    transition:border-color .3s, background .3s}
+  .mark svg{width:11px;height:11px;opacity:.75}
+  .mark:active{background:rgba(11,10,9,.6)}
+  @media (hover:hover){.mark:hover{border-color:var(--champ)}}
+  .id{position:absolute;left:24px;right:24px;bottom:4px;z-index:2}
+  h1{font-weight:600;font-size:clamp(27px,8.6vw,38px);line-height:1;letter-spacing:-.035em;white-space:nowrap}
+  .nm{display:inline-block}
+  .role{margin-top:12px;font-size:14.5px;color:var(--champ);white-space:nowrap}
+
+  .body{padding:0 24px}
+  .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .tag{position:relative;overflow:hidden;font-size:13px;color:#cfc7ba;padding:7px 12px;border:1px solid var(--line);border-radius:100px;
+    opacity:0;transform:translateY(8px) scale(.97);animation:tagIn .8s var(--ease) forwards;
+    transition:border-color .5s var(--ease), color .5s var(--ease), background .5s var(--ease), box-shadow .5s var(--ease);cursor:default;user-select:none}
+  .tag:nth-child(1){animation-delay:.5s}.tag:nth-child(2){animation-delay:.62s}.tag:nth-child(3){animation-delay:.74s}.tag:nth-child(4){animation-delay:.86s}
+  .tag::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;transform:skewX(-20deg);
+    background:linear-gradient(100deg,transparent,rgba(239,226,198,.22),transparent);pointer-events:none}
+  .tag.lit,.tag:active{border-color:rgba(214,193,154,.55);color:var(--champ-hi);background:rgba(214,193,154,.07);box-shadow:0 0 18px -6px rgba(214,193,154,.45)}
+  .tag.lit::after{animation:tagSheen .9s var(--ease)}
+  @media (hover:hover){.tag:hover{border-color:rgba(214,193,154,.55);color:var(--champ-hi);background:rgba(214,193,154,.07)} .tag:hover::after{animation:tagSheen .9s var(--ease)}}
+  @keyframes tagIn{to{opacity:1;transform:none}}
+  @keyframes tagSheen{from{left:-70%}to{left:130%}}
+
+  /* ===== Кнопки ===== */
+  .cta{margin-top:26px;display:grid;gap:10px}
+  .btn{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;height:58px;border-radius:16px;
+    font-size:16.5px;font-weight:600;letter-spacing:.005em;cursor:pointer;border:0;font-family:inherit;width:100%;color:var(--text);
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .3s, border-color .3s}
+  .btn svg{width:20px;height:20px;position:relative;z-index:1}
+  .btn span{position:relative;z-index:1}
+  .btn:active{transform:scale(.97);transition-duration:.12s}
+  @media (hover:hover){.btn:hover{transform:translateY(-2px)}}
+
+  /* Блик, пробегающий по кнопке */
+  .btn::before{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;z-index:0;
+    background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.55) 50%,transparent 100%);
+    transform:skewX(-20deg);opacity:0}
+  .call{background:linear-gradient(180deg,var(--champ-hi) 0%,var(--champ) 60%,#c9b088 100%);color:#16120c;
+    box-shadow:0 10px 30px -12px rgba(214,193,154,.55), inset 0 1px 0 rgba(255,255,255,.6)}
+  .call::before{animation:sheen 4.2s var(--ease) 1.4s infinite}
+  @media (hover:hover){.call:hover{box-shadow:0 16px 40px -12px rgba(214,193,154,.7), inset 0 1px 0 rgba(255,255,255,.6)}}
+  .call .ring{position:relative;z-index:1;display:grid;place-items:center}
+  .call .ring svg{animation:ring 4.2s ease-in-out 2s infinite;transform-origin:50% 50%}
+
+  .write{background:var(--surface);border:1px solid var(--line)}
+  .write::before{background:linear-gradient(100deg,transparent,rgba(214,193,154,.18),transparent)}
+  .write:active::before,.m:active::before{animation:sheen .7s var(--ease)}
+  @media (hover:hover){.write:hover{border-color:rgba(214,193,154,.45)} .write:hover::before{animation:sheen .9s var(--ease)}}
+  .write .chev{transition:transform .4s var(--ease);opacity:.6}
+  .write[aria-expanded="true"]{border-color:rgba(214,193,154,.45)}
+  .write[aria-expanded="true"] .chev{transform:rotate(180deg)}
+
+  .msgr{display:grid;grid-template-columns:1fr 1fr;gap:10px;overflow:hidden;max-height:0;
+    transition:max-height .45s var(--ease)}
+  .msgr.open{max-height:80px}
+  .m{position:relative;overflow:hidden;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    font-weight:600;font-size:15px;border:1px solid var(--champ-lo);color:var(--champ-hi);
+    opacity:0;transform:translateY(-8px);transition:opacity .35s, transform .45s var(--ease), border-color .3s, background .3s}
+  .m::before{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;transform:skewX(-20deg);
+    background:linear-gradient(100deg,transparent,rgba(214,193,154,.25),transparent)}
+  .msgr.open .m{opacity:1;transform:none}
+  .msgr.open .m:nth-child(2){transition-delay:.06s}
+  @media (hover:hover){.m:hover{border-color:var(--champ);background:rgba(214,193,154,.06)} .m:hover::before{animation:sheen .9s var(--ease)}}
+
+  /* ===== Сохранить контакт ===== */
+  .save{position:relative;display:flex;align-items:center;gap:14px;margin-top:26px;padding:20px 20px;border-radius:18px;
+    isolation:isolate;overflow:hidden;transition:transform .35s var(--ease)}
+  .save::before{content:"";position:absolute;inset:-60%;z-index:-2;
+    background:conic-gradient(from 0deg,transparent 0deg,var(--champ-hi) 40deg,transparent 90deg,transparent 180deg,var(--champ-lo) 220deg,transparent 270deg);
+    animation:spin 5s linear infinite}
+  .save::after{content:"";position:absolute;inset:1.5px;border-radius:16.5px;z-index:-1;
+    background:radial-gradient(120% 140% at 0% 0%,#211c15 0%,var(--surface) 55%)}
+  .save:active{transform:scale(.98)}
+  @media (hover:hover){.save:hover{transform:translateY(-2px)}}
+  .save .ic{position:relative;flex:0 0 46px;height:46px;border-radius:50%;display:grid;place-items:center;
+    background:linear-gradient(180deg,var(--champ-hi),var(--champ));color:#16120c}
+  .save .ic::after{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--champ);
+    animation:pulse 2.4s var(--ease) infinite}
+  .save .ic svg{width:22px;height:22px}
+  .save .tx{flex:1}
+  .save .t{font-weight:600;font-size:16.5px}
+  .save .s{font-size:13px;color:var(--muted);margin-top:3px}
+  .save .ar{color:var(--champ);animation:chevBeat 2.4s var(--ease) infinite}
+  .save .ar svg{width:24px;height:24px;display:block}
+
+  .icons{display:flex;justify-content:center;gap:48px;margin-top:26px}
+  .ico{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;padding:0;font-family:inherit;cursor:pointer;-webkit-appearance:none;
+    opacity:0;transform:translateY(10px) scale(.92);animation:icoIn .8s var(--ease) forwards}
+  .ico:nth-child(1){animation-delay:.75s}.ico:nth-child(2){animation-delay:.87s}
+  .ico .c{position:relative;overflow:hidden;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(120% 120% at 30% 20%,#221d16 0%,var(--surface) 60%);border:1px solid var(--line);color:var(--champ);
+    box-shadow:0 8px 22px -12px rgba(0,0,0,.8), inset 0 1px 0 rgba(239,226,198,.06);
+    transition:border-color .4s var(--ease), color .4s var(--ease), box-shadow .4s var(--ease), transform .35s var(--ease)}
+  .ico .c svg{width:24px;height:24px}
+  .ico .c::after{content:"";position:absolute;top:0;left:-80%;width:60%;height:100%;transform:skewX(-20deg);
+    background:linear-gradient(100deg,transparent,rgba(239,226,198,.28),transparent)}
+  .ico .l{font-size:11.5px;color:var(--muted);letter-spacing:.02em;transition:color .4s var(--ease)}
+  .ico:active .c{transform:scale(.92);border-color:var(--champ);color:var(--champ-hi);box-shadow:0 0 24px -6px rgba(214,193,154,.55)}
+  .ico:active .c::after{animation:tagSheen .7s var(--ease)}
+  .ico:active .l{color:var(--champ)}
+  @media (hover:hover){.ico:hover .c{border-color:var(--champ);color:var(--champ-hi);box-shadow:0 0 24px -6px rgba(214,193,154,.5);transform:translateY(-2px)} .ico:hover .c::after{animation:tagSheen .8s var(--ease)} .ico:hover .l{color:var(--champ)}}
+  @keyframes icoIn{to{opacity:1;transform:none}}
+  /* «Написать» в открытом состоянии */
+  .ico .c svg{transition:transform .5s var(--ease)}
+  #write[aria-expanded="true"] .c{border-color:var(--champ);color:var(--champ-hi);box-shadow:0 0 0 4px rgba(214,193,154,.08),0 0 26px -6px rgba(214,193,154,.55)}
+  #write[aria-expanded="true"] .c svg{transform:scale(.9) rotate(-8deg)}
+  #write[aria-expanded="true"] .l{color:var(--champ)}
+  /* Выпадающие мессенджеры */
+  .msgr{display:flex;justify-content:center;gap:10px;max-height:0;overflow:hidden;margin-top:0;
+    transition:max-height .55s var(--ease), margin-top .55s var(--ease)}
+  .msgr.open{max-height:70px;margin-top:20px}
+  .pill{position:relative;overflow:hidden;padding:12px 18px;border-radius:100px;border:1px solid rgba(214,193,154,.35);
+    color:var(--champ-hi);font-size:14.5px;font-weight:500;letter-spacing:.01em;background:rgba(214,193,154,.04);
+    opacity:0;transform:translateY(-14px) scale(.94);filter:blur(4px);
+    transition:opacity .45s var(--ease), transform .55s var(--ease), filter .45s var(--ease), border-color .3s, background .3s, box-shadow .3s}
+  .pill::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;transform:skewX(-20deg);
+    background:linear-gradient(100deg,transparent,rgba(239,226,198,.35),transparent);pointer-events:none}
+  .msgr.open .pill{opacity:1;transform:none;filter:none}
+  .msgr.open .pill::after{animation:tagSheen 1s var(--ease) .35s}
+  .msgr.open .pill:nth-child(1){transition-delay:.05s,.05s,.05s,0s,0s,0s}
+  .msgr.open .pill:nth-child(2){transition-delay:.13s,.13s,.13s,0s,0s,0s}
+  .msgr.open .pill:nth-child(3){transition-delay:.21s,.21s,.21s,0s,0s,0s}
+  .msgr.open .pill:nth-child(2)::after{animation-delay:.43s}.msgr.open .pill:nth-child(3)::after{animation-delay:.51s}
+  .msgr:not(.open) .pill:nth-child(1){transition-delay:.1s}.msgr:not(.open) .pill:nth-child(2){transition-delay:.05s}
+  .pill:active{background:rgba(214,193,154,.12);border-color:var(--champ);box-shadow:0 0 20px -6px rgba(214,193,154,.5);transform:scale(.96)}
+  @media (hover:hover){.pill:hover{background:rgba(214,193,154,.1);border-color:var(--champ);box-shadow:0 0 20px -6px rgba(214,193,154,.45)}}
+  footer{margin-top:40px;text-align:center}
+  .domain{display:inline-block;font-size:13px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;padding-left:.32em;
+    background:linear-gradient(100deg,var(--champ-lo) 0%,var(--champ-lo) 38%,#fff6e3 50%,var(--champ-lo) 62%,var(--champ-lo) 100%);
+    background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shine 4.8s ease-in-out 1.8s infinite;transition:letter-spacing .6s var(--ease)}
+  @media (hover:hover){.domain:hover{letter-spacing:.38em}}
+  @keyframes shine{0%{background-position:100% 0}45%,100%{background-position:0% 0}}
+
+  /* ===== Появление ===== */
+  .rise{opacity:0;transform:translateY(14px);animation:rise .9s var(--ease) forwards}
+  .d1{animation-delay:.15s}.d2{animation-delay:.28s}.d3{animation-delay:.4s}.d4{animation-delay:.52s}.d5{animation-delay:.64s}.d6{animation-delay:.76s}.d7{animation-delay:.9s}
+
+  @keyframes heroIn{to{transform:scale(1)}}
+  @keyframes rise{to{opacity:1;transform:none}}
+  @keyframes sheen{0%{left:-60%;opacity:0}10%{opacity:1}35%{left:130%;opacity:1}36%,100%{left:130%;opacity:0}}
+  @keyframes ring{0%,86%,100%{transform:rotate(0)}88%{transform:rotate(-14deg)}90%{transform:rotate(12deg)}92%{transform:rotate(-10deg)}94%{transform:rotate(8deg)}96%{transform:rotate(0)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes pulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.55);opacity:0}}
+  @keyframes chevBeat{0%{transform:translateX(0);color:var(--champ);filter:none}14%{transform:translateX(5px);color:var(--champ-hi);filter:drop-shadow(0 0 6px rgba(214,193,154,.6))}40%,100%{transform:translateX(0);color:var(--champ);filter:none}}
+  @keyframes plusPulse{0%,100%{transform:scale(1);color:var(--champ);filter:none}50%{transform:scale(1.12);color:var(--champ-hi);filter:drop-shadow(0 0 6px rgba(214,193,154,.55))}}
+  @keyframes nudge{0%,60%,100%{transform:translateY(0)}75%{transform:translateY(4px)}}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .rise,.tag,.ico{opacity:1;transform:none}.hero img{transform:none}.glow i{opacity:1}
+  }
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"><i></i><i></i></div>
+<main class="wrap">
+  <header class="hero">
+    <img src="portrait.jpg" alt="Дмитрий Минаев" width="720" height="900">
+    <div class="id"><div class="nm">
+      <h1 class="rise d1" id="name">Дмитрий Минаев</h1>
+      <div class="role rise d2" id="role">Брокер по недвижимости · Москва</div>
+    </div></div>
+  </header>
+
+  <div class="body">
+    <div class="tags">
+      <span class="tag">Вторичка</span>
+      <span class="tag">Новостройки без комиссии</span>
+      <span class="tag">Загородная недвижимость</span>
+      <span class="tag">Коммерция под доход</span>
+    </div>
+
+    <a class="save rise d4" href="minaev.vcf" download="Дмитрий Минаев.vcf">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
+      <span class="tx"><div class="t">Сохранить контакт</div><div class="s">В телефонную книгу</div></span>
+      <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span>
+    </a>
+    <div class="contact">
+      <div class="icons">
+        <a class="ico" href="tel:+79263977775" aria-label="Позвонить"><span class="c"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span><span class="l">Звонок</span></a>
+        <button class="ico" id="write" type="button" aria-expanded="false" aria-controls="msgr"><span class="c"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.4 1.2 4.6 3.1 6.1L4.4 21l3.6-1.8c1.2.4 2.6.6 4 .6 5.5 0 10-3.9 10-8.6S17.5 3 12 3z"/></svg></span><span class="l">Написать</span></button>
+      </div>
+      <div class="msgr" id="msgr" aria-hidden="true">
+        <a class="pill" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" tabindex="-1">Telegram</a>
+        <a class="pill" href="https://wa.me/79263977775" target="_blank" rel="noopener" tabindex="-1">WhatsApp</a>
+        <a class="pill" href="https://max.ru/u/f9LHodD0cOIltzRMQJNb39zW9yZ9WcLlab7stUpLHNshn4GacqhY7h7xSKM" target="_blank" rel="noopener" tabindex="-1">MAX</a>
+      </div>
+    </div>
+
+
+    <footer class="rise d6"><a class="domain" href="https://realtyminaev.ru/">realtyminaev.ru</a></footer>
+  </div>
+</main>
+<script>
+  (function () {
+    var n = document.getElementById('name'), r = document.getElementById('role');
+    function tw(el) { var g = document.createRange(); g.selectNodeContents(el); return g.getBoundingClientRect().width; }
+    function fit() {
+      r.style.letterSpacing = '0px'; r.style.marginRight = '0px';
+      var ls = (tw(n) - tw(r)) / (r.textContent.length - 1);
+      r.style.letterSpacing = ls + 'px'; r.style.marginRight = (-ls) + 'px';
+    }
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    window.addEventListener('resize', fit);
+  })();
+  (function () {
+    function tick(ms) { try { if (navigator.vibrate) navigator.vibrate(ms || 10); } catch (e) {} }
+    document.querySelectorAll('.save, .ico, .pill').forEach(function (el) {
+      el.addEventListener('click', function () { tick(12); });
+    });
+    document.querySelectorAll('.tag').forEach(function (t) {
+      t.addEventListener('click', function () {
+        tick(6); t.classList.remove('lit'); void t.offsetWidth; t.classList.add('lit');
+        clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('lit'); }, 1400);
+      });
+    });
+  })();
+
+  (function () {
+    var b = document.getElementById('write'), m = document.getElementById('msgr');
+    var pills = m.querySelectorAll('.pill');
+    function set(open) {
+      b.setAttribute('aria-expanded', open);
+      m.classList.toggle('open', open);
+      m.setAttribute('aria-hidden', !open);
+      pills.forEach(function (p) { p.tabIndex = open ? 0 : -1; });
+    }
+    b.addEventListener('click', function (e) {
+      e.stopPropagation();
+      set(b.getAttribute('aria-expanded') !== 'true');
+    });
+    document.addEventListener('click', function (e) {
+      if (b.getAttribute('aria-expanded') === 'true' && !m.contains(e.target)) set(false);
+    });
+  })();
+</script>
+</body>
+</html>
