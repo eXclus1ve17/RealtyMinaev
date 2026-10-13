@@ -3,23 +3,18 @@ VERSION:3.0
 N:Минаев;Дмитрий;;;| Риелтор
 FN:Дмитрий Минаев | Риелтор
 TITLE:Брокер по недвижимости
+ORG:Недвижимость Москва
 TEL;type=CELL;type=VOICE;type=pref:+79263977775
 item1.URL;type=pref:https://realtyminaev.ru/
 item1.X-ABLabel:Сайт
-item2.URL:https://realtyminaev.ru/card/
-item2.X-ABLabel:Визитка
-item3.URL:https://t.me/RealtyMinaev
-item3.X-ABLabel:Telegram
-item4.URL:https://max.ru/u/f9LHodD0cOIltzRMQJNb39zW9yZ9WcLlab7stUpLHNshn4Ga
+item2.URL:https://t.me/RealtyMinaev
+item2.X-ABLabel:Telegram
+item3.URL:https://max.ru/u/f9LHodD0cOIltzRMQJNb39zW9yZ9WcLlab7stUpLHNshn4Ga
  cqhY7h7xSKM
-item4.X-ABLabel:MAX
-NOTE:Риелтор\, брокер по недвижимости (риэл
- тор\, агент по недвижимости). Москва и Под
- московье. Продажа и покупка квартир\, нов
- остройки — бесплатно для покупателя\, за
- городные дома и участки\, коммерция под д
- оход\, проверка квартиры\, сложные сделки
- . Telegram: @RealtyMinaev. Канал: t.me/EasyRealtyMinaev
+item3.X-ABLabel:MAX
+NOTE:Риелтор (риэлтор\, агент по недвижимос
+ ти). Квартиры\, новостройки\, загород\, ком
+ мерция. Москва и МО.
 PHOTO;ENCODING=b;TYPE=JPEG:/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUG
  BgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2w
  BDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQk

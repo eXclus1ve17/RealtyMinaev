@@ -69,9 +69,10 @@ contact:
     N:Минаев;Дмитрий;;;| Риелтор
     FN:Дмитрий Минаев | Риелтор
     TITLE:Брокер по недвижимости
+    ORG:Недвижимость Москва
     TEL;type=CELL;type=VOICE;type=pref:+79263977775
-    URL:https://realtyminaev.ru/card/
-    NOTE:Риелтор\, брокер по недвижимости (риэлтор). Москва и Подмосковье. Telegram: @RealtyMinaev
+    URL:https://realtyminaev.ru/
+    NOTE:Риелтор (риэлтор\, агент по недвижимости). Квартиры\, новостройки\, загород\, коммерция. Москва и МО.
     END:VCARD
 
 fallback: |
