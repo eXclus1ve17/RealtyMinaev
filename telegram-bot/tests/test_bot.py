@@ -25,6 +25,7 @@ class FakeAPI:
         self.calls = []
         self.fail_chat = None
         self.fail_edit = False
+        self.fail_upload = False
 
     def call(self, method, **params):
         self.calls.append((method, params))
@@ -33,6 +34,12 @@ class FakeAPI:
         if method == "editMessageText" and self.fail_edit:
             raise TelegramError("Bad Request: message can't be edited", 400)
         return {"message_id": len(self.calls)}
+
+    def upload(self, method, file_field, path, **params):
+        self.calls.append((method, dict(params, _file=path)))
+        if self.fail_upload:
+            raise TelegramError("network: timeout")
+        return {"message_id": len(self.calls), "photo": [{"file_id": "small"}, {"file_id": "BIG"}]}
 
     def sent(self, chat_id=None):
         return [p for m, p in self.calls if m == "sendMessage" and (chat_id is None or p["chat_id"] == chat_id)]
@@ -105,16 +112,16 @@ class BotTest(unittest.TestCase):
         msg = self.api.last()
         self.assertIn("Дмитрий Минаев", msg["text"])
         btns = buttons(msg["reply_markup"])
-        self.assertEqual(btns[0]["web_app"]["url"], Cfg.webapp_url)
         self.assertEqual(labels(msg["reply_markup"]), [
-            self.b("card"), self.b("services"), self.b("faq"), self.b("lead"), self.b("site")])
+            self.b("lead"), self.b("services"), self.b("faq"), self.b("site")])
+        self.assertEqual(btns[0].get("style"), "primary")
         urls = {b["text"]: b.get("url") for b in btns}
         self.assertEqual(urls[self.b("site")], "https://realtyminaev.ru")
 
     def test_menu_without_webapp_url_uses_link(self):
         self.bot.cfg = type("C", (), {"admin_chat_id": ADMIN, "webapp_url": ""})()
         self.text("/start")
-        self.assertIn("url", buttons(self.api.last()["reply_markup"])[0])
+        self.assertIn(self.b("card"), labels(self.api.last()["reply_markup"]))
 
     def test_all_services_and_back(self):
         self.press("svc")
@@ -462,6 +469,41 @@ class BusinessTest(unittest.TestCase):
         self.assertNotIn("Анна", dump)
 
 
+class BannerTest(unittest.TestCase):
+    def setUp(self):
+        self.api = FakeAPI()
+        self.content = load(ROOT / "content.yaml")
+        cfg = type("C", (), {"admin_chat_id": ADMIN, "webapp_url": "https://x/app/",
+                             "banner_path": str(ROOT / "assets" / "banner.jpg")})()
+        self.bot = Bot(self.api, self.content, StateStore(":memory:"), cfg)
+
+    def start(self):
+        self.bot.handle_update({"update_id": 1, "message": {"message_id": 1, "from": USER,
+                                "chat": {"id": USER["id"], "type": "private"}, "text": "/start"}})
+
+    def test_banner_uploaded_once_then_reused(self):
+        self.start()
+        self.start()
+        photos = [(m, p) for m, p in self.api.calls if m == "sendPhoto"]
+        self.assertEqual(len(photos), 2)
+        self.assertIn("_file", photos[0][1])
+        self.assertEqual(photos[1][1]["photo"], "BIG")
+        self.assertIn("Дмитрий Минаев", photos[0][1]["caption"])
+
+    def test_menu_on_photo_edits_caption(self):
+        self.bot.handle_update({"update_id": 2, "callback_query": {"id": "1", "from": USER, "data": "svc",
+            "message": {"message_id": 5, "chat": {"id": USER["id"], "type": "private"}, "photo": [{"file_id": "BIG"}]}}})
+        methods = [m for m, p in self.api.calls]
+        self.assertIn("editMessageCaption", methods)
+        self.assertNotIn("editMessageText", methods)
+
+    def test_upload_failure_falls_back_to_text(self):
+        self.api.fail_upload = True
+        with self.assertLogs("bot", level="ERROR"):
+            self.start()
+        self.assertIn("Дмитрий Минаев", self.api.sent(USER["id"])[-1]["text"])
+
+
 class PhoneTest(unittest.TestCase):
     def test_formats(self):
         ok = {
@@ -525,7 +567,7 @@ class WebhookTest(unittest.TestCase):
 
     def test_valid_secret(self):
         self.assertEqual(self.request(), "200 OK")
-        self.assertEqual(len(self.api.sent()), 1)
+        self.assertEqual(len([m for m, p in self.api.calls if m in ("sendMessage", "sendPhoto")]), 1)
 
     def test_wrong_or_missing_secret(self):
         self.assertEqual(self.request(secret="wrong"), "403 Forbidden")

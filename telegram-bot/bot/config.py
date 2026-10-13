@@ -29,6 +29,9 @@ class Config:
         self.admin_chat_id = int(admin) if admin.lstrip("-").isdigit() else None
         self.webapp_url = os.environ.get("WEBAPP_URL", "")
         self.public_url = os.environ.get("PUBLIC_URL", "")
+        self.telegram_api_base = os.environ.get("TELEGRAM_API_BASE", "")
+        self.relay_key = os.environ.get("RELAY_KEY", "")
+        self.banner_path = os.environ.get("BANNER_PATH", str(BASE_DIR / "assets" / "banner.jpg"))
         self.state_db = os.environ.get("STATE_DB", str(BASE_DIR / "data" / "state.sqlite3"))
         self.content_path = os.environ.get("CONTENT_PATH", str(BASE_DIR / "content.yaml"))
         self.log_file = os.environ.get("LOG_FILE", str(BASE_DIR / "data" / "errors.log"))

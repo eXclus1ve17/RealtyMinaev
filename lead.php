@@ -47,7 +47,7 @@ $lock = sys_get_temp_dir() . '/lead_' . md5($ip);
 if (is_file($lock) && time() - filemtime($lock) < 30) done(true);   // повтор в течение 30 с — уже приняли
 @touch($lock);
 
-$cfg = ['email' => 'minaevdmitry@gmail.com', 'from' => 'no-reply@realtyminaev.ru', 'tg_token' => '', 'tg_chat' => ''];
+$cfg = ['email' => 'minaevdmitry@gmail.com', 'from' => 'no-reply@realtyminaev.ru', 'tg_token' => '', 'tg_chat' => '', 'tg_api' => '', 'tg_relay_key' => ''];
 foreach ([dirname(__DIR__) . '/lead-config.php', __DIR__ . '/lead-config.php'] as $f) {
     if (is_file($f)) { $cfg = array_merge($cfg, (array)require $f); break; }
 }
@@ -80,10 +80,12 @@ if ($cfg['tg_token'] !== '' && $cfg['tg_chat'] !== '') {
           . "\nСтраница: " . $h($where) . "\nВремя: " . $when . " (МСК)\nСогласие на обработку ПД: да";
     $ctx = stream_context_create(['http' => [
         'method' => 'POST', 'timeout' => 8, 'ignore_errors' => true,
-        'header' => "Content-Type: application/json\r\n",
+        'header' => "Content-Type: application/json\r\n" . ($cfg['tg_relay_key'] !== '' ? 'X-Relay-Key: ' . $cfg['tg_relay_key'] . "\r\n" : ''),
         'content' => json_encode(['chat_id' => $cfg['tg_chat'], 'text' => $text, 'parse_mode' => 'HTML'], JSON_UNESCAPED_UNICODE),
     ]]);
-    $resp = @file_get_contents('https://api.telegram.org/bot' . $cfg['tg_token'] . '/sendMessage', false, $ctx);
+    // tg_api — посредник Cloudflare (из России api.telegram.org доступен нестабильно)
+    $api = rtrim($cfg['tg_api'] !== '' ? $cfg['tg_api'] : 'https://api.telegram.org', '/');
+    $resp = @file_get_contents($api . '/bot' . $cfg['tg_token'] . '/sendMessage', false, $ctx);
     $tg = is_string($resp) && strpos($resp, '"ok":true') !== false;
 }
 // 3. письмо брокеру

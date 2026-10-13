@@ -32,6 +32,7 @@ class StateStore:
         self._conn.execute(
             "CREATE TABLE IF NOT EXISTS greeted (chat TEXT PRIMARY KEY, at INTEGER NOT NULL)"
         )
+        self._conn.execute("CREATE TABLE IF NOT EXISTS kv (k TEXT PRIMARY KEY, v TEXT NOT NULL)")
         self._conn.commit()
 
     def _purge(self):
@@ -91,4 +92,14 @@ class StateStore:
             "INSERT OR REPLACE INTO greeted (chat, at) VALUES (?, ?)",
             (self._chat_key(salt, chat_id), int(time.time())),
         )
+        self._conn.commit()
+
+    # ---------- служебные значения (например, file_id баннера) ----------
+
+    def get_kv(self, key):
+        row = self._conn.execute("SELECT v FROM kv WHERE k = ?", (key,)).fetchone()
+        return row[0] if row else ""
+
+    def set_kv(self, key, value):
+        self._conn.execute("INSERT OR REPLACE INTO kv (k, v) VALUES (?, ?)", (key, value))
         self._conn.commit()

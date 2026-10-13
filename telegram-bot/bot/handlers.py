@@ -4,6 +4,7 @@
 """
 import html
 import logging
+import os
 import re
 import traceback
 from datetime import datetime, timedelta, timezone
@@ -106,7 +107,10 @@ class Bot:
         return [buttons[i:i + 2] for i in range(0, len(buttons), 2)]
 
     def cb(self, key, data):
-        return {"text": self.b(key), "callback_data": data}
+        btn = {"text": self.b(key), "callback_data": data}
+        if key == "lead":
+            btn["style"] = "primary"  # синяя кнопка (Telegram с февраля 2026; старые версии покажут обычную)
+        return btn
 
     def url(self, key, link):
         return {"text": self.b(key), "url": link}
@@ -121,17 +125,36 @@ class Bot:
         return self.cb("cancel", "l:cancel")
 
     def main_menu(self):
+        # «Визитка» — синяя кнопка меню внизу чата; если её нет (не задан WEBAPP_URL), показываем в списке
         links = self.c["links"]
-        if self.cfg.webapp_url:
-            card = {"text": self.b("card"), "web_app": {"url": self.cfg.webapp_url}}
-        else:
-            card = self.url("card", links["card_fallback"])
-        return self.kb([
-            [card],
-            [self.cb("services", "svc"), self.cb("faq", "faq")],
+        rows = [
             [self.cb("lead", "lead")],
+            [self.cb("services", "svc"), self.cb("faq", "faq")],
             [self.url("site", links["site"])],
-        ])
+        ]
+        if not self.cfg.webapp_url:
+            rows.insert(2, [self.url("card", links["card_fallback"])])
+        return self.kb(rows)
+
+    def send_home(self, uid, text):
+        """Главный экран: баннер с фото и подписью; без баннера — обычный текст."""
+        markup = self.main_menu()
+        path = getattr(self.cfg, "banner_path", "")
+        if path and os.path.isfile(path):
+            try:
+                file_id = self.state.get_kv("banner_file_id")
+                params = dict(chat_id=uid, caption=text.strip(), parse_mode="HTML", reply_markup=markup)
+                if file_id:
+                    return self.api.call("sendPhoto", photo=file_id, **params)
+                res = self.api.upload("sendPhoto", "photo", path, **params)
+                sizes = (res or {}).get("photo") or []
+                if sizes:
+                    self.state.set_kv("banner_file_id", sizes[-1]["file_id"])
+                return res
+            except TelegramError as e:
+                log.error("banner not sent: %s", e.code)
+                self.state.set_kv("banner_file_id", "")
+        return self.send(uid, text, markup)
 
     # ---------- отправка ----------
 
@@ -145,11 +168,17 @@ class Bot:
         """Меняет текущее сообщение; если нельзя — присылает новое."""
         msg = cq.get("message") or {}
         try:
-            self.api.call(
-                "editMessageText", chat_id=msg["chat"]["id"], message_id=msg["message_id"],
-                text=text.strip(), parse_mode="HTML", reply_markup=markup,
-                link_preview_options={"is_disabled": True},
-            )
+            if msg.get("photo"):  # главный экран с баннером: меняем подпись под фото
+                self.api.call(
+                    "editMessageCaption", chat_id=msg["chat"]["id"], message_id=msg["message_id"],
+                    caption=text.strip(), parse_mode="HTML", reply_markup=markup,
+                )
+            else:
+                self.api.call(
+                    "editMessageText", chat_id=msg["chat"]["id"], message_id=msg["message_id"],
+                    text=text.strip(), parse_mode="HTML", reply_markup=markup,
+                    link_preview_options={"is_disabled": True},
+                )
         except (TelegramError, KeyError) as e:
             if isinstance(e, TelegramError) and "not modified" in e.description:
                 return
@@ -170,9 +199,9 @@ class Bot:
                     return self.lead_start(msg["from"])
                 if payload.strip() == "contact":
                     return self.send_contact(uid)
-                return self.send(uid, self.c["welcome"], self.main_menu())
+                return self.send_home(uid, self.c["welcome"])
             if cmd == "/menu":
-                return self.send(uid, self.c["menu_text"], self.main_menu())
+                return self.send_home(uid, self.c["menu_text"])
             if cmd == "/lead":
                 return self.lead_start(msg["from"])
             if cmd == "/cancel":

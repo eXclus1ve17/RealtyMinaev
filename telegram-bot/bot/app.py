@@ -26,7 +26,7 @@ def setup_logging(path):
 
 
 def build(cfg):
-    return Bot(TelegramAPI(cfg.bot_token), content_mod.load(cfg.content_path), StateStore(cfg.state_db), cfg)
+    return Bot(TelegramAPI(cfg.bot_token, base=cfg.telegram_api_base, relay_key=cfg.relay_key), content_mod.load(cfg.content_path), StateStore(cfg.state_db), cfg)
 
 
 def _get():
