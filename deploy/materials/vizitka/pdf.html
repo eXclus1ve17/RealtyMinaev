@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Дмитрий Минаев — визитка</title>
+<link rel="stylesheet" href="../../../card/fonts/fonts.css">
+<style>
+  /* Вертикальная PDF-визитка 9:16 под экран телефона; все кнопки — ссылки */
+  @page{size:108mm 192mm;margin:0}
+  :root{--bg:#0b0a08;--surface:#16130f;--champ:#d6c19a;--champ-hi:#efe2c6;--champ-lo:#a88d5f;--text:#f4efe7;--muted:#9a917f;--line:rgba(214,193,154,.3)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:108mm;height:192mm;background:var(--bg)}
+  body{font-family:'Onest',Arial,sans-serif;color:var(--text);position:relative;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  a{color:inherit;text-decoration:none}
+  .ph{position:absolute;left:0;right:0;top:0;height:104mm;background:url(../../../card/portrait.jpg) 50% 18%/cover no-repeat}
+  .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,8,.55) 0%,rgba(11,10,8,0) 18%,rgba(11,10,8,0) 55%,var(--bg) 100%)}
+  .dom{position:absolute;top:6mm;left:0;right:0;text-align:center;font-size:7pt;font-weight:500;letter-spacing:.32em;padding-left:.32em;color:#e9e1d2}
+  .body{position:absolute;left:7mm;right:7mm;top:86mm}
+  h1{font-size:23pt;font-weight:600;letter-spacing:-.035em;line-height:1}
+  .role{margin-top:2.6mm;font-size:10pt;color:var(--champ)}
+  .tags{margin-top:4mm;display:flex;flex-wrap:wrap;gap:1.6mm}
+  .tag{font-size:7.4pt;color:#e6dfd2;padding:1.4mm 2.8mm;border:.25mm solid var(--line);border-radius:10mm}
+  .btns{margin-top:6mm;display:grid;grid-template-columns:1fr 1fr;gap:2.4mm}
+  .b{display:flex;align-items:center;justify-content:center;gap:2mm;height:11mm;border-radius:3mm;font-size:9.4pt;font-weight:500;
+    background:var(--surface);border:.25mm solid var(--line);color:var(--champ-hi)}
+  .b svg{width:4mm;height:4mm;flex:none;color:var(--champ)}
+  .b.call{grid-column:1/-1;height:13mm;background:linear-gradient(180deg,var(--champ-hi),var(--champ) 65%,#c6ad84);color:#16120c;border:0;font-weight:600;font-size:11pt}
+  .b.call svg{color:#16120c;width:4.6mm;height:4.6mm}
+  .b.call small{font-weight:500;font-size:9pt;opacity:.75;margin-left:1mm}
+  .b.save{grid-column:1/-1;background:transparent;border-color:var(--champ-lo)}
+  .note{position:absolute;left:0;right:0;bottom:5mm;text-align:center;font-size:6.6pt;color:var(--muted);letter-spacing:.02em}
+</style></head><body>
+<div class="ph"></div>
+<a class="dom" href="https://realtyminaev.ru/">REALTYMINAEV.RU</a>
+<div class="body">
+  <h1>Дмитрий Минаев</h1>
+  <div class="role">Брокер по недвижимости · Москва</div>
+  <div class="tags"><span class="tag">Вторичное жилье</span><span class="tag">Новостройки без комиссии</span><span class="tag">Загородная недвижимость</span><span class="tag">Коммерция под доход</span></div>
+  <div class="btns">
+    <a class="b call" href="tel:+79263977775"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Позвонить<small>+7 926 397-77-75</small></a>
+    <a class="b" href="https://t.me/RealtyMinaev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 3.6 2.9 10.8c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8L23 5c.3-1.4-.5-2-1.5-1.4zM8.6 13.7l9.6-6.1c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.5-1.6-5z"/></svg>Telegram</a>
+    <a class="b" href="https://wa.me/79263977775"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.6-.1 1.2z"/></svg>WhatsApp</a>
+    <a class="b" href="https://max.ru/u/f9LHodD0cOIltzRMQJNb39zW9yZ9WcLlab7stUpLHNshn4GacqhY7h7xSKM"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.4 1.2 4.6 3.1 6.1L4.4 21l3.6-1.8c1.2.4 2.6.6 4 .6 5.5 0 10-3.9 10-8.6S17.5 3 12 3z"/></svg>MAX</a>
+    <a class="b" href="https://realtyminaev.ru/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>Сайт</a>
+    <a class="b save" href="https://realtyminaev.ru/card/minaev.vcf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Сохранить контакт</a>
+  </div>
+</div>
+<div class="note">Нажмите на кнопку — откроется звонок, мессенджер или сайт</div>
+</body></html>
