@@ -28,7 +28,11 @@
 - Политику ПД не дублировать: дополнить `/politika-konfidencialnosti/` и `/soglasie/` разделом про бота.
 - Неработающую форму сайта разбираем вместе с проверкой хостинга.
 
+## Бот
+- Создан в BotFather: имя «RealtyMinaev Bot», username @RealtyMinaev_bot. Аватар пока не задан.
+
 ## Ожидается от Дмитрия
 - Скриншоты reg.ru: список услуг и карточка хостинга (тариф, панель, SSH).
 - Актуальная папка `realtyminaev-site` и файлы `/card`.
-- chat_id (через @userinfobot), имя и username бота. Токен в чат не присылать.
+- chat_id (через @userinfobot). Токен в чат не присылать.
+- Ответ поддержки reg.ru про Python/Passenger и исходящие к api.telegram.org на Host-0.
