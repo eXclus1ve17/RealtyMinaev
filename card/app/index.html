@@ -45,10 +45,13 @@
   @keyframes glowIn{to{opacity:1}}
   @keyframes drift1{0%{transform:translate(0,0)}50%{transform:translate(90px,-60px)}100%{transform:translate(40px,-140px)}}
   @keyframes drift2{0%{transform:translate(0,0)}50%{transform:translate(-80px,-90px)}100%{transform:translate(-30px,-180px)}}
-  .wrap{position:relative;z-index:1;width:100%;max-width:460px;padding:0 0 calc(36px + env(safe-area-inset-bottom))}
+  .wrap{position:relative;z-index:1;width:100%;max-width:460px;padding:0 0 calc(clamp(16px,3svh,30px) + env(safe-area-inset-bottom));
+    height:100vh;height:100svh;display:flex;flex-direction:column}
 
   /* ===== Шапка ===== */
-  .hero{position:relative;aspect-ratio:4/4.5;overflow:hidden}
+  /* Фото занимает всё место, которое остаётся от кнопок: визитка целиком в одном экране */
+  .hero{position:relative;flex:1 1 auto;min-height:220px;max-height:calc(100vw * 1.125);overflow:hidden}
+  @media (min-width:460px){.hero{max-height:517px}}
   .hero img{width:100%;height:100%;object-fit:cover;object-position:50% 26%;display:block;
     transform:scale(1.06);animation:heroIn 1.6s var(--ease) forwards}
   .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
@@ -122,7 +125,7 @@
   @media (hover:hover){.m:hover{border-color:var(--champ);background:rgba(214,193,154,.06)} .m:hover::before{animation:sheen .9s var(--ease)}}
 
   /* ===== Сохранить контакт ===== */
-  .save{position:relative;display:flex;align-items:center;gap:14px;margin-top:26px;padding:20px 20px;border-radius:18px;
+  .save{position:relative;display:flex;align-items:center;gap:14px;margin-top:clamp(14px,2.6svh,24px);padding:20px 20px;border-radius:18px;
     isolation:isolate;overflow:hidden;transition:transform .35s var(--ease)}
   .save::before{content:"";position:absolute;inset:-60%;z-index:-2;
     background:conic-gradient(from 0deg,transparent 0deg,var(--champ-hi) 40deg,transparent 90deg,transparent 180deg,var(--champ-lo) 220deg,transparent 270deg);
@@ -142,7 +145,7 @@
   .save .ar{color:var(--champ);animation:chevBeat 2.4s var(--ease) infinite}
   .save .ar svg{width:24px;height:24px;display:block}
 
-  .icons{display:flex;justify-content:center;gap:48px;margin-top:26px}
+  .icons{display:flex;justify-content:center;gap:48px;margin-top:clamp(14px,2.6svh,26px)}
   .ico{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;padding:0;font-family:inherit;cursor:pointer;-webkit-appearance:none;
     opacity:0;transform:translateY(10px) scale(.92);animation:icoIn .8s var(--ease) forwards}
   .ico:nth-child(1){animation-delay:.75s}.ico:nth-child(2){animation-delay:.87s}
@@ -183,7 +186,7 @@
   .msgr:not(.open) .pill:nth-child(1){transition-delay:.1s}.msgr:not(.open) .pill:nth-child(2){transition-delay:.05s}
   .pill:active{background:rgba(214,193,154,.12);border-color:var(--champ);box-shadow:0 0 20px -6px rgba(214,193,154,.5);transform:scale(.96)}
   @media (hover:hover){.pill:hover{background:rgba(214,193,154,.1);border-color:var(--champ);box-shadow:0 0 20px -6px rgba(214,193,154,.45)}}
-  footer{margin-top:40px;text-align:center}
+  footer{margin-top:clamp(14px,3svh,36px);text-align:center}
   .domain{display:inline-block;font-size:13px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;padding-left:.32em;
     background:linear-gradient(100deg,var(--champ-lo) 0%,var(--champ-lo) 38%,#fff6e3 50%,var(--champ-lo) 62%,var(--champ-lo) 100%);
     background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -209,6 +212,65 @@
     *,*::before,*::after{animation:none!important;transition:none!important}
     .rise,.tag,.ico{opacity:1;transform:none}.hero img{transform:none}.glow i{opacity:1}
   }
+
+  /* Услуги — компактные плашки в 2 ряда */
+  .tags{margin-top:clamp(12px,2svh,18px);gap:6px}
+  .tag{font-size:12px;padding:6px 10px;letter-spacing:-.005em}
+  @media (max-width:389px){.body{padding:0 20px}.tag{font-size:11.5px;padding:6px 9px}}
+  /* Подсказка для iPhone: всплывает над кнопкой «Сохранить контакт», пока открывается карточка */
+  .savebox{position:relative;margin-top:clamp(16px,2.8svh,26px)}
+  .tip{position:absolute;left:0;right:0;bottom:calc(100% + 12px);z-index:5;padding:13px 16px 13px 14px;border-radius:16px;isolation:isolate;
+    display:flex;gap:12px;align-items:center;color:var(--text);pointer-events:none;
+    opacity:0;transform:translateY(12px) scale(.94);transform-origin:30px 120%;filter:blur(6px);
+    transition:opacity .45s var(--ease),transform .6s var(--ease),filter .45s var(--ease)}
+  .tip::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-2;overflow:hidden;
+    background:conic-gradient(from var(--a,0deg),rgba(168,141,95,.35) 0deg,var(--champ-hi) 50deg,rgba(168,141,95,.35) 110deg,rgba(168,141,95,.35) 360deg)}
+  .tip::after{content:"";position:absolute;inset:1.2px;border-radius:15px;z-index:-1;
+    background:radial-gradient(120% 160% at 0% 0%,#2a2219 0%,#17140f 60%);box-shadow:0 22px 50px -20px rgba(0,0,0,.95)}
+  .tip .arrow{position:absolute;left:24px;bottom:-6px;width:12px;height:12px;transform:rotate(45deg);z-index:-1;
+    background:#17140f;border-right:1.2px solid rgba(214,193,154,.55);border-bottom:1.2px solid rgba(214,193,154,.55)}
+  .tip .num{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600;color:#16120c;
+    background:linear-gradient(180deg,var(--champ-hi),var(--champ));box-shadow:0 0 0 0 rgba(214,193,154,.5)}
+  .tip .tx{font-size:14px;line-height:1.35}
+  .tip .tx small{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
+  .tip .tx b{color:var(--champ-hi);font-weight:600;white-space:nowrap}
+  .tip .tx > *{opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+  .tip.show{opacity:1;transform:none;filter:none;pointer-events:auto}
+  .tip.show::before{animation:trace 1.6s var(--ease) .1s both}
+  .tip.show .num{animation:numPop .7s var(--ease) .2s both, ping 1.8s var(--ease) .9s 2}
+  .tip.show .tx > *{opacity:1;transform:none}
+  .tip.show .tx > :nth-child(1){transition-delay:.15s}.tip.show .tx > :nth-child(2){transition-delay:.27s}
+  @property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+  @keyframes trace{from{--a:-120deg}to{--a:300deg}}
+  @keyframes numPop{from{transform:scale(.4);opacity:0}60%{transform:scale(1.12);opacity:1}to{transform:none}}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(214,193,154,.5)}100%{box-shadow:0 0 0 12px rgba(214,193,154,0)}}
+  /* Золотая полоса загрузки по низу кнопки, пока открывается карточка */
+  .save .prog{position:absolute;left:14px;right:14px;bottom:5px;height:2px;border-radius:2px;overflow:hidden;opacity:0;transition:opacity .3s}
+  .save .prog i{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0);
+    background:linear-gradient(90deg,var(--champ-lo),var(--champ-hi));box-shadow:0 0 10px rgba(239,226,198,.8)}
+  .save.loading .prog{opacity:1}
+  .save.loading .prog i{animation:load 1.7s cubic-bezier(.4,0,.2,1) forwards}
+  @keyframes load{to{transform:scaleX(1)}}
+
+  /* Вариант 2: тонкая полоса «Сохранить контакт» и две половинки под ней */
+  .save.slim{padding:9px 16px 9px 9px;gap:12px}
+  .save.slim .ic{flex:0 0 34px;height:34px}
+  .save.slim .ic svg{width:17px;height:17px}
+  .save.slim .t{flex:1;font-size:16px}
+  .save.slim .ar svg{width:20px;height:20px}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;animation:rise .9s var(--ease) .64s both}
+  .half{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:9px;height:50px;border-radius:14px;
+    border:1px solid var(--line);background:radial-gradient(120% 140% at 0% 0%,#1d1913 0%,var(--surface) 60%);color:var(--text);
+    font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;-webkit-appearance:none;
+    transition:border-color .35s var(--ease),transform .25s var(--ease),box-shadow .35s var(--ease)}
+  .half svg{width:18px;height:18px;color:var(--champ)}
+  .half::after{content:"";position:absolute;top:0;left:-80%;width:55%;height:100%;transform:skewX(-20deg);
+    background:linear-gradient(100deg,transparent,rgba(239,226,198,.22),transparent)}
+  .half:active{transform:scale(.97);border-color:var(--champ)}
+  .half:active::after{animation:tagSheen .7s var(--ease)}
+  @media (hover:hover){.half:hover{border-color:rgba(214,193,154,.55)} .half:hover::after{animation:tagSheen .8s var(--ease)}}
+  #write[aria-expanded="true"]{border-color:var(--champ);box-shadow:0 0 22px -8px rgba(214,193,154,.55)}
+  .msgr.open{margin-top:12px}
 </style>
 </head>
 <body>
@@ -229,16 +291,20 @@
       <span class="tag">Загородная недвижимость</span>
       <span class="tag">Коммерция под доход</span>
     </div>
-
-    <a class="save rise d4" href="https://realtyminaev.ru/card/minaev.vcf" data-ext>
+    <div class="savebox rise d4">
+    <div class="tip" id="tip" role="status" aria-live="polite"><span class="arrow"></span><span class="num">i</span>
+      <span class="tx"><small>Сейчас откроется карточка контакта</small><span>Внизу нажмите <b>«Создать новый контакт»</b></span></span></div>
+    <a class="save slim" href="https://realtyminaev.ru/card/minaev.vcf" data-save>
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
-      <span class="tx"><div class="t">Сохранить контакт</div><div class="s" id="save-hint">В телефонную книгу</div></span>
+      <span class="t">Сохранить контакт</span>
       <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span>
+      <span class="prog" aria-hidden="true"><i></i></span>
     </a>
+    </div>
     <div class="contact">
-      <div class="icons">
-        <a class="ico" href="tel:+79263977775" aria-label="Позвонить"><span class="c"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></span><span class="l">Звонок</span></a>
-        <button class="ico" id="write" type="button" aria-expanded="false" aria-controls="msgr"><span class="c"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.4 1.2 4.6 3.1 6.1L4.4 21l3.6-1.8c1.2.4 2.6.6 4 .6 5.5 0 10-3.9 10-8.6S17.5 3 12 3z"/></svg></span><span class="l">Написать</span></button>
+      <div class="duo">
+        <a class="half" href="tel:+79263977775"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg><span>Позвонить</span></a>
+        <button class="half" id="write" type="button" aria-expanded="false" aria-controls="msgr"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.4 1.2 4.6 3.1 6.1L4.4 21l3.6-1.8c1.2.4 2.6.6 4 .6 5.5 0 10-3.9 10-8.6S17.5 3 12 3z"/></svg><span>Написать</span></button>
       </div>
       <div class="msgr" id="msgr" aria-hidden="true">
         <a class="pill" href="https://t.me/RealtyMinaev" target="_blank" rel="noopener" tabindex="-1">Telegram</a>
@@ -246,8 +312,6 @@
         <a class="pill" href="https://max.ru/u/f9LHodD0cOIltzRMQJNb39zW9yZ9WcLlab7stUpLHNshn4GacqhY7h7xSKM" target="_blank" rel="noopener" tabindex="-1">MAX</a>
       </div>
     </div>
-
-
     <footer class="rise d6"><a class="domain" href="https://realtyminaev.ru/">realtyminaev.ru</a></footer>
   </div>
 </main>
@@ -266,7 +330,7 @@
   })();
   (function () {
     function tick(ms) { try { var tg = window.Telegram && Telegram.WebApp; if (tg && tg.initData && tg.HapticFeedback) { tg.HapticFeedback.impactOccurred(ms > 8 ? 'medium' : 'light'); } else if (navigator.vibrate) { navigator.vibrate(ms || 10); } } catch (e) {} }
-    document.querySelectorAll('.save, .ico, .pill').forEach(function (el) {
+    document.querySelectorAll('.save, .half, .pill').forEach(function (el) {
       el.addEventListener('click', function () { tick(12); });
     });
     document.querySelectorAll('.tag').forEach(function (t) {
@@ -302,7 +366,7 @@
     try { if (tg.disableVerticalSwipes) tg.disableVerticalSwipes(); } catch (e) {}
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]');
-      if (!a) return;
+      if (!a || a.hasAttribute('data-save')) return;
       var url = a.getAttribute('href');
       if (/^https:\/\/t\.me\//.test(url)) { e.preventDefault(); tg.openTelegramLink(url); }
       else if (/^https?:\/\//.test(url)) { e.preventDefault(); tg.openLink(url); }
@@ -310,11 +374,23 @@
   })();
 </script>
 <script>
-  // iPhone не сохраняет контакт сам: подсказываем, куда нажать в открывшейся карточке
+  // iPhone не сохраняет контакт сам: над кнопкой появляется подсказка, а карточка открывается через 1,7 с,
+  // чтобы клиент успел прочитать, куда нажать. Android и компьютер открывают контакт сразу.
   (function () {
     var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    var h = document.getElementById('save-hint');
-    if (ios && h) h.textContent = 'Затем внизу — «Создать новый контакт»';
+    var tip = document.getElementById('tip'), a = document.querySelector('[data-save]'), timer, hide;
+    var tg = window.Telegram && Telegram.WebApp && Telegram.WebApp.initData ? Telegram.WebApp : null;
+    function open() { clearTimeout(timer); a.classList.remove('loading'); if (tg) tg.openLink(a.href); else window.location.href = a.href; }
+    function close() { tip.classList.remove('show'); }
+    a.addEventListener('click', function (e) {
+      if (!ios) { if (tg) { e.preventDefault(); open(); } return; }
+      e.preventDefault();
+      if (a.classList.contains('loading')) return open();   // повторное нажатие — открыть сразу
+      tip.classList.add('show'); a.classList.add('loading');
+      timer = setTimeout(open, 1700);
+      clearTimeout(hide); hide = setTimeout(close, 9000);
+    });
+    document.addEventListener('click', function (e) { if (!a.contains(e.target)) close(); });
   })();
 </script>
 </body>
