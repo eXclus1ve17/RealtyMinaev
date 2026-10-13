@@ -234,6 +234,7 @@
   .tip .tx small{display:block;font-size:12px;color:var(--muted);margin-bottom:2px}
   .tip .tx b{color:var(--champ-hi);font-weight:600;white-space:nowrap}
   .tip .tx > *{opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease),transform .6s var(--ease)}
+  .tip .alt{color:var(--champ-hi);font-weight:600;text-decoration:underline;text-underline-offset:3px}
   .tip.show{opacity:1;transform:none;filter:none;pointer-events:auto}
   .tip.show::before{animation:trace 1.6s var(--ease) .1s both}
   .tip.show .num{animation:numPop .7s var(--ease) .2s both, ping 1.8s var(--ease) .9s 2}
@@ -359,22 +360,47 @@
   })();
 </script>
 <script>
-  // iPhone не сохраняет контакт сам: над кнопкой появляется подсказка, а карточка открывается через 1,7 с,
-  // чтобы клиент успел прочитать, куда нажать. Android и компьютер открывают контакт сразу.
+  // Сохранение контакта.
+  // iPhone в Safari: подсказка над кнопкой, через 1,7 с открывается карточка контакта.
+  // iPhone во встроенном браузере (Telegram, Instagram, Chrome и др.): они скачивают .vcf в «Файлы»,
+  // поэтому открываем карточку в Safari (x-safari-https://, iOS 17+). Не открылось — предлагаем
+  // получить контакт в Telegram через бота. Android и компьютер скачивают файл сразу.
   (function () {
-    var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    var tip = document.getElementById('tip'), a = document.querySelector('[data-save]'), timer, hide;
-    function open() { clearTimeout(timer); a.classList.remove('loading'); window.location.href = a.href; }
+    var ua = navigator.userAgent;
+    var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var tg = window.Telegram && Telegram.WebApp && Telegram.WebApp.initData ? Telegram.WebApp : null;
+    var inapp = ios && !tg && (!!window.TelegramWebviewProxy || /CriOS|FxiOS|EdgiOS|OPiOS|YaBrowser|Instagram|FBAN|FBAV|VKClient|OKApp|Line\//.test(ua) || !/Safari\//.test(ua));
+    var BOT = 'https://t.me/RealtyMinaev_bot?start=contact';
+    var tip = document.getElementById('tip'), small = tip.querySelector('small'), main = tip.querySelector('.tx > span');
+    var a = document.querySelector('[data-save]'), timer, hide, left = false;
+    var vcf = new URL(a.getAttribute('href'), location.href).href;
+    function text(s, m) { small.textContent = s; main.innerHTML = m; }
     function close() { tip.classList.remove('show'); }
+    function show(ms) { tip.classList.add('show'); clearTimeout(hide); hide = setTimeout(close, ms || 9000); }
+    function done() { clearTimeout(timer); a.classList.remove('loading'); }
+    document.addEventListener('visibilitychange', function () { if (document.hidden) left = true; });
+    window.addEventListener('pagehide', function () { left = true; });
+    function fallback() {
+      if (left) return;
+      text('Не открылось?', '<a class="alt" href="' + BOT + '">Получить контакт в Telegram</a> — придёт карточкой в чат');
+      show(15000);
+    }
+    function open() {
+      done();
+      if (tg) { tg.openTelegramLink(BOT); return; }
+      if (inapp) { left = false; location.href = 'x-safari-' + vcf; setTimeout(fallback, 2500); return; }
+      location.href = vcf;
+    }
     a.addEventListener('click', function (e) {
-      if (!ios) return;
+      if (!ios && !tg) return;                                   // Android и компьютер — обычное скачивание
       e.preventDefault();
-      if (a.classList.contains('loading')) return open();   // повторное нажатие — открыть сразу
-      tip.classList.add('show'); a.classList.add('loading');
+      if (a.classList.contains('loading')) return open();        // повторное нажатие — сразу
+      if (tg) text('Пришлю контакт в чат с ботом', 'Нажмите на карточку контакта, чтобы <b>сохранить её</b>');
+      else if (inapp) text('Карточка откроется в Safari', 'Внизу нажмите <b>«Создать новый контакт»</b>');
+      show(); a.classList.add('loading');
       timer = setTimeout(open, 1700);
-      clearTimeout(hide); hide = setTimeout(close, 9000);
     });
-    document.addEventListener('click', function (e) { if (!a.contains(e.target)) close(); });
+    document.addEventListener('click', function (e) { if (!a.contains(e.target) && !tip.contains(e.target)) close(); });
   })();
 </script>
 </body>
