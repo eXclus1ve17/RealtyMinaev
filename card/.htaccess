@@ -32,6 +32,12 @@ AddType font/woff2 .woff2
   </FilesMatch>
   <Files "minaev.vcf">
     Header set Cache-Control "no-cache"
-    Header set Content-Disposition "attachment; filename=minaev.vcf"
+    # iPhone/iPad/Mac: без «attachment», иначе Safari сохраняет файл в «Файлы» вместо карточки контакта.
+    # Android и Windows: скачивание файла — телефон сам предложит добавить контакт.
+    Header set Content-Disposition "attachment; filename=minaev.vcf" env=!APPLE
+    Header append Vary User-Agent
   </Files>
+</IfModule>
+<IfModule mod_setenvif.c>
+  SetEnvIfNoCase User-Agent "iPhone|iPad|iPod|Macintosh" APPLE
 </IfModule>
