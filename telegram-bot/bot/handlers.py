@@ -140,13 +140,17 @@ class Bot:
         """Главный экран: баннер с фото и подписью; без баннера — обычный текст."""
         markup = self.main_menu()
         path = getattr(self.cfg, "banner_path", "")
-        if path and os.path.isfile(path):
+        url = getattr(self.cfg, "banner_url", "")
+        if url or (path and os.path.isfile(path)):
             try:
                 file_id = self.state.get_kv("banner_file_id")
                 params = dict(chat_id=uid, caption=text.strip(), parse_mode="HTML", reply_markup=markup)
                 if file_id:
                     return self.api.call("sendPhoto", photo=file_id, **params)
-                res = self.api.upload("sendPhoto", "photo", path, **params)
+                if url:  # Telegram сам скачает фото по ссылке
+                    res = self.api.call("sendPhoto", photo=url, **params)
+                else:
+                    res = self.api.upload("sendPhoto", "photo", path, **params)
                 sizes = (res or {}).get("photo") or []
                 if sizes:
                     self.state.set_kv("banner_file_id", sizes[-1]["file_id"])

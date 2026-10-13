@@ -33,6 +33,8 @@ class FakeAPI:
             raise TelegramError("Forbidden: bot was blocked", 403)
         if method == "editMessageText" and self.fail_edit:
             raise TelegramError("Bad Request: message can't be edited", 400)
+        if method == "sendPhoto":
+            return {"message_id": len(self.calls), "photo": [{"file_id": "small"}, {"file_id": "BIG"}]}
         return {"message_id": len(self.calls)}
 
     def upload(self, method, file_field, path, **params):
@@ -489,6 +491,15 @@ class BannerTest(unittest.TestCase):
         self.assertIn("_file", photos[0][1])
         self.assertEqual(photos[1][1]["photo"], "BIG")
         self.assertIn("Дмитрий Минаев", photos[0][1]["caption"])
+
+    def test_banner_by_url_through_relay(self):
+        self.bot.cfg.banner_url = "https://relay.example/banner.jpg"
+        self.start()
+        photo = [p for m, p in self.api.calls if m == "sendPhoto"][0]
+        self.assertEqual(photo["photo"], "https://relay.example/banner.jpg")
+        self.assertNotIn("_file", photo)
+        self.start()
+        self.assertEqual([p for m, p in self.api.calls if m == "sendPhoto"][1]["photo"], "BIG")
 
     def test_menu_on_photo_edits_caption(self):
         self.bot.handle_update({"update_id": 2, "callback_query": {"id": "1", "from": USER, "data": "svc",

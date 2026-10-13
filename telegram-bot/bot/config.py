@@ -32,6 +32,9 @@ class Config:
         self.telegram_api_base = os.environ.get("TELEGRAM_API_BASE", "")
         self.relay_key = os.environ.get("RELAY_KEY", "")
         self.banner_path = os.environ.get("BANNER_PATH", str(BASE_DIR / "assets" / "banner.jpg"))
+        # через посредника фото отдаёт сам воркер: из России большие файлы до Cloudflare не доходят
+        relay_banner = self.telegram_api_base.rstrip("/") + "/banner.jpg" if self.telegram_api_base else ""
+        self.banner_url = os.environ.get("BANNER_URL", relay_banner)
         self.state_db = os.environ.get("STATE_DB", str(BASE_DIR / "data" / "state.sqlite3"))
         self.content_path = os.environ.get("CONTENT_PATH", str(BASE_DIR / "content.yaml"))
         self.log_file = os.environ.get("LOG_FILE", str(BASE_DIR / "data" / "errors.log"))

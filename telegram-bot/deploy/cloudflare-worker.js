@@ -2,7 +2,9 @@
 // 1) Telegram → /webhook → пересылаем на бот (bot.realtyminaev.ru), секрет вебхука проверяет сам бот.
 // 2) Бот и форма сайта → /bot<токен>/<метод> → пересылаем в api.telegram.org.
 //    Пропускаем только запросы с ключом X-Relay-Key = переменная RELAY_KEY (Settings → Variables).
+// 3) /banner.jpg — баннер приветствия: Telegram скачивает его отсюда, а не с reg.ru.
 const BOT_ORIGIN = "https://bot.realtyminaev.ru";
+const BANNER = "https://realtyminaev.ru/card/og.jpg";
 
 export default {
   async fetch(request, env) {
@@ -36,6 +38,11 @@ export default {
         status: r.status,
         headers: { "Content-Type": r.headers.get("Content-Type") || "application/json" },
       });
+    }
+
+    if (url.pathname === "/banner.jpg") {
+      const r = await fetch(BANNER, { cf: { cacheEverything: true, cacheTtl: 86400 } });
+      return new Response(r.body, { status: r.status, headers: { "Content-Type": "image/jpeg" } });
     }
 
     if (url.pathname === "/health") {

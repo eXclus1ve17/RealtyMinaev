@@ -66,6 +66,10 @@ def use_relay(url):
         api.call("getMe")
     except TelegramError as e:
         print()
+        if e.description.startswith("network"):
+            print("Хостинг не может связаться с посредником (%s)." % e.description)
+            print("Проверьте адрес: он открывается в браузере? Пришлите этот текст разработчику.")
+            sys.exit(1)
         print("Посредник не пропустил запрос (%s)." % e.description)
         print("Проверьте, что в Cloudflare → воркер → Settings → Variables добавлена переменная")
         print("  RELAY_KEY = %s" % key)
