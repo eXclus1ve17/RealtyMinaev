@@ -85,37 +85,90 @@ mkdir -p "$BOT_DIR/data" && chmod 700 "$BOT_DIR/data"
 (cd "$BOT_DIR" && "$PY" manage.py check) || fail "Токен не подошёл или Telegram недоступен."
 
 step "6. Подключаю бота к сайту bot.realtyminaev.ru"
-cat > "$BOT_SITE/passenger_wsgi.py" <<WSGIEOF
-# Создан скриптом установки. Код бота — в $BOT_DIR (вне папки сайта).
+# Пробуем по очереди: Passenger → CGI → PHP-мост. Оставляем первый, на котором /health отвечает ok.
+chmod 755 "$BOT_DIR" "$BOT_DIR/deploy" "$BOT_DIR/deploy/cgi_bridge.py" 2>/dev/null
+rm -f "$BOT_SITE/passenger_wsgi.py" "$BOT_SITE/bot.cgi" "$BOT_SITE/index.php"
+
+health() { sleep 3; H=$(curl -s --max-time 20 "$BOT_URL/health?$RANDOM" 2>/dev/null); [ "$H" = "ok" ]; }
+
+mode_passenger() {
+  cat > "$BOT_SITE/passenger_wsgi.py" <<WSGIEOF
 import os
 import sys
-
 INTERP = "$PY"
 if os.path.exists(INTERP) and os.path.realpath(sys.executable) != os.path.realpath(INTERP):
     os.execl(INTERP, INTERP, *sys.argv)
-
 sys.path.insert(0, "$BOT_DIR")
 from bot.app import application  # noqa: E402,F401
 WSGIEOF
-cat > "$BOT_SITE/.htaccess" <<HTEOF
+  cat > "$BOT_SITE/.htaccess" <<HTEOF
+<IfModule mod_passenger.c>
 PassengerEnabled On
 PassengerPython $PY
+</IfModule>
 Options -Indexes
 HTEOF
-mkdir -p "$BOT_SITE/tmp" && touch "$BOT_SITE/tmp/restart.txt"
-ok "Файлы запуска записаны, приложение перезапущено"
+  mkdir -p "$BOT_SITE/tmp" && touch "$BOT_SITE/tmp/restart.txt"
+}
 
-step "7. Проверяю, что бот отвечает по адресу $BOT_URL"
-sleep 3
-H=$(curl -s --max-time 20 "$BOT_URL/health" 2>/dev/null)
-if [ "$H" = "ok" ]; then
-  ok "$BOT_URL/health → ok"
-else
-  echo "  Ответ: ${H:0:200}"
-  fail "Бот не отвечает по $BOT_URL/health. Проверьте SSL-сертификат поддомена и пришлите скриншот."
-fi
+mode_cgi() {
+  rm -f "$BOT_SITE/passenger_wsgi.py"
+  printf '#!%s\nimport runpy\nrunpy.run_path("%s/deploy/cgi_bridge.py", run_name="__main__")\n' "$PY" "$BOT_DIR" > "$BOT_SITE/bot.cgi"
+  chmod 755 "$BOT_SITE/bot.cgi"; chmod 755 "$BOT_SITE"
+  cat > "$BOT_SITE/.htaccess" <<'HTEOF'
+Options +ExecCGI -Indexes
+AddHandler cgi-script .cgi
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(webhook|health)/?$ bot.cgi [L]
+</IfModule>
+HTEOF
+}
 
-step "8. Запуск в боевом режиме"
+mode_php() {
+  rm -f "$BOT_SITE/bot.cgi"
+  cat > "$BOT_SITE/index.php" <<PHPEOF
+<?php
+// Мост к боту на Python: создан скриптом установки.
+\$path = parse_url(\$_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+if (!in_array(rtrim(\$path, '/'), ['/webhook', '/health'], true)) { http_response_code(404); exit; }
+\$body = file_get_contents('php://input');
+\$env = [
+  'BOT_BRIDGE' => 'php', 'PATH_INFO' => rtrim(\$path, '/'),
+  'REQUEST_METHOD' => \$_SERVER['REQUEST_METHOD'] ?? 'GET',
+  'CONTENT_LENGTH' => (string)strlen(\$body),
+  'HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN' => \$_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? '',
+  'HOME' => '$HOME', 'LANG' => 'C.UTF-8',
+];
+\$p = proc_open(['$PY', '$BOT_DIR/deploy/cgi_bridge.py'], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], \$pipes, null, \$env);
+if (!is_resource(\$p)) { http_response_code(200); echo 'bridge-error'; exit; }
+fwrite(\$pipes[0], \$body); fclose(\$pipes[0]);
+\$out = stream_get_contents(\$pipes[1]); fclose(\$pipes[1]); fclose(\$pipes[2]); proc_close(\$p);
+[\$status, \$text] = array_pad(explode("\n", (string)\$out, 2), 2, '');
+http_response_code((int)\$status ?: 200);
+header('Content-Type: text/plain; charset=utf-8');
+echo \$text;
+PHPEOF
+  cat > "$BOT_SITE/.htaccess" <<'HTEOF'
+Options -Indexes
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^(webhook|health)/?$ index.php [L]
+</IfModule>
+HTEOF
+}
+
+MODE=""
+for m in passenger cgi php; do
+  "mode_$m"
+  if health; then MODE=$m; break; fi
+  echo "  способ «$m» не подошёл, пробую следующий"
+done
+[ -n "$MODE" ] || { echo "  Ответ: ${H:0:150}"; fail "Ни один способ запуска не сработал. Пришлите скриншот."; }
+echo "MODE=$MODE" > "$BOT_DIR/data/mode"
+ok "Бот запущен способом «$MODE»: $BOT_URL/health → ok"
+
+step "7. Запуск в боевом режиме"
 read -r -p "  Подключить бота к Telegram и включить кнопку «Визитка»? (да/нет) " go
 if [ "$go" = "да" ]; then
   (cd "$BOT_DIR" && "$PY" manage.py set-webhook && "$PY" manage.py setup-menu && "$PY" manage.py check) || fail "Не удалось подключить вебхук."

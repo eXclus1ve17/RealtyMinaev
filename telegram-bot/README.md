@@ -14,11 +14,10 @@
 
 ## Как перезапустить бота
 
-В ISPmanager → «Shell-клиент» выполните:
+Скрипт установки сам выбирает способ запуска на хостинге и записывает его в `data/mode`:
 
-    touch ~/www/bot.realtyminaev.ru/tmp/restart.txt
-
-Новые тексты из `content.yaml` подхватываются после перезапуска.
+- `cgi` или `php` — перезапуск не нужен, новые тексты из `content.yaml` работают сразу;
+- `passenger` — в Shell-клиенте выполните `touch ~/www/bot.realtyminaev.ru/tmp/restart.txt`.
 
 ## Если бот не отвечает
 
