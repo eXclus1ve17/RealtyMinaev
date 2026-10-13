@@ -168,6 +168,8 @@ class Bot:
                 self.state.clear(uid)
                 if payload.strip() == "lead":
                     return self.lead_start(msg["from"])
+                if payload.strip() == "contact":
+                    return self.send_contact(uid)
                 return self.send(uid, self.c["welcome"], self.main_menu())
             if cmd == "/menu":
                 return self.send(uid, self.c["menu_text"], self.main_menu())
@@ -175,6 +177,8 @@ class Bot:
                 return self.lead_start(msg["from"])
             if cmd == "/cancel":
                 return self.lead_cancel(uid)
+            if cmd == "/contact":
+                return self.send_contact(uid)
 
         step, data = self.state.get(uid)
         if step is None:
@@ -453,6 +457,10 @@ class Bot:
             ]))
         self.state.clear(uid)  # после отправки заявку не храним
         self.send(uid, lead["done"], self.kb([[self.btn_menu()]]))
+        try:
+            self.send_contact(uid)  # чтобы клиент узнал номер, когда вы перезвоните
+        except TelegramError as e:
+            log.error("contact not sent: %s", e.code)
 
     def _username(self, uid, data):
         name = data.get("username")
@@ -516,3 +524,15 @@ class Bot:
             self.state.mark_greeted(salt, chat_id)
         except Exception as e:
             log.error("business message failed: %s\n%s", type(e).__name__, "".join(traceback.format_tb(e.__traceback__)))
+
+    # ---------- контакт Дмитрия ----------
+
+    def send_contact(self, uid):
+        """Присылает карточку контакта — в Telegram у неё есть кнопка «Добавить в контакты»."""
+        c = self.c["contact"]
+        self.send(uid, c["intro"])
+        self.api.call(
+            "sendContact", chat_id=uid, phone_number=c["phone"],
+            first_name=c["first_name"], last_name=c.get("last_name") or None,
+            vcard=c["vcard"].replace("\n", "\r\n").strip() + "\r\n",
+        )

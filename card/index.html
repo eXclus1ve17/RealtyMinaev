@@ -231,7 +231,7 @@
 
     <a class="save rise d4" href="minaev.vcf" download="Дмитрий Минаев.vcf">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
-      <span class="tx"><div class="t">Сохранить контакт</div><div class="s">В телефонную книгу</div></span>
+      <span class="tx"><div class="t">Сохранить контакт</div><div class="s" id="save-hint">В телефонную книгу</div></span>
       <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span>
     </a>
     <div class="contact">
@@ -292,6 +292,14 @@
     document.addEventListener('click', function (e) {
       if (b.getAttribute('aria-expanded') === 'true' && !m.contains(e.target)) set(false);
     });
+  })();
+</script>
+<script>
+  // iPhone не сохраняет контакт сам: подсказываем, куда нажать в открывшейся карточке
+  (function () {
+    var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var h = document.getElementById('save-hint');
+    if (ios && h) h.textContent = 'Затем внизу — «Создать новый контакт»';
   })();
 </script>
 </body>

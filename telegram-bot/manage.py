@@ -19,6 +19,7 @@ COMMANDS = [
     {"command": "lead", "description": "Оставить заявку"},
     {"command": "menu", "description": "Меню"},
     {"command": "cancel", "description": "Отменить заявку"},
+    {"command": "contact", "description": "Сохранить мой контакт"},
 ]
 
 

@@ -59,6 +59,7 @@ def validate(data):
         "lead.done", "lead.send_failed", "lead.cancelled", "lead.use_buttons",
         "lead.no_comment", "lead.admin_message",
         "links.bot", "links.consent", "business.greeting",
+        "contact.intro", "contact.phone", "contact.first_name", "contact.vcard",
     ):
         value = _req(data, path, problems)
         if isinstance(value, str):

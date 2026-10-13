@@ -174,7 +174,7 @@ class BotTest(unittest.TestCase):
         t = admin[0]["text"]
         for part in ("Купить", "Иван", "+7 (926) 123-45-67", "Бутово, до 15 млн", "@ivan_client", "(МСК)"):
             self.assertIn(part, t)
-        self.assertEqual(self.api.last()["text"], self.content["lead"]["done"].strip())
+        self.assertIn(self.content["lead"]["done"].strip(), [p["text"] for p in self.api.sent(USER["id"])[-2:]])
         self.assertEqual(self.bot.state.get(USER["id"]), (None, {}))  # заявка не хранится
 
     def test_name_from_profile_button(self):
@@ -197,6 +197,39 @@ class BotTest(unittest.TestCase):
         rows = self.api.last()["reply_markup"]["inline_keyboard"]
         self.assertTrue(all(len(r) <= 2 for r in rows))
         self.assertEqual(len(rows[0]), 2)
+
+    def contacts(self):
+        return [p for m, p in self.api.calls if m == "sendContact"]
+
+    def test_contact_command_and_deep_link(self):
+        self.text("/contact")
+        self.text("/start contact")
+        sent = self.contacts()
+        self.assertEqual(len(sent), 2)
+        self.assertEqual(sent[0]["phone_number"], "+79263977775")
+        self.assertEqual(sent[0]["last_name"], "Минаев | Риелтор")
+        self.assertTrue(sent[0]["vcard"].startswith("BEGIN:VCARD\r\n"))
+        self.assertIn("\r\nEND:VCARD", sent[0]["vcard"])
+
+    def test_contact_sent_after_lead(self):
+        self.full_lead()
+        self.press("l:send")
+        self.assertEqual(len(self.contacts()), 1)
+
+    def test_contact_failure_does_not_break_lead(self):
+        self.full_lead()
+        orig = self.api.call
+
+        def call(method, **p):
+            if method == "sendContact":
+                self.api.calls.append((method, p))
+                raise TelegramError("Bad Request", 400)
+            return orig(method, **p)
+        self.api.call = call
+        with self.assertLogs("bot", level="ERROR"):
+            self.press("l:send")
+        self.assertEqual(len(self.api.sent(ADMIN)), 1)
+        self.assertEqual(self.bot.state.get(USER["id"]), (None, {}))
 
     def test_skip_comment(self):
         self.full_lead(comment=None)
@@ -283,7 +316,7 @@ class BotTest(unittest.TestCase):
         self.api.fail_chat = None
         self.press("l:send")  # повторная отправка работает: 1 неудачная попытка + 1 успешная
         self.assertEqual(len(self.api.sent(ADMIN)), 2)
-        self.assertEqual(self.api.last()["text"], self.content["lead"]["done"].strip())
+        self.assertIn(self.content["lead"]["done"].strip(), [p["text"] for p in self.api.sent(USER["id"])[-2:]])
 
     def test_html_in_user_input_is_escaped(self):
         self.full_lead(comment="<b>жирно</b> & <script>")
