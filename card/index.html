@@ -44,10 +44,13 @@
   @keyframes glowIn{to{opacity:1}}
   @keyframes drift1{0%{transform:translate(0,0)}50%{transform:translate(90px,-60px)}100%{transform:translate(40px,-140px)}}
   @keyframes drift2{0%{transform:translate(0,0)}50%{transform:translate(-80px,-90px)}100%{transform:translate(-30px,-180px)}}
-  .wrap{position:relative;z-index:1;width:100%;max-width:460px;padding:0 0 calc(36px + env(safe-area-inset-bottom))}
+  .wrap{position:relative;z-index:1;width:100%;max-width:460px;padding:0 0 calc(clamp(16px,3svh,30px) + env(safe-area-inset-bottom));
+    height:100vh;height:100svh;display:flex;flex-direction:column}
 
   /* ===== Шапка ===== */
-  .hero{position:relative;aspect-ratio:4/4.5;overflow:hidden}
+  /* Фото занимает всё место, которое остаётся от кнопок: визитка целиком в одном экране */
+  .hero{position:relative;flex:1 1 auto;min-height:220px;max-height:calc(100vw * 1.125);overflow:hidden}
+  @media (min-width:460px){.hero{max-height:517px}}
   .hero img{width:100%;height:100%;object-fit:cover;object-position:50% 26%;display:block;
     transform:scale(1.06);animation:heroIn 1.6s var(--ease) forwards}
   .hero::after{content:"";position:absolute;inset:0;pointer-events:none;
@@ -121,7 +124,7 @@
   @media (hover:hover){.m:hover{border-color:var(--champ);background:rgba(214,193,154,.06)} .m:hover::before{animation:sheen .9s var(--ease)}}
 
   /* ===== Сохранить контакт ===== */
-  .save{position:relative;display:flex;align-items:center;gap:14px;margin-top:26px;padding:20px 20px;border-radius:18px;
+  .save{position:relative;display:flex;align-items:center;gap:14px;margin-top:clamp(14px,2.6svh,24px);padding:20px 20px;border-radius:18px;
     isolation:isolate;overflow:hidden;transition:transform .35s var(--ease)}
   .save::before{content:"";position:absolute;inset:-60%;z-index:-2;
     background:conic-gradient(from 0deg,transparent 0deg,var(--champ-hi) 40deg,transparent 90deg,transparent 180deg,var(--champ-lo) 220deg,transparent 270deg);
@@ -141,7 +144,7 @@
   .save .ar{color:var(--champ);animation:chevBeat 2.4s var(--ease) infinite}
   .save .ar svg{width:24px;height:24px;display:block}
 
-  .icons{display:flex;justify-content:center;gap:48px;margin-top:26px}
+  .icons{display:flex;justify-content:center;gap:48px;margin-top:clamp(14px,2.6svh,26px)}
   .ico{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:0;padding:0;font-family:inherit;cursor:pointer;-webkit-appearance:none;
     opacity:0;transform:translateY(10px) scale(.92);animation:icoIn .8s var(--ease) forwards}
   .ico:nth-child(1){animation-delay:.75s}.ico:nth-child(2){animation-delay:.87s}
@@ -182,7 +185,7 @@
   .msgr:not(.open) .pill:nth-child(1){transition-delay:.1s}.msgr:not(.open) .pill:nth-child(2){transition-delay:.05s}
   .pill:active{background:rgba(214,193,154,.12);border-color:var(--champ);box-shadow:0 0 20px -6px rgba(214,193,154,.5);transform:scale(.96)}
   @media (hover:hover){.pill:hover{background:rgba(214,193,154,.1);border-color:var(--champ);box-shadow:0 0 20px -6px rgba(214,193,154,.45)}}
-  footer{margin-top:40px;text-align:center}
+  footer{margin-top:clamp(14px,3svh,36px);text-align:center}
   .domain{display:inline-block;font-size:13px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;padding-left:.32em;
     background:linear-gradient(100deg,var(--champ-lo) 0%,var(--champ-lo) 38%,#fff6e3 50%,var(--champ-lo) 62%,var(--champ-lo) 100%);
     background-size:300% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -222,13 +225,6 @@
   </header>
 
   <div class="body">
-    <div class="tags">
-      <span class="tag">Вторичка</span>
-      <span class="tag">Новостройки без комиссии</span>
-      <span class="tag">Загородная недвижимость</span>
-      <span class="tag">Коммерция под доход</span>
-    </div>
-
     <a class="save rise d4" href="minaev.vcf" download="Дмитрий Минаев.vcf">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
       <span class="tx"><div class="t">Сохранить контакт</div><div class="s" id="save-hint">В телефонную книгу</div></span>
