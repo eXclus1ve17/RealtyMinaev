@@ -58,12 +58,16 @@ def validate(data):
         "lead.comment_prompt", "lead.comment_too_long", "lead.confirm", "lead.edit_prompt",
         "lead.done", "lead.send_failed", "lead.cancelled", "lead.use_buttons",
         "lead.no_comment", "lead.admin_message",
-        "links.bot", "links.consent", "business.greeting",
+        "links.bot", "links.consent", "business.greeting", "business.hello", "business.hello_named",
         "contact.intro", "contact.phone", "contact.first_name", "contact.vcard",
     ):
         value = _req(data, path, problems)
         if isinstance(value, str):
             _check_html(path, value, problems)
+
+    named = (data.get("business") or {}).get("hello_named") if isinstance(data.get("business"), dict) else None
+    if isinstance(named, str) and "{name}" not in named:
+        problems.append("business.hello_named: нет места для имени {name}")
 
     buttons = _req(data, "buttons", problems) or {}
     for key in (

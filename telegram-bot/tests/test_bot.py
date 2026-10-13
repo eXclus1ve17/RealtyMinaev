@@ -420,6 +420,17 @@ class BusinessTest(unittest.TestCase):
         self.assertIn("https://t.me/RealtyMinaev_bot?start=lead", urls)
         self.assertIn("https://t.me/RealtyMinaev_bot?start=menu", urls)
 
+    def test_greeting_uses_name_only_when_it_looks_like_a_name(self):
+        self.connect()
+        cases = {"Анна": "Здравствуйте, Анна!", "anna": "Здравствуйте, Anna!",
+                 "анна-мария": "Здравствуйте, Анна-Мария!", "🏠 Ваня": "Здравствуйте! ",
+                 "Квартиры ЦАО": "Здравствуйте! ", "user123": "Здравствуйте! ", "": "Здравствуйте! "}
+        for i, (name, hello) in enumerate(cases.items()):
+            self.biz({"id": 1000 + i, "first_name": name}, chat=1000 + i)
+            text = self.greetings()[-1]["text"]
+            self.assertTrue(text.startswith(hello), (name, text))
+            self.assertIn("Спасибо за обращение — скоро отвечу лично.", text)
+
     def test_no_greeting_after_owner_wrote_first(self):
         self.connect()
         self.biz({"id": ADMIN, "first_name": "Дмитрий"}, chat=901)

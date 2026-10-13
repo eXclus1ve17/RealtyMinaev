@@ -52,6 +52,17 @@ def profile_name(user):
     return name[:30]
 
 
+GREETING_NAME = re.compile(r"^[A-Za-zА-Яа-яЁё]{2,20}(-[A-Za-zА-Яа-яЁё]{2,20})?$")
+
+
+def greeting_name(user):
+    """Имя для автоответа — только если подпись в профиле похожа на имя («Анна», «Anna», «Анна-Мария»)."""
+    name = (user.get("first_name") or "").strip()
+    if not GREETING_NAME.match(name):
+        return ""
+    return "-".join(part[:1].upper() + part[1:] for part in name.split("-"))
+
+
 def esc(text):
     return html.escape(text or "", quote=False)
 
@@ -542,11 +553,10 @@ class Bot:
                 return
             if sender.get("is_bot") or self.state.was_greeted(salt, chat_id):
                 return
-            biz = self.c["business"]
             links = self.c["links"]
             self.api.call(
                 "sendMessage", business_connection_id=conn_id, chat_id=chat_id,
-                text=biz["greeting"].strip(), parse_mode="HTML",
+                text=self.biz_greeting(sender), parse_mode="HTML",
                 link_preview_options={"is_disabled": True},
                 reply_markup=self.kb([
                     [{"text": self.b("biz_menu"), "url": links["bot"] + "?start=menu"}],
@@ -557,6 +567,12 @@ class Bot:
             self.state.mark_greeted(salt, chat_id)
         except Exception as e:
             log.error("business message failed: %s\n%s", type(e).__name__, "".join(traceback.format_tb(e.__traceback__)))
+
+    def biz_greeting(self, sender):
+        biz = self.c["business"]
+        name = greeting_name(sender)
+        hello = biz["hello_named"].replace("{name}", esc(name)) if name else biz["hello"]
+        return hello.strip() + " " + biz["greeting"].strip()
 
     # ---------- контакт Дмитрия ----------
 
