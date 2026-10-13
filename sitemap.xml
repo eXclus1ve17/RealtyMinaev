@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://realtyminaev.ru/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://realtyminaev.ru/forma-96/</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>https://realtyminaev.ru/</loc></url>
+  <url><loc>https://realtyminaev.ru/statyi/nalogovyj-vychet-po-ipoteke/</loc><lastmod>2026-04-23</lastmod></url>
+  <url><loc>https://realtyminaev.ru/statyi/ddu-ili-dkp/</loc><lastmod>2026-05-08</lastmod></url>
+  <url><loc>https://realtyminaev.ru/statyi/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/uslugi/prodazha-kvartiry/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/uslugi/kommercheskaya-nedvizhimost/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/uslugi/novostrojki/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/uslugi/pokupka-kvartiry/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/uslugi/zagorodnaya-nedvizhimost/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/slozhnye-sdelki/alternativnaya-sdelka/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/slozhnye-sdelki/distancionnaya-sdelka/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/slozhnye-sdelki/materinskij-kapital/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/slozhnye-sdelki/nasledstvo/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/slozhnye-sdelki/prodazha-doli/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/slozhnye-sdelki/prodazha-v-ipoteke/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/uslugi/proverka-kvartiry/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/uslugi/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/slozhnye-sdelki/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://realtyminaev.ru/kontakty/</loc><lastmod>2026-10-09</lastmod></url>
+  <url><loc>https://realtyminaev.ru/forma-96/</loc></url>
 </urlset>
