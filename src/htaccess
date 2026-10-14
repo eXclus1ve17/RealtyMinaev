@@ -8,8 +8,10 @@ Options -Indexes
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# один адрес сайта: https и без www — одним редиректом
-RewriteCond %{HTTPS} off [OR]
+# один адрес сайта: https и без www — одним редиректом.
+# На reg.ru https принимает nginx, а Apache видит обычное соединение,
+# поэтому смотрим заголовок X-Forwarded-Proto, а не %{HTTPS} (иначе — петля).
+RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://realtyminaev.ru%{REQUEST_URI} [R=301,L]
 
