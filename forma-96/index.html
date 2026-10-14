@@ -27,14 +27,32 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"Product","@id":"https://realtyminaev.ru/forma-96/#product","name":"Проект одноэтажного дома Forma 96","url":"https://realtyminaev.ru/forma-96/","description":"Компактный одноэтажный дом 96,17 м² с террасой 19,50 м² для участка от 5 соток: две спальни, кабинет, кухня-гостиная 27,41 м², два санузла, две гардеробные и кладовая, котельная с входом с улицы. Стены из газобетона.","image":"https://realtyminaev.ru/forma-96/img/forma96-og.jpg?v=4895750be809","category":"Проекты домов","additionalProperty":[{"@type":"PropertyValue","name":"Площадь дома","value":96.17,"unitCode":"MTK"},{"@type":"PropertyValue","name":"Площадь террасы","value":19.5,"unitCode":"MTK"},{"@type":"PropertyValue","name":"Этажность","value":1},{"@type":"PropertyValue","name":"Размер дома","value":"11,9 × 11,9 м"},{"@type":"PropertyValue","name":"Минимальный участок","value":"от 5 соток"},{"@type":"PropertyValue","name":"Материал стен","value":"газобетон"}],"offers":{"@type":"Offer","price":"9990","priceCurrency":"RUB","availability":"https://schema.org/InStock","url":"https://realtyminaev.ru/forma-96/","seller":{"@id":"https://realtyminaev.ru/#person"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://realtyminaev.ru/"},{"@type":"ListItem","position":2,"name":"Проект дома Forma 96","item":"https://realtyminaev.ru/forma-96/"}]},{"@type":"WebPage","@id":"https://realtyminaev.ru/forma-96/#webpage","url":"https://realtyminaev.ru/forma-96/","name":"Forma 96 — проект дома около 100 м² для небольшого участка","description":"Проект компактного одноэтажного дома Forma 96: 96 м² и терраса 19,5 м², 2 спальни, кабинет, 2 санузла, гардеробные. Для участка от 5 соток. Цена проекта 9 990 ₽.","inLanguage":"ru-RU","primaryImageOfPage":"https://realtyminaev.ru/forma-96/img/forma96-og.jpg?v=4895750be809","mainEntity":{"@id":"https://realtyminaev.ru/forma-96/#product"}}]}
 </script>
-<!-- Яндекс.Метрика, счётчик 112500819 (тот же, что на главной) -->
+<!-- Яндекс.Метрика 112500819 — только после согласия на cookie, как на всём сайте.
+     Согласие общее: если человек уже нажал «Согласен» на основном сайте, баннер здесь не показывается. -->
 <script>
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();
-   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-   ym(112500819, "init", {ssr:true, webvisor:true, clickmap:true, accurateTrackBounce:true, trackLinks:true});
+(function(){
+  var KEY='cookie-ok', ok=null;
+  function load(){
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();
+     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+     (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+    ym(112500819,"init",{ssr:true,webvisor:true,clickmap:true,accurateTrackBounce:true,trackLinks:true});
+  }
+  try{ok=localStorage.getItem(KEY)}catch(e){}
+  if(ok==='1'){load();return}
+  if(ok==='0')return;
+  document.addEventListener('DOMContentLoaded',function(){
+    var d=document.createElement('div');
+    d.setAttribute('role','dialog');d.setAttribute('aria-label','Cookie');
+    d.style.cssText='position:fixed;left:16px;bottom:16px;z-index:999;max-width:420px;background:#fff;color:#525C6B;border:1px solid rgba(16,26,44,.08);border-radius:20px;box-shadow:0 18px 50px -22px rgba(16,26,44,.4);padding:16px 18px;font:14px/1.5 Onest,-apple-system,sans-serif';
+    d.innerHTML='Сайт использует cookie и Яндекс Метрику, чтобы понимать, какие страницы полезны. Подробнее — в <a href="/politika-konfidencialnosti/" style="color:#2A4370;text-decoration:underline">политике конфиденциальности</a>.'
+      +'<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button data-c="1" style="font:600 14px Onest,sans-serif;border:0;border-radius:999px;padding:10px 18px;background:#2F4A7A;color:#fff;cursor:pointer">Согласен</button>'
+      +'<button data-c="0" style="font:600 14px Onest,sans-serif;border:1px solid rgba(16,26,44,.15);border-radius:999px;padding:10px 18px;background:#fff;color:#101A2C;cursor:pointer">Только необходимые</button></div>';
+    d.addEventListener('click',function(e){var c=e.target.getAttribute&&e.target.getAttribute('data-c');if(c===null)return;
+      try{localStorage.setItem(KEY,c)}catch(x){} d.remove(); if(c==='1')load();});
+    document.body.appendChild(d);
+  });
+})();
 </script>
 <style>
 /* Верх страницы проекта: название и площади, под ними интерактивный план с экспликацией сбоку.
@@ -282,7 +300,6 @@ a{color:inherit;text-decoration:none}
 
 </head>
 <body>
-<noscript><div><img src="https://mc.yandex.ru/watch/112500819" style="position:absolute;left:-9999px" alt=""></div></noscript>
 <header class="ptop">
   <div class="ptop-in">
     <a class="ptop-home" href="/"><b>Дмитрий Минаев</b><span>брокер по недвижимости</span></a>
