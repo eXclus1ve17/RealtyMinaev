@@ -359,6 +359,16 @@ class BotTest(unittest.TestCase):
         self.assertIn("tg://user?id=777", self.api.sent(ADMIN)[0]["text"])
 
     def test_deep_link_start_lead(self):
+        # с мини-приложением /start lead и /lead отвечают кнопкой, открывающей форму заявки
+        for cmd in ("/start lead", "/lead"):
+            self.text(cmd)
+            btn = buttons(self.api.last()["reply_markup"])[0]
+            self.assertEqual(btn["web_app"]["url"], "https://realtyminaev.ru/card/app/?tab=lead")
+            self.assertEqual(btn.get("style"), "primary")
+            self.assertIsNone(self.bot.state.get(USER["id"])[0])
+
+    def test_lead_without_mini_app_starts_chat_dialog(self):
+        self.bot.cfg = type("C", (), {"admin_chat_id": ADMIN, "webapp_url": ""})()
         self.text("/start lead")
         self.assertEqual(self.bot.state.get(USER["id"])[0], "task")
 
@@ -633,7 +643,7 @@ class AppDataTest(unittest.TestCase):
 
 class ContactDuringOldLeadTest(BotTest):
     def test_contact_ignored_while_old_chat_lead_waits_for_button(self):
-        self.text("/lead")
+        self.press("lead")  # старый диалог заявки в чате ждёт выбора задачи
         n = len(self.api.calls)
         self.bot.handle_update({"update_id": 78, "message": {"message_id": 10, "from": USER, "chat": {"id": USER["id"], "type": "private"},
                                 "contact": {"phone_number": "79261234567", "user_id": USER["id"], "first_name": "Анна"}}})

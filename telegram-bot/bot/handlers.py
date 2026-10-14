@@ -145,6 +145,14 @@ class Bot:
         lead = dict(link("lead"), text=self.b("biz_lead"), style="primary")
         return [[lead], [dict(link("services"), text=self.b("biz_menu"))], [dict(link("card"), text=self.b("biz_card"))]]
 
+    def lead_entry(self, user):
+        """Заявка — форма в мини-приложении; без него — диалог в чате."""
+        if not self.cfg.webapp_url:
+            return self.lead_start(user)
+        self.state.clear(user["id"])
+        btn = {"text": self.b("biz_lead"), "web_app": {"url": self.app_url("lead")}, "style": "primary"}
+        return self.send(user["id"], self.c["lead_app"], self.kb([[btn]]))
+
     def main_menu(self):
         if self.cfg.webapp_url:
             return self.kb(self.app_buttons(lambda tab: {"web_app": {"url": self.app_url(tab)}}) + [[self.btn_write()]])
@@ -223,14 +231,14 @@ class Bot:
             if cmd == "/start":
                 self.state.clear(uid)
                 if payload.strip() == "lead":
-                    return self.lead_start(msg["from"])
+                    return self.lead_entry(msg["from"])
                 if payload.strip() == "contact":
                     return self.send_contact(uid)
                 return self.send_home(uid, self.c["welcome"])
             if cmd == "/menu":
                 return self.send_home(uid, self.c["menu_text"])
             if cmd == "/lead":
-                return self.lead_start(msg["from"])
+                return self.lead_entry(msg["from"])
             if cmd == "/cancel":
                 return self.lead_cancel(uid)
             if cmd == "/contact":

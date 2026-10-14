@@ -51,7 +51,7 @@ def validate(data):
 
     for path in (
         "links.site", "links.dmitry", "links.privacy", "links.card_fallback",
-        "welcome", "menu_text", "fallback", "error",
+        "welcome", "menu_text", "lead_app", "fallback", "error",
         "services.title", "faq.title",
         "lead.task_prompt", "lead.name_prompt", "lead.name_invalid", "lead.consent_prompt",
         "lead.consent_declined", "lead.phone_prompt", "lead.phone_invalid", "lead.phone_saved",

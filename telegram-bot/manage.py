@@ -20,12 +20,9 @@ from bot.config import Config  # noqa: E402
 from bot.content import ContentError, load  # noqa: E402
 from bot.telegram import TelegramAPI, TelegramError  # noqa: E402
 
-COMMANDS = [
+COMMANDS = [  # остальное — в мини-приложении (кнопка «Меню»); /lead, /menu, /cancel работают, если набрать вручную
     {"command": "start", "description": "Главное меню"},
-    {"command": "lead", "description": "Оставить заявку"},
-    {"command": "menu", "description": "Меню"},
-    {"command": "cancel", "description": "Отменить заявку"},
-    {"command": "contact", "description": "Сохранить мой контакт"},
+    {"command": "contact", "description": "Сохранить контакт Дмитрия"},
 ]
 
 
