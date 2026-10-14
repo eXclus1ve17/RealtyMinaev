@@ -147,7 +147,7 @@ class Bot:
 
     def main_menu(self):
         if self.cfg.webapp_url:
-            return self.kb(self.app_buttons(lambda tab: {"web_app": {"url": self.app_url(tab)}}))
+            return self.kb(self.app_buttons(lambda tab: {"web_app": {"url": self.app_url(tab)}}) + [[self.btn_write()]])
         # без мини-приложения — меню кнопками в чате
         links = self.c["links"]
         rows = [
@@ -240,9 +240,11 @@ class Bot:
         if step is None and msg.get("contact"):
             return  # номер из формы мини-приложения («Отправить номер из Telegram») — отвечать не нужно
         if step is None:
-            return self.send(uid, self.c["fallback"], self.kb([
-                [self.cb("faq", "faq"), self.btn_write()], [self.btn_menu()],
-            ]))
+            if self.cfg.webapp_url:  # услуги и вопросы — в мини-приложении
+                rows = [[{"text": self.b("biz_menu"), "web_app": {"url": self.app_url("services")}}], [self.btn_write()]]
+            else:
+                rows = [[self.cb("faq", "faq"), self.btn_write()], [self.btn_menu()]]
+            return self.send(uid, self.c["fallback"], self.kb(rows))
         if text == self.b("cancel"):  # кнопка «Отмена» под полем ввода на шаге телефона
             return self.lead_cancel(uid)
         if step == NAME:

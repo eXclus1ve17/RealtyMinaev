@@ -115,9 +115,10 @@ class BotTest(unittest.TestCase):
         self.assertIn("Дмитрий Минаев", msg["text"])
         btns = buttons(msg["reply_markup"])
         # заявка (синяя) · услуги и вопросы · визитка — всё открывает разделы мини-приложения
-        self.assertEqual(labels(msg["reply_markup"]), [self.b("biz_lead"), self.b("biz_menu"), self.b("biz_card")])
+        self.assertEqual(labels(msg["reply_markup"]), [self.b("biz_lead"), self.b("biz_menu"), self.b("biz_card"), self.b("write")])
         self.assertEqual(btns[0].get("style"), "primary")
-        self.assertEqual([b["web_app"]["url"] for b in btns], [
+        self.assertEqual(btns[3]["url"], "https://t.me/RealtyMinaev")
+        self.assertEqual([b["web_app"]["url"] for b in btns[:3]], [
             "https://realtyminaev.ru/card/app/?tab=lead", "https://realtyminaev.ru/card/app/?tab=services",
             "https://realtyminaev.ru/card/app/?tab=card"])
 
@@ -376,9 +377,8 @@ class BotTest(unittest.TestCase):
         self.text("Сколько стоит однушка в Бутово?")
         msg = self.api.last()
         self.assertEqual(msg["text"], self.content["fallback"].strip())
-        lbl = labels(msg["reply_markup"])
-        for key in ("faq", "write", "menu"):
-            self.assertIn(self.b(key), lbl)
+        self.assertEqual(labels(msg["reply_markup"]), [self.b("biz_menu"), self.b("write")])
+        self.assertIn("web_app", buttons(msg["reply_markup"])[0])
 
     def test_group_chats_ignored(self):
         self.bot.handle_update({"message": {"message_id": 1, "from": USER,
