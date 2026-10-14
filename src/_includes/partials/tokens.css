@@ -67,6 +67,69 @@ html[data-theme="slate"]{
   --overlay-rgb:28,32,30;
 }
 
+/* ── ПОЛНОЧЬ И ШАМПАНЬ (вариант на выбор) ─────── data-theme="navy" ── */
+html[data-theme="navy"]{
+  --bg:#F3F2EF; --bg-rgb:243,242,239;          /* тёплый фарфор                 */
+  --surface:#FFFFFF; --surface-2:#F8F7F5;
+  --dark:#111A2B; --dark-rgb:17,26,43;         /* чернильно-синий               */
+  --dark-hi:#1C2840;
+  --ink:#141B28; --ink-rgb:20,27,40;
+  --ink-2:#545A65; --ink-3:#6E737C;
+  --accent:#1C2840; --accent-rgb:28,40,64;
+  --accent-hi:#283756; --accent-ink:#7A5E2E;
+  --accent-soft:#EEEAE1; --on-accent:#FFFFFF;
+  --metal:#9C7E4C; --metal-lite:#D6BC8A;
+  --metal-grad:linear-gradient(135deg,#E9D6AE 0%,#B89862 100%);
+  --metal-shine:#FFF5E0; --on-metal:#1C1608;
+  --tint:#DDE1E8;
+  --glow:rgba(214,188,138,.16);
+  --glow-2:rgba(60,85,130,.32);
+  --fill-bg:#F4ECDA; --fill-ink:#6A4F26;
+  --overlay-rgb:10,15,26;
+}
+
+/* ── ПЕТРОЛЬ И ЛАТУНЬ (вариант на выбор) ───────── data-theme="petrol" ── */
+html[data-theme="petrol"]{
+  --bg:#F1F1EE; --bg-rgb:241,241,238;          /* светлый камень                */
+  --surface:#FFFFFF; --surface-2:#F7F7F5;
+  --dark:#12303A; --dark-rgb:18,48,58;         /* петроль: сине-бирюзовый       */
+  --dark-hi:#1B3F4B;
+  --ink:#13242B; --ink-rgb:19,36,43;
+  --ink-2:#4F5D63; --ink-3:#69767B;
+  --accent:#1A4250; --accent-rgb:26,66,80;
+  --accent-hi:#225363; --accent-ink:#1E4A58;
+  --accent-soft:#E1EAEC; --on-accent:#FFFFFF;
+  --metal:#957641; --metal-lite:#CFB078;
+  --metal-grad:linear-gradient(135deg,#E2C894 0%,#B08D55 100%);
+  --metal-shine:#FFF2D6; --on-metal:#1C1608;
+  --tint:#D8E3E6;
+  --glow:rgba(207,176,120,.15);
+  --glow-2:rgba(40,120,140,.30);
+  --fill-bg:#F4ECDA; --fill-ink:#6A4F26;
+  --overlay-rgb:8,22,28;
+}
+
+/* ── ПЫЛЬНЫЙ ИНДИГО (вариант на выбор) ──────────── data-theme="dusk" ── */
+html[data-theme="dusk"]{
+  --bg:#ECEEF1; --bg-rgb:236,238,241;          /* холодный светлый              */
+  --surface:#F9FAFB; --surface-2:#F2F4F6;
+  --dark:#273142; --dark-rgb:39,49,66;         /* приглушённый серо-синий       */
+  --dark-hi:#344058;
+  --ink:#1F2633; --ink-rgb:31,38,51;
+  --ink-2:#555D6B; --ink-3:#6C7482;
+  --accent:#344058; --accent-rgb:52,64,88;
+  --accent-hi:#414F6C; --accent-ink:#4A5878;
+  --accent-soft:#E0E4EC; --on-accent:#FFFFFF;
+  --metal:#917A55; --metal-lite:#CDB892;
+  --metal-grad:linear-gradient(135deg,#E0D1B2 0%,#AD9671 100%);
+  --metal-shine:#FBF3E2; --on-metal:#211B10;
+  --tint:#D9DEE7;
+  --glow:rgba(205,184,146,.14);
+  --glow-2:rgba(110,130,170,.28);
+  --fill-bg:#F0EADB; --fill-ink:#5F5030;
+  --overlay-rgb:20,26,38;
+}
+
 /* ── РАЗМЕРЫ, ЛИНИИ И ТЕНИ (общие) ───────────────── */
 :root{
   --line:rgba(var(--ink-rgb),.10); --line-2:rgba(var(--ink-rgb),.06);
