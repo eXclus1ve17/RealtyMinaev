@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="midnight">
+<html lang="ru" data-theme="emerald">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -68,13 +68,20 @@
   --pad:clamp(16px,3.4vw,44px);
   --font:'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
-/* палитра «Графит и шампань» — та же, что в src/_includes/partials/tokens.css */
-html[data-theme="graphite"]{
-  --bg:#F5F4F1; --surface:#FFFFFF; --surface-2:#FAF9F6;
-  --ink:#17191C; --ink-2:#575C63; --ink-3:#73787F;
-  --accent:#7A5F2E; --accent-hi:#8E7037; --accent-ink:#6B5228; --accent-soft:#EFE9DD;
-  --metal:#A88752; --metal-lite:#D3B67F; --dark:#16181B;
-  --line:rgba(23,25,28,.10); --line-2:rgba(23,25,28,.06);
+/* палитры — те же, что в src/_includes/partials/tokens.css */
+html[data-theme="emerald"]{
+  --bg:#F4F4F0; --surface:#FFFFFF; --surface-2:#F8F8F5;
+  --ink:#14201C; --ink-2:#4F5B56; --ink-3:#6A7570;
+  --accent:#1F4D3F; --accent-hi:#27604F; --accent-ink:#1C4538; --accent-soft:#E3ECE7;
+  --metal:#957641; --metal-lite:#CDAE74; --dark:#0F2A23;
+  --line:rgba(20,32,28,.10); --line-2:rgba(20,32,28,.06);
+}
+html[data-theme="onyx"]{
+  --bg:#F4F3F1; --surface:#FFFFFF; --surface-2:#F9F8F6;
+  --ink:#141414; --ink-2:#57554F; --ink-3:#716E68;
+  --accent:#1A1A1A; --accent-hi:#333333; --accent-ink:#7A5C25; --accent-soft:#F1EBDD;
+  --metal:#A07F45; --metal-lite:#D4B47A; --dark:#131313;
+  --line:rgba(20,20,20,.10); --line-2:rgba(20,20,20,.06);
 }
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}

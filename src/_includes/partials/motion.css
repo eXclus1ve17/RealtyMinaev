@@ -33,7 +33,7 @@
 @media (hover:hover) and (pointer:fine){
   .m-glow{position:relative;isolation:isolate}
   .m-glow::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .35s;
-    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(47,74,122,.10),transparent 70%)}
+    background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(var(--accent-rgb),.10),transparent 70%)}
   .m-glow.m-dark::after{background:radial-gradient(280px circle at var(--mx,50%) var(--my,50%),rgba(198,164,107,.16),transparent 70%)}
   .m-glow:hover::after{opacity:1}
   .m-mag{transition:transform .35s cubic-bezier(.22,.8,.3,1)}

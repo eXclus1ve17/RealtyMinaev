@@ -1,51 +1,51 @@
 /* ════════════════════════════════════════════════════════════════════
    ПАЛИТРА САЙТА — общая для всех страниц (главная, внутренние, Forma 96).
    Весь цвет живёт только здесь. Схема выбирается атрибутом на <html>:
-        data-theme="midnight"  — Полночь и латунь
-        data-theme="graphite"  — Графит и шампань
+        data-theme="emerald"  — Изумруд и латунь
+        data-theme="onyx"     — Оникс и золото
    ════════════════════════════════════════════════════════════════════ */
 
-/* ── ПОЛНОЧЬ И ЛАТУНЬ ─────────────────────────── data-theme="midnight" ── */
+/* ── ИЗУМРУД И ЛАТУНЬ ──────────────────────────── data-theme="emerald" ── */
 :root,
-html[data-theme="midnight"]{
-  --bg:#F3F4F7; --bg-rgb:243,244,247;          /* фон страницы, холодный фарфор */
-  --surface:#FFFFFF; --surface-2:#F7F8FA;      /* карточки и подложки           */
-  --dark:#0C1628; --dark-rgb:12,22,40;         /* тёмные блоки: герой, призыв, подвал */
-  --dark-hi:#18253F;                           /* тёмный при наведении          */
-  --ink:#0F1A2E; --ink-rgb:15,26,46;           /* основной текст                */
-  --ink-2:#4F5A6A; --ink-3:#6B7483;            /* абзацы и подписи              */
-  --accent:#2B4677; --accent-rgb:43,70,119;    /* кнопки и активные состояния   */
-  --accent-hi:#375A93; --accent-ink:#27406C;
-  --accent-soft:#E4E9F2; --on-accent:#FFFFFF;
-  --metal:#9C7B46; --metal-lite:#C9A86E;       /* латунь: на светлом / на тёмном */
-  --metal-grad:linear-gradient(135deg,#DCC08A 0%,#B08D55 100%);
-  --metal-shine:#FFF0CF; --on-metal:#1A1408;
-  --tint:#DCE4F0;                              /* переход светлого в тёмное     */
-  --glow:rgba(201,168,110,.16);                /* латунное свечение на тёмном   */
-  --glow-2:rgba(55,90,147,.35);                /* холодное свечение на тёмном   */
-  --fill-bg:#FBF1DE; --fill-ink:#7A5520;
-  --overlay-rgb:8,14,26;                       /* затемнение фото               */
+html[data-theme="emerald"]{
+  --bg:#F4F4F0; --bg-rgb:244,244,240;          /* светлый камень                */
+  --surface:#FFFFFF; --surface-2:#F8F8F5;      /* карточки и подложки           */
+  --dark:#0F2A23; --dark-rgb:15,42,35;         /* бутылочный зелёный: герой, призыв, подвал */
+  --dark-hi:#173A31;
+  --ink:#14201C; --ink-rgb:20,32,28;           /* основной текст                */
+  --ink-2:#4F5B56; --ink-3:#6A7570;            /* абзацы и подписи              */
+  --accent:#1F4D3F; --accent-rgb:31,77,63;     /* кнопки на светлом             */
+  --accent-hi:#27604F; --accent-ink:#1C4538;
+  --accent-soft:#E3ECE7; --on-accent:#FFFFFF;
+  --metal:#957641; --metal-lite:#CDAE74;       /* латунь: на светлом / на тёмном */
+  --metal-grad:linear-gradient(135deg,#E0C690 0%,#B08D55 100%);
+  --metal-shine:#FFF2D6; --on-metal:#1C1608;
+  --tint:#DCE6E0;                              /* переход светлого в тёмное     */
+  --glow:rgba(205,174,116,.16);                /* латунное свечение на тёмном   */
+  --glow-2:rgba(46,110,88,.38);                /* изумрудное свечение           */
+  --fill-bg:#F6EEDC; --fill-ink:#6E5226;
+  --overlay-rgb:8,20,16;                       /* затемнение фото               */
 }
 
-/* ── ГРАФИТ И ШАМПАНЬ ─────────────────────────── data-theme="graphite" ── */
-html[data-theme="graphite"]{
-  --bg:#F5F4F1; --bg-rgb:245,244,241;          /* светлый камень                */
-  --surface:#FFFFFF; --surface-2:#FAF9F6;
-  --dark:#16181B; --dark-rgb:22,24,27;         /* графит                        */
-  --dark-hi:#24272C;
-  --ink:#17191C; --ink-rgb:23,25,28;
-  --ink-2:#575C63; --ink-3:#73787F;
-  --accent:#7A5F2E; --accent-rgb:122,95,46;    /* тёмное шампанское — кнопки    */
-  --accent-hi:#8E7037; --accent-ink:#6B5228;
-  --accent-soft:#EFE9DD; --on-accent:#FFFFFF;
-  --metal:#A88752; --metal-lite:#D3B67F;
-  --metal-grad:linear-gradient(135deg,#E6D0A2 0%,#B8975E 100%);
-  --metal-shine:#FFF5DE; --on-metal:#1C1608;
-  --tint:#E6E0D4;
-  --glow:rgba(211,182,127,.17);
-  --glow-2:rgba(120,110,95,.28);
+/* ── ОНИКС И ЗОЛОТО ───────────────────────────── data-theme="onyx" ── */
+html[data-theme="onyx"]{
+  --bg:#F4F3F1; --bg-rgb:244,243,241;          /* тёплый белый                  */
+  --surface:#FFFFFF; --surface-2:#F9F8F6;
+  --dark:#131313; --dark-rgb:19,19,19;         /* оникс                         */
+  --dark-hi:#232323;
+  --ink:#141414; --ink-rgb:20,20,20;
+  --ink-2:#57554F; --ink-3:#716E68;
+  --accent:#1A1A1A; --accent-rgb:26,26,26;     /* чёрные кнопки на светлом      */
+  --accent-hi:#333333; --accent-ink:#7A5C25;   /* надписи-акценты — тёмное золото */
+  --accent-soft:#F1EBDD; --on-accent:#FFFFFF;
+  --metal:#A07F45; --metal-lite:#D4B47A;
+  --metal-grad:linear-gradient(135deg,#EAD4A2 0%,#B8955A 100%);
+  --metal-shine:#FFF6DF; --on-metal:#1C1608;
+  --tint:#E7E2D8;
+  --glow:rgba(212,180,122,.18);
+  --glow-2:rgba(130,108,72,.22);
   --fill-bg:#F6EEDC; --fill-ink:#6E5226;
-  --overlay-rgb:14,16,19;
+  --overlay-rgb:12,12,12;
 }
 
 /* ── РАЗМЕРЫ, ЛИНИИ И ТЕНИ (общие для обеих схем) ───────────────── */
