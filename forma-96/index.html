@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="midnight">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -67,6 +67,14 @@
   --r-xl:44px; --r-lg:28px; --r-md:20px;
   --pad:clamp(16px,3.4vw,44px);
   --font:'Onest',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+/* палитра «Графит и шампань» — та же, что в src/_includes/partials/tokens.css */
+html[data-theme="graphite"]{
+  --bg:#F5F4F1; --surface:#FFFFFF; --surface-2:#FAF9F6;
+  --ink:#17191C; --ink-2:#575C63; --ink-3:#73787F;
+  --accent:#7A5F2E; --accent-hi:#8E7037; --accent-ink:#6B5228; --accent-soft:#EFE9DD;
+  --metal:#A88752; --metal-lite:#D3B67F; --dark:#16181B;
+  --line:rgba(23,25,28,.10); --line-2:rgba(23,25,28,.06);
 }
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}

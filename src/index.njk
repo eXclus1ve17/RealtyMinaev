@@ -4,7 +4,7 @@ eleventyExcludeFromCollections: true
 ---
 {%- import "partials/nav.njk" as nav -%}
 <!DOCTYPE html>
-<html lang="ru" data-theme="steel" class="mv-glass">
+<html lang="ru" data-theme="midnight" class="mv-glass">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -37,112 +37,11 @@ eleventyExcludeFromCollections: true
 <style>
 /* ============================================================
    Дмитрий Минаев — просто о недвижимости
-   Светлая тема: карточка-герой во всю ширину, плавающие отзывы
-   поверх фото. Все цвета — в блоке «ПАЛИТРА САЙТА» ниже.
+   Светлая тема: карточка-герой во всю ширину.
+   Все цвета — в src/_includes/partials/tokens.css (общий файл для всех страниц).
    ============================================================ */
 
-/* ════════════════════════════════════════════════════════════════════
-   ПАЛИТРА САЙТА — весь цвет живёт только здесь.
-
-   ЧТОБЫ СМЕНИТЬ ПАЛИТРУ ЦЕЛИКОМ: в самом верху файла, во второй
-   строке, в теге <html ... data-theme="steel"> замените слово steel
-   на одно из трёх:
-
-        steel      — Полночный синий и сталь   (сейчас включена)
-        graphite   — Графит и шампань
-        emerald    — Изумруд и латунь
-
-   ЧТОБЫ ПОПРАВИТЬ ОТДЕЛЬНЫЙ ЦВЕТ: найдите его ниже в блоке нужной
-   палитры и замените код цвета. Менять можно прямо здесь, все три
-   палитры всегда рабочие — ничего раскомментировать не нужно.
-   ════════════════════════════════════════════════════════════════════ */
-
-/* ── ПАЛИТРА 1 · ПОЛНОЧНЫЙ СИНИЙ И СТАЛЬ ───────── data-theme="steel" ── */
-:root,
-html[data-theme="steel"]{
-  /* поверхности */
-  --bg:          #F4F5F7;   /* фон страницы, холодный мрамор     */
-  --bg-rgb:      244,245,247;
-  --surface:     #FFFFFF;   /* карточки, панели                  */
-  --surface-2:   #F7F8FA;   /* мягкая подложка внутри карточек   */
-  --dark:        #101A2C;   /* тёмные блоки: канал, плитка лого  */
-  --dark-hi:     #1B2942;   /* тот же, при наведении             */
-
-  /* текст */
-  --ink:         #101A2C;   /* основной текст                    */
-  --ink-rgb:     16,26,44;  /* он же для линий и теней           */
-  --ink-2:       #525C6B;   /* абзацы, описания                  */
-  --ink-3:       #7C8593;   /* подписи, плейсхолдеры             */
-
-  /* акцент — кнопки и активные состояния */
-  --accent:      #2F4A7A;   /* стальной синий                    */
-  --accent-rgb:  47,74,122;
-  --accent-hi:   #3A5B94;   /* акцент при наведении              */
-  --accent-ink:  #2A4370;   /* акцент как текст (надзаголовки)   */
-  --accent-soft: #E5EAF3;   /* светлая заливка акцента           */
-  --on-accent:   #FFFFFF;   /* текст на акцентной кнопке         */
-
-  /* металл — только аттестат и звёзды отзывов */
-  --metal:       #9C7B46;   /* бронза на светлом фоне            */
-  --metal-lite:  #C6A46B;   /* бронза на тёмном фоне             */
-
-  /* затемнение фотографии в первом экране */
-  --overlay-rgb: 8,14,26;
-}
-
-/* ── ПАЛИТРА 2 · ГРАФИТ И ШАМПАНЬ ────────────── data-theme="graphite" ── */
-html[data-theme="graphite"]{
-  --bg:          #F7F6F4;   /* тёплая почти белая бумага         */
-  --bg-rgb:      247,246,244;
-  --surface:     #FFFFFF;
-  --surface-2:   #FAF9F7;
-  --dark:        #16191D;   /* графит                            */
-  --dark-hi:     #242930;
-
-  --ink:         #16191D;
-  --ink-rgb:     22,25,29;
-  --ink-2:       #5C636B;
-  --ink-3:       #8B929A;
-
-  --accent:      #8A6A33;   /* шампань, приглушённая             */
-  --accent-rgb:  138,106,51;
-  --accent-hi:   #A07C3E;
-  --accent-ink:  #7A5C2A;
-  --accent-soft: #F0E9DB;
-  --on-accent:   #FFFFFF;
-
-  --metal:       #B79155;
-  --metal-lite:  #D2B27A;
-
-  --overlay-rgb: 14,16,19;
-}
-
-/* ── ПАЛИТРА 3 · ИЗУМРУД И ЛАТУНЬ ─────────────── data-theme="emerald" ── */
-html[data-theme="emerald"]{
-  --bg:          #F5F3ED;   /* слоновая кость                    */
-  --bg-rgb:      245,243,237;
-  --surface:     #FFFFFF;
-  --surface-2:   #FAF8F3;
-  --dark:        #14312A;   /* глубокая зелень                   */
-  --dark-hi:     #1E4238;
-
-  --ink:         #1B2422;
-  --ink-rgb:     27,36,34;
-  --ink-2:       #586460;
-  --ink-3:       #87918D;
-
-  --accent:      #14312A;   /* зелень как акцент                 */
-  --accent-rgb:  20,49,42;
-  --accent-hi:   #1E4238;
-  --accent-ink:  #1A3C33;
-  --accent-soft: #E2EAE5;
-  --on-accent:   #FFFFFF;
-
-  --metal:       #A8834E;   /* латунь                            */
-  --metal-lite:  #C9A96F;
-
-  --overlay-rgb: 10,24,20;
-}
+{% include "partials/tokens.css" %}
 
 /* ── РАЗМЕРЫ И ТЕНИ (общие для всех палитр) ────────────────────── */
 :root{
@@ -807,7 +706,7 @@ textarea{resize:vertical;min-height:84px}
 /* ---------- полоска проекта Forma 96 (вариант C «Чертёж на свету») ----------
    градиент от белого к синему сайта; на белом — планировка с мебелью, справа название и кнопка */
 .pstrip{position:relative;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);min-height:clamp(240px,22vw,300px);border-radius:var(--r-xl);overflow:hidden;color:#fff;
-  background:linear-gradient(112deg,#FFFFFF 0%,#FFFFFF 30%,#DCE4F0 39%,var(--accent) 55%,var(--dark) 100%)}
+  background:linear-gradient(112deg,#FFFFFF 0%,#FFFFFF 30%,var(--tint) 39%,var(--accent) 55%,var(--dark) 100%)}
 .pstrip-plan{position:relative;padding:clamp(18px,2.4vw,30px) 0 0 clamp(18px,2.4vw,34px);display:flex;align-items:flex-end}
 .pstrip-dim{position:absolute;left:clamp(18px,2.4vw,34px);top:clamp(16px,2vw,24px);font-size:12px;font-weight:600;color:var(--ink-3);letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .pstrip .plan-mini{display:block;width:min(310px,84%);height:auto;margin-bottom:-7%;filter:drop-shadow(0 20px 30px rgba(var(--ink-rgb),.12))}
@@ -819,8 +718,8 @@ textarea{resize:vertical;min-height:84px}
 /* перелив названия: по буквам проходит блик, по «96» — латунный, чуть позже */
 @media (prefers-reduced-motion:no-preference){
   .pstrip-title,.pstrip-title span{-webkit-background-clip:text;background-clip:text;color:transparent;background-size:300% 100%;animation:f96 6.5s cubic-bezier(.45,0,.25,1) infinite}
-  .pstrip-title{background-image:linear-gradient(100deg,#fff 0%,#fff 40%,#F3E3BF 50%,#fff 60%,#fff 100%)}
-  .pstrip-title span{background-image:linear-gradient(100deg,#C6A46B 0%,#C6A46B 38%,#FFF0CF 50%,#C6A46B 62%,#C6A46B 100%);animation-delay:.45s}
+  .pstrip-title{background-image:linear-gradient(100deg,#fff 0%,#fff 40%,var(--metal-shine) 50%,#fff 60%,#fff 100%)}
+  .pstrip-title span{background-image:linear-gradient(100deg,var(--metal-lite) 0%,var(--metal-lite) 38%,var(--metal-shine) 50%,var(--metal-lite) 62%,var(--metal-lite) 100%);animation-delay:.45s}
   .pstrip:hover .pstrip-title,.pstrip:hover .pstrip-title span{animation-duration:3s}
   @keyframes f96{0%{background-position:100% 0}55%,100%{background-position:0 0}}
 }
@@ -831,22 +730,22 @@ textarea{resize:vertical;min-height:84px}
 .pstrip:hover .btn svg{transform:translateX(3px)}
 .pstrip:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 /* планировка «Чертёж» */
-.plan-mini .pw{fill:#1B2942}
+.plan-mini .pw{fill:var(--dark-hi)}
 .plan-mini .pr,.plan-mini .wr-openings{fill:#fff}
 .plan-mini .pt{fill:#EADCC3}
-.plan-mini .wr-glass{fill:#fff;stroke:#1B2942;stroke-width:1.5}
-.plan-mini .wr-glass-line{fill:none;stroke:#1B2942;stroke-width:1.8}
-.plan-mini .wr-glass-leaf{fill:#fff;stroke:#101A2C;stroke-width:1.8}
-.plan-mini .wr-door-leaf,.plan-mini .wr-sliding-panel{fill:#E9DFCF;stroke:#101A2C;stroke-width:1.6}
-.plan-mini .wr-door-arc,.plan-mini .wr-sliding-track,.plan-mini .wr-door-glazing{fill:none;stroke:#7C8593;stroke-width:1.3}
-.plan-mini .wr-sliding-closed{fill:none;stroke:#7C8593;stroke-dasharray:5 5}
-.plan-mini .pf *{fill:#fff;stroke:#101A2C;stroke-width:.75;vector-effect:non-scaling-stroke}
+.plan-mini .wr-glass{fill:#fff;stroke:var(--dark-hi);stroke-width:1.5}
+.plan-mini .wr-glass-line{fill:none;stroke:var(--dark-hi);stroke-width:1.8}
+.plan-mini .wr-glass-leaf{fill:#fff;stroke:var(--dark);stroke-width:1.8}
+.plan-mini .wr-door-leaf,.plan-mini .wr-sliding-panel{fill:#E9DFCF;stroke:var(--dark);stroke-width:1.6}
+.plan-mini .wr-door-arc,.plan-mini .wr-sliding-track,.plan-mini .wr-door-glazing{fill:none;stroke:var(--ink-3);stroke-width:1.3}
+.plan-mini .wr-sliding-closed{fill:none;stroke:var(--ink-3);stroke-dasharray:5 5}
+.plan-mini .pf *{fill:#fff;stroke:var(--dark);stroke-width:.75;vector-effect:non-scaling-stroke}
 .plan-mini .pf .f-soft2{fill:#F1F3F6}
-.plan-mini .pf .f-rug{fill:none;stroke:#7C8593;stroke-dasharray:3 3}
-.plan-mini .pf .f-screen{fill:#101A2C}
+.plan-mini .pf .f-rug{fill:none;stroke:var(--ink-3);stroke-dasharray:3 3}
+.plan-mini .pf .f-screen{fill:var(--dark)}
 .plan-mini .pf .f-line{fill:none}
 @media (max-width:760px){
-  .pstrip{grid-template-columns:minmax(0,1fr);border-radius:var(--r-lg);background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 42%,#C9D4E6 48%,var(--accent) 55%,var(--dark) 100%)}
+  .pstrip{grid-template-columns:minmax(0,1fr);border-radius:var(--r-lg);background:linear-gradient(180deg,#FFFFFF 0%,#FFFFFF 42%,var(--tint) 48%,var(--accent) 55%,var(--dark) 100%)}
   .pstrip-plan{justify-content:center;padding:44px 16px 0}
   .pstrip .plan-mini{margin-bottom:0;width:min(280px,80%)}
   .pstrip .btn{width:100%}
@@ -889,7 +788,7 @@ textarea{resize:vertical;min-height:84px}
 </script>
 <!-- Яндекс Метрика подключается из /assets/site.js только после согласия на cookie (баннер внизу страницы). -->
 <style>
-.pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,#c9d4e6 47%,#2f4a7a 64%,#101a2c 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
+.pstrip{min-height:220px;grid-template-columns:42% 58%}.pstrip-plan{align-items:center;justify-content:center;padding:20px}.pstrip .plan-mini{width:190px;margin:0;filter:none}.pstrip-dim{display:none}.pstrip-txt{padding:28px 40px;gap:10px}.pstrip-title{font-size:64px}.pstrip-sub{max-width:42ch}.pstrip .btn{margin-top:4px}@media(max-width:700px){.pstrip{grid-template-columns:1fr;background:linear-gradient(180deg,#fff 0%,#fff 35%,var(--tint) 47%,var(--accent) 64%,var(--dark) 100%)}.pstrip-plan{padding:20px 16px 8px}.pstrip .plan-mini{width:170px}.pstrip-txt{padding:24px;gap:12px}.pstrip-title{font-size:56px}}
 
 /* ссылки «Подробнее» в карточках сложных сделок */
 .case .go{margin-top:auto;padding-top:4px;font-size:13.5px;font-weight:600;color:var(--metal-lite);display:flex;flex-wrap:wrap;gap:4px 10px}
@@ -955,6 +854,7 @@ textarea{resize:vertical;min-height:84px}
 
 {% include "partials/motion.css" %}
 {% include "partials/menu.css" %}
+{% include "partials/premium.css" %}
 </style></head>
 <body>
 

@@ -37,7 +37,7 @@
 }
 
 /* ===== 1. «Стекло»: тёмное матовое стекло, латунные акценты ===== */
-:root.mv-glass .nav .dd{min-width:300px;padding:10px;border-radius:20px;background:rgba(14,22,38,.9);
+:root.mv-glass .nav .dd{min-width:300px;padding:10px;border-radius:20px;background:rgba(var(--dark-rgb),.9);
   -webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);
   border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -22px rgba(8,14,26,.6),inset 0 1px 0 rgba(255,255,255,.08)}
 :root.mv-glass .nav .dd a{position:relative;padding:11px 16px 11px 20px;border-radius:12px;color:rgba(255,255,255,.86);background:none}
@@ -45,13 +45,13 @@
 :root.mv-glass .nav .dd a:hover,:root.mv-glass .nav .dd a[aria-current="page"]{background:rgba(255,255,255,.08);color:#fff}
 :root.mv-glass .nav .dd a:hover::before,:root.mv-glass .nav .dd a[aria-current="page"]::before{height:18px}
 :root.mv-glass .nav .dd a.more{display:flex;justify-content:center;gap:8px;margin-top:8px;padding:12px 16px;border:0;border-radius:999px;
-  background:linear-gradient(135deg,#D9BD87,#B08D55);color:#1A1408;font-weight:600;font-size:14.5px}
+  background:var(--metal-grad);color:var(--on-metal);font-weight:600;font-size:14.5px}
 :root.mv-glass .nav .dd a.more::before{display:none}
 :root.mv-glass .nav .dd a.more::after{content:"→";transition:transform .25s}
-:root.mv-glass .nav .dd a.more:hover{background:linear-gradient(135deg,#E4CB98,#BC9960);color:#1A1408}
+:root.mv-glass .nav .dd a.more:hover{background:var(--metal-grad);color:var(--on-metal);filter:brightness(1.06)}
 :root.mv-glass .nav .dd a.more:hover::after{transform:translateX(3px)}
 
-:root.mv-glass .mnav{color:#fff;background:rgba(12,19,33,.66);-webkit-backdrop-filter:blur(28px) saturate(1.3);backdrop-filter:blur(28px) saturate(1.3)}
+:root.mv-glass .mnav{color:#fff;background:rgba(var(--dark-rgb),.66);-webkit-backdrop-filter:blur(28px) saturate(1.3);backdrop-filter:blur(28px) saturate(1.3)}
 :root.mv-glass .mnav summary,:root.mv-glass .mnav a.ml,:root.mv-glass .mnav .brand b{color:#fff}
 :root.mv-glass .mnav .brand span{color:rgba(255,255,255,.6)}
 :root.mv-glass .mnav details,:root.mv-glass .mnav > a.ml{border-color:rgba(255,255,255,.12)}

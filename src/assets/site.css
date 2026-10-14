@@ -1,22 +1,10 @@
 /* ============================================================
    Внутренние страницы realtyminaev.ru.
-   Палитра, шрифт и компоненты те же, что на главной (тема steel):
-   цвета скопированы из её блока «ПАЛИТРА САЙТА». Меняя цвет здесь,
-   поменяйте его и на главной — пока главная живёт отдельным файлом.
+   Цвета — общие с главной, в src/_includes/partials/tokens.css.
+   Кнопки, тёмные блоки и анимации — в partials/premium.css.
    ============================================================ */
 :root{
-  --bg:#F4F5F7; --bg-rgb:244,245,247;
-  --surface:#FFFFFF; --surface-2:#F7F8FA;
-  --dark:#101A2C; --dark-hi:#1B2942;
-  --ink:#101A2C; --ink-rgb:16,26,44; --ink-2:#525C6B; --ink-3:#6E7785;
-  --accent:#2F4A7A; --accent-rgb:47,74,122; --accent-hi:#3A5B94; --accent-ink:#2A4370;
-  --accent-soft:#E5EAF3; --on-accent:#FFFFFF;
-  --metal:#9C7B46; --metal-lite:#C6A46B;
-  --fill-bg:#FBF1DE; --fill-ink:#7A5520;
-
-  --line:rgba(var(--ink-rgb),.10); --line-2:rgba(var(--ink-rgb),.06);
-  --shadow:0 18px 50px -22px rgba(var(--ink-rgb),.32);
-  --shadow-sm:0 8px 24px -12px rgba(var(--ink-rgb),.28);
+  /* цвета — в partials/tokens.css (подключается в шапке каждой страницы) */
   --r-xl:44px; --r-lg:28px; --r-md:20px;
   --pad:clamp(16px,3.4vw,44px);
   --maxw:1440px;
@@ -404,11 +392,23 @@ a.post:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
 .hdr-write svg{width:17px;height:17px;color:var(--accent)}
 
 /* Шапка страницы: крупный заголовок, латунная линия, «паспорт» услуги в строку, лёгкая сетка-чертёж */
-.ph{position:relative;isolation:isolate}
-.ph::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(var(--accent-rgb),.07),rgba(var(--accent-rgb),0) 92%)}
+/* Первый экран внутренней страницы — тёмная карточка, как герой на главной.
+   Внутри неё цвета текста и линий переопределены через переменные. */
+.ph{position:relative;isolation:isolate;overflow:hidden;color:var(--ink);
+  width:calc(100% - 2*var(--pad));max-width:calc(var(--maxw) - 2*var(--pad));margin:12px auto 0;border-radius:var(--r-xl);
+  padding:clamp(30px,4.4vw,64px) 0 clamp(30px,4vw,56px);
+  background:radial-gradient(70% 120% at 100% 0,var(--glow),transparent 60%),radial-gradient(60% 120% at 0 100%,var(--glow-2),transparent 62%),var(--dark);
+  --ink:#fff;--ink-2:rgba(255,255,255,.74);--ink-3:rgba(255,255,255,.56);--line:rgba(255,255,255,.16);--line-2:rgba(255,255,255,.1);
+  --accent-ink:var(--metal-lite);--surface:rgba(255,255,255,.06);--accent-soft:rgba(255,255,255,.08)}
+.ph::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/100% 88px;mask-image:linear-gradient(90deg,transparent,#000 40%,#000 60%,transparent)}
+.ph .free{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:var(--ink-2)}
+.ph .eyebrow::before{background:var(--metal-lite)}
+.crumbs{padding-bottom:4px}
 .ph .ph-grid{grid-template-columns:1fr!important;gap:26px!important}
 .ph .h1{font-size:clamp(38px,5.6vw,80px);letter-spacing:-.045em;max-width:17ch}
-.ph .ph-main{border-bottom:2px solid var(--metal-lite);padding-bottom:26px}
+.ph .ph-main{position:relative;padding-bottom:26px}
+.ph .ph-main::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--metal-grad);transform-origin:left}
 .ph .brief{background:none;box-shadow:none;border:0;padding:0}
 .ph .brief .t{display:none}
 .ph .brief ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
