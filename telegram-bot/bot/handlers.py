@@ -127,7 +127,7 @@ class Bot:
         return {"text": self.b(key), "url": link}
 
     def btn_write(self):
-        return self.url("write", self.c["links"]["dmitry"])
+        return dict(self.url("write", self.c["links"]["dmitry"]), style="primary")  # синяя, как «Оставить заявку»
 
     def btn_menu(self):
         return self.cb("menu", "menu")
@@ -155,7 +155,9 @@ class Bot:
 
     def main_menu(self):
         if self.cfg.webapp_url:
-            return self.kb(self.app_buttons(lambda tab: {"web_app": {"url": self.app_url(tab)}}) + [[self.btn_write()]])
+            rows = self.app_buttons(lambda tab: {"web_app": {"url": self.app_url(tab)}})
+            rows.insert(1, [self.btn_write()])  # заявка · личное сообщение · услуги и вопросы · визитка
+            return self.kb(rows)
         # без мини-приложения — меню кнопками в чате
         links = self.c["links"]
         rows = [

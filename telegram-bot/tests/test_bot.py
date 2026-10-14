@@ -115,10 +115,10 @@ class BotTest(unittest.TestCase):
         self.assertIn("Дмитрий Минаев", msg["text"])
         btns = buttons(msg["reply_markup"])
         # заявка (синяя) · услуги и вопросы · визитка — всё открывает разделы мини-приложения
-        self.assertEqual(labels(msg["reply_markup"]), [self.b("biz_lead"), self.b("biz_menu"), self.b("biz_card"), self.b("write")])
-        self.assertEqual(btns[0].get("style"), "primary")
-        self.assertEqual(btns[3]["url"], "https://t.me/RealtyMinaev")
-        self.assertEqual([b["web_app"]["url"] for b in btns[:3]], [
+        self.assertEqual(labels(msg["reply_markup"]), [self.b("biz_lead"), self.b("write"), self.b("biz_menu"), self.b("biz_card")])
+        self.assertEqual([b.get("style") for b in btns], ["primary", "primary", None, None])
+        self.assertEqual(btns[1]["url"], "https://t.me/RealtyMinaev")
+        self.assertEqual([b["web_app"]["url"] for b in (btns[0], btns[2], btns[3])], [
             "https://realtyminaev.ru/card/app/?tab=lead", "https://realtyminaev.ru/card/app/?tab=services",
             "https://realtyminaev.ru/card/app/?tab=card"])
 
