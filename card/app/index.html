@@ -291,7 +291,8 @@
   @keyframes sheetUp{from{transform:translateY(100%)}}
 
   /* Заявка — помещается в один экран */
-  .form{padding:14px 16px 34px;display:grid;gap:12px}
+  .form{padding:14px 16px 0;display:flex;flex-direction:column;gap:12px;min-height:100%}
+  .sendbar{margin-top:auto;position:sticky;bottom:0;padding:10px 0 34px;background:linear-gradient(180deg,rgba(11,10,9,0),var(--bg) 30%);display:grid;gap:8px}
   .fh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
   .form h2{margin:0;font-size:22px;font-weight:600;letter-spacing:-.02em}
   .form .sub{margin:0;color:var(--muted);font-size:12.5px}
@@ -312,14 +313,16 @@
   .share svg{width:16px;height:16px}
   .share.on{display:flex}
   .share.got{border-color:var(--champ);background:rgba(214,193,154,.14)}
-  .addc{border:0;background:none;padding:2px 0;color:var(--champ);font:500 13.5px 'Onest',sans-serif;cursor:pointer;-webkit-appearance:none}
-  .cmt textarea{display:none;height:66px;padding:11px 14px;resize:none;line-height:1.4;margin-top:6px}
-  .cmt.open .addc{display:none}
-  .cmt.open textarea{display:block;margin-top:0;animation:open .4s var(--ease)}
+  textarea.fld{height:64px;padding:11px 14px;resize:none;line-height:1.4;display:block}
+  @media (max-height:680px){
+    .form{gap:9px;padding-top:10px}.form h2{font-size:20px}.lbl{margin-bottom:4px}
+    .chip{padding:7px 4px}.fld,.share{height:42px}textarea.fld{height:44px;padding:10px 14px}
+    .sendbar{padding:6px 0 30px}.gold{height:48px}
+  }
   .chk{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.45;color:#bdb5a7;cursor:pointer}
   .chk input{flex:none;margin:1px 0 0;width:20px;height:20px;accent-color:var(--champ)}
   .chk a{color:var(--champ-hi);text-decoration:underline;text-decoration-color:var(--champ-lo);text-underline-offset:2px}
-  .err{color:#e7a08f;font-size:12.5px;min-height:0;margin-top:-6px}
+  .err{color:#e7a08f;font-size:12.5px;text-align:center}
   .err:empty{display:none}
   .done{display:none;padding:56px 24px 32px;text-align:center}
   .done.on{display:block}
@@ -463,11 +466,9 @@
       <div><label class="lbl" for="f-phone">Телефон</label>
         <div class="prow"><input class="fld" id="f-phone" name="phone" inputmode="tel" maxlength="30" placeholder="+7 ___ ___-__-__" autocomplete="tel">
         <button class="share" type="button" id="share"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 3.6 2.9 10.8c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8L23 5c.3-1.4-.5-2-1.5-1.4zM8.6 13.7l9.6-6.1c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.5-1.6-5z"/></svg><span>Из Telegram</span></button></div></div>
-      <div class="cmt"><button class="addc" type="button" id="addc">+ Добавить комментарий</button>
-        <textarea class="fld" id="f-comment" name="comment" maxlength="500" placeholder="Например: двушка в ЦАО до 25 млн" aria-label="Комментарий"></textarea></div>
+      <div><label class="lbl" for="f-comment">Комментарий</label><textarea class="fld" id="f-comment" name="comment" maxlength="500" placeholder="Например: двушка в ЦАО до 25 млн"></textarea></div>
       <label class="chk"><input type="checkbox" id="f-consent"><span>Согласен на <a href="https://realtyminaev.ru/soglasie/" target="_blank" rel="noopener">обработку персональных данных</a> и их передачу через Telegram (серверы за рубежом). <a href="https://realtyminaev.ru/politika-konfidencialnosti/" target="_blank" rel="noopener">Политика</a></span></label>
-      <div class="err" id="err" role="alert"></div>
-      <button class="gold" type="submit" id="send">Отправить заявку</button>
+      <div class="sendbar"><div class="err" id="err" role="alert"></div><button class="gold" type="submit" id="send">Отправить заявку</button></div>
     </form>
     <div class="done" id="done" role="status">
       <div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
@@ -583,8 +584,30 @@
       if (inapp || tg) { left = false; location.href = 'x-safari-' + vcf; setTimeout(fallback, 2500); return; }
       location.href = vcf;
     }
+    // В мини-приложении Telegram не открывает Safari и карточку контакта: бот присылает карточку в чат
+    // (contact.php проверяет подпись Telegram), приложение закрывается — в чате кнопка «Добавить».
+    var busy = false;
+    function toChat(retried) {
+      busy = true; a.classList.add('loading');
+      text('Пришлю карточку контакта в чат', 'Там нажмите <b>«Добавить»</b>'); show(12000);
+      var fd = new FormData(); fd.append('initData', tg.initData);
+      fetch('../../contact.php', { method: 'POST', body: fd }).then(function (r) { return r.json(); }).then(function (j) {
+        if (j.ok) {
+          done(); busy = false;
+          text('Карточка в чате ✓', 'Нажмите <b>«Добавить»</b> под ней');
+          try { tg.HapticFeedback.notificationOccurred('success'); } catch (x) {}
+          setTimeout(function () { tg.close(); }, 1400);
+          return;
+        }
+        if (j.error === 'forbidden' && !retried && tg.requestWriteAccess) {  // клиент ещё не запускал бота
+          return tg.requestWriteAccess(function (ok) { busy = false; done(); if (ok) toChat(true); else tg.openTelegramLink(BOT); });
+        }
+        throw new Error(j.error);
+      }).catch(function () { busy = false; done(); tg.openTelegramLink(BOT); });
+    }
     a.addEventListener('click', function (e) {
-      if (!ios && !tg) return;                                   // Android и компьютер — обычное скачивание
+      if (tg) { e.preventDefault(); if (!busy) toChat(false); return; }
+      if (!ios) return;                                          // Android и компьютер — обычное скачивание
       e.preventDefault();
       if (a.classList.contains('loading')) return open();        // повторное нажатие — сразу
       if (tg && !ios) text('Откроется браузер', 'Затем телефон предложит <b>добавить контакт</b>');
@@ -652,7 +675,6 @@
         });
       });
     }
-    document.getElementById('addc').addEventListener('click', function () { this.parentNode.classList.add('open'); document.getElementById('f-comment').focus(); });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var task = form.querySelector('.chip[aria-pressed="true"]');
@@ -680,7 +702,7 @@
         .then(function () { send.disabled = false; send.textContent = 'Отправить заявку'; });
     });
     document.querySelector('#done .again').addEventListener('click', function () {
-      document.getElementById('done').classList.remove('on'); form.style.display = ''; form.reset(); document.querySelector('.cmt').classList.remove('open');
+      document.getElementById('done').classList.remove('on'); form.style.display = ''; form.reset();
       form.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
     });
   })();
