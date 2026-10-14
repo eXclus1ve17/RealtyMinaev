@@ -149,3 +149,114 @@
     }).catch(function () { location.href = u.pathname; });
   });
 })();
+
+// Движение: появление «лесенкой», заголовки построчно, счётчики цифр,
+// подсветка карточек и магнитные кнопки. При «уменьшить движение» — ничего.
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  // 1. Появление лесенкой: элементы одной группы выезжают по очереди
+  var GROUPS = '.pairs > .pair, .algo-steps > .algo-step, .cards > .card, .cards > .post, .cases-grid > .case, .cx-list > .cx, .tiles > .tile, .stats > .stat, .faq > details, .check > a, .checks > li, .algo-out li, .att-rows > li, .ch-list > .ch';
+  var items = [].slice.call(document.querySelectorAll(GROUPS));
+  var seen = new Map();
+  items.forEach(function (el) {
+    var p = el.parentNode, n = seen.get(p) || 0;
+    seen.set(p, n + 1);
+    el.style.setProperty('--i', Math.min(n, 8));
+    var rv = el.closest('.rv'); if (rv) rv.classList.add('rv-off');
+    el.classList.add('m-st');
+  });
+  // проявляем всё, до чего человек уже долистал, — и при быстрой прокрутке тоже
+  var left = items.slice(), ticking = false;
+  var reveal = function () {
+    ticking = false;
+    var lim = innerHeight * 0.92;
+    left = left.filter(function (el) {
+      if (el.getBoundingClientRect().top < lim) { el.classList.add('m-in'); return false; }
+      return true;
+    });
+    if (!left.length) removeEventListener('scroll', onScroll);
+  };
+  var onScroll = function () { if (!ticking) { ticking = true; requestAnimationFrame(reveal); } };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+  requestAnimationFrame(function () { requestAnimationFrame(reveal); });
+
+  // 2. Заголовок страницы построчно (на главной строки уже размечены)
+  var h1 = document.querySelector('.ph .h1, .doc h1');
+  var split = function () {
+    if (!h1 || h1.classList.contains('m-ready')) return;
+    var walk = function (node) {
+      [].slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var f = document.createDocumentFragment();
+          c.textContent.split(/( +)/).forEach(function (t) {
+            if (!t) return;
+            if (/^ +$/.test(t)) { f.appendChild(document.createTextNode(t)); return; }
+            var s = document.createElement('span'); s.className = 'm-w'; s.textContent = t; f.appendChild(s);
+          });
+          c.parentNode.replaceChild(f, c);
+        } else if (c.nodeType === 1) walk(c);
+      });
+    };
+    walk(h1);
+    var top = null, line = -1;
+    [].slice.call(h1.querySelectorAll('.m-w')).forEach(function (w) {
+      var t = Math.round(w.offsetTop);
+      if (top === null || Math.abs(t - top) > 4) { top = t; line++; }
+      w.style.setProperty('--l', line);
+    });
+    h1.classList.add('m-ready');
+  };
+  if (h1 && !h1.querySelector('.ln')) {
+    // строки считаем после загрузки шрифта, но не ждём дольше 0,5 с
+    Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(function (r) { setTimeout(r, 500); })]).then(split);
+  }
+
+  // 3. Счётчики: «100+», «>50%», «с 2020» отсчитываются при появлении
+  var nums = [].slice.call(document.querySelectorAll('.stat b'));
+  var cio = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      cio.unobserve(e.target);
+      var el = e.target, txt = el.textContent, m = txt.match(/\d+/);
+      if (!m) return;
+      var end = +m[0], start = end > 1900 ? end - 20 : 0, t0 = null, dur = 1100;
+      var step = function (ts) {
+        if (!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / dur), v = Math.round(start + (end - start) * (1 - Math.pow(1 - k, 3)));
+        el.textContent = txt.replace(m[0], v);
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }, { threshold: .6 });
+  nums.forEach(function (n) { cio.observe(n); });
+
+  if (!fine) return;
+
+  // 4. Подсветка карточек под курсором
+  var GLOW = '.card, .pair, .tile, .case, .cx, .stat, .channel, .ch, .author-card, .trust';
+  [].slice.call(document.querySelectorAll(GLOW)).forEach(function (el) {
+    el.classList.add('m-glow');
+    if (el.closest('.cases, .contact-main')) el.classList.add('m-dark');
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // 5. Магнитные кнопки связи
+  [].slice.call(document.querySelectorAll('.hdr-tel, .hdr-write, .btn-tel, .hero-actions .btn, .trust-cta .btn')).forEach(function (b) {
+    b.classList.add('m-mag');
+    b.addEventListener('pointermove', function (e) {
+      var r = b.getBoundingClientRect();
+      var x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height;
+      b.style.transform = 'translate(' + (x * 8).toFixed(1) + 'px,' + (y * 6).toFixed(1) + 'px)';
+    });
+    b.addEventListener('pointerleave', function () { b.style.transform = ''; });
+  });
+})();
