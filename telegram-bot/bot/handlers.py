@@ -237,8 +237,8 @@ class Bot:
                 return self.send_contact(uid)
 
         step, data = self.state.get(uid)
-        if step is None and msg.get("contact"):
-            return  # номер из формы мини-приложения («Отправить номер из Telegram») — отвечать не нужно
+        if msg.get("contact") and step != PHONE:
+            return  # номер из формы мини-приложения («Из Telegram») — отвечать не нужно, даже посреди старой заявки в чате
         if step is None:
             if self.cfg.webapp_url:  # услуги и вопросы — в мини-приложении
                 rows = [[{"text": self.b("biz_menu"), "web_app": {"url": self.app_url("services")}}], [self.btn_write()]]

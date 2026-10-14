@@ -3,7 +3,7 @@
   python3 manage.py check          — проверить токен, связь с Telegram и тексты
   python3 manage.py set-webhook    — подключить бота к адресу PUBLIC_URL (боевой режим)
   python3 manage.py delete-webhook — отключить вебхук
-  python3 manage.py setup-menu     — кнопка «Визитка» в чате и список команд
+  python3 manage.py setup-menu     — кнопка «Меню» внизу чата (мини-приложение) и список команд
   python3 manage.py use-relay URL  — работать через посредника Cloudflare (адрес воркера)
   python3 manage.py export-app     — тексты услуг и вопросов для мини-приложения (data.json на сайте)
 """
@@ -143,9 +143,10 @@ def run(cmd):
             print("Вебхук отключён.")
         elif cmd == "setup-menu":
             if cfg.webapp_url:
+                label = load(cfg.content_path)["buttons"].get("menu_button") or "Меню"
                 api.call("setChatMenuButton", menu_button={
-                    "type": "web_app", "text": "Визитка", "web_app": {"url": cfg.webapp_url}})
-                print("Кнопка «Визитка» в чате: %s" % cfg.webapp_url)
+                    "type": "web_app", "text": label, "web_app": {"url": cfg.webapp_url}})
+                print("Кнопка «%s» в чате: %s" % (label, cfg.webapp_url))
             api.call("setMyCommands", commands=COMMANDS)
             print("Команды бота обновлены.")
         else:

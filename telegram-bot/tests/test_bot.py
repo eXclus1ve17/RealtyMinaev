@@ -629,3 +629,12 @@ class AppDataTest(unittest.TestCase):
         self.assertEqual(sum(len(x["q"]) for x in d["faq"]), sum(len(x["questions"]) for x in c["faq"]["categories"]))
         self.assertEqual(d["tasks"], [t["button"] for t in c["lead"]["tasks"]])
         self.assertNotIn("<", json.dumps(d, ensure_ascii=False))
+
+
+class ContactDuringOldLeadTest(BotTest):
+    def test_contact_ignored_while_old_chat_lead_waits_for_button(self):
+        self.text("/lead")
+        n = len(self.api.calls)
+        self.bot.handle_update({"update_id": 78, "message": {"message_id": 10, "from": USER, "chat": {"id": USER["id"], "type": "private"},
+                                "contact": {"phone_number": "79261234567", "user_id": USER["id"], "first_name": "Анна"}}})
+        self.assertEqual(len(self.api.calls), n)
