@@ -18,17 +18,22 @@
       document.getElementById(b.getAttribute('aria-controls')).classList.toggle('open', open);
     });
   });
-  document.addEventListener('click', function () { closeAll(); });
+  document.addEventListener('click', function (e) {
+    closeAll();
+    // клик мимо открытого мобильного меню (по затемнённому фону) закрывает его
+    if (m && m.classList.contains('open') && !m.contains(e.target) && !e.target.closest('[data-mnav],[data-menu]')) closeM();
+  });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); closeM(); } });
 
   // мобильное меню
   var m = document.getElementById('mnav');
-  function closeM() { if (m) { m.classList.remove('open'); document.body.style.overflow = ''; } }
+  function closeM() { if (m) { m.classList.remove('open'); document.body.style.overflow = ''; document.documentElement.classList.remove('mnav-open'); } }
   document.querySelectorAll('[data-mnav]').forEach(function (b) {
     b.addEventListener('click', function () {
       var open = b.dataset.mnav === 'open';
       m.classList.toggle('open', open);
       document.body.style.overflow = open ? 'hidden' : '';
+      document.documentElement.classList.toggle('mnav-open', open);
       if (open) m.querySelector('.mnav-close').focus();
     });
   });

@@ -4,7 +4,7 @@ eleventyExcludeFromCollections: true
 ---
 {%- import "partials/nav.njk" as nav -%}
 <!DOCTYPE html>
-<html lang="ru" data-theme="steel">
+<html lang="ru" data-theme="steel" class="mv-glass">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -816,6 +816,14 @@ textarea{resize:vertical;min-height:84px}
 .pstrip .eyebrow::before{background:var(--metal-lite)}
 .pstrip-title{font-size:clamp(52px,6.4vw,92px);font-weight:600;letter-spacing:-.055em;line-height:.92;white-space:nowrap}
 .pstrip-title span{font-weight:500;color:var(--metal-lite)}
+/* перелив названия: по буквам проходит блик, по «96» — латунный, чуть позже */
+@media (prefers-reduced-motion:no-preference){
+  .pstrip-title,.pstrip-title span{-webkit-background-clip:text;background-clip:text;color:transparent;background-size:300% 100%;animation:f96 6.5s cubic-bezier(.45,0,.25,1) infinite}
+  .pstrip-title{background-image:linear-gradient(100deg,#fff 0%,#fff 40%,#F3E3BF 50%,#fff 60%,#fff 100%)}
+  .pstrip-title span{background-image:linear-gradient(100deg,#C6A46B 0%,#C6A46B 38%,#FFF0CF 50%,#C6A46B 62%,#C6A46B 100%);animation-delay:.45s}
+  .pstrip:hover .pstrip-title,.pstrip:hover .pstrip-title span{animation-duration:3s}
+  @keyframes f96{0%{background-position:100% 0}55%,100%{background-position:0 0}}
+}
 .pstrip-sub{font-size:15.5px;line-height:1.5;color:rgba(255,255,255,.72);max-width:34ch}
 .pstrip .btn{margin-top:6px}
 .pstrip .btn svg{transition:transform .25s}
@@ -946,6 +954,7 @@ textarea{resize:vertical;min-height:84px}
 .hero-pills.one-col{grid-template-columns:1fr!important}
 
 {% include "partials/motion.css" %}
+{% include "partials/menu.css" %}
 </style></head>
 <body>
 
@@ -1254,14 +1263,14 @@ textarea{resize:vertical;min-height:84px}
   document.querySelectorAll('[data-menu]').forEach(function(b){
     b.addEventListener('click', function(){
       lastMenuBtn = b;
-      mnav.classList.add('open'); document.body.style.overflow='hidden';
+      mnav.classList.add('open'); document.body.style.overflow='hidden'; document.documentElement.classList.add('mnav-open');
       var first = mnav.querySelector('a, button');
       if(first) first.focus();
     });
   });
   function closeNav(){
     if(!mnav.classList.contains('open')) return;
-    mnav.classList.remove('open'); document.body.style.overflow='';
+    mnav.classList.remove('open'); document.body.style.overflow=''; document.documentElement.classList.remove('mnav-open');
     if(lastMenuBtn) lastMenuBtn.focus();
   }
   /* Esc закрывает, Tab не выпускает фокус из открытого меню */
@@ -1277,6 +1286,10 @@ textarea{resize:vertical;min-height:84px}
   });
   document.getElementById('mnavClose').addEventListener('click', closeNav);
   mnav.addEventListener('click', function(e){ if(e.target.tagName === 'A') closeNav(); });
+  /* клик мимо панели (затемнённый фон) закрывает меню */
+  document.addEventListener('click', function(e){
+    if(mnav.classList.contains('open') && !mnav.contains(e.target) && !e.target.closest('[data-menu]')) closeNav();
+  });
 
   /* ---------- якоря ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(function(a){

@@ -3,7 +3,7 @@
 {%- set canonical = site.url + page.url -%}
 {%- set waText = "Здравствуйте! Пишу с сайта" + ((": " + (crumbs | last).title) if crumbs else "") + "." -%}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="mv-glass">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -49,7 +49,8 @@
  {%- if schema %},{{ schema | safe }}{% endif %}
 ]}
 </script>
-<style>{% include "partials/motion.css" %}</style>
+<style>{% include "partials/motion.css" %}
+{% include "partials/menu.css" %}</style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
