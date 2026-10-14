@@ -34,6 +34,10 @@ $name    = $clean('name', 60);
 $phone   = $clean('phone', 30);
 $page    = $clean('page', 200);
 $topic   = $clean('topic', 200);
+$comment = $clean('comment', 500);
+$tgUser  = preg_replace('/[^A-Za-z0-9_]/', '', $clean('tg', 40));   // @username из мини-приложения Telegram
+$fromApp = $page === 'tg-app';
+$title   = $fromApp ? 'Заявка из Telegram (мини-приложение)' : 'Заявка с сайта';
 $consent = ($_POST['consent'] ?? '') === '1';
 
 if (($_POST['website'] ?? '') !== '') done(true);              // ловушка для ботов: делаем вид, что всё хорошо
@@ -53,7 +57,7 @@ foreach ([dirname(__DIR__) . '/lead-config.php', __DIR__ . '/lead-config.php'] a
 }
 
 $when = date('d.m.Y H:i');
-$where = ($topic !== '' ? $topic : '—') . ' (' . $page . ')';
+$where = ($topic !== '' ? $topic : '—') . ($fromApp ? '' : ' (' . $page . ')');
 
 // 1. запись на хостинге — до отправки письма
 $dir = $cfg['storage'] ?? dirname(__DIR__) . '/leads';
@@ -69,15 +73,18 @@ if (is_file($log)) {
     @file_put_contents($log, $keep ? implode("\n", $keep) . "\n" : '', LOCK_EX);
 }
 $saved = @file_put_contents($log,
-    implode(';', array_map(fn($v) => '"' . str_replace('"', '""', $v) . '"', [$when, $name, $phone, $where, 'согласие: да'])) . "\n",
+    implode(';', array_map(fn($v) => '"' . str_replace('"', '""', $v) . '"', [$when, $name, $phone, $where, 'согласие: да', $comment, $tgUser !== '' ? '@' . $tgUser : ''])) . "\n",
     FILE_APPEND | LOCK_EX) !== false;
 
 // 2. сообщение брокеру в Telegram
 $tg = false;
 if ($cfg['tg_token'] !== '' && $cfg['tg_chat'] !== '') {
     $h = fn(string $v) => htmlspecialchars($v, ENT_NOQUOTES, 'UTF-8');
-    $text = "<b>Заявка с сайта</b>\n\nИмя: " . $h($name !== '' ? $name : '—') . "\nТелефон: " . $h($phone)
-          . "\nСтраница: " . $h($where) . "\nВремя: " . $when . " (МСК)\nСогласие на обработку ПД: да";
+    $text = "<b>" . $title . "</b>\n\nИмя: " . $h($name !== '' ? $name : '—') . "\nТелефон: " . $h($phone)
+          . ($tgUser !== '' ? "\nTelegram: @" . $tgUser : '')
+          . ($fromApp ? "\nЗадача: " : "\nСтраница: ") . $h($where)
+          . ($comment !== '' ? "\nКомментарий: " . $h($comment) : '')
+          . "\nВремя: " . $when . " (МСК)\nСогласие на обработку ПД: да";
     $ctx = stream_context_create(['http' => [
         'method' => 'POST', 'timeout' => 8, 'ignore_errors' => true, 'user_agent' => 'RealtyMinaevSite/1.0',
         'header' => "Content-Type: application/json\r\n" . ($cfg['tg_relay_key'] !== '' ? 'X-Relay-Key: ' . $cfg['tg_relay_key'] . "\r\n" : ''),
@@ -89,9 +96,12 @@ if ($cfg['tg_token'] !== '' && $cfg['tg_chat'] !== '') {
     $tg = is_string($resp) && strpos($resp, '"ok":true') !== false;
 }
 // 3. письмо брокеру
-$body = "Заявка с сайта realtyminaev.ru\n\nИмя: " . ($name !== '' ? $name : '—') . "\nТелефон: " . $phone
-      . "\nСтраница: " . $where . "\nВремя: " . $when . "\nСогласие на обработку ПД: да";
-$subject = '=?UTF-8?B?' . base64_encode('Заявка с сайта: ' . ($topic !== '' ? $topic : 'перезвонить')) . '?=';
+$body = $title . " (realtyminaev.ru)\n\nИмя: " . ($name !== '' ? $name : '—') . "\nТелефон: " . $phone
+      . ($tgUser !== '' ? "\nTelegram: @" . $tgUser : '')
+      . ($fromApp ? "\nЗадача: " : "\nСтраница: ") . $where
+      . ($comment !== '' ? "\nКомментарий: " . $comment : '')
+      . "\nВремя: " . $when . "\nСогласие на обработку ПД: да";
+$subject = '=?UTF-8?B?' . base64_encode($title . ': ' . ($topic !== '' ? $topic : 'перезвонить')) . '?=';
 $headers = "Content-Type: text/plain; charset=utf-8\r\nFrom: " . $cfg['from'];
 $mailed = @mail($cfg['email'], $subject, $body, $headers);
 

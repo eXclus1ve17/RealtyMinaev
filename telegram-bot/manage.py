@@ -5,7 +5,9 @@
   python3 manage.py delete-webhook — отключить вебхук
   python3 manage.py setup-menu     — кнопка «Визитка» в чате и список команд
   python3 manage.py use-relay URL  — работать через посредника Cloudflare (адрес воркера)
+  python3 manage.py export-app     — тексты услуг и вопросов для мини-приложения (data.json на сайте)
 """
+import json
 import os
 import re
 import secrets
@@ -53,6 +55,31 @@ def update_lead_config(cfg, relay_url, relay_key):
         % (cfg.bot_token, cfg.admin_chat_id, relay_url, relay_key), encoding="utf-8")
     path.chmod(0o600)
     return True
+
+
+def app_data(content):
+    """Услуги, вопросы и задачи заявки для мини-приложения — те же тексты, что в боте."""
+    def plain(t):
+        return re.sub(r"<[^>]+>", "", t or "").strip()
+
+    def body(t):
+        # первая строка ответа бота — жирный заголовок, в приложении он уже есть в названии
+        t = plain(t)
+        return t.split("\n", 1)[1].strip() if "\n" in t else t
+
+    return {
+        "services": [{"title": s["button"], "text": body(s["text"])} for s in content["services"]["items"]],
+        "faq": [{"title": c["button"], "q": [{"q": q["q"], "a": plain(q["a"])} for q in c["questions"]]}
+                for c in content["faq"]["categories"]],
+        "tasks": [t["button"] for t in content["lead"]["tasks"]],
+    }
+
+
+def export_app(cfg, path=None):
+    path = Path(path or os.environ.get("APP_DATA") or Path.home() / "www" / "realtyminaev.ru" / "card" / "app" / "data.json")
+    data = app_data(load(cfg.content_path))
+    path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print("Мини-приложение: %d услуг, %d тем вопросов → %s" % (len(data["services"]), len(data["faq"]), path))
 
 
 def use_relay(url):
@@ -131,6 +158,12 @@ def run(cmd):
 
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
+    if cmd == "export-app":
+        try:
+            export_app(Config(), sys.argv[2] if len(sys.argv) > 2 else None)
+        except ContentError as e:
+            sys.exit("Ошибка в content.yaml:\n%s" % e)
+        return
     if cmd == "use-relay":
         if len(sys.argv) < 3:
             sys.exit("Укажите адрес воркера: python3 manage.py use-relay https://...workers.dev")

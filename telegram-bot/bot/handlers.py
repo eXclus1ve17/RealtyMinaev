@@ -135,8 +135,20 @@ class Bot:
     def btn_cancel(self):
         return self.cb("cancel", "l:cancel")
 
+    def app_url(self, tab):
+        """Раздел мини-приложения: card, services или lead."""
+        sep = "&" if "?" in self.cfg.webapp_url else "?"
+        return self.cfg.webapp_url + sep + "tab=" + tab
+
+    def app_buttons(self, link):
+        """Заявка (синяя) · Услуги и частые вопросы · Визитка — всё открывает мини-приложение."""
+        lead = dict(link("lead"), text=self.b("biz_lead"), style="primary")
+        return [[lead], [dict(link("services"), text=self.b("biz_menu"))], [dict(link("card"), text=self.b("biz_card"))]]
+
     def main_menu(self):
-        # «Визитка» — синяя кнопка меню внизу чата; если её нет (не задан WEBAPP_URL), показываем в списке
+        if self.cfg.webapp_url:
+            return self.kb(self.app_buttons(lambda tab: {"web_app": {"url": self.app_url(tab)}}))
+        # без мини-приложения — меню кнопками в чате
         links = self.c["links"]
         rows = [
             [self.cb("lead", "lead")],
@@ -225,6 +237,8 @@ class Bot:
                 return self.send_contact(uid)
 
         step, data = self.state.get(uid)
+        if step is None and msg.get("contact"):
+            return  # номер из формы мини-приложения («Отправить номер из Telegram») — отвечать не нужно
         if step is None:
             return self.send(uid, self.c["fallback"], self.kb([
                 [self.cb("faq", "faq"), self.btn_write()], [self.btn_menu()],
@@ -558,15 +572,21 @@ class Bot:
                 "sendMessage", business_connection_id=conn_id, chat_id=chat_id,
                 text=self.biz_greeting(sender), parse_mode="HTML",
                 link_preview_options={"is_disabled": True},
-                reply_markup=self.kb([
-                    [{"text": self.b("biz_menu"), "url": links["bot"] + "?start=menu"}],
-                    [{"text": self.b("biz_lead"), "url": links["bot"] + "?start=lead"}],
-                    [{"text": self.b("biz_card"), "url": links["card_fallback"]}],
-                ]),
+                reply_markup=self.kb(self.biz_buttons(links)),
             )
             self.state.mark_greeted(salt, chat_id)
         except Exception as e:
             log.error("business message failed: %s\n%s", type(e).__name__, "".join(traceback.format_tb(e.__traceback__)))
+
+    def biz_buttons(self, links):
+        # в личной переписке кнопка web_app запрещена — ссылка t.me/<бот>?startapp=… открывает главное мини-приложение
+        if self.cfg.webapp_url:
+            return self.app_buttons(lambda tab: {"url": links["bot"] + "?startapp=" + tab})
+        return [
+            [{"text": self.b("biz_lead"), "url": links["bot"] + "?start=lead", "style": "primary"}],
+            [{"text": self.b("biz_menu"), "url": links["bot"] + "?start=menu"}],
+            [{"text": self.b("biz_card"), "url": links["card_fallback"]}],
+        ]
 
     def biz_greeting(self, sender):
         biz = self.c["business"]

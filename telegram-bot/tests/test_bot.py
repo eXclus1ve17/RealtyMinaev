@@ -114,11 +114,23 @@ class BotTest(unittest.TestCase):
         msg = self.api.last()
         self.assertIn("Дмитрий Минаев", msg["text"])
         btns = buttons(msg["reply_markup"])
-        self.assertEqual(labels(msg["reply_markup"]), [
-            self.b("lead"), self.b("services"), self.b("faq"), self.b("site")])
+        # заявка (синяя) · услуги и вопросы · визитка — всё открывает разделы мини-приложения
+        self.assertEqual(labels(msg["reply_markup"]), [self.b("biz_lead"), self.b("biz_menu"), self.b("biz_card")])
         self.assertEqual(btns[0].get("style"), "primary")
-        urls = {b["text"]: b.get("url") for b in btns}
-        self.assertEqual(urls[self.b("site")], "https://realtyminaev.ru")
+        self.assertEqual([b["web_app"]["url"] for b in btns], [
+            "https://realtyminaev.ru/card/app/?tab=lead", "https://realtyminaev.ru/card/app/?tab=services",
+            "https://realtyminaev.ru/card/app/?tab=card"])
+
+    def test_menu_without_webapp_keeps_chat_buttons(self):
+        self.bot.cfg = type("C", (), {"admin_chat_id": ADMIN, "webapp_url": ""})()
+        self.text("/start")
+        self.assertEqual(labels(self.api.last()["reply_markup"])[:3], [self.b("lead"), self.b("services"), self.b("faq")])
+
+    def test_contact_from_mini_app_is_not_answered(self):
+        n = len(self.api.calls)
+        self.bot.handle_update({"update_id": 77, "message": {"message_id": 9, "from": USER, "chat": {"id": USER["id"], "type": "private"},
+                                "contact": {"phone_number": "79261234567", "user_id": USER["id"], "first_name": "Анна"}}})
+        self.assertEqual(len(self.api.calls), n)
 
     def test_menu_without_webapp_url_uses_link(self):
         self.bot.cfg = type("C", (), {"admin_chat_id": ADMIN, "webapp_url": ""})()
@@ -417,8 +429,10 @@ class BusinessTest(unittest.TestCase):
         self.assertEqual(len(sent), 1)
         self.assertEqual(sent[0]["chat_id"], 900)
         urls = [b["url"] for b in buttons(sent[0]["reply_markup"])]
-        self.assertIn("https://t.me/RealtyMinaev_bot?start=lead", urls)
-        self.assertIn("https://t.me/RealtyMinaev_bot?start=menu", urls)
+        self.assertEqual(urls, ["https://t.me/RealtyMinaev_bot?startapp=lead", "https://t.me/RealtyMinaev_bot?startapp=services",
+                                "https://t.me/RealtyMinaev_bot?startapp=card"])
+        self.assertEqual(buttons(sent[0]["reply_markup"])[0].get("style"), "primary")
+        self.assertNotIn("web_app", str(sent[0]["reply_markup"]))  # в личной переписке web_app-кнопки запрещены
 
     def test_greeting_uses_name_only_when_it_looks_like_a_name(self):
         self.connect()
@@ -604,3 +618,14 @@ class WebhookTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AppDataTest(unittest.TestCase):
+    def test_export_matches_bot_texts(self):
+        import manage
+        c = load(ROOT / "content.yaml")
+        d = manage.app_data(c)
+        self.assertEqual(len(d["services"]), len(c["services"]["items"]))
+        self.assertEqual(sum(len(x["q"]) for x in d["faq"]), sum(len(x["questions"]) for x in c["faq"]["categories"]))
+        self.assertEqual(d["tasks"], [t["button"] for t in c["lead"]["tasks"]])
+        self.assertNotIn("<", json.dumps(d, ensure_ascii=False))
