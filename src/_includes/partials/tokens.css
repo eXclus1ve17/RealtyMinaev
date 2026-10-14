@@ -25,6 +25,48 @@ html[data-theme="onyx"]{
   --overlay-rgb:12,12,12;
 }
 
+/* ── МОККО И ПЕСОК (вариант на выбор) ───────────── data-theme="mocha" ── */
+html[data-theme="mocha"]{
+  --bg:#ECE8E2; --bg-rgb:236,232,226;          /* песок                         */
+  --surface:#F8F6F2; --surface-2:#F2EFEA;
+  --dark:#2A2521; --dark-rgb:42,37,33;         /* мокко-графит                  */
+  --dark-hi:#38322C;
+  --ink:#2A2521; --ink-rgb:42,37,33;
+  --ink-2:#615950; --ink-3:#766D64;
+  --accent:#3A332D; --accent-rgb:58,51,45;
+  --accent-hi:#4A423B; --accent-ink:#76593A;
+  --accent-soft:#E3DCD1; --on-accent:#FFFFFF;
+  --metal:#9A7C55; --metal-lite:#CDB08A;
+  --metal-grad:linear-gradient(135deg,#DFC9A6 0%,#B4936A 100%);
+  --metal-shine:#FFF1DC; --on-metal:#241B10;
+  --tint:#DED6CB;
+  --glow:rgba(205,176,138,.16);
+  --glow-2:rgba(150,120,90,.18);
+  --fill-bg:#F1E7D6; --fill-ink:#6A4F2E;
+  --overlay-rgb:30,25,22;
+}
+
+/* ── СЛАНЕЦ И ШАЛФЕЙ (вариант на выбор) ─────────── data-theme="slate" ── */
+html[data-theme="slate"]{
+  --bg:#E9EBE8; --bg-rgb:233,235,232;          /* светлый шалфейно-серый        */
+  --surface:#F7F8F6; --surface-2:#F0F2EF;
+  --dark:#2B302E; --dark-rgb:43,48,46;         /* сланец                        */
+  --dark-hi:#39403D;
+  --ink:#262B29; --ink-rgb:38,43,41;
+  --ink-2:#575F5B; --ink-3:#6C7470;
+  --accent:#3B4440; --accent-rgb:59,68,64;
+  --accent-hi:#4B5550; --accent-ink:#56664F;
+  --accent-soft:#DDE3DB; --on-accent:#FFFFFF;
+  --metal:#8C7A55; --metal-lite:#C9B78F;
+  --metal-grad:linear-gradient(135deg,#DCCFAE 0%,#A99470 100%);
+  --metal-shine:#FBF3DF; --on-metal:#211C10;
+  --tint:#DADFD9;
+  --glow:rgba(201,183,143,.14);
+  --glow-2:rgba(120,148,128,.22);
+  --fill-bg:#EEE8D6; --fill-ink:#5E5330;
+  --overlay-rgb:28,32,30;
+}
+
 /* ── РАЗМЕРЫ, ЛИНИИ И ТЕНИ (общие) ───────────────── */
 :root{
   --line:rgba(var(--ink-rgb),.10); --line-2:rgba(var(--ink-rgb),.06);
