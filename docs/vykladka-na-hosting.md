@@ -1,5 +1,17 @@
 # Выкладка сайта на reg.ru
 
+## Быстрое обновление — одна команда
+
+Готовый сайт лежит в ветке `site` на GitHub (её обновляет `scripts/publish-site.sh`).
+Shell-клиент reg.ru → вставить и выполнить:
+
+```
+curl -sL https://github.com/eXclus1ve17/RealtyMinaev/archive/refs/heads/site.tar.gz | tar xz --strip-components=1 -C ~/www/realtyminaev.ru
+```
+
+Файлы заменяются поверх, журнал заявок и `lead-config.php` не затрагиваются.
+Ниже — первая выкладка вручную, архивом.
+
 Архив: `realtyminaev-sajt-ГГГГ-ММ-ДД.zip` — содержимое папки `_site` после `npx eleventy`.
 В архиве 112 файлов, включая скрытый `.htaccess`.
 
