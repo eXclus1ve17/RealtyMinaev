@@ -1,73 +1,10 @@
 /* ════════════════════════════════════════════════════════════════════
    ПАЛИТРА САЙТА — общая для всех страниц (главная, внутренние, Forma 96).
-   Весь цвет живёт только здесь. Схема «Оникс и золото» (data-theme="onyx").
+   Весь цвет живёт только здесь. Схема «Полночь и шампань» (data-theme="navy").
    ════════════════════════════════════════════════════════════════════ */
 
-/* ── ОНИКС И ЗОЛОТО ───────────────────────────── data-theme="onyx" ── */
+/* ── ПОЛНОЧЬ И ШАМПАНЬ ──────────────── data-theme="navy" ── */
 :root,
-html[data-theme="onyx"]{
-  --bg:#F4F3F1; --bg-rgb:244,243,241;          /* тёплый белый                  */
-  --surface:#FFFFFF; --surface-2:#F9F8F6;
-  --dark:#131313; --dark-rgb:19,19,19;         /* оникс                         */
-  --dark-hi:#232323;
-  --ink:#141414; --ink-rgb:20,20,20;
-  --ink-2:#57554F; --ink-3:#716E68;
-  --accent:#1A1A1A; --accent-rgb:26,26,26;     /* чёрные кнопки на светлом      */
-  --accent-hi:#333333; --accent-ink:#7A5C25;   /* надписи-акценты — тёмное золото */
-  --accent-soft:#F1EBDD; --on-accent:#FFFFFF;
-  --metal:#A07F45; --metal-lite:#D4B47A;
-  --metal-grad:linear-gradient(135deg,#EAD4A2 0%,#B8955A 100%);
-  --metal-shine:#FFF6DF; --on-metal:#1C1608;
-  --tint:#E7E2D8;
-  --glow:rgba(212,180,122,.18);
-  --glow-2:rgba(130,108,72,.22);
-  --fill-bg:#F6EEDC; --fill-ink:#6E5226;
-  --overlay-rgb:12,12,12;
-}
-
-/* ── МОККО И ПЕСОК (вариант на выбор) ───────────── data-theme="mocha" ── */
-html[data-theme="mocha"]{
-  --bg:#ECE8E2; --bg-rgb:236,232,226;          /* песок                         */
-  --surface:#F8F6F2; --surface-2:#F2EFEA;
-  --dark:#2A2521; --dark-rgb:42,37,33;         /* мокко-графит                  */
-  --dark-hi:#38322C;
-  --ink:#2A2521; --ink-rgb:42,37,33;
-  --ink-2:#615950; --ink-3:#766D64;
-  --accent:#3A332D; --accent-rgb:58,51,45;
-  --accent-hi:#4A423B; --accent-ink:#76593A;
-  --accent-soft:#E3DCD1; --on-accent:#FFFFFF;
-  --metal:#9A7C55; --metal-lite:#CDB08A;
-  --metal-grad:linear-gradient(135deg,#DFC9A6 0%,#B4936A 100%);
-  --metal-shine:#FFF1DC; --on-metal:#241B10;
-  --tint:#DED6CB;
-  --glow:rgba(205,176,138,.16);
-  --glow-2:rgba(150,120,90,.18);
-  --fill-bg:#F1E7D6; --fill-ink:#6A4F2E;
-  --overlay-rgb:30,25,22;
-}
-
-/* ── СЛАНЕЦ И ШАЛФЕЙ (вариант на выбор) ─────────── data-theme="slate" ── */
-html[data-theme="slate"]{
-  --bg:#E9EBE8; --bg-rgb:233,235,232;          /* светлый шалфейно-серый        */
-  --surface:#F7F8F6; --surface-2:#F0F2EF;
-  --dark:#2B302E; --dark-rgb:43,48,46;         /* сланец                        */
-  --dark-hi:#39403D;
-  --ink:#262B29; --ink-rgb:38,43,41;
-  --ink-2:#575F5B; --ink-3:#6C7470;
-  --accent:#3B4440; --accent-rgb:59,68,64;
-  --accent-hi:#4B5550; --accent-ink:#56664F;
-  --accent-soft:#DDE3DB; --on-accent:#FFFFFF;
-  --metal:#8C7A55; --metal-lite:#C9B78F;
-  --metal-grad:linear-gradient(135deg,#DCCFAE 0%,#A99470 100%);
-  --metal-shine:#FBF3DF; --on-metal:#211C10;
-  --tint:#DADFD9;
-  --glow:rgba(201,183,143,.14);
-  --glow-2:rgba(120,148,128,.22);
-  --fill-bg:#EEE8D6; --fill-ink:#5E5330;
-  --overlay-rgb:28,32,30;
-}
-
-/* ── ПОЛНОЧЬ И ШАМПАНЬ (вариант на выбор) ─────── data-theme="navy" ── */
 html[data-theme="navy"]{
   --bg:#F3F2EF; --bg-rgb:243,242,239;          /* тёплый фарфор                 */
   --surface:#FFFFFF; --surface-2:#F8F7F5;
@@ -86,48 +23,6 @@ html[data-theme="navy"]{
   --glow-2:rgba(60,85,130,.32);
   --fill-bg:#F4ECDA; --fill-ink:#6A4F26;
   --overlay-rgb:10,15,26;
-}
-
-/* ── ПЕТРОЛЬ И ЛАТУНЬ (вариант на выбор) ───────── data-theme="petrol" ── */
-html[data-theme="petrol"]{
-  --bg:#F1F1EE; --bg-rgb:241,241,238;          /* светлый камень                */
-  --surface:#FFFFFF; --surface-2:#F7F7F5;
-  --dark:#12303A; --dark-rgb:18,48,58;         /* петроль: сине-бирюзовый       */
-  --dark-hi:#1B3F4B;
-  --ink:#13242B; --ink-rgb:19,36,43;
-  --ink-2:#4F5D63; --ink-3:#69767B;
-  --accent:#1A4250; --accent-rgb:26,66,80;
-  --accent-hi:#225363; --accent-ink:#1E4A58;
-  --accent-soft:#E1EAEC; --on-accent:#FFFFFF;
-  --metal:#957641; --metal-lite:#CFB078;
-  --metal-grad:linear-gradient(135deg,#E2C894 0%,#B08D55 100%);
-  --metal-shine:#FFF2D6; --on-metal:#1C1608;
-  --tint:#D8E3E6;
-  --glow:rgba(207,176,120,.15);
-  --glow-2:rgba(40,120,140,.30);
-  --fill-bg:#F4ECDA; --fill-ink:#6A4F26;
-  --overlay-rgb:8,22,28;
-}
-
-/* ── ПЫЛЬНЫЙ ИНДИГО (вариант на выбор) ──────────── data-theme="dusk" ── */
-html[data-theme="dusk"]{
-  --bg:#ECEEF1; --bg-rgb:236,238,241;          /* холодный светлый              */
-  --surface:#F9FAFB; --surface-2:#F2F4F6;
-  --dark:#273142; --dark-rgb:39,49,66;         /* приглушённый серо-синий       */
-  --dark-hi:#344058;
-  --ink:#1F2633; --ink-rgb:31,38,51;
-  --ink-2:#555D6B; --ink-3:#6C7482;
-  --accent:#344058; --accent-rgb:52,64,88;
-  --accent-hi:#414F6C; --accent-ink:#4A5878;
-  --accent-soft:#E0E4EC; --on-accent:#FFFFFF;
-  --metal:#917A55; --metal-lite:#CDB892;
-  --metal-grad:linear-gradient(135deg,#E0D1B2 0%,#AD9671 100%);
-  --metal-shine:#FBF3E2; --on-metal:#211B10;
-  --tint:#D9DEE7;
-  --glow:rgba(205,184,146,.14);
-  --glow-2:rgba(110,130,170,.28);
-  --fill-bg:#F0EADB; --fill-ink:#5F5030;
-  --overlay-rgb:20,26,38;
 }
 
 /* ── РАЗМЕРЫ, ЛИНИИ И ТЕНИ (общие) ───────────────── */
