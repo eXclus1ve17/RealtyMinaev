@@ -1,0 +1,42 @@
+/* Заявка «Перезвоните мне» — компактная форма в одну строку (lead-c).
+   Классы lead-* не пересекаются со стилями главной и внутренних страниц. */
+.lead-btn{font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:9px;height:52px;padding:0 24px;border-radius:999px;
+  border:1px solid transparent;font:600 15px/1 inherit;font-family:inherit;white-space:nowrap;cursor:pointer;transition:background-color .25s,border-color .25s}
+.lead-btn-accent{background:var(--accent,#2F4A7A);color:var(--on-accent,#fff)}.lead-btn-accent:hover{background:var(--accent-hi,#3A5B94)}
+.lead-btn[disabled]{opacity:.6;cursor:default}
+.lead-check{text-transform:none!important;letter-spacing:0!important;color:inherit;display:grid!important;grid-template-columns:20px 1fr;gap:10px;align-items:start;font-weight:400!important;font-size:13px!important;line-height:1.45;margin:4px 0}
+.lead-check input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--accent,#2F4A7A)}
+.lead-check a{color:var(--accent-ink,#2A4370);text-decoration:underline}
+.lead-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.lead-msg{font-size:14px;margin:4px 0 0;min-height:1.4em}
+.lead-msg.ok{color:#1F6B3A;font-weight:600}.lead-msg.err{color:#A3321F}
+
+/* ---------- компактная заявка в одну строку ---------- */
+.lead-c{border-radius:28px;padding:clamp(20px,2.6vw,32px) clamp(20px,3vw,40px);
+  display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:10px 32px;align-items:center}
+.lead-c-h{font-size:clamp(20px,2vw,26px);font-weight:600;letter-spacing:-.025em;line-height:1.15;margin:0}
+.lead-c-txt p{margin:6px 0 0;font-size:14px}
+.lead-c-row{display:grid;grid-template-columns:1fr 1.2fr auto;gap:10px}
+.lead-c-row input{height:52px;border-radius:999px;padding:0 20px;font:inherit;font-size:16px;width:100%}
+.lead-c-row .lead-btn-accent{width:auto;margin:0}
+.lead-c .lead-check{grid-column:2;margin:0}
+.lead-c .lead-msg{grid-column:2;margin:0;min-height:0}
+.lead-c .lead-msg:empty{display:none}
+.lead-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* светлая карточка */
+.lead-c--light{background:var(--surface,#fff);color:var(--ink,#101A2C);border:1px solid var(--line-2);box-shadow:0 18px 50px -30px rgba(var(--ink-rgb,16,26,44),.35)}
+.lead-c--light .lead-c-txt p{color:var(--ink-2,#525C6B)}
+.lead-c--light input{border:1px solid var(--line);background:var(--surface-2,#F7F8FA);color:var(--ink,#101A2C)}
+.lead-c--light .lead-check{color:var(--ink-2,#525C6B)}
+.lead-c input:focus{outline:2px solid var(--accent,#2F4A7A);outline-offset:1px}
+@media (max-width:900px){
+  .lead-c{grid-template-columns:1fr}
+  .lead-c .lead-check,.lead-c .lead-msg{grid-column:1}
+  .lead-c-row{grid-template-columns:1fr 1fr}
+  .lead-c-row .lead-btn-accent{grid-column:1/-1;width:100%}
+}
+@media (max-width:480px){.lead-c-row{grid-template-columns:1fr}}
+/* компактная заявка стоит последней перед подвалом: свой нижний отступ не нужен */
+.lead-sec:has(.lead-c){padding-top:clamp(24px,3vw,40px);padding-bottom:0}
+.lead-c-hours{font-size:13px!important;font-weight:600;color:var(--accent-ink,#2A4370)!important;margin-top:8px!important}
+.lead-c .fill{background:var(--fill-bg,#FBF1DE);color:var(--fill-ink,#7A5520);border-radius:6px;padding:1px 6px;font-weight:500}
