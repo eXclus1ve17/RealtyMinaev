@@ -18,12 +18,29 @@
       document.getElementById(b.getAttribute('aria-controls')).classList.toggle('open', open);
     });
   });
+  // «Написать»: панель Telegram / WhatsApp / MAX под кнопкой
+  var wrs = document.querySelectorAll('.wr');
+  function closeWr(except) {
+    wrs.forEach(function (w) { if (w === except) return; w.classList.remove('open'); w.querySelector('.wr-btn').setAttribute('aria-expanded', 'false'); });
+  }
+  wrs.forEach(function (w) {
+    var b = w.querySelector('.wr-btn');
+    b.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = !w.classList.contains('open');
+      closeWr(w); closeAll();
+      w.classList.toggle('open', open);
+      b.setAttribute('aria-expanded', String(open));
+    });
+    w.querySelector('.wr-pop').addEventListener('click', function (e) { if (e.target.closest('a')) setTimeout(function () { closeWr(); }, 150); });
+  });
   document.addEventListener('click', function (e) {
+    if (!e.target.closest('.wr-pop')) closeWr();
     closeAll();
     // клик мимо открытого мобильного меню (по затемнённому фону) закрывает его
     if (m && m.classList.contains('open') && !m.contains(e.target) && !e.target.closest('[data-mnav],[data-menu]')) closeM();
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); closeM(); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); closeM(); closeWr(); } });
 
   // мобильное меню
   var m = document.getElementById('mnav');

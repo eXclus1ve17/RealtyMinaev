@@ -1,0 +1,30 @@
+/* ---------- «Написать»: панель мессенджеров под кнопкой ---------- */
+.wr{position:relative;display:flex}
+.wr-btn svg{transition:transform .4s var(--ease)}
+.wr.open .wr-btn svg{transform:rotate(-10deg) scale(1.08)}
+.wr-pop{position:absolute;right:0;top:calc(100% + 12px);z-index:80;width:272px;padding:8px;border-radius:22px;
+  background:radial-gradient(120% 80% at 100% 0,var(--glow),transparent 60%),rgba(var(--dark-rgb),.94);
+  -webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 34px 70px -24px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.08);
+  visibility:hidden;opacity:0;transform:translateY(-10px) scale(.94);transform-origin:calc(100% - 72px) 0;pointer-events:none;
+  transition:opacity .22s ease,transform .4s var(--ease),visibility 0s linear .4s}
+.wr-pop::before{content:"";position:absolute;top:-6px;right:66px;width:12px;height:12px;transform:rotate(45deg);
+  background:rgba(var(--dark-rgb),.94);border-left:1px solid rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.12);border-radius:3px 0 0 0}
+.wr.open .wr-pop{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .22s ease,transform .5s var(--ease),visibility 0s}
+.wr-pop a{position:relative;display:flex;align-items:center;gap:14px;padding:10px 40px 10px 10px;border-radius:15px;color:#fff;
+  opacity:0;transform:translateX(12px);transition:opacity .3s ease,transform .5s var(--ease),background-color .2s}
+.wr.open .wr-pop a{opacity:1;transform:none}
+.wr.open .wr-pop a:nth-child(1){transition-delay:.06s,.06s,0s}
+.wr.open .wr-pop a:nth-child(2){transition-delay:.12s,.12s,0s}
+.wr.open .wr-pop a:nth-child(3){transition-delay:.18s,.18s,0s}
+.wr-pop a::after{content:"→";position:absolute;right:16px;top:50%;transform:translate(-6px,-50%);opacity:0;color:var(--metal-lite);transition:opacity .25s,transform .3s var(--ease)}
+.wr-pop a:hover,.wr-pop a:focus-visible{background:rgba(255,255,255,.08);outline:none}
+.wr-pop a:hover::after,.wr-pop a:focus-visible::after{opacity:1;transform:translate(0,-50%)}
+.wr-ic{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--metal-grad);color:var(--on-metal);
+  box-shadow:0 8px 18px -10px rgba(0,0,0,.6);transition:transform .4s var(--ease)}
+.wr-pop a:hover .wr-ic{transform:scale(1.08) rotate(-6deg)}
+.wr-ic svg{width:19px;height:19px}
+.wr-t{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.wr-t b{font-size:15px;font-weight:600;letter-spacing:-.01em}
+.wr-t small{font-size:12px;color:rgba(255,255,255,.58);margin-top:3px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.wr-pop,.wr-pop a,.wr.open .wr-pop,.wr.open .wr-pop a{transition:none!important;transform:none!important}}

@@ -1,0 +1,13 @@
+{#- Кнопка «Написать» с панелью мессенджеров (шапка на всех страницах).
+    id — уникальный для панели, cls — классы кнопки, wa — ссылка WhatsApp с готовым текстом. -#}
+{%- from "partials/icons.njk" import icon -%}
+{%- macro write(site, id, cls, wa) -%}
+<div class="wr">
+  <button class="btn {{ cls }} wr-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="{{ id }}">{{ icon("chat") | safe }}<span class="lbl">Написать</span></button>
+  <div class="wr-pop" id="{{ id }}" role="menu" aria-label="Написать в мессенджер">
+    <a role="menuitem" href="{{ site.telegram }}" target="_blank" rel="noopener" data-goal="write_telegram"><span class="wr-ic">{{ icon("tg") | safe }}</span><span class="wr-t"><b>Telegram</b><small>@RealtyMinaev</small></span></a>
+    <a role="menuitem" href="{{ wa or site.whatsapp }}" target="_blank" rel="noopener" data-goal="write_whatsapp"><span class="wr-ic">{{ icon("wa") | safe }}</span><span class="wr-t"><b>WhatsApp</b><small>+7 926 397-77-75</small></span></a>
+    <a role="menuitem" href="{{ site.max }}" target="_blank" rel="noopener" data-goal="write_max"><span class="wr-ic">{{ icon("max") | safe }}</span><span class="wr-t"><b>MAX</b><small>Мессенджер MAX</small></span></a>
+  </div>
+</div>
+{%- endmacro -%}
