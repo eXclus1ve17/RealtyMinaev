@@ -302,6 +302,15 @@
   .chip[aria-pressed="true"]{background:rgba(214,193,154,.14);border-color:var(--champ);color:var(--champ-hi);box-shadow:0 0 18px -6px rgba(214,193,154,.6)}
   .chip[aria-pressed="true"]::after{content:"";position:absolute;top:0;left:-70%;width:50%;height:100%;transform:skewX(-20deg);background:linear-gradient(100deg,transparent,rgba(239,226,198,.35),transparent);animation:chipSheen .8s var(--ease)}
   @keyframes chipSheen{to{left:130%}}
+  /* Заявка в два слоя: сначала «Купить / Продать / Другое», затем тип недвижимости */
+  .chips.two{grid-template-columns:1fr 1fr}
+  .step2{display:grid;grid-template-rows:0fr;opacity:0;margin-top:-12px;transition:grid-template-rows .5s var(--ease),opacity .4s var(--ease),margin-top .5s var(--ease)}
+  .step2 > div{overflow:hidden;min-height:0}
+  .step2.on{grid-template-rows:1fr;opacity:1;margin-top:0}
+  .step2.on .chip{animation:chipIn .5s var(--ease) both}
+  .step2.on .chip:nth-child(2){animation-delay:.05s}.step2.on .chip:nth-child(3){animation-delay:.1s}.step2.on .chip:nth-child(4){animation-delay:.15s}
+  @keyframes chipIn{from{opacity:0;transform:translateY(-6px) scale(.96)}}
+  .lbl b{font-weight:500;color:var(--champ)}
   .fld{width:100%;height:46px;border-radius:13px;border:1px solid var(--line);background:var(--surface);color:var(--text);padding:0 14px;font:400 16px 'Onest',sans-serif;
     transition:border-color .3s var(--ease),box-shadow .3s var(--ease);-webkit-appearance:none}
   .fld::placeholder{color:#6f685d}
@@ -316,8 +325,9 @@
   textarea.fld{height:64px;padding:11px 14px;resize:none;line-height:1.4;display:block}
   @media (max-height:680px){
     .form{gap:9px;padding-top:10px}.form h2{font-size:20px}.lbl{margin-bottom:4px}
-    .chip{padding:7px 4px}.fld,.share{height:42px}textarea.fld{height:44px;padding:10px 14px}
-    .sendbar{padding:6px 0 30px}.gold{height:48px}
+    .form{gap:7px}.chip{padding:6px 4px}.fld,.share{height:40px}textarea.fld{height:40px;padding:9px 14px}
+    .lbl{font-size:11.5px;margin-bottom:3px}.chk{font-size:11.5px;line-height:1.35}
+    .sendbar{padding:4px 0 28px}.gold{height:48px}
   }
   .chk{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.45;color:#bdb5a7;cursor:pointer}
   .chk input{flex:none;margin:1px 0 0;width:20px;height:20px;accent-color:var(--champ)}
@@ -461,7 +471,9 @@
   <section class="pane" id="p-lead" aria-label="Заявка">
     <form class="form stag" id="form" novalidate>
       <div class="fh"><h2>Заявка</h2><p class="sub">Перезвоню в течение часа в рабочее время</p></div>
-      <div><span class="lbl" id="l-task">Что нужно</span><div class="chips" id="tasks" role="group" aria-labelledby="l-task"></div></div>
+      <div><span class="lbl" id="l-deal">Что хотите сделать?</span><div class="chips" id="deal" role="group" aria-labelledby="l-deal">
+        <button class="chip" type="button" aria-pressed="false" data-v="buy">Купить</button><button class="chip" type="button" aria-pressed="false" data-v="sell">Продать</button><button class="chip" type="button" aria-pressed="false" data-v="other">Другое</button></div></div>
+      <div class="step2" id="step2"><div><span class="lbl" id="l-kind">Что купить?</span><div class="chips two" id="kind" role="group" aria-labelledby="l-kind"></div></div></div>
       <div><label class="lbl" for="f-name">Имя</label><input class="fld" id="f-name" name="name" maxlength="60" autocomplete="name"></div>
       <div><label class="lbl" for="f-phone">Телефон</label>
         <div class="prow"><input class="fld" id="f-phone" name="phone" inputmode="tel" maxlength="30" placeholder="+7 ___ ___-__-__" autocomplete="tel">
@@ -652,7 +664,6 @@
       document.getElementById('faq').innerHTML = d.faq.map(function (c) {
         return item(c.title, '<div class="qs">' + c.q.map(function (x) { return item(x.q, '<div class="ans">' + paras(x.a) + '</div>'); }).join('') + '</div>');
       }).join('');
-      document.getElementById('tasks').innerHTML = d.tasks.map(function (t) { return '<button class="chip" type="button" aria-pressed="false">' + esc(t) + '</button>'; }).join('');
     }).catch(function () {
       document.getElementById('svc').innerHTML = '<p class="ans">Не удалось загрузить. Закройте и откройте приложение ещё раз.</p>';
     });
@@ -662,9 +673,29 @@
     var phone = document.getElementById('f-phone'), share = document.getElementById('share');
     var user = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
     if (user && user.first_name && /^[A-Za-zА-Яа-яЁё-]{2,40}$/.test(user.first_name)) document.getElementById('f-name').value = user.first_name;
-    document.getElementById('tasks').addEventListener('click', function (e) {
+    // Шаг 1 — сделка, шаг 2 — тип недвижимости; подсказка в комментарии подстраивается под выбор
+    var KINDS = {
+      buy: { label: 'Что купить?', items: [['Квартиру', 'Квартира', 'Район, комнаты, бюджет'], ['Новостройку', 'Новостройка', 'Район или ЖК, бюджет, срок сдачи'], ['Дом / участок', 'Дом / участок', 'Направление, площадь, бюджет'], ['Коммерцию', 'Коммерция', 'Тип помещения, район, бюджет']] },
+      sell: { label: 'Что продать?', items: [['Квартиру', 'Квартира', 'Район, комнаты, ожидаемая цена'], ['Переуступку', 'Переуступка', 'ЖК, срок сдачи, цена'], ['Дом / участок', 'Дом / участок', 'Направление, площадь дома и участка, цена'], ['Коммерцию', 'Коммерция', 'Тип, площадь, есть ли арендатор, цена']] },
+      other: { label: 'С чем помочь?', items: [['Консультация', 'Консультация', 'Коротко опишите вопрос'], ['Проверка объекта', 'Проверка объекта', 'Адрес или ссылка на объявление'], ['Сложная сделка', 'Сложная сделка', 'Что за ситуация: наследство, доли, ипотека…'], ['Другое', 'Другое', 'Опишите задачу в двух словах']] }
+    };
+    var DEAL = { buy: 'Купить', sell: 'Продать', other: 'Другое' };
+    var deal = document.getElementById('deal'), kind = document.getElementById('kind'), step2 = document.getElementById('step2'), comment = document.getElementById('f-comment');
+    var HINT = comment.placeholder;
+    function press(group, c) { group.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', x === c); }); }
+    deal.addEventListener('click', function (e) {
+      var c = e.target.closest('.chip'); if (!c || c.getAttribute('aria-pressed') === 'true') return;
+      haptic(); press(deal, c); err.textContent = '';
+      var k = KINDS[c.dataset.v];
+      document.getElementById('l-kind').textContent = k.label;
+      kind.innerHTML = k.items.map(function (x, i) { return '<button class="chip" type="button" aria-pressed="false" data-i="' + i + '">' + esc(x[0]) + '</button>'; }).join('');
+      step2.classList.remove('on'); void step2.offsetWidth; step2.classList.add('on');
+      comment.placeholder = HINT;
+    });
+    kind.addEventListener('click', function (e) {
       var c = e.target.closest('.chip'); if (!c) return;
-      haptic(); this.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', x === c); });
+      haptic(); press(kind, c); err.textContent = '';
+      comment.placeholder = KINDS[deal.querySelector('[aria-pressed="true"]').dataset.v].items[c.dataset.i][2];
     });
     if (tg && tg.requestContact && tg.isVersionAtLeast && tg.isVersionAtLeast('6.9')) {
       share.classList.add('on');
@@ -677,16 +708,17 @@
     }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var task = form.querySelector('.chip[aria-pressed="true"]');
+      var d1 = deal.querySelector('[aria-pressed="true"]'), d2 = kind.querySelector('[aria-pressed="true"]');
       var digits = phone.value.replace(/\D/g, '');
-      if (!task) { err.textContent = 'Выберите, что нужно сделать.'; return; }
+      if (!d1) { err.textContent = 'Выберите: купить, продать или другое.'; return; }
+      if (!d2) { err.textContent = 'Выберите вариант во втором ряду.'; return; }
       if (digits.length < 10 || digits.length > 15) { err.textContent = 'Укажите телефон или отправьте его из Telegram.'; phone.focus(); return; }
       if (!document.getElementById('f-consent').checked) { err.textContent = 'Отметьте согласие — без него я не могу принять заявку.'; return; }
       err.textContent = ''; send.disabled = true; send.textContent = 'Отправляю…';
       var fd = new FormData();
       fd.append('name', document.getElementById('f-name').value.trim());
       fd.append('phone', phone.value.trim());
-      fd.append('topic', task.textContent);
+      fd.append('topic', DEAL[d1.dataset.v] + ' · ' + KINDS[d1.dataset.v].items[d2.dataset.i][1]);
       fd.append('comment', document.getElementById('f-comment').value.trim());
       fd.append('tg', user && user.username ? user.username : '');
       fd.append('page', 'tg-app');
@@ -704,6 +736,7 @@
     document.querySelector('#done .again').addEventListener('click', function () {
       document.getElementById('done').classList.remove('on'); form.style.display = ''; form.reset();
       form.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      step2.classList.remove('on'); comment.placeholder = HINT;
     });
   })();
 </script>
